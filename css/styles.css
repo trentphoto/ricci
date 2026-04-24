@@ -1269,6 +1269,293 @@ p  { max-width: 660px; }
 }
 
 /* ============================================
+   COUNTER BLOCK (in-store items under products)
+   ============================================ */
+.counter-block {
+  margin-top: 96px;
+  padding-top: 72px;
+  border-top: 1px solid rgba(0,0,0,0.08);
+}
+.counter-header {
+  margin-bottom: 48px;
+  max-width: 720px;
+}
+.counter-header h2 { margin-bottom: 16px; }
+.counter-header p { color: #666; }
+.counter-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+.counter-item {
+  padding: 32px;
+  border-right: 1px solid rgba(0,0,0,0.08);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  background: var(--white);
+  transition: background 0.2s;
+}
+.counter-item:hover { background: var(--cream); }
+.counter-item:nth-child(3n) { border-right: none; }
+.counter-item:nth-last-child(-n+3) { border-bottom: none; }
+.counter-tag {
+  display: inline-block;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  padding: 4px 10px;
+  margin-bottom: 14px;
+}
+.counter-item h3 { font-size: 1.15rem; margin-bottom: 10px; }
+.counter-item p {
+  font-size: 0.92rem;
+  color: #666;
+  line-height: 1.7;
+  max-width: 100%;
+}
+.counter-footer {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.counter-phone {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--red);
+  letter-spacing: 0.01em;
+}
+.counter-phone:hover { color: var(--red-dark); }
+
+/* ============================================
+   PARTNERS — Pittsburgh's best tables (elegant B&W)
+   ============================================ */
+.section-partners {
+  padding: var(--section-pad);
+  background: var(--white);
+  border-top: 1px solid rgba(0,0,0,0.06);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.partners-header {
+  max-width: 680px;
+  margin: 0 auto 64px;
+  text-align: center;
+}
+.partners-eyebrow { color: var(--charcoal); opacity: 0.55; }
+.partners-header h2 { margin-bottom: 20px; }
+.partners-header p { color: #555; margin-inline: auto; font-size: 1.02rem; }
+.partners-list {
+  max-width: 980px;
+  margin: 0 auto;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  border-left: 1px solid rgba(0,0,0,0.1);
+}
+.partners-list li {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--charcoal);
+  text-align: center;
+  padding: 28px 16px;
+  border-right: 1px solid rgba(0,0,0,0.1);
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  letter-spacing: 0.01em;
+  transition: background 0.2s, color 0.2s;
+}
+.partners-list li:hover { background: var(--charcoal); color: var(--cream); }
+.partners-footer {
+  max-width: 680px;
+  margin: 56px auto 0;
+  text-align: center;
+}
+.partners-note {
+  font-size: 0.95rem;
+  color: #777;
+  margin-inline: auto;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+/* ============================================
+   COOKBOOK — Mangia Salsiccia
+   ============================================ */
+.section-cookbook {
+  background: var(--cream);
+  padding: var(--section-pad);
+}
+.cookbook-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 80px;
+  align-items: center;
+}
+.cookbook-art {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cookbook-cover {
+  width: 260px;
+  height: 360px;
+  background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%);
+  color: var(--cream);
+  border-radius: 4px;
+  box-shadow:
+    0 20px 48px rgba(0,0,0,0.25),
+    inset 0 0 0 8px rgba(201,168,76,0.18),
+    inset 0 0 0 9px rgba(201,168,76,0.4);
+  padding: 40px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transform: rotate(-3deg);
+  transition: transform 0.3s;
+}
+.cookbook-cover:hover { transform: rotate(-1deg) translateY(-4px); }
+.cookbook-cover-title {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.1;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+.cookbook-cover-sub {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--cream);
+  margin-bottom: 32px;
+}
+.cookbook-cover-byline {
+  font-size: 0.65rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(248,240,220,0.7);
+  padding-top: 16px;
+  border-top: 1px solid rgba(201,168,76,0.4);
+}
+.cookbook-copy h2 { margin-bottom: 20px; }
+.cookbook-copy p {
+  color: #555;
+  font-size: 1.02rem;
+  line-height: 1.8;
+  margin-bottom: 16px;
+  max-width: 100%;
+}
+.cookbook-copy .cookbook-charity {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--red);
+  font-size: 1.05rem;
+  margin-bottom: 28px;
+}
+
+/* ============================================
+   VISIT / LOCAL SHOP
+   ============================================ */
+.section-visit {
+  background: var(--charcoal);
+  color: var(--white);
+  padding: var(--section-pad);
+}
+.visit-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+.visit-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 64px;
+}
+.visit-header .eyebrow { color: var(--gold); }
+.visit-header h2 { color: var(--white); margin-bottom: 20px; }
+.visit-header p {
+  color: rgba(255,255,255,0.7);
+  margin-inline: auto;
+  font-size: 1.02rem;
+}
+.visit-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+  padding: 48px 0;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.visit-block h4 {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+.visit-block p {
+  color: rgba(255,255,255,0.75);
+  font-size: 0.98rem;
+  line-height: 1.8;
+  max-width: 100%;
+}
+.visit-block .store-hours-row { font-size: 0.95rem; }
+.visit-phone {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 12px;
+  letter-spacing: 0.01em;
+}
+.visit-phone:hover { color: var(--cream); }
+.visit-phone-note {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.7;
+}
+.visit-phone-note a {
+  color: var(--gold);
+  border-bottom: 1px solid rgba(201,168,76,0.4);
+}
+.visit-phone-note a:hover { color: var(--cream); border-color: var(--cream); }
+.visit-quote {
+  max-width: 780px;
+  margin: 56px auto 0;
+  text-align: center;
+  font-family: var(--font-serif);
+  font-size: clamp(1.2rem, 2.4vw, 1.55rem);
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--cream);
+  position: relative;
+  padding: 0 24px;
+}
+.visit-quote cite {
+  display: block;
+  margin-top: 20px;
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-style: normal;
+}
+
+/* ============================================
    RESPONSIVE
    ============================================ */
 @media (max-width: 900px) {
@@ -1294,4 +1581,23 @@ p  { max-width: 660px; }
   .usda-inner { flex-direction: column; text-align: center; }
   .menu-notice .container { flex-direction: column; text-align: center; }
   .menu-extras { justify-content: center; }
+}
+
+/* Responsive overrides for new sections */
+@media (max-width: 900px) {
+  .counter-grid { grid-template-columns: 1fr 1fr; }
+  .counter-item:nth-child(3n) { border-right: 1px solid rgba(0,0,0,0.08); }
+  .counter-item:nth-child(2n) { border-right: none; }
+  .counter-item:nth-last-child(-n+3) { border-bottom: 1px solid rgba(0,0,0,0.08); }
+  .counter-item:nth-last-child(-n+2) { border-bottom: none; }
+  .partners-list { grid-template-columns: repeat(2, 1fr); }
+  .cookbook-inner { grid-template-columns: 1fr; gap: 48px; }
+  .visit-grid { grid-template-columns: 1fr; gap: 40px; }
+}
+@media (max-width: 640px) {
+  .counter-grid { grid-template-columns: 1fr; }
+  .counter-item { border-right: none !important; border-bottom: 1px solid rgba(0,0,0,0.08); }
+  .counter-item:last-child { border-bottom: none; }
+  .partners-list { grid-template-columns: 1fr; }
+  .counter-footer { flex-direction: column; align-items: flex-start; }
 }

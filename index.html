@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ricci's Italian Sausage — Since 1945 | Pittsburgh, PA</title>
-  <meta name="description" content="80 years of authentic Italian sausage, made from a family recipe brought from Sulmona, Italy. USDA certified. Shipped nationwide." />
+  <meta name="description" content="80 years of authentic Italian sausage, made from a family recipe brought from Sulmona, Italy. USDA certified. Made in McKees Rocks. Shipped nationwide." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -14,7 +14,6 @@
 
   <!-- ══════════════════════════════════════════
        HEADER
-       Shopify: sections/header.liquid
   ══════════════════════════════════════════ -->
   <header class="site-header">
     <nav class="nav">
@@ -26,13 +25,13 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="story.html">Our Story</a></li>
         <li><a href="menu.html">Menu</a></li>
-        <li class="nav-shop"><a href="#">Shop</a></li>
+        <li class="nav-shop"><a href="shop.html">Shop</a></li>
         <li><a href="press.html">Press</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="#visit">Visit</a></li>
       </ul>
       <div class="nav-cta">
         <span class="nav-cart">Cart (0)</span>
-        <a href="#" class="btn btn-primary">Order Now</a>
+        <a href="shop.html" class="btn btn-primary">Order Now</a>
       </div>
     </nav>
   </header>
@@ -41,23 +40,20 @@
 
     <!-- ══════════════════════════════════════════
          HERO
-         Shopify: sections/hero.liquid
-         Replace .hero-bg background-image with
-         {{ section.settings.image | image_url }}
     ══════════════════════════════════════════ -->
     <section class="hero">
       <div class="hero-bg"></div>
       <div class="hero-content">
-        <span class="hero-year">Pittsburgh, Pennsylvania · Since 1945</span>
+        <span class="hero-year">Three Generations of Master Sausage-Makers · Since 1945</span>
         <h1>The Recipe That<br /><em>Hasn't Changed</em><br />in 80 Years.</h1>
         <p class="hero-sub">
-          A family secret from Sulmona, Italy. Hand-mixed spices.
-          The same proprietary grind. Now shipping nationwide for
-          the first time in our history.
+          A family recipe from Sulmona, Italy — hand-mixed, hand-linked,
+          made fresh every morning in McKees Rocks. Served at Pittsburgh's
+          best tables. Now shipping to your door.
         </p>
         <div class="hero-actions">
-          <a href="#" class="btn btn-primary">Shop Now</a>
-          <a href="story.html" class="btn btn-outline">Our Story</a>
+          <a href="shop.html" class="btn btn-primary">Shop Online</a>
+          <a href="#visit" class="btn btn-outline">Visit the Shop</a>
         </div>
       </div>
       <div class="hero-badge">
@@ -67,14 +63,14 @@
 
     <!-- ══════════════════════════════════════════
          PRESS BAR
-         Shopify: sections/press-bar.liquid
     ══════════════════════════════════════════ -->
     <div class="press-bar">
       <div class="press-bar-inner">
         <span class="press-bar-label">As Seen On</span>
         <div class="press-items">
-          <span class="press-item">WQED — What Pittsburgh Eats!</span>
-          <span class="press-item">KDKA Radio</span>
+          <span class="press-item">WQED — Meat Pittsburgh</span>
+          <span class="press-item">ESPN College GameDay</span>
+          <span class="press-item">YaJagoff</span>
           <span class="press-item">SBA Family Business of the Year</span>
           <span class="press-item">National Italian American Sports Hall of Fame</span>
           <span class="press-item">Pittsburgh Post-Gazette</span>
@@ -84,25 +80,24 @@
 
     <!-- ══════════════════════════════════════════
          HERITAGE STATS
-         Shopify: sections/heritage-stats.liquid
     ══════════════════════════════════════════ -->
     <section class="section-heritage">
       <div class="container">
         <div class="heritage-grid">
           <div>
             <span class="heritage-stat-num">1945</span>
-            <span class="heritage-stat-label">Founded in<br />Pittsburgh, PA</span>
+            <span class="heritage-stat-label">Founded in<br />McKees Rocks, PA</span>
           </div>
           <div>
             <span class="heritage-stat-num">80+</span>
             <span class="heritage-stat-label">Years of the<br />Same Recipe</span>
           </div>
           <div>
-            <span class="heritage-stat-num">630+</span>
-            <span class="heritage-stat-label">Customers<br />Per Week</span>
+            <span class="heritage-stat-num">3</span>
+            <span class="heritage-stat-label">Generations of<br />Master Sausage-Makers</span>
           </div>
           <div>
-            <span class="heritage-stat-num">50+</span>
+            <span class="heritage-stat-num">50</span>
             <span class="heritage-stat-label">States We<br />Now Ship To</span>
           </div>
         </div>
@@ -110,14 +105,12 @@
     </section>
 
     <!-- ══════════════════════════════════════════
-         FEATURED PRODUCTS
-         Shopify: sections/featured-products.liquid
-         Product cards map to product.liquid template
+         FEATURED PRODUCTS — Ship Nationwide
     ══════════════════════════════════════════ -->
     <section class="section-products">
       <div class="container">
         <div class="section-header">
-          <span class="eyebrow">Our Products</span>
+          <span class="eyebrow">Shipped Nationwide</span>
           <h2>Crafted the Same Way<br />Since Day One.</h2>
           <p>Every link made with the same hand-mixed spice blend Ernest Ricci
              brought from Sulmona, Italy. No shortcuts. No compromises.</p>
@@ -139,7 +132,7 @@
                   $59.95
                   <span class="ship-note">+ Shipping · Arrives Frozen</span>
                 </div>
-                <a href="#" class="btn btn-outline-dark">Add to Cart</a>
+                <a href="shop.html" class="btn btn-outline-dark">Add to Cart</a>
               </div>
             </div>
           </div>
@@ -158,7 +151,7 @@
                   $59.95
                   <span class="ship-note">+ Shipping · Arrives Frozen</span>
                 </div>
-                <a href="#" class="btn btn-outline-dark">Add to Cart</a>
+                <a href="shop.html" class="btn btn-outline-dark">Add to Cart</a>
               </div>
             </div>
           </div>
@@ -175,7 +168,7 @@
                   $99.95
                   <span class="ship-note">Free Shipping · Arrives Frozen</span>
                 </div>
-                <a href="#" class="btn btn-primary">Add to Cart</a>
+                <a href="shop.html" class="btn btn-primary">Add to Cart</a>
               </div>
             </div>
           </div>
@@ -193,7 +186,7 @@
                   $129.95
                   <span class="ship-note">Free Shipping · Premium Packaging</span>
                 </div>
-                <a href="#" class="btn btn-primary">Add to Cart</a>
+                <a href="shop.html" class="btn btn-primary">Add to Cart</a>
               </div>
             </div>
           </div>
@@ -211,7 +204,7 @@
                   $149.95
                   <span class="ship-note">Free Shipping · Limited Seasonal</span>
                 </div>
-                <a href="#" class="btn btn-primary">Add to Cart</a>
+                <a href="shop.html" class="btn btn-primary">Add to Cart</a>
               </div>
             </div>
           </div>
@@ -229,18 +222,69 @@
                   $59.95<span style="font-size:0.7em;color:#999;font-family:var(--font-sans);font-weight:400"> /mo</span>
                   <span class="ship-note">Free Shipping · Cancel Anytime</span>
                 </div>
-                <a href="#" class="btn btn-primary">Subscribe</a>
+                <a href="shop.html" class="btn btn-primary">Subscribe</a>
               </div>
             </div>
           </div>
 
         </div><!-- /products-grid -->
+
+        <!-- FROM THE COUNTER — In-store authentic items -->
+        <div class="counter-block">
+          <div class="counter-header">
+            <span class="eyebrow">From the Counter</span>
+            <h2>What Pittsburgh Has Been<br />Lining Up For Since 1945.</h2>
+            <p>The hot case at our McKees Rocks shop. Made fresh in-house daily —
+               pick it up, or call ahead and we'll have it ready.</p>
+          </div>
+
+          <div class="counter-grid">
+            <div class="counter-item">
+              <span class="counter-tag">Signature</span>
+              <h3>Lil's Famous Stuffed Sausage Rolls</h3>
+              <p>A Ricci's original, made in-house. A McKees Rocks favorite
+                 for generations.</p>
+            </div>
+            <div class="counter-item">
+              <span class="counter-tag">Ernie's Recipe</span>
+              <h3>Stuffed Banana Peppers</h3>
+              <p>Sweet or hot peppers stuffed with our seasoned sausage.</p>
+            </div>
+            <div class="counter-item">
+              <span class="counter-tag">Ready to Eat</span>
+              <h3>Sausage Sandwiches &amp; Hot Plates</h3>
+              <p>Hot or sweet sausage, meatballs, mac 'n cheese with sausage,
+                 Friday pasta e fagioli, and lasagna — made fresh daily.</p>
+            </div>
+            <div class="counter-item">
+              <span class="counter-tag">Fresh Daily</span>
+              <h3>Hand-Linked Rope Sausage</h3>
+              <p>Our signature sausage, hot or sweet. The same proprietary
+                 grind we've been cutting since 1945.</p>
+            </div>
+            <div class="counter-item">
+              <span class="counter-tag">Sunday Sauce</span>
+              <h3>Homemade Italian Meatballs</h3>
+              <p>Tender, hand-rolled, seasoned with the family spice blend.</p>
+            </div>
+            <div class="counter-item">
+              <span class="counter-tag">Heat &amp; Serve</span>
+              <h3>Cooked Sausage in Sauce</h3>
+              <p>Slow-cooked with peppers and onions. Ready for the table.</p>
+            </div>
+          </div>
+
+          <div class="counter-footer">
+            <a href="menu.html" class="btn btn-outline-dark">See the Full Menu</a>
+            <a href="tel:4123319531" class="counter-phone">Call Ahead · 412-331-9531</a>
+          </div>
+        </div>
+
       </div>
     </section>
 
     <!-- ══════════════════════════════════════════
          STORY SPLIT
-         Shopify: sections/story-split.liquid
     ══════════════════════════════════════════ -->
     <section class="section-story-split">
       <div class="story-split-img">
@@ -260,9 +304,9 @@
           sausage that made Ricci's a Pittsburgh institution.
         </p>
         <p>
-          Now, Ricci's is entering a new era — with a fresh mission: to bring
-          the most authentic Italian sausage in America to doorsteps across
-          the country.
+          Today, three generations of master sausage-makers still run the
+          counter — and for the first time in our history, we're shipping
+          to doorsteps across the country.
         </p>
         <a href="story.html" class="btn btn-outline-dark">Read the Full Story</a>
       </div>
@@ -270,7 +314,6 @@
 
     <!-- ══════════════════════════════════════════
          USDA CERTIFICATION CALLOUT
-         Shopify: sections/usda-banner.liquid
     ══════════════════════════════════════════ -->
     <div class="section-usda">
       <div class="usda-inner">
@@ -279,9 +322,9 @@
           <h3>Why USDA Federal Inspection Matters</h3>
           <p>
             Ricci's has held USDA Federal Inspection since 1973 — one of the rarest
-            certifications in American food manufacturing. It means daily on-site
-            inspection, the highest food safety standards, and the legal ability to
-            ship fresh sausage to all 50 states. Most regional producers don't have it.
+            certifications in American food manufacturing. Daily on-site inspection,
+            the highest food safety standards, and the legal ability to ship fresh
+            sausage to all 50 states. Most regional producers don't have it.
           </p>
         </div>
         <a href="story.html" class="btn btn-outline">Learn More</a>
@@ -289,9 +332,132 @@
     </div>
 
     <!-- ══════════════════════════════════════════
+         PARTNERS — Pittsburgh's Best Tables
+    ══════════════════════════════════════════ -->
+    <section class="section-partners">
+      <div class="container">
+        <div class="partners-header">
+          <span class="eyebrow partners-eyebrow">Pittsburgh's Best Tables</span>
+          <h2>Served Where It Matters.</h2>
+          <p>
+            For decades, Pittsburgh's most loved kitchens have built their
+            menus on Ricci's. A short list of the restaurants, bakeries, and
+            markets that carry us.
+          </p>
+        </div>
+
+        <ul class="partners-list">
+          <li>Juliano's Pizza</li>
+          <li>Chub's North Park</li>
+          <li>4th Avenue Pizzeria</li>
+          <li>Pasta Too</li>
+          <li>Fat Heads Southside</li>
+          <li>Doughboy's Pizza</li>
+          <li>Angelia's Pizza</li>
+          <li>Big Jim's Greenfield</li>
+          <li>Pennsylvania Macaroni</li>
+          <li>Cibrone's Bakery</li>
+          <li>Groceria Merante</li>
+        </ul>
+
+        <div class="partners-footer">
+          <p class="partners-note">
+            Restaurant, retailer, or market? Our USDA Grant of Inspection lets
+            us ship wholesale across PA, OH, and WV.
+          </p>
+          <a href="mailto:wholesale@ricciitaliansausage.com" class="btn btn-outline-dark">Wholesale Inquiries</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         COOKBOOK — Mangia Salsiccia!
+    ══════════════════════════════════════════ -->
+    <section class="section-cookbook">
+      <div class="cookbook-inner">
+        <div class="cookbook-art">
+          <div class="cookbook-cover">
+            <span class="cookbook-cover-title">Mangia<br />Salsiccia!</span>
+            <span class="cookbook-cover-sub">Cooking with Sausage</span>
+            <span class="cookbook-cover-byline">The Ricci Family</span>
+          </div>
+        </div>
+        <div class="cookbook-copy">
+          <span class="eyebrow">Charity Cookbook</span>
+          <h2>Mangia Salsiccia!<br />Cooking with Sausage.</h2>
+          <p>
+            Our family cookbook — three generations of recipes for Sunday
+            sauce, stuffed peppers, Feast of the Seven Fishes, and every
+            way we've ever served a link of sausage. The original family
+            recipe is still a secret. Everything else is in the book.
+          </p>
+          <p class="cookbook-charity">
+            100% of proceeds support local charity.
+          </p>
+          <a href="#" class="btn btn-primary">Get the Cookbook · $24.95</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         VISIT THE SHOP / LOCAL
+    ══════════════════════════════════════════ -->
+    <section id="visit" class="section-visit">
+      <div class="visit-inner">
+        <div class="visit-header">
+          <span class="eyebrow">Visit the Shop</span>
+          <h2>500 Pine Hollow Road.<br />McKees Rocks, PA.</h2>
+          <p>
+            The same counter since 1945. Stop in, say hi, and pick up
+            something hot for dinner. Local? Call ahead and we'll have
+            your order ready at the counter.
+          </p>
+        </div>
+
+        <div class="visit-grid">
+          <div class="visit-block">
+            <h4>Address</h4>
+            <p>
+              Kenmawr Plaza<br />
+              500 Pine Hollow Road<br />
+              McKees Rocks, PA 15136
+            </p>
+          </div>
+          <div class="visit-block">
+            <h4>Hours</h4>
+            <div class="store-hours-row">
+              <span class="day">Mon – Fri</span>
+              <span>8:30 AM – 6:00 PM</span>
+            </div>
+            <div class="store-hours-row">
+              <span class="day">Saturday</span>
+              <span>8:30 AM – 5:00 PM</span>
+            </div>
+            <div class="store-hours-row">
+              <span class="day">Sunday</span>
+              <span>Closed</span>
+            </div>
+          </div>
+          <div class="visit-block">
+            <h4>Call the Shop</h4>
+            <a href="tel:4123319531" class="visit-phone">412-331-9531</a>
+            <p class="visit-phone-note">
+              Local orders, catering, custom cuts — call us.
+              Out-of-town? <a href="shop.html">Shop online →</a>
+            </p>
+          </div>
+        </div>
+
+        <blockquote class="visit-quote">
+          "Please do not fax or email your order. We are old fashioned
+          and enjoy talking to our customers on the phone! Capish?"
+          <cite>— The Ricci Family</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
          EMAIL CAPTURE
-         Shopify: sections/email-signup.liquid
-         Connect to Klaviyo via Shopify integration
     ══════════════════════════════════════════ -->
     <section class="section-email">
       <div class="container">
@@ -312,7 +478,6 @@
 
   <!-- ══════════════════════════════════════════
        FOOTER
-       Shopify: sections/footer.liquid
   ══════════════════════════════════════════ -->
   <footer class="site-footer">
     <div class="footer-grid">
@@ -322,18 +487,21 @@
           <span>Italian Sausage · Est. 1945</span>
         </div>
         <p>
-          A family recipe from Sulmona, Italy. Made in Pittsburgh, Pennsylvania
+          A family recipe from Sulmona, Italy. Made in McKees Rocks, Pennsylvania
           since 1945. USDA inspected. Shipped nationwide.
+        </p>
+        <p style="margin-top:12px;">
+          <a href="tel:4123319531" style="color:var(--gold);font-family:var(--font-serif);font-size:1.05rem;">412-331-9531</a>
         </p>
       </div>
       <div class="footer-col">
         <h4>Shop</h4>
         <ul>
-          <li><a href="#">Sweet Italian Sausage</a></li>
-          <li><a href="#">Hot Italian Sausage</a></li>
-          <li><a href="#">Gift Boxes</a></li>
-          <li><a href="#">The Sausage Club</a></li>
-          <li><a href="#">Wholesale</a></li>
+          <li><a href="shop.html">Sweet Italian Sausage</a></li>
+          <li><a href="shop.html">Hot Italian Sausage</a></li>
+          <li><a href="shop.html">Gift Boxes</a></li>
+          <li><a href="shop.html">The Sausage Club</a></li>
+          <li><a href="mailto:wholesale@ricciitaliansausage.com">Wholesale</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -342,7 +510,7 @@
           <li><a href="story.html">Our Story</a></li>
           <li><a href="menu.html">Menu</a></li>
           <li><a href="press.html">Press</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="#visit">Visit the Shop</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -357,7 +525,7 @@
     </div>
     <div class="footer-bottom">
       <span>&copy; 2026 Ricci's Italian Sausage. All rights reserved.</span>
-      <span>500 Pine Hollow Rd, McKees Rocks, PA 15136</span>
+      <span>500 Pine Hollow Rd, McKees Rocks, PA 15136 · 412-331-9531</span>
       <span>Privacy · Terms</span>
     </div>
   </footer>
