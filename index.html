@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ricci's Italian Sausage — Since 1945 | Pittsburgh, PA</title>
+  <meta name="description" content="80 years of authentic Italian sausage, made from a family recipe brought from Sulmona, Italy. USDA certified. Shipped nationwide." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════
+       HEADER
+       Shopify: sections/header.liquid
+  ══════════════════════════════════════════ -->
+  <header class="site-header">
+    <nav class="nav">
+      <a href="index.html" class="nav-logo">
+        Ricci's
+        <span>Italian Sausage · Est. 1945</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="story.html">Our Story</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li class="nav-shop"><a href="#">Shop</a></li>
+        <li><a href="press.html">Press</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <div class="nav-cta">
+        <span class="nav-cart">Cart (0)</span>
+        <a href="#" class="btn btn-primary">Order Now</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ══════════════════════════════════════════
+         HERO
+         Shopify: sections/hero.liquid
+         Replace .hero-bg background-image with
+         {{ section.settings.image | image_url }}
+    ══════════════════════════════════════════ -->
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-content">
+        <span class="hero-year">Pittsburgh, Pennsylvania · Since 1945</span>
+        <h1>The Recipe That<br /><em>Hasn't Changed</em><br />in 80 Years.</h1>
+        <p class="hero-sub">
+          A family secret from Sulmona, Italy. Hand-mixed spices.
+          The same proprietary grind. Now shipping nationwide for
+          the first time in our history.
+        </p>
+        <div class="hero-actions">
+          <a href="#" class="btn btn-primary">Shop Now</a>
+          <a href="story.html" class="btn btn-outline">Our Story</a>
+        </div>
+      </div>
+      <div class="hero-badge">
+        USDA<br />Inspected<br />Since<br />1973
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         PRESS BAR
+         Shopify: sections/press-bar.liquid
+    ══════════════════════════════════════════ -->
+    <div class="press-bar">
+      <div class="press-bar-inner">
+        <span class="press-bar-label">As Seen On</span>
+        <div class="press-items">
+          <span class="press-item">WQED — What Pittsburgh Eats!</span>
+          <span class="press-item">KDKA Radio</span>
+          <span class="press-item">SBA Family Business of the Year</span>
+          <span class="press-item">National Italian American Sports Hall of Fame</span>
+          <span class="press-item">Pittsburgh Post-Gazette</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         HERITAGE STATS
+         Shopify: sections/heritage-stats.liquid
+    ══════════════════════════════════════════ -->
+    <section class="section-heritage">
+      <div class="container">
+        <div class="heritage-grid">
+          <div>
+            <span class="heritage-stat-num">1945</span>
+            <span class="heritage-stat-label">Founded in<br />Pittsburgh, PA</span>
+          </div>
+          <div>
+            <span class="heritage-stat-num">80+</span>
+            <span class="heritage-stat-label">Years of the<br />Same Recipe</span>
+          </div>
+          <div>
+            <span class="heritage-stat-num">630+</span>
+            <span class="heritage-stat-label">Customers<br />Per Week</span>
+          </div>
+          <div>
+            <span class="heritage-stat-num">50+</span>
+            <span class="heritage-stat-label">States We<br />Now Ship To</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         FEATURED PRODUCTS
+         Shopify: sections/featured-products.liquid
+         Product cards map to product.liquid template
+    ══════════════════════════════════════════ -->
+    <section class="section-products">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Our Products</span>
+          <h2>Crafted the Same Way<br />Since Day One.</h2>
+          <p>Every link made with the same hand-mixed spice blend Ernest Ricci
+             brought from Sulmona, Italy. No shortcuts. No compromises.</p>
+        </div>
+
+        <div class="products-grid">
+
+          <div class="product-card">
+            <div class="product-card-img">
+              <img src="assets/img/sausage-peppers.webp" alt="Classic Sweet Italian Sausage with peppers" />
+            </div>
+            <div class="product-card-body">
+              <span class="product-card-tag">Best Seller</span>
+              <h3>Classic Sweet Italian Sausage</h3>
+              <p>Our original, since 1945. Mild and fragrant with fennel,
+                 garlic, and the Sulmona family spice blend. 3 lbs, fresh.</p>
+              <div class="product-card-footer">
+                <div class="product-price">
+                  $59.95
+                  <span class="ship-note">+ Shipping · Arrives Frozen</span>
+                </div>
+                <a href="#" class="btn btn-outline-dark">Add to Cart</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-card-img">
+              <img src="assets/img/sausage-roll.webp" alt="Hot Italian Sausage" />
+            </div>
+            <div class="product-card-body">
+              <span class="product-card-tag">Fan Favorite</span>
+              <h3>Hot Italian Sausage</h3>
+              <p>Bold heat, full flavor. The same family recipe with crushed
+                 red pepper. A Pittsburgh staple for Sunday sauce. 3 lbs, fresh.</p>
+              <div class="product-card-footer">
+                <div class="product-price">
+                  $59.95
+                  <span class="ship-note">+ Shipping · Arrives Frozen</span>
+                </div>
+                <a href="#" class="btn btn-outline-dark">Add to Cart</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-card-img">[ Product Photo ]</div>
+            <div class="product-card-body">
+              <span class="product-card-tag">Gift · Free Shipping</span>
+              <h3>The Pittsburgh Italian Pack</h3>
+              <p>Sweet sausage, hot sausage, and hand-rolled meatballs.
+                 The full Sunday table. Everything you need for the sauce.</p>
+              <div class="product-card-footer">
+                <div class="product-price">
+                  $99.95
+                  <span class="ship-note">Free Shipping · Arrives Frozen</span>
+                </div>
+                <a href="#" class="btn btn-primary">Add to Cart</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-card-img">[ Product Photo ]</div>
+            <div class="product-card-body">
+              <span class="product-card-tag">Gift Box · Free Shipping</span>
+              <h3>The Ricci Legacy Gift Box</h3>
+              <p>Our full range, beautifully packaged. Sweet, hot, meatballs,
+                 and stuffed peppers. The gift for the Italian food lover in
+                 your life.</p>
+              <div class="product-card-footer">
+                <div class="product-price">
+                  $129.95
+                  <span class="ship-note">Free Shipping · Premium Packaging</span>
+                </div>
+                <a href="#" class="btn btn-primary">Add to Cart</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-card-img">[ Product Photo ]</div>
+            <div class="product-card-body">
+              <span class="product-card-tag">Seasonal · Free Shipping</span>
+              <h3>Feast of the Seven Fishes Bundle</h3>
+              <p>The complete Italian Christmas Eve table. Sausage, meatballs,
+                 stuffed peppers — and a hand-written recipe card from
+                 the Ricci family.</p>
+              <div class="product-card-footer">
+                <div class="product-price">
+                  $149.95
+                  <span class="ship-note">Free Shipping · Limited Seasonal</span>
+                </div>
+                <a href="#" class="btn btn-primary">Add to Cart</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-card-img">[ Product Photo ]</div>
+            <div class="product-card-body">
+              <span class="product-card-tag">Subscribe &amp; Save</span>
+              <h3>The Ricci Sausage Club</h3>
+              <p>A different variety every month. Rotating seasonal cuts,
+                 member-only recipes, and early access to limited editions.
+                 Cancel anytime.</p>
+              <div class="product-card-footer">
+                <div class="product-price">
+                  $59.95<span style="font-size:0.7em;color:#999;font-family:var(--font-sans);font-weight:400"> /mo</span>
+                  <span class="ship-note">Free Shipping · Cancel Anytime</span>
+                </div>
+                <a href="#" class="btn btn-primary">Subscribe</a>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /products-grid -->
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         STORY SPLIT
+         Shopify: sections/story-split.liquid
+    ══════════════════════════════════════════ -->
+    <section class="section-story-split">
+      <div class="story-split-img">
+        <img src="assets/img/family.webp" alt="The Ricci family at their McKees Rocks shop" />
+      </div>
+      <div class="story-split-content">
+        <span class="eyebrow">80 Years in the Making</span>
+        <h2>A Recipe Worth<br />Keeping Secret.</h2>
+        <p>
+          In 1945, Ernest Ricci opened a small butcher shop in McKees Rocks,
+          Pennsylvania. He brought with him a spice blend from his family's
+          hometown of Sulmona, Italy — and a stubborn refusal to change it.
+        </p>
+        <p>
+          Eight decades later, not a single ingredient has been altered.
+          The same hand-mixed spices. The same proprietary grind. The same
+          sausage that made Ricci's a Pittsburgh institution.
+        </p>
+        <p>
+          Now, Ricci's is entering a new era — with a fresh mission: to bring
+          the most authentic Italian sausage in America to doorsteps across
+          the country.
+        </p>
+        <a href="story.html" class="btn btn-outline-dark">Read the Full Story</a>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         USDA CERTIFICATION CALLOUT
+         Shopify: sections/usda-banner.liquid
+    ══════════════════════════════════════════ -->
+    <div class="section-usda">
+      <div class="usda-inner">
+        <div class="usda-badge">USDA<br />Federal<br />Inspected<br />Est. 1973</div>
+        <div class="usda-copy">
+          <h3>Why USDA Federal Inspection Matters</h3>
+          <p>
+            Ricci's has held USDA Federal Inspection since 1973 — one of the rarest
+            certifications in American food manufacturing. It means daily on-site
+            inspection, the highest food safety standards, and the legal ability to
+            ship fresh sausage to all 50 states. Most regional producers don't have it.
+          </p>
+        </div>
+        <a href="story.html" class="btn btn-outline">Learn More</a>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         EMAIL CAPTURE
+         Shopify: sections/email-signup.liquid
+         Connect to Klaviyo via Shopify integration
+    ══════════════════════════════════════════ -->
+    <section class="section-email">
+      <div class="container">
+        <span class="eyebrow">Join the Family</span>
+        <h2>Get Early Access &amp;<br />Members-Only Recipes.</h2>
+        <p>
+          Be the first to know about new products, seasonal bundles, and
+          limited-edition cuts. Plus a Ricci family recipe in your first email.
+        </p>
+        <form class="email-form" onsubmit="return false;">
+          <input type="email" placeholder="Your email address" />
+          <button type="submit">Join</button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══════════════════════════════════════════
+       FOOTER
+       Shopify: sections/footer.liquid
+  ══════════════════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo">
+          Ricci's
+          <span>Italian Sausage · Est. 1945</span>
+        </div>
+        <p>
+          A family recipe from Sulmona, Italy. Made in Pittsburgh, Pennsylvania
+          since 1945. USDA inspected. Shipped nationwide.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#">Sweet Italian Sausage</a></li>
+          <li><a href="#">Hot Italian Sausage</a></li>
+          <li><a href="#">Gift Boxes</a></li>
+          <li><a href="#">The Sausage Club</a></li>
+          <li><a href="#">Wholesale</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="story.html">Our Story</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="press.html">Press</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Help</h4>
+        <ul>
+          <li><a href="#">Shipping Info</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Returns</a></li>
+          <li><a href="#">Track Order</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Ricci's Italian Sausage. All rights reserved.</span>
+      <span>500 Pine Hollow Rd, McKees Rocks, PA 15136</span>
+      <span>Privacy · Terms</span>
+    </div>
+  </footer>
+
+</body>
+</html>
