@@ -1,0 +1,1711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ricci's — Since MCMXLV · Alla Famiglia</title>
+  <meta name="description" content="Ricci's Italian Sausage. A recipe from Sulmona, Italy. Made in Pittsburgh since 1945. USDA inspected every day since 1973." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================================
+       LA CASA RICCI — Archive Variant
+       Inspired by Giusti 1605, Amedei Tuscany
+       ============================================ */
+
+    :root {
+      --ink:        #0B0908;
+      --wood:       #1A110D;
+      --wood-2:     #241811;
+      --oxblood:    #6B1818;
+      --oxblood-2:  #4A0F0F;
+      --parchment:  #E8DBC1;
+      --parchment-2:#D4C3A3;
+      --cream:      #F4EBD4;
+      --gold:       #B8914A;
+      --gold-light: #D4B26E;
+      --rule:       rgba(184,145,74,0.28);
+      --rule-soft:  rgba(184,145,74,0.12);
+      --muted:      rgba(232,219,193,0.55);
+
+      --serif: 'Cormorant Garamond', Garamond, 'Times New Roman', serif;
+      --sans:  'Inter', system-ui, sans-serif;
+
+      --max: 1280px;
+      --gutter: 56px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      background: var(--ink);
+      color: var(--parchment);
+      font-size: 16px;
+      line-height: 1.6;
+      font-weight: 300;
+      letter-spacing: 0.005em;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    /* film-grain overlay for the whole page */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: 0.55;
+      mix-blend-mode: overlay;
+    }
+
+    /* ── Typography ────────────────────────── */
+    .serif { font-family: var(--serif); }
+    .italic { font-style: italic; }
+    h1, h2, h3, h4 {
+      font-family: var(--serif);
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: -0.005em;
+    }
+    h1 { font-size: clamp(3rem, 7.5vw, 6.2rem); font-weight: 500; }
+    h2 { font-size: clamp(2.2rem, 4.8vw, 3.8rem); font-weight: 500; }
+    h3 { font-size: clamp(1.3rem, 2vw, 1.7rem); font-weight: 600; }
+    p  { max-width: 56ch; }
+
+    .smallcaps {
+      font-family: var(--sans);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .wordmark-sub {
+      font-family: var(--sans);
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.36em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── Layout ────────────────────────────── */
+    .container {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
+    .rule {
+      height: 1px;
+      background: var(--rule);
+      width: 100%;
+    }
+    .rule-gold {
+      height: 1px;
+      background: var(--gold);
+      width: 48px;
+    }
+
+    /* ============================================
+       MASTHEAD / HEADER
+       ============================================ */
+    .masthead {
+      border-bottom: 1px solid var(--rule-soft);
+      background: var(--ink);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(6px);
+      background: rgba(11,9,8,0.92);
+    }
+    .masthead-top {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 18px var(--gutter);
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 40px;
+    }
+    .mast-left, .mast-right {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      font-family: var(--sans);
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+    .mast-right { justify-content: flex-end; }
+    .mast-left a, .mast-right a {
+      color: var(--parchment);
+      opacity: 0.7;
+      transition: opacity 0.2s, color 0.2s;
+    }
+    .mast-left a:hover, .mast-right a:hover { color: var(--gold); opacity: 1; }
+    .wordmark {
+      text-align: center;
+      line-height: 1;
+    }
+    .wordmark-name {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1.9rem;
+      font-weight: 500;
+      color: var(--parchment);
+      letter-spacing: 0.01em;
+    }
+    .wordmark-name em { color: var(--gold); font-style: normal; font-weight: 600; }
+    .wordmark-line {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 6px;
+    }
+    .wordmark-line::before,
+    .wordmark-line::after {
+      content: '';
+      width: 28px; height: 1px;
+      background: var(--rule);
+    }
+
+    /* ============================================
+       HERO — The Masthead Page
+       ============================================ */
+    .hero {
+      position: relative;
+      min-height: 92vh;
+      background:
+        radial-gradient(1200px 700px at 80% 30%, rgba(107,24,24,0.35), transparent 60%),
+        radial-gradient(900px 600px at 15% 80%, rgba(184,145,74,0.08), transparent 65%),
+        linear-gradient(180deg, var(--ink) 0%, var(--wood) 100%);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid var(--rule);
+    }
+    .hero::after {
+      /* aged-paper corner gradient */
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.55) 100%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: var(--max);
+      width: 100%;
+      margin: 0 auto;
+      padding: 120px var(--gutter);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .hero-left { position: relative; }
+    .hero-vol {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 40px;
+      color: var(--gold);
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1.05rem;
+      letter-spacing: 0.02em;
+    }
+    .hero-vol::before {
+      content: '';
+      width: 56px; height: 1px;
+      background: var(--gold);
+      display: inline-block;
+    }
+    .hero h1 {
+      color: var(--parchment);
+      margin-bottom: 40px;
+    }
+    .hero h1 .it { font-style: italic; color: var(--gold); font-weight: 500; }
+    .hero h1 .sm { display: block; font-size: 0.42em; font-style: italic; color: var(--muted); letter-spacing: 0.02em; margin-top: 12px; }
+    .hero-sub {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--parchment-2);
+      max-width: 48ch;
+      line-height: 1.55;
+      margin-bottom: 48px;
+    }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+    .btn {
+      display: inline-block;
+      padding: 16px 34px;
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: 1px solid var(--gold);
+      transition: background 0.25s, color 0.25s;
+    }
+    .btn-gold {
+      background: var(--gold);
+      color: var(--ink);
+    }
+    .btn-gold:hover { background: var(--gold-light); border-color: var(--gold-light); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--gold);
+    }
+    .btn-ghost:hover { background: var(--gold); color: var(--ink); }
+
+    /* Hero right — Dossier card */
+    .hero-right {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .dossier {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+      padding: 48px 40px;
+      background:
+        linear-gradient(180deg, rgba(36,24,17,0.85), rgba(26,17,13,0.95));
+      border: 1px solid var(--rule);
+      color: var(--parchment);
+    }
+    .dossier::before, .dossier::after {
+      content: '';
+      position: absolute;
+      background: var(--gold);
+      opacity: 0.5;
+    }
+    .dossier::before { top: 8px; left: 8px; right: 8px; height: 1px; }
+    .dossier::after { bottom: 8px; left: 8px; right: 8px; height: 1px; }
+    .dossier-label {
+      text-align: center;
+      font-family: var(--sans);
+      font-size: 0.6rem;
+      letter-spacing: 0.36em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+    }
+    .dossier-title {
+      text-align: center;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1.6rem;
+      color: var(--parchment);
+      margin-bottom: 8px;
+    }
+    .dossier-sub {
+      text-align: center;
+      font-family: var(--sans);
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 36px;
+    }
+    .dossier-rows {
+      border-top: 1px solid var(--rule-soft);
+    }
+    .dossier-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--rule-soft);
+      font-family: var(--sans);
+      font-size: 0.78rem;
+    }
+    .dossier-row .k {
+      color: var(--muted);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-size: 0.66rem;
+    }
+    .dossier-row .v {
+      color: var(--parchment);
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 0.95rem;
+    }
+    .dossier-seal {
+      margin: 32px auto 0;
+      width: 92px;
+      height: 92px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      font-family: var(--serif);
+      font-size: 0.6rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 1.5;
+    }
+    .dossier-seal strong {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-style: italic;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-transform: none;
+      color: var(--gold-light);
+    }
+
+    /* ============================================
+       CHAPTER SECTIONS
+       ============================================ */
+    .chapter {
+      padding: 140px var(--gutter);
+      border-bottom: 1px solid var(--rule-soft);
+      position: relative;
+    }
+    .chapter-head {
+      max-width: var(--max);
+      margin: 0 auto 80px;
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 48px;
+      align-items: baseline;
+    }
+    .chapter-roman {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 4.5rem;
+      color: var(--gold);
+      line-height: 1;
+      font-weight: 500;
+    }
+    .chapter-title .smallcaps {
+      display: block;
+      margin-bottom: 14px;
+    }
+    .chapter-title h2 {
+      color: var(--parchment);
+      max-width: 18ch;
+    }
+    .chapter-title h2 em { color: var(--gold); font-weight: 500; }
+
+    /* ============================================
+       II — SULMONA (two-column editorial)
+       ============================================ */
+    .sulmona {
+      background:
+        radial-gradient(800px 500px at 90% 10%, rgba(107,24,24,0.12), transparent 65%),
+        var(--ink);
+    }
+    .sulmona-body {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 96px;
+      align-items: center;
+    }
+    .sulmona-prose p {
+      font-family: var(--serif);
+      font-size: 1.18rem;
+      line-height: 1.75;
+      color: var(--parchment-2);
+      margin-bottom: 22px;
+    }
+    .sulmona-prose p:first-of-type::first-letter {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 4.4rem;
+      float: left;
+      line-height: 0.85;
+      padding: 8px 14px 0 0;
+      color: var(--gold);
+      font-weight: 500;
+    }
+    .sulmona-prose .pull {
+      display: block;
+      margin: 40px 0;
+      padding: 0 0 0 28px;
+      border-left: 1px solid var(--gold);
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1.45rem;
+      line-height: 1.5;
+      color: var(--gold-light);
+    }
+    .archive-card {
+      background: var(--wood-2);
+      border: 1px solid var(--rule);
+      padding: 0;
+      position: relative;
+    }
+    .archive-card-img {
+      aspect-ratio: 4/5;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.3), rgba(0,0,0,0.7)),
+        url('assets/img/sausage-roll.webp') center/cover;
+      position: relative;
+      filter: saturate(0.7) contrast(1.05);
+    }
+    .archive-card-img::after {
+      content: '';
+      position: absolute;
+      inset: 16px;
+      border: 1px solid rgba(184,145,74,0.25);
+      pointer-events: none;
+    }
+    .archive-card-plaque {
+      padding: 28px 32px;
+      border-top: 1px solid var(--rule-soft);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 16px;
+    }
+    .archive-card-plaque .label {
+      font-family: var(--sans);
+      font-size: 0.6rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .archive-card-plaque .title {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1.25rem;
+      color: var(--parchment);
+    }
+    .archive-card-plaque .year {
+      font-family: var(--serif);
+      font-size: 2rem;
+      color: var(--gold);
+      line-height: 0.9;
+      letter-spacing: -0.01em;
+    }
+
+    /* ============================================
+       III — THE GRIND (macro-texture / bean-to-bar)
+       ============================================ */
+    .grind {
+      background:
+        radial-gradient(1000px 600px at 50% 0%, rgba(184,145,74,0.06), transparent 60%),
+        var(--wood);
+    }
+    .grind-narrative {
+      max-width: 960px;
+      margin: 0 auto 80px;
+      text-align: center;
+    }
+    .grind-narrative p {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      line-height: 1.7;
+      color: var(--parchment-2);
+      margin-inline: auto;
+      max-width: 52ch;
+    }
+    .grind-narrative p em { color: var(--gold); font-style: italic; }
+
+    .grind-steps {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+    .grind-step {
+      padding: 56px 36px;
+      border-right: 1px solid var(--rule-soft);
+      position: relative;
+    }
+    .grind-step:last-child { border-right: none; }
+    .grind-step-num {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 0.9rem;
+      color: var(--gold);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .grind-step-macro {
+      aspect-ratio: 1/1;
+      margin-bottom: 28px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--rule-soft);
+    }
+    .grind-step-macro.m1 {
+      background:
+        radial-gradient(circle at 35% 40%, #8a6c2e 0%, #4d3516 35%, #1a0f05 80%);
+    }
+    .grind-step-macro.m2 {
+      background:
+        radial-gradient(circle at 60% 30%, #9a2525 0%, #5a1515 40%, #1a0707 85%),
+        repeating-conic-gradient(from 0deg at 50% 50%, rgba(0,0,0,0.15) 0deg 8deg, transparent 8deg 16deg);
+    }
+    .grind-step-macro.m3 {
+      background:
+        radial-gradient(ellipse at 50% 50%, #c9884c 0%, #7a4a22 45%, #1c0f07 85%);
+    }
+    .grind-step-macro.m4 {
+      background:
+        linear-gradient(135deg, #2a1b0f 0%, #5c3a1e 40%, #8e5f30 70%, #2a1b0f 100%);
+    }
+    .grind-step-macro::after {
+      content: attr(data-label);
+      position: absolute;
+      bottom: 12px; left: 14px;
+      font-family: var(--sans);
+      font-size: 0.55rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(232,219,193,0.5);
+    }
+    .grind-step h3 {
+      font-family: var(--serif);
+      font-style: italic;
+      color: var(--parchment);
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+    .grind-step p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 100%;
+    }
+
+    /* ============================================
+       IV — THE OFFERING (Products as jewelry)
+       ============================================ */
+    .offering {
+      background: var(--ink);
+    }
+    .offering-grid {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+    }
+    .offer-card {
+      background: var(--wood);
+      padding: 48px 36px;
+      display: flex;
+      flex-direction: column;
+      transition: background 0.3s;
+      position: relative;
+    }
+    .offer-card:hover { background: var(--wood-2); }
+    .offer-card-specimen {
+      aspect-ratio: 1/1;
+      margin-bottom: 32px;
+      background:
+        radial-gradient(circle at 50% 45%, rgba(184,145,74,0.15), transparent 55%),
+        var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--rule-soft);
+      position: relative;
+    }
+    .offer-card-specimen::before {
+      content: '';
+      position: absolute;
+      width: 60%;
+      height: 60%;
+      background:
+        radial-gradient(ellipse at 50% 50%, rgba(107,24,24,0.85) 0%, rgba(60,10,10,0.6) 45%, transparent 80%),
+        radial-gradient(circle at 45% 40%, rgba(255,200,120,0.18) 0%, transparent 30%);
+      filter: blur(1px);
+      border-radius: 50%;
+    }
+    .offer-card-specimen .specimen-label {
+      position: absolute;
+      top: 12px; left: 14px;
+      font-family: var(--sans);
+      font-size: 0.55rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(184,145,74,0.6);
+      z-index: 2;
+    }
+    .offer-card-specimen .specimen-no {
+      position: absolute;
+      top: 12px; right: 14px;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--gold);
+      z-index: 2;
+    }
+    .offer-card-label {
+      font-family: var(--sans);
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+    .offer-card h3 {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 500;
+      color: var(--parchment);
+      margin-bottom: 16px;
+      font-size: 1.55rem;
+    }
+    .offer-card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 32px;
+      flex: 1;
+      max-width: 100%;
+    }
+    .offer-card-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 24px;
+      border-top: 1px solid var(--rule-soft);
+    }
+    .offer-card-price {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1.5rem;
+      color: var(--gold);
+    }
+    .offer-card-price small {
+      display: block;
+      font-family: var(--sans);
+      font-style: normal;
+      font-size: 0.55rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .offer-link {
+      font-family: var(--sans);
+      font-size: 0.68rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 4px;
+      transition: border-color 0.2s;
+    }
+    .offer-link:hover { border-color: var(--gold); }
+
+    /* ============================================
+       V — THE GIFT (prominent gifting rail)
+       ============================================ */
+    .gifting {
+      background:
+        radial-gradient(900px 500px at 50% 100%, rgba(107,24,24,0.22), transparent 70%),
+        var(--wood);
+    }
+    .gift-split {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--rule);
+    }
+    .gift-art {
+      aspect-ratio: 1/1;
+      min-height: 520px;
+      background:
+        radial-gradient(circle at 50% 40%, rgba(184,145,74,0.18), transparent 60%),
+        linear-gradient(135deg, var(--oxblood-2) 0%, var(--wood) 100%);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .gift-crate {
+      width: 58%;
+      aspect-ratio: 4/3;
+      background:
+        linear-gradient(135deg, #2d1c10 0%, #4a2f1a 45%, #2d1c10 100%);
+      border: 1px solid var(--gold);
+      box-shadow:
+        0 30px 80px rgba(0,0,0,0.6),
+        inset 0 0 0 8px rgba(11,9,8,0.3),
+        inset 0 0 0 9px rgba(184,145,74,0.4);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      color: var(--gold);
+      text-align: center;
+    }
+    .gift-crate::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 0; right: 0;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.35;
+    }
+    .gift-crate-title {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 2rem;
+      margin-bottom: 8px;
+      color: var(--gold-light);
+    }
+    .gift-crate-sub {
+      font-family: var(--sans);
+      font-size: 0.6rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .gift-crate-seal {
+      position: absolute;
+      bottom: -24px; right: -24px;
+      width: 80px; height: 80px;
+      background: var(--oxblood);
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      text-align: center;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 0.7rem;
+      line-height: 1.1;
+    }
+    .gift-crate-seal strong {
+      font-size: 1.2rem;
+      color: var(--gold-light);
+      font-weight: 500;
+    }
+    .gift-copy {
+      padding: 80px 64px;
+      background: var(--ink);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .gift-copy h2 { color: var(--parchment); margin-bottom: 28px; }
+    .gift-copy h2 em { color: var(--gold); font-weight: 500; }
+    .gift-copy p {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      line-height: 1.75;
+      color: var(--parchment-2);
+      margin-bottom: 32px;
+    }
+    .gift-list {
+      list-style: none;
+      margin-bottom: 36px;
+    }
+    .gift-list li {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--rule-soft);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--sans);
+      font-size: 0.85rem;
+    }
+    .gift-list li:last-child { border-bottom: none; }
+    .gift-list .name {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--parchment);
+    }
+    .gift-list .price {
+      font-family: var(--serif);
+      color: var(--gold);
+      font-size: 1.05rem;
+    }
+
+    /* ============================================
+       VI — ARCHIVIO (press vitrine)
+       ============================================ */
+    .archivio {
+      background: var(--ink);
+    }
+    .archivio-grid {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 2px;
+      border: 1px solid var(--rule);
+      background: var(--rule);
+    }
+    .vitrine {
+      background: var(--wood);
+      padding: 40px 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 260px;
+    }
+    .vitrine-big { grid-column: span 6; }
+    .vitrine-med { grid-column: span 6; }
+    .vitrine-sm  { grid-column: span 4; }
+    .vitrine-date {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 2.6rem;
+      color: var(--gold);
+      line-height: 0.9;
+      margin-bottom: 20px;
+    }
+    .vitrine .smallcaps { margin-bottom: 14px; }
+    .vitrine h3 {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 500;
+      color: var(--parchment);
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+    }
+    .vitrine p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 100%;
+    }
+    .vitrine-link {
+      margin-top: 24px;
+      font-family: var(--sans);
+      font-size: 0.62rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* ============================================
+       VII — LA CASA (visit the shop)
+       ============================================ */
+    .casa {
+      background:
+        radial-gradient(600px 400px at 20% 20%, rgba(184,145,74,0.08), transparent 70%),
+        var(--wood-2);
+    }
+    .casa-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+    .casa-head {
+      text-align: center;
+      margin-bottom: 72px;
+    }
+    .casa-head .smallcaps { display: block; margin-bottom: 18px; }
+    .casa-head h2 {
+      color: var(--parchment);
+      max-width: 18ch;
+      margin: 0 auto 24px;
+    }
+    .casa-head h2 em { color: var(--gold); font-weight: 500; }
+    .casa-head p {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      color: var(--parchment-2);
+      margin-inline: auto;
+      max-width: 50ch;
+      line-height: 1.7;
+    }
+    .casa-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+    .casa-block {
+      padding: 56px 40px;
+      border-right: 1px solid var(--rule-soft);
+    }
+    .casa-block:last-child { border-right: none; }
+    .casa-block .smallcaps { margin-bottom: 24px; display: block; }
+    .casa-block p {
+      font-family: var(--serif);
+      font-size: 1.08rem;
+      color: var(--parchment);
+      line-height: 1.75;
+      max-width: 100%;
+    }
+    .casa-block .phone {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 2.2rem;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 14px;
+      letter-spacing: 0.01em;
+    }
+    .casa-hours {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--rule-soft);
+      font-family: var(--sans);
+      font-size: 0.85rem;
+    }
+    .casa-hours:last-child { border: none; }
+    .casa-hours .d {
+      color: var(--muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .casa-hours .h {
+      font-family: var(--serif);
+      font-style: italic;
+      color: var(--parchment);
+    }
+    .casa-quote {
+      text-align: center;
+      padding: 96px 48px 0;
+      max-width: 840px;
+      margin: 0 auto;
+    }
+    .casa-quote blockquote {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+      color: var(--parchment);
+      line-height: 1.55;
+      position: relative;
+      padding: 0 40px;
+    }
+    .casa-quote blockquote::before,
+    .casa-quote blockquote::after {
+      content: '"';
+      position: absolute;
+      font-family: var(--serif);
+      font-size: 5rem;
+      color: var(--gold);
+      opacity: 0.45;
+      line-height: 0.6;
+      font-style: italic;
+    }
+    .casa-quote blockquote::before { top: -8px; left: -8px; }
+    .casa-quote blockquote::after { bottom: -40px; right: -8px; content: '"'; }
+    .casa-quote cite {
+      display: block;
+      margin-top: 36px;
+      font-family: var(--sans);
+      font-size: 0.65rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    /* ============================================
+       JOIN (email)
+       ============================================ */
+    .join {
+      background: var(--ink);
+      border-top: 1px solid var(--rule);
+      padding: 120px var(--gutter);
+      text-align: center;
+    }
+    .join .smallcaps { display: block; margin-bottom: 20px; }
+    .join h2 {
+      color: var(--parchment);
+      margin-bottom: 20px;
+    }
+    .join h2 em { color: var(--gold); font-weight: 500; }
+    .join p {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      color: var(--parchment-2);
+      margin: 0 auto 48px;
+      max-width: 52ch;
+    }
+    .join-form {
+      max-width: 480px;
+      margin: 0 auto;
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid var(--gold);
+    }
+    .join-form input {
+      flex: 1;
+      padding: 18px 4px;
+      background: transparent;
+      border: none;
+      color: var(--parchment);
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1.05rem;
+      outline: none;
+    }
+    .join-form input::placeholder { color: var(--muted); }
+    .join-form button {
+      padding: 18px 28px;
+      background: transparent;
+      border: none;
+      color: var(--gold);
+      font-family: var(--sans);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .join-form button:hover { color: var(--gold-light); }
+
+    /* ============================================
+       FOOTER (Colofon)
+       ============================================ */
+    .colofon {
+      background: var(--ink);
+      border-top: 1px solid var(--rule-soft);
+      padding: 72px var(--gutter) 40px;
+      color: var(--muted);
+    }
+    .colofon-grid {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr 1fr;
+      gap: 56px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--rule-soft);
+    }
+    .colofon-brand .wordmark-name {
+      font-size: 1.4rem;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .colofon-brand p {
+      font-family: var(--serif);
+      font-size: 0.95rem;
+      color: var(--parchment-2);
+      line-height: 1.7;
+      margin-bottom: 18px;
+      max-width: 36ch;
+    }
+    .colofon h4 {
+      font-family: var(--sans);
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+    .colofon ul { list-style: none; }
+    .colofon li { margin-bottom: 12px; }
+    .colofon a {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--parchment-2);
+      transition: color 0.2s;
+    }
+    .colofon a:hover { color: var(--gold); }
+    .colofon-bot {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--sans);
+      font-size: 0.66rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* ============================================
+       RESPONSIVE
+       ============================================ */
+    @media (max-width: 1100px) {
+      :root { --gutter: 36px; }
+      .hero-inner, .sulmona-body { grid-template-columns: 1fr; gap: 64px; }
+      .grind-steps { grid-template-columns: repeat(2, 1fr); }
+      .grind-step { border-bottom: 1px solid var(--rule-soft); }
+      .grind-step:nth-child(2n) { border-right: none; }
+      .offering-grid { grid-template-columns: repeat(2, 1fr); }
+      .gift-split { grid-template-columns: 1fr; }
+      .gift-copy { padding: 56px 40px; }
+      .archivio-grid { grid-template-columns: repeat(6, 1fr); }
+      .vitrine-big, .vitrine-med, .vitrine-sm { grid-column: span 6; }
+      .casa-grid { grid-template-columns: 1fr; }
+      .casa-block { border-right: none; border-bottom: 1px solid var(--rule-soft); }
+      .chapter-head { grid-template-columns: 80px 1fr; gap: 32px; }
+      .chapter-roman { font-size: 3rem; }
+      .colofon-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      :root { --gutter: 22px; }
+      .masthead-top { grid-template-columns: 1fr; gap: 16px; text-align: center; }
+      .mast-left, .mast-right { display: none; }
+      .chapter { padding: 96px var(--gutter); }
+      .offering-grid { grid-template-columns: 1fr; }
+      .grind-steps { grid-template-columns: 1fr; }
+      .grind-step { border-right: none; }
+      .colofon-grid { grid-template-columns: 1fr; }
+      h1 { font-size: 2.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════
+       MASTHEAD
+  ══════════════════════════════════════════ -->
+  <header class="masthead">
+    <div class="masthead-top">
+      <nav class="mast-left">
+        <a href="#sulmona">Origini</a>
+        <a href="#grind">Il Metodo</a>
+        <a href="#offering">La Bottega</a>
+        <a href="#archivio">Archivio</a>
+      </nav>
+      <a href="index2.html" class="wordmark">
+        <span class="wordmark-name">Ricci<em>&apos;</em>s</span>
+        <span class="wordmark-line"><span class="wordmark-sub">Est. MCMXLV · McKees Rocks</span></span>
+      </a>
+      <nav class="mast-right">
+        <a href="#casa">La Casa</a>
+        <a href="#gifting">Il Dono</a>
+        <a href="shop.html">Ordina</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ══════════════════════════════════════════
+         HERO — Vol. LXXX
+    ══════════════════════════════════════════ -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-left">
+          <div class="hero-vol">
+            Vol. LXXX &nbsp;·&nbsp; MMXXVI
+          </div>
+          <h1>
+            A recipe from <span class="it">Sulmona.</span><br />
+            Unchanged since <span class="it">1945.</span>
+            <span class="sm">— One family. Three generations. Same hands at the counter.</span>
+          </h1>
+          <p class="hero-sub">
+            Hand-mixed spices. A proprietary grind. A USDA inspector at
+            the door every morning since 1973. The finest Italian sausage
+            in America, now sent anywhere in the country.
+          </p>
+          <div class="hero-actions">
+            <a href="shop.html" class="btn btn-gold">Enter the Shop</a>
+            <a href="#sulmona" class="btn btn-ghost">Read the Story</a>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="dossier">
+            <div class="dossier-label">Dossier · La Famiglia Ricci</div>
+            <div class="dossier-title">Salsiccia Italiana</div>
+            <div class="dossier-sub">Specimen № 001 · Dolce / Piccante</div>
+
+            <div class="dossier-rows">
+              <div class="dossier-row"><span class="k">Origin</span><span class="v">Sulmona, Abruzzo</span></div>
+              <div class="dossier-row"><span class="k">Founded</span><span class="v">MCMXLV</span></div>
+              <div class="dossier-row"><span class="k">Method</span><span class="v">Hand-mixed, hand-linked</span></div>
+              <div class="dossier-row"><span class="k">Inspected</span><span class="v">Daily, since 1973</span></div>
+              <div class="dossier-row"><span class="k">Recipe</span><span class="v">Secret. Still.</span></div>
+            </div>
+
+            <div class="dossier-seal">
+              <strong>80</strong>
+              anni<br />al banco
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         CHAPTER I — SULMONA / ORIGINI
+    ══════════════════════════════════════════ -->
+    <section id="sulmona" class="chapter sulmona">
+      <div class="chapter-head">
+        <div class="chapter-roman">I.</div>
+        <div class="chapter-title">
+          <span class="smallcaps">Origini</span>
+          <h2>A spice blend carried from <em>Sulmona.</em></h2>
+        </div>
+      </div>
+
+      <div class="sulmona-body">
+        <div class="sulmona-prose">
+          <p>
+            Sulmona sits on a ridge in the Abruzzo mountains, a small Italian
+            city known for confetti — sugared almonds — and for cured meats
+            that have been cut the same way since long before the Ricci
+            family kept shop there.
+          </p>
+          <p>
+            The spices were mixed at home. Nobody wrote them down. When
+            Ernest Ricci crossed the Atlantic, the blend came with him in
+            his head — and every link of sausage we make today traces back
+            to it, unchanged.
+          </p>
+          <span class="pull">
+            "The recipe hasn't changed. Not once. Not a single ingredient."
+          </span>
+          <p>
+            That is the entire premise of this shop. No line extensions. No
+            modernization. The same hands, the same hand-mixed blend, the
+            same proprietary grind since 1945.
+          </p>
+        </div>
+
+        <figure class="archive-card">
+          <div class="archive-card-img"></div>
+          <figcaption class="archive-card-plaque">
+            <div>
+              <div class="label">Archival Specimen № 01</div>
+              <div class="title">Rope Sausage, Hot</div>
+            </div>
+            <div class="year">1945</div>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         CHAPTER II — IL METODO (bean-to-bar journey)
+    ══════════════════════════════════════════ -->
+    <section id="grind" class="chapter grind">
+      <div class="chapter-head">
+        <div class="chapter-roman">II.</div>
+        <div class="chapter-title">
+          <span class="smallcaps">Il Metodo</span>
+          <h2>From cut to <em>counter.</em></h2>
+        </div>
+      </div>
+
+      <div class="grind-narrative">
+        <p>
+          Four steps. One room. The same sequence every morning
+          since 1945. This is how a link of Ricci's is made — <em>and why
+          it has never been imitated.</em>
+        </p>
+      </div>
+
+      <div class="grind-steps">
+        <article class="grind-step">
+          <div class="grind-step-num">Passaggio I</div>
+          <div class="grind-step-macro m1" data-label="Macro · Spice"></div>
+          <h3>The Blend</h3>
+          <p>Fennel, pepper, garlic, and the Sulmona family blend. Measured
+             by hand, in the same order, every time. Nothing from a bag.</p>
+        </article>
+
+        <article class="grind-step">
+          <div class="grind-step-num">Passaggio II</div>
+          <div class="grind-step-macro m2" data-label="Macro · Grind"></div>
+          <h3>The Grind</h3>
+          <p>A proprietary cut — coarser than most — that holds the spice
+             and keeps the juice. The same dies we've used for decades.</p>
+        </article>
+
+        <article class="grind-step">
+          <div class="grind-step-num">Passaggio III</div>
+          <div class="grind-step-macro m3" data-label="Macro · Link"></div>
+          <h3>The Link</h3>
+          <p>Hand-linked into rope. Every sausage in the case was tied by
+             a person who knows what a good link feels like.</p>
+        </article>
+
+        <article class="grind-step">
+          <div class="grind-step-num">Passaggio IV</div>
+          <div class="grind-step-macro m4" data-label="Macro · Rest"></div>
+          <h3>The Rest</h3>
+          <p>Cold rest before the case, before the pan, before the plate.
+             Patience is part of the recipe — and it can't be hurried.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         CHAPTER III — LA BOTTEGA (products as jewelry)
+    ══════════════════════════════════════════ -->
+    <section id="offering" class="chapter offering">
+      <div class="chapter-head">
+        <div class="chapter-roman">III.</div>
+        <div class="chapter-title">
+          <span class="smallcaps">La Bottega</span>
+          <h2>The <em>offering.</em></h2>
+        </div>
+      </div>
+
+      <div class="offering-grid">
+
+        <article class="offer-card">
+          <div class="offer-card-specimen">
+            <span class="specimen-label">Specimen</span>
+            <span class="specimen-no">№ 001</span>
+          </div>
+          <div class="offer-card-label">Dolce · Sweet</div>
+          <h3>Salsiccia Dolce</h3>
+          <p>The original. Fennel, garlic, and the Sulmona family blend.
+             Mild and fragrant. Three pounds, fresh.</p>
+          <div class="offer-card-foot">
+            <div class="offer-card-price">$59<small>Shipped frozen</small></div>
+            <a href="shop.html" class="offer-link">Acquire →</a>
+          </div>
+        </article>
+
+        <article class="offer-card">
+          <div class="offer-card-specimen">
+            <span class="specimen-label">Specimen</span>
+            <span class="specimen-no">№ 002</span>
+          </div>
+          <div class="offer-card-label">Piccante · Hot</div>
+          <h3>Salsiccia Piccante</h3>
+          <p>The same recipe with crushed red pepper. For Sunday sauce
+             and the plates that matter. Three pounds, fresh.</p>
+          <div class="offer-card-foot">
+            <div class="offer-card-price">$59<small>Shipped frozen</small></div>
+            <a href="shop.html" class="offer-link">Acquire →</a>
+          </div>
+        </article>
+
+        <article class="offer-card">
+          <div class="offer-card-specimen">
+            <span class="specimen-label">Specimen</span>
+            <span class="specimen-no">№ 003</span>
+          </div>
+          <div class="offer-card-label">Polpette · Meatballs</div>
+          <h3>Polpette di Casa</h3>
+          <p>Hand-rolled, tender, seasoned with the family blend.
+             The meatball the shop has made every day since 1945. Two pounds.</p>
+          <div class="offer-card-foot">
+            <div class="offer-card-price">$49<small>Shipped frozen</small></div>
+            <a href="shop.html" class="offer-link">Acquire →</a>
+          </div>
+        </article>
+
+        <article class="offer-card">
+          <div class="offer-card-specimen">
+            <span class="specimen-label">Specimen</span>
+            <span class="specimen-no">№ 004</span>
+          </div>
+          <div class="offer-card-label">Assortimento · Selection</div>
+          <h3>La Tavola Domenicale</h3>
+          <p>The Sunday table. Sweet, hot, and meatballs —
+             everything a family needs for a proper sauce.</p>
+          <div class="offer-card-foot">
+            <div class="offer-card-price">$99<small>Free Shipping</small></div>
+            <a href="shop.html" class="offer-link">Acquire →</a>
+          </div>
+        </article>
+
+        <article class="offer-card">
+          <div class="offer-card-specimen">
+            <span class="specimen-label">Seasonal</span>
+            <span class="specimen-no">№ 005</span>
+          </div>
+          <div class="offer-card-label">Festa · Seasonal</div>
+          <h3>Festa dei Sette Pesci</h3>
+          <p>The Feast of the Seven Fishes bundle — with a hand-written
+             recipe card from the Ricci family. Returns each December.</p>
+          <div class="offer-card-foot">
+            <div class="offer-card-price">$149<small>Limited · Free Shipping</small></div>
+            <a href="shop.html" class="offer-link">Acquire →</a>
+          </div>
+        </article>
+
+        <article class="offer-card">
+          <div class="offer-card-specimen">
+            <span class="specimen-label">Subscription</span>
+            <span class="specimen-no">№ 006</span>
+          </div>
+          <div class="offer-card-label">Il Circolo · The Club</div>
+          <h3>Il Circolo Ricci</h3>
+          <p>A rotating cut each month. Members-only recipes and early
+             access to limited editions. Cancel any time.</p>
+          <div class="offer-card-foot">
+            <div class="offer-card-price">$59<small>Per month · Free Shipping</small></div>
+            <a href="shop.html" class="offer-link">Enroll →</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         CHAPTER IV — IL DONO (gifting, prominent)
+    ══════════════════════════════════════════ -->
+    <section id="gifting" class="chapter gifting">
+      <div class="chapter-head">
+        <div class="chapter-roman">IV.</div>
+        <div class="chapter-title">
+          <span class="smallcaps">Il Dono · The Gift</span>
+          <h2>For the person who <em>understands food.</em></h2>
+        </div>
+      </div>
+
+      <div class="gift-split">
+        <div class="gift-art">
+          <div class="gift-crate">
+            <div class="gift-crate-title">La Cassa Ricci</div>
+            <div class="gift-crate-sub">Signature Gift Crate</div>
+            <div class="gift-crate-seal">
+              <strong>R</strong>
+              Est.<br />1945
+            </div>
+          </div>
+        </div>
+
+        <div class="gift-copy">
+          <span class="smallcaps">Il Dono</span>
+          <h2>A gift for the <em>serious</em> table.</h2>
+          <p>
+            Packed in a lined wooden crate, sealed with wax, and hand-addressed.
+            The gift for the Italian-American in your life — or anyone who
+            takes a Sunday sauce seriously.
+          </p>
+          <ul class="gift-list">
+            <li><span class="name">La Tavola Domenicale</span><span class="price">$99</span></li>
+            <li><span class="name">La Cassa Ricci Legacy</span><span class="price">$129</span></li>
+            <li><span class="name">Festa dei Sette Pesci</span><span class="price">$149</span></li>
+            <li><span class="name">Corporate Gifting (10+)</span><span class="price">Inquire</span></li>
+          </ul>
+          <a href="shop.html" class="btn btn-gold">Shop Gifting</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         CHAPTER V — ARCHIVIO (press vitrine)
+    ══════════════════════════════════════════ -->
+    <section id="archivio" class="chapter archivio">
+      <div class="chapter-head">
+        <div class="chapter-roman">V.</div>
+        <div class="chapter-title">
+          <span class="smallcaps">Archivio · The Record</span>
+          <h2>Documented, <em>decade by decade.</em></h2>
+        </div>
+      </div>
+
+      <div class="archivio-grid">
+
+        <article class="vitrine vitrine-big">
+          <div>
+            <span class="smallcaps">USDA · Established</span>
+            <div class="vitrine-date">1973</div>
+            <h3>Federal Inspection</h3>
+            <p>A USDA inspector has walked our floor every day since. That
+               is how you can trust what is in the package — and how we
+               can send it anywhere in the country.</p>
+          </div>
+          <a href="press.html" class="vitrine-link">Read the Record →</a>
+        </article>
+
+        <article class="vitrine vitrine-med">
+          <div>
+            <span class="smallcaps">WQED · Emmy-Winning</span>
+            <div class="vitrine-date">Series</div>
+            <h3><em>Meat Pittsburgh</em>, and three generations at the board.</h3>
+            <p>Featured on WQED's Emmy-winning <em>Meat Pittsburgh</em>,
+               <em>What Pittsburgh Eats</em>, <em>Grandmother's Wisdom</em>,
+               and <em>Feast of the Seven Fish</em>.</p>
+          </div>
+          <a href="press.html" class="vitrine-link">View on WQED →</a>
+        </article>
+
+        <article class="vitrine vitrine-sm">
+          <div>
+            <span class="smallcaps">SBA</span>
+            <div class="vitrine-date">2010</div>
+            <h3>Family Business of the Year</h3>
+          </div>
+        </article>
+
+        <article class="vitrine vitrine-sm">
+          <div>
+            <span class="smallcaps">Hall of Fame</span>
+            <div class="vitrine-date">2011</div>
+            <h3>National Italian American Sports Hall of Fame</h3>
+          </div>
+        </article>
+
+        <article class="vitrine vitrine-sm">
+          <div>
+            <span class="smallcaps">ESPN · GameDay</span>
+            <div class="vitrine-date">2023</div>
+            <h3>Pat McAfee and the ESPN crew at the counter.</h3>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         CHAPTER VI — LA CASA (visit / local)
+    ══════════════════════════════════════════ -->
+    <section id="casa" class="chapter casa">
+      <div class="chapter-head">
+        <div class="chapter-roman">VI.</div>
+        <div class="chapter-title">
+          <span class="smallcaps">La Casa · The House</span>
+          <h2>Five hundred <em>Pine Hollow Road.</em></h2>
+        </div>
+      </div>
+
+      <div class="casa-inner">
+        <div class="casa-head">
+          <p>
+            The same counter since 1945. Stop in, say hello, and pick up
+            something hot for dinner. Local? Call ahead — your order will
+            be ready at the counter.
+          </p>
+        </div>
+
+        <div class="casa-grid">
+          <div class="casa-block">
+            <span class="smallcaps">Indirizzo · Address</span>
+            <p>
+              Kenmawr Plaza<br />
+              500 Pine Hollow Road<br />
+              McKees Rocks, PA 15136
+            </p>
+          </div>
+
+          <div class="casa-block">
+            <span class="smallcaps">Orari · Hours</span>
+            <div class="casa-hours"><span class="d">Mon – Fri</span><span class="h">8:30 – 18:00</span></div>
+            <div class="casa-hours"><span class="d">Saturday</span><span class="h">8:30 – 17:00</span></div>
+            <div class="casa-hours"><span class="d">Sunday</span><span class="h">Chiuso</span></div>
+          </div>
+
+          <div class="casa-block">
+            <span class="smallcaps">Telefono · Call</span>
+            <a href="tel:4123319531" class="phone">412 · 331 · 9531</a>
+            <p style="font-size:0.95rem;color:var(--parchment-2);">
+              Local orders, catering, custom cuts — call us directly.
+            </p>
+          </div>
+        </div>
+
+        <div class="casa-quote">
+          <blockquote>
+            Please do not fax or email your order. We are old fashioned
+            and enjoy talking to our customers on the phone. Capish?
+          </blockquote>
+          <cite>— La Famiglia Ricci</cite>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         JOIN
+    ══════════════════════════════════════════ -->
+    <section class="join">
+      <span class="smallcaps">Alla Famiglia</span>
+      <h2>Join <em>the family.</em></h2>
+      <p>
+        A quiet letter, now and then — a recipe, a seasonal release, an
+        early note before something leaves the counter.
+      </p>
+      <form class="join-form" onsubmit="return false;">
+        <input type="email" placeholder="il tuo indirizzo email" />
+        <button type="submit">Subscribe</button>
+      </form>
+    </section>
+
+  </main>
+
+  <!-- ══════════════════════════════════════════
+       COLOFON (footer)
+  ══════════════════════════════════════════ -->
+  <footer class="colofon">
+    <div class="colofon-grid">
+      <div class="colofon-brand">
+        <span class="wordmark-name">Ricci<em>&apos;</em>s</span>
+        <span class="wordmark-sub">Italian Sausage · Est. MCMXLV</span>
+        <p style="margin-top:18px;">
+          A recipe from Sulmona, Italy. Made in McKees Rocks,
+          Pennsylvania since 1945.
+        </p>
+        <p>
+          <a href="tel:4123319531" style="color:var(--gold);font-size:1.1rem;">412 · 331 · 9531</a>
+        </p>
+      </div>
+      <div>
+        <h4>La Bottega</h4>
+        <ul>
+          <li><a href="shop.html">Salsiccia Dolce</a></li>
+          <li><a href="shop.html">Salsiccia Piccante</a></li>
+          <li><a href="shop.html">Il Dono</a></li>
+          <li><a href="shop.html">Il Circolo</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>La Casa</h4>
+        <ul>
+          <li><a href="story.html">Origini</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="press.html">Archivio</a></li>
+          <li><a href="#casa">Visit</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contatti</h4>
+        <ul>
+          <li><a href="#">Shipping</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="mailto:wholesale@ricciitaliansausage.com">Wholesale</a></li>
+          <li><a href="mailto:press@ricciitaliansausage.com">Press</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="colofon-bot">
+      <span>© MMXXVI · Ricci&apos;s Italian Sausage</span>
+      <span>500 Pine Hollow Rd · McKees Rocks PA 15136</span>
+      <span>Privacy · Terms</span>
+    </div>
+  </footer>
+
+</body>
+</html>
