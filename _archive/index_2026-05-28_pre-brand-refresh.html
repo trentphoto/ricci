@@ -7,12 +7,8 @@
   <meta name="description" content="A boutique Pittsburgh sausage maker since 1945. Small batches, hand-mixed real spices, all natural — no additives, no preservatives. USDA-inspected. Shipped nationwide." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
-  <link rel="icon" href="assets/favicon/favicon.ico" sizes="any" />
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16.png" />
-  <link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png" />
 </head>
 <body>
 
@@ -29,15 +25,14 @@
           <li><a href="index.html">Home</a></li>
           <li><a href="story.html">Our Story</a></li>
           <li><a href="menu.html">Menu</a></li>
-          <li><a href="catering.html">Catering</a></li>
           <li class="nav-shop"><a href="shop.html">Shop</a></li>
           <li><a href="press.html">Press</a></li>
-          <li><a href="index.html#visit">Visit</a></li>
+          <li><a href="#visit">Visit</a></li>
         </ul>
       </div>
       <div class="nav-cta">
         <span class="nav-cart">Cart (0)</span>
-        <button type="button" class="btn btn-primary" data-open-order>Order Now</button>
+        <a href="shop.html" class="btn btn-primary">Order Now</a>
       </div>
       <button type="button" class="nav-toggle" id="site-nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
         <span class="nav-toggle-inner" aria-hidden="true">
@@ -55,28 +50,30 @@
     <!-- ══════════════════════════════════════════
          HERO
     ══════════════════════════════════════════ -->
-    <section class="hero hero--grill">
-      <div class="hero-bg" aria-hidden="true"></div>
+    <section class="hero hero--placeholder">
+      <div class="hero-bg">
+        <span class="img-placeholder-label">PHOTO: Italian sausage links sizzling on a hot charcoal grill — close-up, char marks, smoke curling, fennel seeds visible, warm golden-hour light. Hero shot, the product as the star.</span>
+      </div>
       <div class="hero-content">
-        <h1>The Sausage Pittsburgh<br /><em>Misses, Shipped to Your Door.</em></h1>
+        <h1>Real Italian Sausage.<br /><em>On Your Table This Weekend.</em></h1>
         <p class="hero-sub">
-          Small-batch, hand-mixed, all natural — the same sausage Ricci's has
-          made in McKees Rocks since 1945, now packed frozen and shipped to all
-          50 states. Make Sunday dinner taste like home, wherever you live.
+          The sausage Pittsburgh has lined up for since 1945 — small-batch,
+          hand-mixed, all natural — now shipped frozen to your door.
+          Make Sunday taste like it should.
         </p>
         <div class="hero-actions">
-          <a href="products.html" class="hero-cta hero-cta--primary">
+          <a href="shop.html" class="hero-cta hero-cta--primary">
             <span class="hero-cta-title">Send Me a Box</span>
             <span class="hero-cta-sub">Frozen, shipped nationwide in 2 days</span>
           </a>
-          <a href="shipping.html" class="hero-cta hero-cta--outline">
-            <span class="hero-cta-title">How Shipping Works</span>
-            <span class="hero-cta-sub">Packed cold, arrives frozen, ready for the freezer</span>
+          <a href="#visit" class="hero-cta hero-cta--outline">
+            <span class="hero-cta-title">Visit the Shop</span>
+            <span class="hero-cta-sub">Hot prepared food &amp; fresh sausage by the pound</span>
           </a>
         </div>
       </div>
       <div class="hero-badge">
-        USDA<br />Certified<br />Since<br />1973
+        USDA<br />Inspected<br />Since<br />1973
       </div>
     </section>
 
@@ -90,12 +87,15 @@
             <span class="eyebrow">Why Most Sausage Disappoints</span>
             <h2>Sunday Dinner Shouldn't<br />Taste Like a Compromise.</h2>
             <p>
-              Most sausage is mass-produced, packed with fillers,
+              Grocery-store sausage is mass-produced, packed with fillers,
               and seasoned with pre-ground dust that lost its flavor a year
               ago. You read the label and there are twelve ingredients —
               half of them you can't pronounce.
             </p>
-            <p>Our sausage is different.</p>
+            <p>
+              Real food shouldn't need a chemistry set. Your Sunday sauce
+              deserves better than something that tastes like nothing.
+            </p>
           </div>
           <div class="problem-img">
             <div class="img-placeholder img-placeholder--tall">PHOTO: Side-by-side or single shot showing a bland, pale grocery-store sausage package next to (or contrasted with) a hand-mixed Ricci's link with visible whole fennel seeds and real spices. Editorial/honest lighting, slightly moody. Could also be just an honest close-up of an overprocessed industrial sausage label with the ingredient list visible.</div>
@@ -174,7 +174,7 @@
           </div>
         </div>
         <div class="plan-cta">
-          <a href="products.html" class="btn btn-primary">Send Me a Box</a>
+          <a href="shop.html" class="btn btn-primary">Send Me a Box</a>
         </div>
       </div>
     </section>
@@ -207,7 +207,7 @@
                   $59.95
                   <span class="ship-note">+ Shipping · Arrives Frozen</span>
                 </div>
-                <a href="shop/sweet-italian-sausage.html" class="btn btn-outline-dark">View Product</a>
+                <a href="shop.html" class="btn btn-outline-dark">Add to Cart</a>
               </div>
             </div>
           </div>
@@ -227,15 +227,62 @@
                   $59.95
                   <span class="ship-note">+ Shipping · Arrives Frozen</span>
                 </div>
-                <a href="shop/hot-italian-sausage.html" class="btn btn-outline-dark">View Product</a>
+                <a href="shop.html" class="btn btn-outline-dark">Add to Cart</a>
               </div>
             </div>
           </div>
 
         </div><!-- /products-grid -->
 
-        <div class="plan-cta">
-          <a href="products.html" class="btn btn-primary">See All Boxes &amp; Bundles</a>
+        <!-- FROM THE COUNTER — In-store authentic items -->
+        <div class="counter-block">
+          <div class="counter-header">
+            <span class="eyebrow">From the Counter</span>
+            <h2>What Pittsburgh Has Been<br />Lining Up For Since 1945.</h2>
+            <p>The hot case at our McKees Rocks shop. Made fresh in-house daily —
+               pick it up, or call ahead and we'll have it ready.</p>
+          </div>
+
+          <div class="counter-grid">
+            <div class="counter-item">
+              <span class="counter-tag">Signature</span>
+              <h3>Lil's Famous Stuffed Sausage Rolls</h3>
+              <p>A Ricci's original, made in-house. A McKees Rocks favorite
+                 for generations.</p>
+            </div>
+            <div class="counter-item">
+              <span class="counter-tag">Ernie's Recipe</span>
+              <h3>Stuffed Banana Peppers</h3>
+              <p>Sweet or hot peppers stuffed with our seasoned sausage.</p>
+            </div>
+            <div class="counter-item">
+              <span class="counter-tag">Ready to Eat</span>
+              <h3>Sausage Sandwiches &amp; Hot Plates</h3>
+              <p>Hot or sweet sausage, meatballs, mac 'n cheese with sausage,
+                 Friday pasta e fagioli, and lasagna — made fresh daily.</p>
+            </div>
+            <div class="counter-item">
+              <span class="counter-tag">Fresh Daily</span>
+              <h3>Hand-Linked Rope Sausage</h3>
+              <p>Our signature sausage, hot or sweet. The same proprietary
+                 grind we've been cutting since 1945.</p>
+            </div>
+            <div class="counter-item">
+              <span class="counter-tag">Sunday Sauce</span>
+              <h3>Homemade Italian Meatballs</h3>
+              <p>Tender, hand-rolled, seasoned with the family spice blend.</p>
+            </div>
+            <div class="counter-item">
+              <span class="counter-tag">Heat &amp; Serve</span>
+              <h3>Cooked Sausage in Sauce</h3>
+              <p>Slow-cooked with peppers and onions. Ready for the table.</p>
+            </div>
+          </div>
+
+          <div class="counter-footer">
+            <a href="menu.html" class="btn btn-outline-dark">See the Full Menu</a>
+            <a href="tel:4123319531" class="counter-phone">Call Ahead · 412-331-9531</a>
+          </div>
         </div>
 
       </div>
@@ -322,6 +369,29 @@
     </div>
 
     <!-- ══════════════════════════════════════════
+         PARTNERS — Pittsburgh's Best Tables
+    ══════════════════════════════════════════ -->
+    <section class="section-partners">
+      <div class="container">
+        <div class="partners-header">
+          <span class="eyebrow partners-eyebrow">Pittsburgh's Best Tables</span>
+          <h2>Served Where It Matters.</h2>
+          <p>
+            For decades, Pittsburgh's most loved kitchens have built their
+            menus on Ricci's—pizzerias, bakeries, and markets all over town.
+          </p>
+        </div>
+
+        <div class="partners-footer">
+          <p class="partners-note">
+            Restaurant, retailer, or market? We'd love to be on your menu.
+          </p>
+          <a href="mailto:wholesale@riccisausage.com" class="btn btn-outline-dark">Wholesale Inquiries</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
          COOKBOOK — Mangia Salsiccia!
     ══════════════════════════════════════════ -->
     <section class="section-cookbook">
@@ -351,6 +421,62 @@
     </section>
 
     <!-- ══════════════════════════════════════════
+         VISIT THE SHOP / LOCAL
+    ══════════════════════════════════════════ -->
+    <section id="visit" class="section-visit">
+      <div class="visit-inner">
+        <div class="visit-header">
+          <span class="eyebrow">Visit the Shop</span>
+          <h2>500 Pine Hollow Road.<br />McKees Rocks, PA.</h2>
+          <p>
+            Stop in, say hi, and pick up
+            something hot for dinner. Local? Call ahead and we'll have
+            your order ready at the counter.
+          </p>
+        </div>
+
+        <div class="visit-grid">
+          <div class="visit-block">
+            <h4>Address</h4>
+            <p>
+              500 Pine Hollow Road<br />
+              McKees Rocks, PA 15136
+            </p>
+          </div>
+          <div class="visit-block">
+            <h4>Hours</h4>
+            <div class="store-hours-row">
+              <span class="day">Mon – Fri</span>
+              <span>8:30 AM – 6:00 PM</span>
+            </div>
+            <div class="store-hours-row">
+              <span class="day">Saturday</span>
+              <span>8:30 AM – 5:00 PM</span>
+            </div>
+            <div class="store-hours-row">
+              <span class="day">Sunday</span>
+              <span>Closed</span>
+            </div>
+          </div>
+          <div class="visit-block">
+            <h4>Call the Shop</h4>
+            <a href="tel:4123319531" class="visit-phone">412-331-9531</a>
+            <p class="visit-phone-note">
+              Local orders, catering, custom cuts — call us.
+              Out-of-town? <a href="shop.html">Shop online →</a>
+            </p>
+          </div>
+        </div>
+
+        <blockquote class="visit-quote">
+          "Please do not fax or email your order. We are old fashioned
+          and enjoy talking to our customers on the phone! Capish?"
+          <cite>— The Ricci Family</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
          EMAIL CAPTURE
     ══════════════════════════════════════════ -->
     <section class="section-email">
@@ -361,11 +487,9 @@
           Be the first to know about new products, seasonal bundles, and
           limited-edition cuts. Plus a Ricci family recipe in your first email.
         </p>
-        <form class="email-form" data-crm="subscribe" data-source="newsletter" data-success="Thanks — you're on the list!">
-          <input type="email" name="email" placeholder="Your email address" required />
-          <input type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px" />
+        <form class="email-form" onsubmit="return false;">
+          <input type="email" placeholder="Your email address" />
           <button type="submit">Join</button>
-          <span class="crm-status" role="status" style="display:block;margin-top:8px;font-size:0.9rem;"></span>
         </form>
       </div>
     </section>
@@ -402,7 +526,7 @@
           <li><a href="shop/pittsburgh-italian-pack.html">Pittsburgh Italian Pack</a></li>
           <li><a href="shop/ricci-legacy-gift-box.html">Legacy Gift Box</a></li>
           <li><a href="shop/sausage-club.html">The Sausage Club</a></li>
-          <li><a href="products.html">All Products</a></li>
+          <li><a href="shop.html">All Products</a></li>
           <li><a href="mailto:wholesale@riccisausage.com">Wholesale</a></li>
         </ul>
       </div>
@@ -445,9 +569,5 @@
   </footer>
 
   <script src="js/nav-drawer.js" defer></script>
-  <script src="js/catering-modal.js" defer></script>
-  <script src="js/order-modal.js" defer></script>
-  <script src="js/crm.js" defer></script>
-  <script src="js/cart.js" defer></script>
 </body>
 </html>

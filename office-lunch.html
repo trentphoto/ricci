@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Office Lunch — $12.99 a Person | Ricci's Italian Sausage, Pittsburgh</title>
+  <meta name="description" content="Office lunch from Ricci's Italian Sausage — $12.99 a person gets everyone a meatball or sausage sandwich with chips and a drink. Order online, reorder in one tap." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon" href="assets/favicon/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16.png" />
+  <link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png" />
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/logo.png" alt="Ricci's Italian Sausage">
+      </a>
+      <div class="nav-menu">
+        <ul class="nav-links" id="primary-nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="story.html">Our Story</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="catering.html">Catering</a></li>
+          <li class="nav-shop"><a href="shop.html">Shop</a></li>
+          <li><a href="press.html">Press</a></li>
+          <li><a href="index.html#visit">Visit</a></li>
+        </ul>
+      </div>
+      <div class="nav-cta">
+        <span class="nav-cart">Cart (0)</span>
+        <a href="#order" class="btn btn-primary">Order Lunch</a>
+      </div>
+      <button type="button" class="nav-toggle" id="site-nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
+        <span class="nav-toggle-inner" aria-hidden="true">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </span>
+      </button>
+    </nav>
+    <div class="nav-backdrop" id="nav-backdrop" aria-hidden="true"></div>
+  </header>
+
+  <main>
+    <article class="product-detail">
+
+      <!-- HERO -->
+      <section class="product-hero">
+        <div class="container product-hero-grid">
+          <div class="product-hero-img product-hero-img--placeholder">[ Office Lunch Spread ]</div>
+          <div class="product-hero-body">
+            <span class="eyebrow">Office Lunch · McKees Rocks &amp; Pittsburgh</span>
+            <h1>Lunch for the Whole Office.<br />$12.99 a Person.</h1>
+            <p class="product-hero-lead">
+              Everyone picks a sandwich — Lil's meatball, our famous hot sausage,
+              or sweet sausage — and everyone gets chips and a drink. You count
+              heads, we handle the rest.
+            </p>
+            <div class="product-hero-cta">
+              <a href="#order" class="btn btn-primary">Build Your Order</a>
+              <a href="tel:4123319531" class="btn btn-outline-dark">Call · 412-331-9531</a>
+            </div>
+            <p class="product-hero-weight"><strong>Ordered before?</strong> Enter your email below and reorder your usual in one tap.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- HOW IT WORKS -->
+      <section class="section-plan">
+        <div class="container">
+          <div class="section-header">
+            <span class="eyebrow">How It Works</span>
+            <h2>Office Managers,<br />This One's for You.</h2>
+          </div>
+          <div class="plan-grid">
+            <div class="plan-step">
+              <span class="plan-step-num">01</span>
+              <h3>Count Heads</h3>
+              <p>Five meatball, four hot sausage? Just set how many of each
+                 sandwich. Every person is $12.99 flat — sandwich, chips, and a
+                 drink included. The math does itself.</p>
+            </div>
+            <div class="plan-step">
+              <span class="plan-step-num">02</span>
+              <h3>Tell Us When</h3>
+              <p>Pick the day and time. We deliver to Pittsburgh-area offices or
+                 have it stacked and ready at the counter — labeled and easy to
+                 hand out.</p>
+            </div>
+            <div class="plan-step">
+              <span class="plan-step-num">03</span>
+              <h3>Reorder in One Tap</h3>
+              <p>First order? Just leave your email at the end — no account, no
+                 password. Next time we'll greet you by name and your last order
+                 is one tap away.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ORDER SHEET -->
+      <section class="menu-section" id="order">
+        <div class="container lunch-wrap">
+          <div class="menu-section-header">
+            <span class="eyebrow">The Order Sheet</span>
+            <h2>Build Your Office Lunch.</h2>
+          </div>
+
+          <!-- Returning customer lookup -->
+          <div class="lunch-lookup" id="lunch-lookup">
+            <div class="lunch-lookup-copy">
+              <h3>Ordered with us before?</h3>
+              <p>Enter your email and we'll pull up your last order.</p>
+            </div>
+            <div class="lunch-lookup-form">
+              <input type="email" id="lunch-lookup-email" placeholder="you@yourcompany.com" autocomplete="email" />
+              <button type="button" class="btn btn-outline-dark" id="lunch-lookup-btn">Find My Orders</button>
+            </div>
+            <span class="lunch-lookup-status" id="lunch-lookup-status" role="status"></span>
+          </div>
+
+          <!-- Welcome back panel (filled by JS) -->
+          <div class="lunch-welcome" id="lunch-welcome" hidden></div>
+
+          <form class="lunch-sheet" id="lunch-sheet" novalidate>
+            <div id="lunch-form-inner">
+
+              <div class="lunch-rate">
+                <span class="lunch-rate-price">$12.99 <small>/ person</small></span>
+                <span class="lunch-rate-desc">Every person gets one sandwich of their choice, a bag of chips, and a drink.</span>
+              </div>
+
+              <div class="cater-section">
+                <div class="cater-section-head"><span class="eyebrow">Step 01</span><h3>Pick the Sandwiches</h3></div>
+                <div class="cater-items">
+                  <div class="cater-item-row" data-item="meatball">
+                    <div class="cater-item-name">Lil's Meatball Sandwich
+                      <small>Three hand-rolled meatballs, sauce, Grande cheese, Mancini's roll</small>
+                    </div>
+                    <div class="cater-qty">
+                      <button type="button" data-qty-step="-1" aria-label="Fewer meatball sandwiches">−</button>
+                      <input type="number" min="0" value="0" data-qty="meatball" inputmode="numeric" aria-label="Meatball sandwiches">
+                      <button type="button" data-qty-step="1" aria-label="More meatball sandwiches">+</button>
+                    </div>
+                    <div class="cater-item-price">people</div>
+                  </div>
+                  <div class="cater-item-row" data-item="hot">
+                    <div class="cater-item-name">Famous Hot Sausage
+                      <small>Hot Italian sausage, peppers &amp; onions, sauce, Grande cheese</small>
+                    </div>
+                    <div class="cater-qty">
+                      <button type="button" data-qty-step="-1" aria-label="Fewer hot sausage sandwiches">−</button>
+                      <input type="number" min="0" value="0" data-qty="hot" inputmode="numeric" aria-label="Hot sausage sandwiches">
+                      <button type="button" data-qty-step="1" aria-label="More hot sausage sandwiches">+</button>
+                    </div>
+                    <div class="cater-item-price">people</div>
+                  </div>
+                  <div class="cater-item-row" data-item="sweet">
+                    <div class="cater-item-name">Sweet Sausage Sandwich
+                      <small>Sweet Italian sausage, peppers &amp; onions, Grande cheese</small>
+                    </div>
+                    <div class="cater-qty">
+                      <button type="button" data-qty-step="-1" aria-label="Fewer sweet sausage sandwiches">−</button>
+                      <input type="number" min="0" value="0" data-qty="sweet" inputmode="numeric" aria-label="Sweet sausage sandwiches">
+                      <button type="button" data-qty-step="1" aria-label="More sweet sausage sandwiches">+</button>
+                    </div>
+                    <div class="cater-item-price">people</div>
+                  </div>
+                </div>
+                <p class="lunch-includes">Chips &amp; drinks for everyone — already in the price.</p>
+              </div>
+
+              <div class="cater-section">
+                <div class="cater-section-head"><span class="eyebrow">Step 02</span><h3>When &amp; Where</h3></div>
+                <div class="cater-grid-2">
+                  <div class="cater-field"><label for="l-date">Day</label><input id="l-date" name="date" type="date" required></div>
+                  <div class="cater-field"><label for="l-time">Lunch Time</label><input id="l-time" name="time" type="time" value="12:00" required></div>
+                </div>
+                <div class="cater-field" style="margin-top:14px;">
+                  <label>Pickup or Delivery</label>
+                  <div class="cater-switch">
+                    <div class="cater-switch-label">How should lunch arrive?<small>Delivery available for Pittsburgh-area offices. Pickup at 500 Pine Hollow Rd.</small></div>
+                    <div class="cater-toggle" id="lunch-fulfill" data-active="delivery">
+                      <button type="button" class="cater-toggle-opt" data-prep="delivery">Deliver to Office</button>
+                      <button type="button" class="cater-toggle-opt" data-prep="pickup">Pickup</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="cater-field" style="margin-top:14px;" id="lunch-address-field">
+                  <label for="l-address">Office Address</label>
+                  <input id="l-address" name="address" type="text" placeholder="Suite, street, city" autocomplete="street-address">
+                </div>
+                <div class="cater-field" style="margin-top:14px;">
+                  <label for="l-notes">Notes</label>
+                  <textarea id="l-notes" name="notes" placeholder="Allergies, gate code, 'ask for Dana at the front desk'..."></textarea>
+                </div>
+              </div>
+
+              <div class="cater-section">
+                <div class="cater-section-head"><span class="eyebrow">Step 03</span><h3>Who's Ordering</h3></div>
+                <p class="lunch-contact-note" id="lunch-contact-note">No account needed — your email is your login. We'll save this order so next time is one tap.</p>
+                <div class="cater-grid-2">
+                  <div class="cater-field"><label for="l-name">Your Name</label><input id="l-name" name="name" type="text" autocomplete="name" required></div>
+                  <div class="cater-field"><label for="l-company">Company / Office</label><input id="l-company" name="company" type="text" autocomplete="organization"></div>
+                  <div class="cater-field"><label for="l-email">Email</label><input id="l-email" name="email" type="email" autocomplete="email" required></div>
+                  <div class="cater-field"><label for="l-phone">Phone</label><input id="l-phone" name="phone" type="tel" autocomplete="tel"></div>
+                </div>
+                <label class="lunch-newsletter">
+                  <input type="checkbox" name="newsletter" checked>
+                  Email me office lunch specials around the holidays and big work days.
+                </label>
+              </div>
+
+              <div class="lunch-footer">
+                <div class="cater-total">Lunch Total
+                  <span id="lunch-total">$0.00</span>
+                  <small id="lunch-headcount">0 people</small>
+                </div>
+                <div class="cater-actions">
+                  <button type="button" class="btn btn-primary" id="lunch-submit">Place Office Order</button>
+                </div>
+              </div>
+
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- BIGGER CROWD -->
+      <section class="menu-section menu-section-alt">
+        <div class="container product-prose">
+          <span class="eyebrow">Bigger Crowd?</span>
+          <h2>Trays for Parties &amp; Events.</h2>
+          <p>Feeding more than an office lunch — a holiday party, a retirement send-off, the whole floor? Our <a href="hot-foods/catering.html"><strong>catering trays</strong></a> are the move: sausage and peppers, meatballs, lasagna, mac &amp; cheese by the tray. Or call <a href="tel:4123319531"><strong>412-331-9531</strong></a> and we'll plan it with you.</p>
+        </div>
+      </section>
+
+      <!-- EMAIL CAPTURE -->
+      <section class="section-email">
+        <div class="container">
+          <span class="eyebrow">Join the Family</span>
+          <h2>Office Specials &amp; Holiday Reminders.</h2>
+          <p>Lunch deals for the office, holiday lead times, and the specials worth forwarding to the whole team.</p>
+          <form class="email-form" data-crm="subscribe" data-source="office-lunch-newsletter" data-success="Thanks — you're on the list!">
+            <input type="email" name="email" placeholder="Your work email" required />
+            <input type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px" />
+            <button type="submit">Join</button>
+            <span class="crm-status" role="status" style="display:block;margin-top:8px;font-size:0.9rem;"></span>
+          </form>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo">
+          Ricci's
+          <span>Italian Sausage · Est. 1945</span>
+        </div>
+        <p>
+          A boutique Italian sausage maker — hand-mixed, small batches,
+          all natural. A family recipe from Sulmona, Italy. Made in
+          McKees Rocks, Pennsylvania since 1945. USDA-inspected.
+          Shipped nationwide.
+        </p>
+        <p style="margin-top:12px;">
+          <a href="tel:4123319531" style="color:var(--gold);font-family:var(--font-serif);font-size:1.05rem;">412-331-9531</a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Shop · Ship Nationwide</h4>
+        <ul>
+          <li><a href="shop/sweet-italian-sausage.html">Sweet Italian Sausage</a></li>
+          <li><a href="shop/hot-italian-sausage.html">Hot Italian Sausage</a></li>
+          <li><a href="shop/italian-meatballs.html">Italian Meatballs</a></li>
+          <li><a href="shop/pittsburgh-italian-pack.html">Pittsburgh Italian Pack</a></li>
+          <li><a href="shop/ricci-legacy-gift-box.html">Legacy Gift Box</a></li>
+          <li><a href="shop/sausage-club.html">The Sausage Club</a></li>
+          <li><a href="products.html">All Products</a></li>
+          <li><a href="wholesale.html">Wholesale</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Hot Foods · McKees Rocks</h4>
+        <ul>
+          <li><a href="hot-foods/hot-sausage-sandwich.html">Famous Hot Sausage</a></li>
+          <li><a href="hot-foods/meatball-sandwich.html">Lil's Meatball Sandwich</a></li>
+          <li><a href="hot-foods/banana-pepper-sandwich.html">Ernie's Banana Pepper</a></li>
+          <li><a href="hot-foods/sausage-rolls.html">Lil's Sausage Rolls</a></li>
+          <li><a href="office-lunch.html">Office Lunch · $12.99</a></li>
+          <li><a href="catering.html">Catering Trays</a></li>
+          <li><a href="menu.html">Full Menu</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="story.html">Our Story</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="press.html">Press</a></li>
+          <li><a href="index.html#visit">Visit the Shop</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Help</h4>
+        <ul>
+          <li><a href="shipping.html">Shipping Info</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="returns.html">Returns</a></li>
+          <li><a href="https://shop.riccisausage.com/account">Track Order</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Ricci's Italian Sausage. All rights reserved.</span>
+      <span><a href="https://maps.app.goo.gl/9rDvQrZiuCKRCmFE9" target="_blank" rel="noopener noreferrer">500 Pine Hollow Rd, McKees Rocks, PA 15136</a> · 412-331-9531</span>
+      <span><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span>
+    </div>
+  </footer>
+
+  <script src="js/nav-drawer.js" defer></script>
+  <script src="js/office-lunch.js" defer></script>
+  <script src="js/crm.js" defer></script>
+  <script src="js/cart.js" defer></script>
+</body>
+</html>

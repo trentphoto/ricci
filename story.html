@@ -4,34 +4,48 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Our Story — Ricci's Italian Sausage | Since 1945</title>
-  <meta name="description" content="The 80-year story of Ricci's Italian Sausage — from a family recipe in Sulmona, Italy to Pittsburgh's most beloved Italian market." />
+  <meta name="description" content="The 80-year story of Ricci's Italian Sausage — a boutique, hand-made, all-natural sausage from a family recipe in Sulmona, Italy to Pittsburgh's most beloved Italian market." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon" href="assets/favicon/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16.png" />
+  <link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png" />
 </head>
 <body>
 
   <!-- HEADER (same as index) -->
   <header class="site-header">
-    <nav class="nav">
+    <nav class="nav" aria-label="Primary">
       <a href="index.html" class="nav-logo">
-        Ricci's
-        <span>Italian Sausage · Est. 1945</span>
+        <img src="assets/logo.png" alt="Ricci's Italian Sausage">
       </a>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="story.html">Our Story</a></li>
-        <li><a href="menu.html">Menu</a></li>
-        <li class="nav-shop"><a href="#">Shop</a></li>
-        <li><a href="press.html">Press</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
+      <div class="nav-menu">
+        <ul class="nav-links" id="primary-nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="story.html">Our Story</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="catering.html">Catering</a></li>
+          <li class="nav-shop"><a href="shop.html">Shop</a></li>
+          <li><a href="press.html">Press</a></li>
+          <li><a href="index.html#visit">Visit</a></li>
+        </ul>
+      </div>
       <div class="nav-cta">
         <span class="nav-cart">Cart (0)</span>
-        <a href="#" class="btn btn-primary">Order Now</a>
+        <button type="button" class="btn btn-primary" data-open-order>Order Now</button>
       </div>
+      <button type="button" class="nav-toggle" id="site-nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
+        <span class="nav-toggle-inner" aria-hidden="true">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </span>
+      </button>
     </nav>
+    <div class="nav-backdrop" id="nav-backdrop" aria-hidden="true"></div>
   </header>
 
   <main>
@@ -39,16 +53,20 @@
     <!-- ══════════════════════════════════════════
          PAGE HERO
     ══════════════════════════════════════════ -->
-    <div class="page-hero">
-      <span class="eyebrow">Our Story</span>
-      <h1>Since 1945.</h1>
-      <p>Eighty years of one recipe. One family. One city.<br />
-         And now — the whole country.</p>
-    </div>
+    <section class="hero hero--story">
+      <div class="hero-bg"></div>
+      <div class="hero-content">
+        <span class="hero-year">Our Story · Since 1945</span>
+        <h1>Eighty Years.<br /><em>One Recipe.</em><br />One Family.</h1>
+        <p class="hero-sub">
+          From a hilltop town in Abruzzo to a butcher's counter in McKees Rocks —
+          and now to doorsteps across the country.
+        </p>
+      </div>
+    </section>
 
     <!-- ══════════════════════════════════════════
          BRAND STORY BODY
-         DRAFT — Refine with real photos + Ricci family details
     ══════════════════════════════════════════ -->
     <article class="story-body">
 
@@ -59,39 +77,129 @@
       </p>
 
       <p>
-        It started in Sulmona, a small hilltop city in the Abruzzo region of Italy —
-        known for centuries as the home of confetti (sugared almonds) and hand-crafted
-        cured meats. The Ricci family kept a spice blend there, passed down through
-        generations, that nobody outside the family ever wrote down.
+        It started in Sulmona, a hilltop city in the Abruzzo region of Italy —
+        known for centuries as the home of confetti (sugared almonds) and
+        hand-crafted cured meats. The Ricci family kept a spice blend there,
+        passed down through generations, that nobody outside the family ever
+        wrote down.
       </p>
 
       <p>
-        When Ernest Ricci came to America, he brought it with him.
+        When Ernest Ricci Sr. came to America, he brought it with him.
       </p>
 
       <blockquote>
         "The recipe hasn't changed. Not once. Not a single ingredient."
       </blockquote>
 
-      <h2>1945: McKees Rocks, Pennsylvania</h2>
+      <h2>1945: A Basement in McKees Rocks</h2>
 
       <p>
-        Ernest opened a small butcher shop at 500 Pine Hollow Road in McKees Rocks —
-        a working-class Pittsburgh borough with a dense Italian-American community
-        that knew good sausage the moment they tasted it.
+        Ricci's Italian Sausage was founded by Ernest and Stella Ricci in the
+        basement of their McKees Rocks home. They mixed the spice blend by hand,
+        ground the pork themselves, and stuffed every link the way Ernest's
+        family had done it in Abruzzo.
       </p>
 
       <p>
-        Word spread fast. Families made the drive from across Pittsburgh. Restaurants
-        called. By the time the Korean War ended, Ricci's Italian Sausage was already
-        becoming something rare in American food: a true original, with no
-        competition, no imitators, and a customer base that came back every single week.
+        Later that year, they opened an Italian grocery store at 926 Island
+        Avenue in McKees Rocks — imported groceries, specialty meats, and the
+        home-made Italian sausage Pittsburgh would come to know them for. Word
+        spread fast. Families drove in from across the city. Restaurants
+        started calling.
       </p>
 
       <p>
-        In 1973, the USDA showed up. From that day on, an inspector has walked
-        our floor every morning we've been open — which is how we've been able
-        to send our sausage to people outside Pittsburgh ever since.
+        Stella ran the counter for nearly fifty years and was a fixture in the
+        neighborhood — known by name by every customer, and by more than a few
+        local celebrities. She remained active in the business until 1994.
+      </p>
+
+      <h2>Three Generations of Master Sausage-Makers</h2>
+
+      <p>
+        Ernest Sr. taught the recipe to his son, Ernest Jr. — Master
+        Sausage-Maker, Generation II — who carried it forward and taught it to
+        his own son, Ernest B. Ricci, Master Sausage-Maker, Generation III. Same
+        spice blend, same hand-mix, same stubborn refusal to change a thing.
+      </p>
+
+      <p>
+        Today the shop sits at Kenmawr Plaza — 500 Pine Hollow Road, still in
+        McKees Rocks, still making the same sausage Pittsburgh has been lining
+        up for since 1945.
+      </p>
+
+      <h2>From the Hot Case: Lil's Famous Stuffed Sausage Rolls</h2>
+
+      <div class="story-image">
+        <img src="assets/img/sausage-roll.webp" alt="Lil's Famous Stuffed Sausage Rolls" />
+        <span class="caption">Lil's Famous Stuffed Sausage Rolls — a Ricci's original since the early days.</span>
+      </div>
+
+      <p>
+        Over the years the counter grew. Under Lillian Ricci's watchful eye,
+        Ricci's added a hot case of prepared foods — cooked sausage in sauce,
+        homemade Italian meatballs, sweet and hot stuffed banana peppers, and
+        Lil's famous stuffed sausage rolls, a Ricci's original made nowhere else.
+      </p>
+
+      <p>
+        The hot case is still part of the daily ritual at the shop. Made fresh
+        in-house, the same way, every morning.
+      </p>
+
+      <h2>A Boutique Sausage Maker</h2>
+
+      <p>
+        Ricci's is a <strong>boutique sausage maker</strong>. We make
+        everything in small batches — roughly 200 pounds at a time —
+        hand-mixing every seasoning ourselves. Real paprika, whole fennel
+        seed, imported spices. All natural ingredients, no additives, no
+        preservatives.
+      </p>
+
+      <p>
+        That's a different category from the big sausage houses pumping
+        thousand-pound batches through a line with liquid paprika and ground
+        fennel. The federal limit for fat in hot Italian sausage is 35%; in
+        sweet, it's 50%. Ours runs <strong>well below the line</strong>. Low fat, low
+        sodium, low salt. Lean meat, real spice, and a long enough mix to do
+        it properly.
+      </p>
+
+      <h2>The Abruzzo Difference</h2>
+
+      <p>
+        Our sweet sausage is <strong>Abruzzo-style</strong>: crushed black
+        pepper, no fennel, and — please — no garlic. That's how it's made in
+        Sulmona. It's lighter, more aromatic, and lets the pork do the talking.
+      </p>
+
+      <p>
+        Our hot sausage is <strong>Calabria-style</strong>: real paprika, crushed
+        red pepper, and whole fennel seed. Slow heat, full flavor, the way
+        Calabrian families have made it for generations.
+      </p>
+
+      <p>
+        Both are made from 100% USDA-inspected meats and imported spices. Natural
+        casings on every rope sausage. Hand-mixed, in the same sequence, every
+        single time. No cereal fillers. No artificial spices. No "designer"
+        seasonings. No shortcuts.
+      </p>
+
+      <h2>USDA Federal Inspection · Since 1973</h2>
+
+      <p>
+        Ricci's has been federally inspected by the USDA since 1973. It's why we can stand behind every link, and why we
+        can ship our sausage anywhere in the country.
+      </p>
+
+      <p>
+        Ricci's is the only USDA-inspected sausage maker in Pittsburgh
+        that also runs its own retail counter and serves hot food.
+        Hand-made sausage, hand-prepared hot foods, every day.
       </p>
 
       <!-- TIMELINE -->
@@ -100,15 +208,15 @@
         <div class="timeline-item">
           <span class="timeline-year">1945</span>
           <h3>Founded in McKees Rocks, PA</h3>
-          <p>Ernest Ricci opens his butcher shop, making sausage from his family's
-             Sulmona recipe. The first customers arrive the first week and never stop.</p>
+          <p>Ernest and Stella Ricci begin making Italian sausage in the
+             basement of their McKees Rocks home, then open an Italian grocery
+             at 926 Island Avenue.</p>
         </div>
 
         <div class="timeline-item">
           <span class="timeline-year">1973</span>
           <h3>USDA Federal Inspection</h3>
-          <p>A USDA inspector has walked our floor every day since. It's why
-             we can send our sausage to people outside of Pittsburgh.</p>
+          <p>Ricci's is granted federal inspection by the USDA.</p>
         </div>
 
         <div class="timeline-item">
@@ -126,6 +234,14 @@
         </div>
 
         <div class="timeline-item">
+          <span class="timeline-year">2023</span>
+          <h3>ESPN College GameDay Feature</h3>
+          <p>Pat McAfee and the ESPN crew visit the counter, highlighting
+             Ricci's Hot Italian Sausage as a legendary Pittsburgh game-day
+             staple.</p>
+        </div>
+
+        <div class="timeline-item">
           <span class="timeline-year">Ongoing</span>
           <h3>WQED "What Pittsburgh Eats!"</h3>
           <p>Regular features on Pittsburgh's own public television station —
@@ -134,74 +250,26 @@
 
         <div class="timeline-item">
           <span class="timeline-year">2026</span>
-          <h3>A New Era Begins</h3>
-          <p>Ricci's enters a new chapter. The recipe stays the same. The mission
-             gets bigger: bringing Pittsburgh's most beloved Italian sausage to
-             doorsteps across America.</p>
+          <h3>Now Shipping Nationwide</h3>
+          <p>For the first time in eighty years, Ricci's is shipping
+             coast-to-coast. The recipe stays the same. The address of the
+             table changes.</p>
         </div>
 
       </div><!-- /timeline -->
 
-      <h2>The Recipe That Hasn't Changed</h2>
-
-      <p>
-        We're not going to tell you what's in it.
-      </p>
-
-      <p>
-        What we can tell you is this: the spice blend is mixed by hand, in the same
-        sequence, every single time. The grind is proprietary. The process is the same
-        as it was in 1945. There are no shortcuts because there is no shortcut that
-        produces this flavor.
-      </p>
-
-      <p>
-        When the holidays come and we can't keep up, we put a limit on how
-        much any one customer can buy. Not because we're precious about it —
-        because we'd rather send a slightly smaller order to everyone than
-        cut corners to make more.
-      </p>
-
-      <blockquote>
-        Every week, the line forms before we open.
-      </blockquote>
-
       <h2>Now — Shipping to You</h2>
 
       <p>
-        For eighty years, the only way to get Ricci's was to drive to
-        McKees Rocks. That's starting to change.
-      </p>
-
-      <p>
-        We're now packing sausage on dry ice and sending it to families
-        across the country — Pittsburgh transplants, folks who tasted it
-        at a friend's Sunday dinner, people who've heard about it for years
-        and finally want to try it themselves.
-      </p>
-
-      <p>
-        The recipe hasn't changed. The team hasn't changed. Only the
-        address of the people we get to feed.
-      </p>
-
-      <h2>What Stays the Same</h2>
-
-      <p>
-        Everything that matters. The recipe. The facility. The team — some of whom
-        have been making sausage at 500 Pine Hollow Road for over a decade. The daily
-        USDA inspection. The hand-mixed spice blend. The refusal to compromise on
-        flavor for the sake of convenience or cost.
-      </p>
-
-      <p>
-        The store in McKees Rocks is still open. The same six days a week schedule.
-        The same team behind the counter. The same faces many Pittsburgh families
-        have seen every week for years. That doesn't change.
+        For eighty years, the only way to get Ricci's was to drive to McKees
+        Rocks. Now, we're boxing orders for Pittsburgh
+        transplants, for friends-of-friends who tasted it at a Sunday dinner,
+        and for people who've heard about it for years and finally want to try
+        it themselves.
       </p>
 
       <p style="margin-top:40px;">
-        <a href="index.html#shop" class="btn btn-primary">Shop the Collection</a>
+        <a href="products.html" class="btn btn-primary">Shop the Collection</a>
       </p>
 
     </article>
@@ -215,9 +283,11 @@
           Be the first to know about new products, seasonal bundles, and
           limited-edition cuts. Plus a Ricci family recipe in your first email.
         </p>
-        <form class="email-form" onsubmit="return false;">
-          <input type="email" placeholder="Your email address" />
+        <form class="email-form" data-crm="subscribe" data-source="newsletter" data-success="Thanks — you're on the list!">
+          <input type="email" name="email" placeholder="Your email address" required />
+          <input type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px" />
           <button type="submit">Join</button>
+          <span class="crm-status" role="status" style="display:block;margin-top:8px;font-size:0.9rem;"></span>
         </form>
       </div>
     </section>
@@ -225,7 +295,8 @@
   </main>
 
   <!-- FOOTER (same as index) -->
-  <footer class="site-footer">
+    <!-- FOOTER -->
+<footer class="site-footer">
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="nav-logo">
@@ -233,18 +304,38 @@
           <span>Italian Sausage · Est. 1945</span>
         </div>
         <p>
-          A family recipe from Sulmona, Italy. Made in Pittsburgh, Pennsylvania
-          since 1945. USDA inspected. Shipped nationwide.
+          A boutique Italian sausage maker — hand-mixed, small batches,
+          all natural. A family recipe from Sulmona, Italy. Made in
+          McKees Rocks, Pennsylvania since 1945. USDA-inspected.
+          Shipped nationwide.
+        </p>
+        <p style="margin-top:12px;">
+          <a href="tel:4123319531" style="color:var(--gold);font-family:var(--font-serif);font-size:1.05rem;">412-331-9531</a>
         </p>
       </div>
       <div class="footer-col">
-        <h4>Shop</h4>
+        <h4>Shop · Ship Nationwide</h4>
         <ul>
-          <li><a href="#">Sweet Italian Sausage</a></li>
-          <li><a href="#">Hot Italian Sausage</a></li>
-          <li><a href="#">Gift Boxes</a></li>
-          <li><a href="#">The Sausage Club</a></li>
-          <li><a href="#">Wholesale</a></li>
+          <li><a href="shop/sweet-italian-sausage.html">Sweet Italian Sausage</a></li>
+          <li><a href="shop/hot-italian-sausage.html">Hot Italian Sausage</a></li>
+          <li><a href="shop/italian-meatballs.html">Italian Meatballs</a></li>
+          <li><a href="shop/pittsburgh-italian-pack.html">Pittsburgh Italian Pack</a></li>
+          <li><a href="shop/ricci-legacy-gift-box.html">Legacy Gift Box</a></li>
+          <li><a href="shop/sausage-club.html">The Sausage Club</a></li>
+          <li><a href="products.html">All Products</a></li>
+          <li><a href="mailto:wholesale@riccisausage.com">Wholesale</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Hot Foods · McKees Rocks</h4>
+        <ul>
+          <li><a href="hot-foods/hot-sausage-sandwich.html">Famous Hot Sausage</a></li>
+          <li><a href="hot-foods/meatball-sandwich.html">Lil's Meatball Sandwich</a></li>
+          <li><a href="hot-foods/banana-pepper-sandwich.html">Ernie's Banana Pepper</a></li>
+          <li><a href="hot-foods/sausage-rolls.html">Lil's Sausage Rolls</a></li>
+          <li><a href="hot-foods/sausage-lasagna.html">Sausage Lasagna</a></li>
+          <li><a href="hot-foods/catering.html">Catering Trays</a></li>
+          <li><a href="menu.html">Full Menu</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -253,25 +344,30 @@
           <li><a href="story.html">Our Story</a></li>
           <li><a href="menu.html">Menu</a></li>
           <li><a href="press.html">Press</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="index.html#visit">Visit the Shop</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Help</h4>
         <ul>
-          <li><a href="#">Shipping Info</a></li>
-          <li><a href="#">FAQ</a></li>
-          <li><a href="#">Returns</a></li>
-          <li><a href="#">Track Order</a></li>
+          <li><a href="shipping.html">Shipping Info</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="returns.html">Returns</a></li>
+          <li><a href="https://shop.riccisausage.com/account">Track Order</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
       <span>&copy; 2026 Ricci's Italian Sausage. All rights reserved.</span>
-      <span>500 Pine Hollow Rd, McKees Rocks, PA 15136</span>
-      <span>Privacy · Terms</span>
+      <span><a href="https://maps.app.goo.gl/9rDvQrZiuCKRCmFE9" target="_blank" rel="noopener noreferrer">500 Pine Hollow Rd, McKees Rocks, PA 15136</a> · 412-331-9531</span>
+      <span><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span>
     </div>
   </footer>
 
+  <script src="js/nav-drawer.js" defer></script>
+  <script src="js/catering-modal.js" defer></script>
+  <script src="js/order-modal.js" defer></script>
+  <script src="js/crm.js" defer></script>
+  <script src="js/cart.js" defer></script>
 </body>
 </html>

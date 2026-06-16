@@ -7,31 +7,45 @@
   <meta name="description" content="The menu at Ricci's Italian Sausage — handmade sandwiches, sausage rolls, meatballs, daily specials, and catering trays. It's what Pittsburgh eats." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon" href="assets/favicon/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16.png" />
+  <link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png" />
 </head>
 <body>
 
   <!-- HEADER -->
   <header class="site-header">
-    <nav class="nav">
+    <nav class="nav" aria-label="Primary">
       <a href="index.html" class="nav-logo">
-        Ricci's
-        <span>Italian Sausage · Est. 1945</span>
+        <img src="assets/logo.png" alt="Ricci's Italian Sausage">
       </a>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="story.html">Our Story</a></li>
-        <li><a href="menu.html">Menu</a></li>
-        <li class="nav-shop"><a href="#">Shop</a></li>
-        <li><a href="press.html">Press</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
+      <div class="nav-menu">
+        <ul class="nav-links" id="primary-nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="story.html">Our Story</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="catering.html">Catering</a></li>
+          <li class="nav-shop"><a href="shop.html">Shop</a></li>
+          <li><a href="press.html">Press</a></li>
+          <li><a href="index.html#visit">Visit</a></li>
+        </ul>
+      </div>
       <div class="nav-cta">
         <span class="nav-cart">Cart (0)</span>
-        <a href="#" class="btn btn-primary">Order Now</a>
+        <button type="button" class="btn btn-primary" data-open-order>Order Now</button>
       </div>
+      <button type="button" class="nav-toggle" id="site-nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
+        <span class="nav-toggle-inner" aria-hidden="true">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </span>
+      </button>
     </nav>
+    <div class="nav-backdrop" id="nav-backdrop" aria-hidden="true"></div>
   </header>
 
   <main>
@@ -43,6 +57,11 @@
       <p>Handmade daily, exclusively in-house.<br />
          It's what Pittsburgh eats.</p>
     </div>
+
+    <!-- CATERING STRIP — for visitors looking for group orders -->
+    <a href="catering.html" class="menu-catering-strip" style="display:block;background:var(--red,#9e1b1b);color:#fff;text-align:center;padding:14px 20px;text-decoration:none;font-weight:600;letter-spacing:.02em;">
+      Looking for a group order? See our catering &amp; trays &rarr;
+    </a>
 
     <!-- PHONE ORDER NOTICE -->
     <div class="menu-notice">
@@ -119,7 +138,7 @@
           <div class="menu-item">
             <div class="menu-item-header">
               <h3>Lil's Sausage Rolls</h3>
-              <span class="menu-price">$10.00</span>
+              <span class="menu-price">$12.99</span>
             </div>
             <p>Made fresh daily. Mancini's dough, ground hot sausage, shredded Grande cheese topped with olive oil and parmesan.</p>
             <span class="menu-item-tag">Made Fresh Daily</span>
@@ -144,17 +163,13 @@
           <div class="menu-item">
             <div class="menu-item-header">
               <h3>Meatballs</h3>
-              <span class="menu-price">$1.95 <span class="price-unit">/pc</span></span>
+              <span class="menu-price">$1.99 <span class="price-unit">/pc</span></span>
             </div>
             <p>Homemade, served with sauce.</p>
           </div>
 
         </div>
 
-        <div class="menu-extras">
-          <span>Buns: $0.50 each</span>
-          <span>Side of Sauce: $2.00</span>
-        </div>
       </div>
     </section>
 
@@ -164,41 +179,76 @@
     <section class="menu-section menu-section-dark">
       <div class="container">
         <div class="menu-section-header">
-          <span class="eyebrow" style="color: var(--gold);">Don't Miss These</span>
-          <h2 style="color: var(--white);">Daily Specials</h2>
+          <span class="eyebrow" style="color: var(--gold);">Available Only on Their Day</span>
+          <h2 style="color: var(--white);">The Week at Ricci's</h2>
+          <p style="color: rgba(255,255,255,0.55);">
+            Each special is made for its day — when it's gone, it's gone. Plan your week accordingly.
+          </p>
         </div>
 
-        <div class="specials-grid">
+        <div class="menu-calendar">
 
-          <div class="special-card">
-            <span class="special-day">Monday</span>
-            <h3>"Pazzo" Monday</h3>
-            <p>"Pazzo" is crazy for you non-Italians! Any sandwich with a soft drink.</p>
-            <span class="menu-price">$7.75 <span class="price-unit">includes tax</span></span>
+          <div class="calendar-day" data-day="1">
+            <span class="calendar-day-name">Monday</span>
+            <div class="calendar-special">
+              <h3>"Pazzo" Monday</h3>
+              <p>"Pazzo" is crazy for you non-Italians! Any sandwich with a soft drink.</p>
+              <span class="menu-price">$7.75 <span class="price-unit">incl. tax</span></span>
+            </div>
           </div>
 
-          <div class="special-card">
-            <span class="special-day">Tuesday &amp; Thursday</span>
-            <h3>Mac 'n Cheese</h3>
-            <p>With ground hot sausage. Available by the cup or large container.</p>
-            <span class="menu-price">$4.95 <span class="price-unit">sm</span> &middot; $5.99 <span class="price-unit">/lb</span></span>
+          <div class="calendar-day" data-day="2">
+            <span class="calendar-day-name">Tuesday</span>
+            <div class="calendar-special">
+              <h3>Mac 'n Cheese</h3>
+              <p>With ground hot sausage. By the cup or large container.</p>
+              <span class="menu-price">$4.95 <span class="price-unit">sm</span> &middot; $5.99 <span class="price-unit">/lb</span></span>
+            </div>
           </div>
 
-          <div class="special-card">
-            <span class="special-day">Wednesday &amp; Saturday</span>
-            <h3>Sausage Lasagna</h3>
-            <p>Made with our homemade sauce, Grande Sopraffina ricotta, three-cheese blend, and Ricci's ground hot sausage.</p>
-            <span class="menu-price">$7.25 <span class="price-unit">/serving</span></span>
+          <div class="calendar-day" data-day="3">
+            <span class="calendar-day-name">Wednesday</span>
+            <div class="calendar-special">
+              <h3>Sausage Lasagna</h3>
+              <p>Homemade sauce, Grande Sopraffina ricotta, three-cheese blend, ground hot sausage.</p>
+              <span class="menu-price">$7.25 <span class="price-unit">/serving</span></span>
+            </div>
           </div>
 
-          <div class="special-card">
-            <span class="special-day">Friday</span>
-            <h3>Sherry's Pasta e' Fagioli</h3>
-            <p>Made with our homemade sauce, ground hot sausage, Ditalini pasta and cannellini beans, served with a Mancini roll.</p>
-            <span class="menu-price">$4.95 <span class="price-unit">serving</span> &middot; $9.99 <span class="price-unit">/qt</span></span>
+          <div class="calendar-day" data-day="4">
+            <span class="calendar-day-name">Thursday</span>
+            <div class="calendar-special">
+              <h3>Mac 'n Cheese</h3>
+              <p>With ground hot sausage. By the cup or large container.</p>
+              <span class="menu-price">$4.95 <span class="price-unit">sm</span> &middot; $5.99 <span class="price-unit">/lb</span></span>
+            </div>
+          </div>
+
+          <div class="calendar-day" data-day="5">
+            <span class="calendar-day-name">Friday</span>
+            <div class="calendar-special">
+              <h3>Sherry's Pasta e' Fagioli</h3>
+              <p>Homemade sauce, ground hot sausage, Ditalini pasta &amp; cannellini beans with a Mancini roll.</p>
+              <span class="menu-price">$4.95 <span class="price-unit">srv</span> &middot; $9.99 <span class="price-unit">/qt</span></span>
+            </div>
+          </div>
+
+          <div class="calendar-day" data-day="6">
+            <span class="calendar-day-name">Saturday</span>
+            <div class="calendar-special">
+              <h3>Sausage Lasagna</h3>
+              <p>Homemade sauce, Grande Sopraffina ricotta, three-cheese blend, ground hot sausage.</p>
+              <span class="menu-price">$7.25 <span class="price-unit">/serving</span></span>
+            </div>
+          </div>
+
+          <div class="calendar-day calendar-day--wide" data-day="0">
+            <span class="calendar-day-name">Sunday</span>
+            <div class="calendar-day-empty">Closed — see you Monday</div>
           </div>
 
         </div>
+
       </div>
     </section>
 
@@ -216,76 +266,21 @@
     </div>
 
     <!-- ══════════════════════════════════════════
-         CATERING MENU
+         CATERING CTA  (full tray menu now lives on catering.html)
     ══════════════════════════════════════════ -->
     <section class="menu-section">
       <div class="container">
         <div class="menu-section-header center">
-          <span class="eyebrow">Feed the Family</span>
-          <h2>Catering Menu</h2>
-          <p style="margin-inline:auto;">The Italian family coming over? Homemade savories
-             to please — even the Godfather.</p>
+          <span class="eyebrow">Feeding a Crowd?</span>
+          <h2>Catering &amp; Group Orders</h2>
+          <p style="margin-inline:auto;">The Italian family coming over? Trays, party packs,
+             and full event catering — homemade savories to please even the Godfather.
+             See the full catering menu and start your order.</p>
         </div>
 
-        <div class="catering-grid">
-
-          <div class="catering-item">
-            <div class="catering-item-name">Lil's Homemade Sausage Rolls</div>
-            <div class="catering-item-price">$9.99 each</div>
-          </div>
-
-          <div class="catering-item">
-            <div class="catering-item-name">Stuffed Banana Peppers</div>
-            <div class="catering-item-sizes">
-              <span>Small Tray (6 pc) <strong>$20.95</strong></span>
-              <span>Large Tray (12 pc) <strong>$41.95</strong></span>
-            </div>
-          </div>
-
-          <div class="catering-item">
-            <div class="catering-item-name">Hot Italian Sausage</div>
-            <div class="catering-item-sizes">
-              <span>Small Tray (12 pc) <strong>$39.95</strong></span>
-              <span>Large Tray (24 pc) <strong>$79.95</strong></span>
-            </div>
-          </div>
-
-          <div class="catering-item">
-            <div class="catering-item-name">Sweet Italian Sausage</div>
-            <div class="catering-item-sizes">
-              <span>Small Tray (12 pc) <strong>$39.95</strong></span>
-              <span>Large Tray (24 pc) <strong>$79.95</strong></span>
-            </div>
-          </div>
-
-          <div class="catering-item">
-            <div class="catering-item-name">Meatballs (2 oz)</div>
-            <div class="catering-item-sizes">
-              <span>Small Tray (12 pc) <strong>$23.50</strong></span>
-              <span>Large Tray (24 pc) <strong>$46.95</strong></span>
-            </div>
-          </div>
-
-          <div class="catering-item">
-            <div class="catering-item-name">Mac 'n Cheese w/ Hot Sausage</div>
-            <div class="catering-item-price">Small Tray $36.95</div>
-          </div>
-
-          <div class="catering-item">
-            <div class="catering-item-name">Sausage Lasagna</div>
-            <div class="catering-item-details">Layered with hot or sweet sausage and our homemade sauce — 12 servings</div>
-            <div class="catering-item-price">Small Tray $71.95</div>
-          </div>
-
-          <div class="catering-item">
-            <div class="catering-item-name">Mancini's Sausage Buns</div>
-            <div class="catering-item-price">$6.00 / dozen</div>
-          </div>
-
-        </div>
-
-        <div class="catering-notice">
-          <p>If possible, we need <strong>24-hour notice</strong> on all trays and bread.</p>
+        <div class="center" style="margin-top: 28px;">
+          <a href="catering.html" class="btn btn-primary" style="font-size: 1.1rem; padding: 16px 36px;">See Catering &amp; Trays</a>
+          <p style="margin-top: 12px; font-size: 0.9rem; color: #6b5544;">Or call <a href="tel:4123319531" style="color: var(--red); font-weight: 600;">412-331-9531</a></p>
         </div>
       </div>
     </section>
@@ -304,22 +299,23 @@
     <section class="section-email">
       <div class="container">
         <span class="eyebrow">Join the Family</span>
-        <h2>Get Early Access &amp;<br />Members-Only Recipes.</h2>
+        <h2>Get Monthly Specials &amp;<br />Family Updates.</h2>
         <p>
-          Be the first to know about new products, seasonal bundles, and
-          limited-edition cuts. Plus a Ricci family recipe in your first email.
+          Seasonal bundles, shop specials, and a note when there's something worth
+          sharing — the way we'd tell folks who stop by the counter.
         </p>
-        <form class="email-form" onsubmit="return false;">
-          <input type="email" placeholder="Your email address" />
+        <form class="email-form" data-crm="subscribe" data-source="newsletter" data-success="Thanks — you're on the list!">
+          <input type="email" name="email" placeholder="Your email address" required />
+          <input type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px" />
           <button type="submit">Join</button>
+          <span class="crm-status" role="status" style="display:block;margin-top:8px;font-size:0.9rem;"></span>
         </form>
       </div>
     </section>
 
   </main>
-
-  <!-- FOOTER -->
-  <footer class="site-footer">
+    <!-- FOOTER -->
+<footer class="site-footer">
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="nav-logo">
@@ -327,18 +323,38 @@
           <span>Italian Sausage · Est. 1945</span>
         </div>
         <p>
-          A family recipe from Sulmona, Italy. Made in Pittsburgh, Pennsylvania
-          since 1945. USDA inspected. Shipped nationwide.
+          A boutique Italian sausage maker — hand-mixed, small batches,
+          all natural. A family recipe from Sulmona, Italy. Made in
+          McKees Rocks, Pennsylvania since 1945. USDA-inspected.
+          Shipped nationwide.
+        </p>
+        <p style="margin-top:12px;">
+          <a href="tel:4123319531" style="color:var(--gold);font-family:var(--font-serif);font-size:1.05rem;">412-331-9531</a>
         </p>
       </div>
       <div class="footer-col">
-        <h4>Shop</h4>
+        <h4>Shop · Ship Nationwide</h4>
         <ul>
-          <li><a href="#">Sweet Italian Sausage</a></li>
-          <li><a href="#">Hot Italian Sausage</a></li>
-          <li><a href="#">Gift Boxes</a></li>
-          <li><a href="#">The Sausage Club</a></li>
-          <li><a href="#">Wholesale</a></li>
+          <li><a href="shop/sweet-italian-sausage.html">Sweet Italian Sausage</a></li>
+          <li><a href="shop/hot-italian-sausage.html">Hot Italian Sausage</a></li>
+          <li><a href="shop/italian-meatballs.html">Italian Meatballs</a></li>
+          <li><a href="shop/pittsburgh-italian-pack.html">Pittsburgh Italian Pack</a></li>
+          <li><a href="shop/ricci-legacy-gift-box.html">Legacy Gift Box</a></li>
+          <li><a href="shop/sausage-club.html">The Sausage Club</a></li>
+          <li><a href="products.html">All Products</a></li>
+          <li><a href="mailto:wholesale@riccisausage.com">Wholesale</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Hot Foods · McKees Rocks</h4>
+        <ul>
+          <li><a href="hot-foods/hot-sausage-sandwich.html">Famous Hot Sausage</a></li>
+          <li><a href="hot-foods/meatball-sandwich.html">Lil's Meatball Sandwich</a></li>
+          <li><a href="hot-foods/banana-pepper-sandwich.html">Ernie's Banana Pepper</a></li>
+          <li><a href="hot-foods/sausage-rolls.html">Lil's Sausage Rolls</a></li>
+          <li><a href="hot-foods/sausage-lasagna.html">Sausage Lasagna</a></li>
+          <li><a href="hot-foods/catering.html">Catering Trays</a></li>
+          <li><a href="menu.html">Full Menu</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -347,25 +363,30 @@
           <li><a href="story.html">Our Story</a></li>
           <li><a href="menu.html">Menu</a></li>
           <li><a href="press.html">Press</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="index.html#visit">Visit the Shop</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Help</h4>
         <ul>
-          <li><a href="#">Shipping Info</a></li>
-          <li><a href="#">FAQ</a></li>
-          <li><a href="#">Returns</a></li>
-          <li><a href="#">Track Order</a></li>
+          <li><a href="shipping.html">Shipping Info</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="returns.html">Returns</a></li>
+          <li><a href="https://shop.riccisausage.com/account">Track Order</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
       <span>&copy; 2026 Ricci's Italian Sausage. All rights reserved.</span>
-      <span>500 Pine Hollow Rd, McKees Rocks, PA 15136</span>
-      <span>Privacy · Terms</span>
+      <span><a href="https://maps.app.goo.gl/9rDvQrZiuCKRCmFE9" target="_blank" rel="noopener noreferrer">500 Pine Hollow Rd, McKees Rocks, PA 15136</a> · 412-331-9531</span>
+      <span><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span>
     </div>
   </footer>
 
+  <script src="js/nav-drawer.js" defer></script>
+  <script src="js/catering-modal.js" defer></script>
+  <script src="js/order-modal.js" defer></script>
+  <script src="js/crm.js" defer></script>
+  <script src="js/cart.js" defer></script>
 </body>
 </html>
