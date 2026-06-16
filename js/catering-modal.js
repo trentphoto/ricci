@@ -226,8 +226,8 @@
       '\nTrays: ' + prep +
       (notes ? '\nNotes: ' + notes : '');
 
-    var CRM = window.CRM_BASE || 'https://crm.riccisausage.com';
-    fetch(CRM + '/api/catering', {
+    // CRM base is defined once in js/crm.js (published as window.CRM_BASE).
+    fetch(window.CRM_BASE + '/api/catering', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

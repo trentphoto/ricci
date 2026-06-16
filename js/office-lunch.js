@@ -50,7 +50,8 @@
 
     // Best-effort post to the real CRM — page works without it.
     var lines = orderLines(order.items);
-    fetch((window.CRM_BASE || 'https://crm.riccisausage.com') + '/api/catering', {
+    // CRM base is defined once in js/crm.js (published as window.CRM_BASE).
+    fetch(window.CRM_BASE + '/api/catering', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

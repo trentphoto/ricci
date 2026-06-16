@@ -1,9 +1,10 @@
 /*
  * Ricci's — on-page catering order-builder.
  * Progressive enhancement for the #catering-form: quantity steppers, a live
- * estimated total, prep + fulfillment toggles, and a human-readable
- * order_summary that rides along in the Netlify Forms submission.
- * The actual submit is handled by js/netlify-forms.js.
+ * estimated total, prep + fulfillment toggles, and a human-readable order
+ * summary. On submit it folds the order + logistics + notes into a single
+ * "message" field, which is the only free-text the CRM stores alongside the
+ * core contact fields. The actual submit is handled by js/crm.js.
  */
 (function () {
   var form = document.getElementById("catering-form");
@@ -13,6 +14,38 @@
   var countEl = document.getElementById("catering-count");
   var summaryInput = form.querySelector('input[name="order_summary"]');
   var totalInput = form.querySelector('input[name="estimated_total"]');
+  var messageInput = form.querySelector('input[name="message"]');
+
+  function fieldVal(name) {
+    var el = form.elements[name];
+    return el && typeof el.value === "string" ? el.value.trim() : "";
+  }
+
+  // Compose the human-readable order the CRM stores with the inquiry.
+  function buildMessage() {
+    var lines = ["Order:", summaryInput && summaryInput.value ? summaryInput.value : "(no trays selected)"];
+    if (totalInput && totalInput.value) lines.push("Estimated total: " + totalInput.value);
+    lines.push("");
+    var prep = fieldVal("prep");
+    var fulfillment = fieldVal("fulfillment");
+    var address = fieldVal("delivery_address");
+    var time = fieldVal("event_time");
+    var org = fieldVal("organization");
+    var notes = fieldVal("notes");
+    if (prep) lines.push("Tray prep: " + prep);
+    if (fulfillment) lines.push("Fulfillment: " + fulfillment);
+    if (address) lines.push("Delivery address: " + address);
+    if (time) lines.push("Preferred time: " + time);
+    if (org) lines.push("Company / occasion: " + org);
+    if (notes) lines.push("", "Notes: " + notes);
+    return lines.join("\n");
+  }
+
+  // Runs before crm.js's submit handler (this script loads first), so the
+  // message field is populated by the time the CRM client reads it.
+  form.addEventListener("submit", function () {
+    if (messageInput) messageInput.value = buildMessage();
+  });
 
   function money(n) {
     return "$" + n.toFixed(2);

@@ -153,7 +153,7 @@
         </div>
       </section>
 
-      <!-- ══════════════ CATERING REQUEST FORM (Netlify) ══════════════ -->
+      <!-- ══════════════ CATERING REQUEST FORM (CRM) ══════════════ -->
       <section class="menu-section menu-section-alt" id="request">
         <div class="container cater-form-wrap">
           <div class="menu-section-header">
@@ -174,24 +174,20 @@
           </div>
 
           <!--
-            Netlify Forms: data-netlify enables detection at deploy time.
-            The hidden form-name + bot-field honeypot register the form and
-            filter spam. Submission is handled via AJAX by js/netlify-forms.js.
+            CRM form: data-crm="catering" posts to the CRM /api/catering
+            endpoint (js/crm.js). The order builder (js/catering-form.js)
+            assembles a human-readable "message" the CRM stores with the
+            inquiry. data-success-panel swaps in the success panel below.
           -->
           <form
             id="catering-form"
-            name="catering-request"
-            method="POST"
-            data-netlify="true"
-            netlify-honeypot="bot-field"
+            data-crm="catering"
             data-success-panel="#catering-success"
             class="cater-page-form">
 
-            <input type="hidden" name="form-name" value="catering-request" />
-            <p hidden>
-              <label>Don't fill this out if you're human: <input name="bot-field" /></label>
-            </p>
+            <input type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px" />
             <!-- Synthesized by js/catering-form.js so the order reads cleanly -->
+            <input type="hidden" name="message" value="" />
             <input type="hidden" name="order_summary" value="" />
             <input type="hidden" name="estimated_total" value="" />
             <input type="hidden" name="prep" value="Prepared Hot" />
@@ -399,24 +395,17 @@
         </div>
       </section>
 
-      <!-- ══════════════ EMAIL CAPTURE (Netlify) ══════════════ -->
+      <!-- ══════════════ EMAIL CAPTURE (CRM) ══════════════ -->
       <section class="section-email">
         <div class="container">
           <span class="eyebrow">Join the Family</span>
           <h2>Specials &amp; Catering Reminders.</h2>
           <p>Seasonal trays, holiday lead times, and the specials worth knowing about.</p>
-          <form
-            class="email-form"
-            name="newsletter"
-            method="POST"
-            data-netlify="true"
-            netlify-honeypot="bot-field"
-            data-success="Thanks — you're on the list!">
-            <input type="hidden" name="form-name" value="newsletter" />
-            <p hidden><label>Skip: <input name="bot-field" /></label></p>
+          <form class="email-form" data-crm="subscribe" data-source="catering-newsletter" data-success="Thanks — you're on the list!">
             <input type="email" name="email" placeholder="Your email address" required />
+            <input type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px" />
             <button type="submit">Join</button>
-            <span class="form-status" role="status" style="display:block;margin-top:8px;font-size:0.9rem;"></span>
+            <span class="crm-status" role="status" style="display:block;margin-top:8px;font-size:0.9rem;"></span>
           </form>
         </div>
       </section>
@@ -495,7 +484,7 @@
 
   <script src="js/nav-drawer.js" defer></script>
   <script src="js/catering-form.js" defer></script>
-  <script src="js/netlify-forms.js" defer></script>
+  <script src="js/crm.js" defer></script>
   <script src="js/cart.js" defer></script>
 </body>
 </html>

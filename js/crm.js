@@ -7,10 +7,14 @@
  * Forms should include a hidden honeypot: <input name="_hp">.
  * A <span class="crm-status"> in the form shows feedback.
  *
- * To point at a different backend, set window.CRM_BASE before this script.
+ * SINGLE SOURCE OF TRUTH for the CRM backend URL. To override (e.g. local
+ * dev or a custom domain), set window.CRM_BASE before this script loads.
+ * Other scripts (office-lunch.js, etc.) read window.CRM_BASE, which we
+ * publish below — don't hardcode the URL anywhere else.
  */
 (function () {
-  var CRM_BASE = window.CRM_BASE || "https://crm.riccisausage.com";
+  var CRM_BASE = window.CRM_BASE || "https://riccis-crm.fly.dev";
+  window.CRM_BASE = CRM_BASE; // publish so other scripts share one config
   var FIELDS = ["email", "name", "phone", "message", "event_date", "headcount", "source"];
 
   function val(form, name) {
@@ -45,16 +49,29 @@
     form.__crmBound = true;
     var type = form.getAttribute("data-crm");
     var path = "/api/" + type;
-    var statusEl = form.querySelector(".crm-status");
+    var statusEl = form.querySelector(".crm-status, .form-status");
     var btn = form.querySelector('button[type="submit"], button:not([type]), [type="submit"]');
+    // Optional rich success: swap the form out for a panel (e.g. catering).
+    var panelSel = form.getAttribute("data-success-panel");
+    var panel = panelSel ? document.querySelector(panelSel) : null;
+
+    function succeed() {
+      if (panel) {
+        form.hidden = true;
+        panel.hidden = false;
+        panel.scrollIntoView({ behavior: "smooth", block: "center" });
+      } else if (statusEl) {
+        statusEl.textContent = message({ ok: true }, form);
+      }
+      form.reset();
+    }
 
     form.addEventListener("submit", async function (e) {
       e.preventDefault();
 
       // honeypot: if filled, a bot submitted — fake success, send nothing
       if (form.elements._hp && form.elements._hp.value) {
-        if (statusEl) statusEl.textContent = message({ ok: true }, form);
-        form.reset();
+        succeed();
         return;
       }
 
@@ -66,8 +83,8 @@
       if (statusEl) statusEl.textContent = "Sending…";
       var r = await post(path, data);
       if (btn) btn.disabled = false;
-      if (statusEl) statusEl.textContent = message(r, form);
-      if (r.ok) form.reset();
+      if (r.ok) succeed();
+      else if (statusEl) statusEl.textContent = message(r, form);
     });
   }
 
