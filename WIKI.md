@@ -110,7 +110,10 @@ future Shopify import (unrelated to the old generator).
 
 - **No working checkout.** All "Add to Cart" buttons are `href="#"`; the nav
   cart is a placeholder. Needs Shopify wiring (or removal) before selling.
-- **No analytics, no Open Graph / Twitter tags.** Favicon is done.
+- **Google Analytics (GA4) is wired into every page's `<head>`**, but still uses
+  the placeholder ID `G-XXXXXXXXXX` — swap in the real Measurement ID (find/replace
+  across all 31 pages) before launch.
+- **No Open Graph / Twitter tags.** Favicon is done.
 - **No `sitemap.xml` / `robots.txt`** (and no `CNAME` if hosting on GitHub Pages).
 - **Claims to verify with the owner:** homepage "50 States We Now Ship To" and
   "the only [Pittsburgh sausage maker] that also cooks."
