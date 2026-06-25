@@ -34,7 +34,7 @@
       </div>
       <div class="nav-cta">
         <span class="nav-cart">Cart (0)</span>
-        <a href="#request" class="btn btn-primary">Request a Quote</a>
+        <button type="button" class="btn btn-primary" data-open-catering>Request a Quote</button>
       </div>
       <button type="button" class="nav-toggle" id="site-nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
         <span class="nav-toggle-inner" aria-hidden="true">
@@ -63,7 +63,7 @@
               gone before the night is over.
             </p>
             <div class="product-hero-cta">
-              <a href="#request" class="btn btn-primary">Request a Catering Quote</a>
+              <button type="button" class="btn btn-primary" data-open-catering>Request a Catering Quote</button>
               <a href="tel:4123319531" class="btn btn-outline-dark">Call · 412-331-9531</a>
             </div>
             <p class="product-hero-weight"><strong>24-hour notice</strong> on all trays and bread. Holidays book up early.</p>
@@ -115,7 +115,7 @@
           <div class="catering-grid">
             <div class="catering-item">
               <div class="catering-item-name">Lil's Homemade Sausage Rolls</div>
-              <div class="catering-item-price">$9.99 each</div>
+              <div class="catering-item-price">$15.99 each</div>
             </div>
             <div class="catering-item">
               <div class="catering-item-name">Stuffed Banana Peppers</div>
@@ -153,245 +153,19 @@
         </div>
       </section>
 
-      <!-- ══════════════ CATERING REQUEST FORM (CRM) ══════════════ -->
+      <!-- ══════════════ REQUEST CTA → CATERING MODAL ══════════════ -->
       <section class="menu-section menu-section-alt" id="request">
-        <div class="container cater-form-wrap">
-          <div class="menu-section-header">
-            <span class="eyebrow">Plan Your Order</span>
-            <h2>Request a Catering Quote.</h2>
-            <p>Build your trays below and we'll follow up fast to confirm. Prefer to
-               talk it through? We're old fashioned and happy to take your order on
-               the phone at <a href="tel:4123319531" style="color:var(--red);font-weight:600;">412-331-9531</a>.</p>
+        <div class="container product-prose" style="text-align:center;">
+          <span class="eyebrow">Plan Your Order</span>
+          <h2>Request a Catering Quote.</h2>
+          <p>Build your trays and we'll follow up fast to confirm. Prefer to talk it
+             through? We're old fashioned and happy to take your order on the phone at
+             <a href="tel:4123319531" style="color:var(--red);font-weight:600;">412-331-9531</a>.</p>
+          <div class="product-hero-cta" style="justify-content:center;margin-top:8px;">
+            <button type="button" class="btn btn-primary" data-open-catering>Build Your Catering Order</button>
+            <a href="tel:4123319531" class="btn btn-outline-dark">Call · 412-331-9531</a>
           </div>
-
-          <!-- Success panel (revealed by JS after submit) -->
-          <div class="form-success" id="catering-success" hidden>
-            <span class="eyebrow">Request Received</span>
-            <h3>Thank you — we've got it.</h3>
-            <p>We'll be in touch shortly to confirm your trays, timing, and pickup.
-               In a hurry? Call the shop at
-               <a href="tel:4123319531">412-331-9531</a>.</p>
-          </div>
-
-          <!--
-            CRM form: data-crm="catering" posts to the CRM /api/catering
-            endpoint (js/crm.js). The order builder (js/catering-form.js)
-            assembles a human-readable "message" the CRM stores with the
-            inquiry. data-success-panel swaps in the success panel below.
-          -->
-          <form
-            id="catering-form"
-            data-crm="catering"
-            data-success-panel="#catering-success"
-            class="cater-page-form">
-
-            <input type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px" />
-            <!-- Synthesized by js/catering-form.js so the order reads cleanly -->
-            <input type="hidden" name="message" value="" />
-            <input type="hidden" name="order_summary" value="" />
-            <input type="hidden" name="estimated_total" value="" />
-            <input type="hidden" name="prep" value="Prepared Hot" />
-            <input type="hidden" name="fulfillment" value="Pickup" />
-
-            <!-- Step 01 — Your details -->
-            <div class="cater-section">
-              <div class="cater-section-head"><span class="eyebrow">Step 01</span><h3>Your Details</h3></div>
-              <div class="cater-grid-2">
-                <div class="cater-field"><label for="c-name">Name</label><input id="c-name" name="name" type="text" autocomplete="name" required></div>
-                <div class="cater-field"><label for="c-org">Company / Occasion <span style="text-transform:none;letter-spacing:0;color:#b3a690;">(optional)</span></label><input id="c-org" name="organization" type="text" autocomplete="organization"></div>
-                <div class="cater-field"><label for="c-email">Email</label><input id="c-email" name="email" type="email" autocomplete="email" required></div>
-                <div class="cater-field"><label for="c-phone">Phone</label><input id="c-phone" name="phone" type="tel" autocomplete="tel" required></div>
-              </div>
-            </div>
-
-            <!-- Step 02 — The event -->
-            <div class="cater-section">
-              <div class="cater-section-head"><span class="eyebrow">Step 02</span><h3>The Event</h3></div>
-              <div class="cater-grid-2">
-                <div class="cater-field"><label for="c-date">Date Needed</label><input id="c-date" name="event_date" type="date" required></div>
-                <div class="cater-field"><label for="c-time">Pickup / Delivery Time</label><input id="c-time" name="event_time" type="time" required></div>
-                <div class="cater-field"><label for="c-head">Headcount</label><input id="c-head" name="headcount" type="number" min="1" inputmode="numeric" placeholder="How many people?"></div>
-              </div>
-
-              <div class="cater-field" style="margin-top:24px;">
-                <label>Pickup or Delivery</label>
-                <div class="cater-switch">
-                  <div class="cater-switch-label">How should it arrive?<small>Pickup at 500 Pine Hollow Rd. Delivery available for Pittsburgh-area orders.</small></div>
-                  <div class="cater-toggle" data-toggle="fulfillment" data-active="pickup">
-                    <button type="button" class="cater-toggle-opt" data-value="pickup">Pickup</button>
-                    <button type="button" class="cater-toggle-opt" data-value="delivery">Delivery</button>
-                  </div>
-                </div>
-              </div>
-
-              <div class="cater-field" style="margin-top:14px;" id="catering-address-field" hidden>
-                <label for="c-addr">Delivery Address</label>
-                <input id="c-addr" name="delivery_address" type="text" placeholder="Street, suite, city" autocomplete="street-address">
-              </div>
-
-              <div class="cater-field" style="margin-top:14px;">
-                <label>Tray Preparation</label>
-                <div class="cater-switch">
-                  <div class="cater-switch-label">How would you like the trays?<small>Prepared hot = ready to serve. Cool down = chilled for reheating at home.</small></div>
-                  <div class="cater-toggle" data-toggle="prep" data-active="hot">
-                    <button type="button" class="cater-toggle-opt" data-value="hot">Hot</button>
-                    <button type="button" class="cater-toggle-opt" data-value="cool">Cool Down</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Step 03 — Choose trays -->
-            <div class="cater-section">
-              <div class="cater-section-head"><span class="eyebrow">Step 03</span><h3>Choose Your Trays</h3></div>
-              <div class="cater-items">
-
-                <div class="cater-item-row" data-name="Lil's Sausage Rolls (each)" data-price="9.99">
-                  <div class="cater-item-name">Lil's Sausage Rolls<small>$9.99 each</small></div>
-                  <div class="cater-qty">
-                    <button type="button" data-qty-step="-1" aria-label="Fewer sausage rolls">−</button>
-                    <input type="number" min="0" value="0" data-qty name="item_sausage_rolls" inputmode="numeric" aria-label="Sausage rolls quantity">
-                    <button type="button" data-qty-step="1" aria-label="More sausage rolls">+</button>
-                  </div>
-                  <div class="cater-item-price">$9.99</div>
-                </div>
-
-                <div class="cater-item-row" data-name="Stuffed Banana Peppers — Small (6 pc)" data-price="20.95">
-                  <div class="cater-item-name">Stuffed Banana Peppers — Small<small>6 pc · $20.95</small></div>
-                  <div class="cater-qty">
-                    <button type="button" data-qty-step="-1" aria-label="Fewer small stuffed peppers">−</button>
-                    <input type="number" min="0" value="0" data-qty name="item_stuffed_peppers_sm" inputmode="numeric" aria-label="Stuffed peppers small quantity">
-                    <button type="button" data-qty-step="1" aria-label="More small stuffed peppers">+</button>
-                  </div>
-                  <div class="cater-item-price">$20.95</div>
-                </div>
-
-                <div class="cater-item-row" data-name="Stuffed Banana Peppers — Large (12 pc)" data-price="41.95">
-                  <div class="cater-item-name">Stuffed Banana Peppers — Large<small>12 pc · $41.95</small></div>
-                  <div class="cater-qty">
-                    <button type="button" data-qty-step="-1" aria-label="Fewer large stuffed peppers">−</button>
-                    <input type="number" min="0" value="0" data-qty name="item_stuffed_peppers_lg" inputmode="numeric" aria-label="Stuffed peppers large quantity">
-                    <button type="button" data-qty-step="1" aria-label="More large stuffed peppers">+</button>
-                  </div>
-                  <div class="cater-item-price">$41.95</div>
-                </div>
-
-                <div class="cater-item-row" data-name="Hot Italian Sausage — Small Tray (12 pc)" data-price="39.95">
-                  <div class="cater-item-name">Hot Italian Sausage — Small Tray<small>12 pc · $39.95</small></div>
-                  <div class="cater-qty">
-                    <button type="button" data-qty-step="-1" aria-label="Fewer small hot sausage trays">−</button>
-                    <input type="number" min="0" value="0" data-qty name="item_hot_sausage_sm" inputmode="numeric" aria-label="Hot sausage small tray quantity">
-                    <button type="button" data-qty-step="1" aria-label="More small hot sausage trays">+</button>
-                  </div>
-                  <div class="cater-item-price">$39.95</div>
-                </div>
-
-                <div class="cater-item-row" data-name="Hot Italian Sausage — Large Tray (24 pc)" data-price="79.95">
-                  <div class="cater-item-name">Hot Italian Sausage — Large Tray<small>24 pc · $79.95</small></div>
-                  <div class="cater-qty">
-                    <button type="button" data-qty-step="-1" aria-label="Fewer large hot sausage trays">−</button>
-                    <input type="number" min="0" value="0" data-qty name="item_hot_sausage_lg" inputmode="numeric" aria-label="Hot sausage large tray quantity">
-                    <button type="button" data-qty-step="1" aria-label="More large hot sausage trays">+</button>
-                  </div>
-                  <div class="cater-item-price">$79.95</div>
-                </div>
-
-                <div class="cater-item-row" data-name="Sweet Italian Sausage — Small Tray (12 pc)" data-price="39.95">
-                  <div class="cater-item-name">Sweet Italian Sausage — Small Tray<small>12 pc · $39.95</small></div>
-                  <div class="cater-qty">
-                    <button type="button" data-qty-step="-1" aria-label="Fewer small sweet sausage trays">−</button>
-                    <input type="number" min="0" value="0" data-qty name="item_sweet_sausage_sm" inputmode="numeric" aria-label="Sweet sausage small tray quantity">
-                    <button type="button" data-qty-step="1" aria-label="More small sweet sausage trays">+</button>
-                  </div>
-                  <div class="cater-item-price">$39.95</div>
-                </div>
-
-                <div class="cater-item-row" data-name="Sweet Italian Sausage — Large Tray (24 pc)" data-price="79.95">
-                  <div class="cater-item-name">Sweet Italian Sausage — Large Tray<small>24 pc · $79.95</small></div>
-                  <div class="cater-qty">
-                    <button type="button" data-qty-step="-1" aria-label="Fewer large sweet sausage trays">−</button>
-                    <input type="number" min="0" value="0" data-qty name="item_sweet_sausage_lg" inputmode="numeric" aria-label="Sweet sausage large tray quantity">
-                    <button type="button" data-qty-step="1" aria-label="More large sweet sausage trays">+</button>
-                  </div>
-                  <div class="cater-item-price">$79.95</div>
-                </div>
-
-                <div class="cater-item-row" data-name="Meatballs — Small Tray (12 pc)" data-price="23.50">
-                  <div class="cater-item-name">Meatballs (2 oz) — Small Tray<small>12 pc · $23.50</small></div>
-                  <div class="cater-qty">
-                    <button type="button" data-qty-step="-1" aria-label="Fewer small meatball trays">−</button>
-                    <input type="number" min="0" value="0" data-qty name="item_meatballs_sm" inputmode="numeric" aria-label="Meatballs small tray quantity">
-                    <button type="button" data-qty-step="1" aria-label="More small meatball trays">+</button>
-                  </div>
-                  <div class="cater-item-price">$23.50</div>
-                </div>
-
-                <div class="cater-item-row" data-name="Meatballs — Large Tray (24 pc)" data-price="46.95">
-                  <div class="cater-item-name">Meatballs (2 oz) — Large Tray<small>24 pc · $46.95</small></div>
-                  <div class="cater-qty">
-                    <button type="button" data-qty-step="-1" aria-label="Fewer large meatball trays">−</button>
-                    <input type="number" min="0" value="0" data-qty name="item_meatballs_lg" inputmode="numeric" aria-label="Meatballs large tray quantity">
-                    <button type="button" data-qty-step="1" aria-label="More large meatball trays">+</button>
-                  </div>
-                  <div class="cater-item-price">$46.95</div>
-                </div>
-
-                <div class="cater-item-row" data-name="Mac 'n Cheese w/ Hot Sausage — Small Tray" data-price="36.95">
-                  <div class="cater-item-name">Mac 'n Cheese w/ Hot Sausage<small>Small Tray · $36.95</small></div>
-                  <div class="cater-qty">
-                    <button type="button" data-qty-step="-1" aria-label="Fewer mac and cheese trays">−</button>
-                    <input type="number" min="0" value="0" data-qty name="item_mac_cheese" inputmode="numeric" aria-label="Mac and cheese tray quantity">
-                    <button type="button" data-qty-step="1" aria-label="More mac and cheese trays">+</button>
-                  </div>
-                  <div class="cater-item-price">$36.95</div>
-                </div>
-
-                <div class="cater-item-row" data-name="Sausage Lasagna — Small Tray (12 servings)" data-price="71.95">
-                  <div class="cater-item-name">Sausage Lasagna<small>Small Tray · 12 servings · $71.95</small></div>
-                  <div class="cater-qty">
-                    <button type="button" data-qty-step="-1" aria-label="Fewer lasagna trays">−</button>
-                    <input type="number" min="0" value="0" data-qty name="item_lasagna" inputmode="numeric" aria-label="Lasagna tray quantity">
-                    <button type="button" data-qty-step="1" aria-label="More lasagna trays">+</button>
-                  </div>
-                  <div class="cater-item-price">$71.95</div>
-                </div>
-
-                <div class="cater-item-row" data-name="Mancini's Sausage Buns (dozen)" data-price="6.00">
-                  <div class="cater-item-name">Mancini's Sausage Buns<small>$6.00 / dozen</small></div>
-                  <div class="cater-qty">
-                    <button type="button" data-qty-step="-1" aria-label="Fewer dozen buns">−</button>
-                    <input type="number" min="0" value="0" data-qty name="item_buns" inputmode="numeric" aria-label="Sausage buns quantity">
-                    <button type="button" data-qty-step="1" aria-label="More dozen buns">+</button>
-                  </div>
-                  <div class="cater-item-price">$6.00</div>
-                </div>
-
-              </div>
-            </div>
-
-            <!-- Step 04 — Notes -->
-            <div class="cater-section">
-              <div class="cater-section-head"><span class="eyebrow">Step 04</span><h3>Anything Else?</h3></div>
-              <div class="cater-field">
-                <label for="c-notes">Notes</label>
-                <textarea id="c-notes" name="notes" placeholder="Allergies, lasagna hot or sweet, custom party packs, special requests..."></textarea>
-              </div>
-            </div>
-
-            <!-- Footer / total -->
-            <div class="cater-footer cater-footer--inline">
-              <div class="cater-total">Estimated Total
-                <span id="catering-total">$0.00</span>
-                <small id="catering-count">Nothing selected yet</small>
-              </div>
-              <div class="cater-actions">
-                <button type="submit" class="btn btn-primary">Request a Quote</button>
-              </div>
-            </div>
-
-            <p class="form-status" role="status" aria-live="polite"></p>
-            <p class="cater-notice-small" style="margin-top:24px;margin-bottom:0;">This is a request, not a final order — we'll confirm everything (and the final total) with you before we make a thing. Pay at pickup.</p>
-          </form>
+          <p class="cater-notice-small" style="margin-top:24px;margin-bottom:0;">This is a request, not a final order — we'll confirm everything (and the final total) with you before we make a thing. Pay at pickup.</p>
         </div>
       </section>
 
@@ -483,7 +257,7 @@
   </footer>
 
   <script src="js/nav-drawer.js" defer></script>
-  <script src="js/catering-form.js" defer></script>
+  <script src="js/catering-modal.js" defer></script>
   <script src="js/crm.js" defer></script>
   <script src="js/cart.js" defer></script>
 </body>

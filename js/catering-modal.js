@@ -1,6 +1,6 @@
 (function () {
   var ITEMS = [
-    { id: 'rolls',     name: "Lil's Sausage Rolls",       unit: 'each',             price: 9.99 },
+    { id: 'rolls',     name: "Lil's Sausage Rolls",       unit: 'each',             price: 15.99 },
     { id: 'pep_sm',    name: 'Stuffed Banana Peppers',    unit: 'Small Tray (6 pc)',  price: 20.95 },
     { id: 'pep_lg',    name: 'Stuffed Banana Peppers',    unit: 'Large Tray (12 pc)', price: 41.95 },
     { id: 'hot_sm',    name: 'Hot Italian Sausage',       unit: 'Small Tray (12 pc)', price: 39.95 },
