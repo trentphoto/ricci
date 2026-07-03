@@ -15,7 +15,8 @@
 (function () {
   var CRM_BASE = window.CRM_BASE || "https://riccis-crm.fly.dev";
   window.CRM_BASE = CRM_BASE; // publish so other scripts share one config
-  var FIELDS = ["email", "name", "phone", "message", "event_date", "headcount", "source"];
+  var FIELDS = ["email", "name", "phone", "message", "event_date", "headcount", "source",
+                "age", "years_experience", "availability", "position"];
 
   function val(form, name) {
     var el = form.elements[name];

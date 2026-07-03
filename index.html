@@ -55,36 +55,59 @@
   <main>
 
     <!-- ══════════════════════════════════════════
-         HERO — Brand promise + grunt test, then three doors
+         HERO SLIDER — Slide 1: brand promise · Slide 2: Monday special
     ══════════════════════════════════════════ -->
-    <section class="hero hero--storefront">
-      <div class="hero-bg" aria-hidden="true"></div>
-      <div class="hero-content">
-        <div class="hero-textblock">
-          <h1>Pittsburgh's Italian Sausage<br /><em>Since 1945.</em></h1>
-          <p class="hero-sub">
-            The same small-batch, hand-mixed sausage Pittsburgh has lined up for
-            since 1945 — fresh at our counter, catered to your table, and shipped
-            frozen to your door anywhere in the country.
-          </p>
+    <section class="hero hero-slider" id="home-hero" aria-roledescription="carousel" aria-label="Featured">
+      <div class="hero-slides">
+
+        <!-- Slide 1 — Storefront brand promise -->
+        <div class="hero-slide hero--storefront is-active" data-slide="0" role="group" aria-roledescription="slide" aria-label="Slide 1 of 2">
+          <div class="hero-bg" aria-hidden="true"></div>
+          <div class="hero-content">
+            <div class="hero-textblock">
+              <h1>Pittsburgh's Italian Sausage<br /><em>Since 1945.</em></h1>
+              <p class="hero-sub">
+                The same small-batch, hand-mixed sausage Pittsburgh has lined up for
+                since 1945 — fresh at our counter, catered to your table, and shipped
+                frozen to your door anywhere in the country.
+              </p>
+            </div>
+            <div class="hero-actions">
+              <a href="shop.html" class="hero-cta hero-cta--primary">
+                <span class="hero-cta-title">Ship a Box</span>
+                <span class="hero-cta-sub">Shipped frozen, nationwide in 2 days</span>
+              </a>
+              <a href="menu.html" class="hero-cta hero-cta--outline">
+                <span class="hero-cta-title">Visit the Shop</span>
+                <span class="hero-cta-sub">Hot prepared food &amp; fresh sausage by the pound</span>
+              </a>
+              <a href="catering.html" class="hero-cta hero-cta--outline">
+                <span class="hero-cta-title">Order Catering</span>
+                <span class="hero-cta-sub">Trays &amp; party packs for any crowd</span>
+              </a>
+            </div>
+          </div>
+          <div class="hero-badge">
+            USDA<br />Certified<br />Since<br />1973
+          </div>
         </div>
-        <div class="hero-actions">
-          <a href="shop.html" class="hero-cta hero-cta--primary">
-            <span class="hero-cta-title">Ship a Box</span>
-            <span class="hero-cta-sub">Shipped frozen, nationwide in 2 days</span>
-          </a>
-          <a href="menu.html" class="hero-cta hero-cta--outline">
-            <span class="hero-cta-title">Visit the Shop</span>
-            <span class="hero-cta-sub">Hot prepared food &amp; fresh sausage by the pound</span>
-          </a>
-          <a href="catering.html" class="hero-cta hero-cta--outline">
-            <span class="hero-cta-title">Order Catering</span>
-            <span class="hero-cta-sub">Trays &amp; party packs for any crowd</span>
-          </a>
+
+        <!-- Slide 2 — Pepperoni Roll · Monday special pre-order -->
+        <div class="hero-slide hero--promo" data-slide="1" role="group" aria-roledescription="slide" aria-label="Slide 2 of 2">
+          <div class="hero-bg" aria-hidden="true"></div>
+          <div class="hero-content">
+            <div class="hero-promo">
+              <span class="hero-promo-eyebrow">New Monday Special · Mondays Only · Limited Time</span>
+              <h2 class="hero-promo-title">The Pepperoni<br />Roll</h2>
+              <p class="hero-promo-sub">
+                Hand-rolled, baked fresh, and gone by lunch. Reserve yours now for
+                pickup this Monday at the McKees Rocks counter.
+              </p>
+              <button type="button" class="btn btn-primary hero-promo-cta" data-open-preorder>Reserve One Now</button>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="hero-badge">
-        USDA<br />Certified<br />Since<br />1973
+
       </div>
     </section>
 
@@ -128,7 +151,7 @@
             <h3>Order Catering</h3>
             <p>Feeding a crowd? Trays, party packs, and event catering — the
                easy way to put real Italian food on the table for any
-               gathering. Office lunch? $12.99 a person, chips and drinks
+               gathering. Office lunch? $10.99 a person, chips and a fresh-baked cookie
                included.</p>
             <p><a href="catering.html" class="btn btn-outline-dark">Catering &amp; Trays</a>
                <a href="office-lunch.html" class="btn btn-outline-dark">Office Lunch</a></p>
@@ -249,15 +272,34 @@
     </section>
 
     <!-- ══════════════════════════════════════════
+         NOW HIRING
+    ══════════════════════════════════════════ -->
+    <section class="section-hiring">
+      <div class="hiring-inner">
+        <div class="hiring-badge" aria-hidden="true">We're<br />Hiring</div>
+        <div class="hiring-copy">
+          <span class="eyebrow">Join the Family</span>
+          <h3>We're Hiring Counter Help.</h3>
+          <p>
+            Friendly, reliable folks who like good food and good people — come
+            work the counter at our McKees Rocks shop. No experience needed.
+            Apply in two minutes.
+          </p>
+        </div>
+        <a href="careers.html" class="btn btn-primary">See the Job &amp; Apply</a>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
          EMAIL CAPTURE
     ══════════════════════════════════════════ -->
     <section class="section-email">
       <div class="container">
         <span class="eyebrow">Join the Family</span>
-        <h2>Get Early Access &amp;<br />Members-Only Recipes.</h2>
+        <h2>Stay in the Loop.</h2>
         <p>
-          Be the first to know about new products, seasonal bundles, and
-          limited-edition cuts. Plus a Ricci family recipe in your first email.
+          Sign up to hear from the Ricci family now and then — a little news
+          from the shop, straight to your inbox.
         </p>
         <form class="email-form" data-crm="subscribe" data-source="newsletter" data-success="Thanks — you're on the list!">
           <input type="email" name="email" placeholder="Your email address" required />
@@ -313,7 +355,7 @@
           <li><a href="hot-foods/sausage-lasagna.html">Sausage Lasagna</a></li>
           <li><a href="hot-foods/mac-and-cheese.html">Mac 'n Cheese</a></li>
           <li><a href="hot-foods/pasta-e-fagioli.html">Pasta e' Fagioli</a></li>
-          <li><a href="office-lunch.html">Office Lunch · $12.99</a></li>
+          <li><a href="office-lunch.html">Office Lunch · $10.99</a></li>
           <li><a href="catering.html">Catering Trays</a></li>
           <li><a href="menu.html">Full Menu</a></li>
         </ul>
@@ -324,6 +366,7 @@
           <li><a href="story.html">Our Story</a></li>
           <li><a href="menu.html">Menu</a></li>
           <li><a href="press.html">Press</a></li>
+          <li><a href="careers.html">Careers</a></li>
           <li><a href="index.html#visit">Visit the Shop</a></li>
         </ul>
       </div>
@@ -347,6 +390,8 @@
   <script src="js/nav-drawer.js" defer></script>
   <script src="js/catering-modal.js" defer></script>
   <script src="js/order-modal.js" defer></script>
+  <script src="js/hero-slider.js" defer></script>
+  <script src="js/preorder-modal.js" defer></script>
   <script src="js/crm.js" defer></script>
   <script src="js/cart.js" defer></script>
 </body>

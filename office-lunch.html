@@ -5,8 +5,8 @@
   <script async src="/js/analytics.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Office Lunch — $12.99 a Person | Ricci's Italian Sausage, Pittsburgh</title>
-  <meta name="description" content="Office lunch from Ricci's Italian Sausage — $12.99 a person gets everyone a meatball or sausage sandwich with chips and a drink. Order online, reorder in one tap." />
+  <title>Office Lunch — $10.99 a Person | Ricci's Italian Sausage, Pittsburgh</title>
+  <meta name="description" content="Office lunch from Ricci's Italian Sausage — $10.99 a person gets everyone a meatball or sausage sandwich with chips and a fresh-baked cookie. Order online, reorder in one tap." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -58,11 +58,11 @@
           <div class="product-hero-img product-hero-img--placeholder">[ Office Lunch Spread ]</div>
           <div class="product-hero-body">
             <span class="eyebrow">Office Lunch · McKees Rocks &amp; Pittsburgh</span>
-            <h1>Lunch for the Whole Office.<br />$12.99 a Person.</h1>
+            <h1>Lunch for the Whole Office.<br />$10.99 a Person.</h1>
             <p class="product-hero-lead">
               Everyone picks a sandwich — Lil's meatball, our famous hot sausage,
-              or sweet sausage — and everyone gets chips and a drink. You count
-              heads, we handle the rest.
+              or sweet sausage — plus chips and a cookie, fresh-baked in store. You count
+              heads; we box everything up at the counter. Walk in, grab the boxes, go.
             </p>
             <div class="product-hero-cta">
               <a href="#order" class="btn btn-primary">Build Your Order</a>
@@ -85,15 +85,15 @@
               <span class="plan-step-num">01</span>
               <h3>Count Heads</h3>
               <p>Five meatball, four hot sausage? Just set how many of each
-                 sandwich. Every person is $12.99 flat — sandwich, chips, and a
-                 drink included. The math does itself.</p>
+                 sandwich. Every person is $10.99 flat — sandwich, chips, and a
+                 fresh-baked cookie included. The math does itself.</p>
             </div>
             <div class="plan-step">
               <span class="plan-step-num">02</span>
-              <h3>Tell Us When</h3>
-              <p>Pick the day and time. We deliver to Pittsburgh-area offices or
-                 have it stacked and ready at the counter — labeled and easy to
-                 hand out.</p>
+              <h3>Pick It Up</h3>
+              <p>Pick the day and time. Everything boxed up at the counter when you
+                 arrive — labeled by sandwich, ready to hand out. Walk in, grab the
+                 boxes, done.</p>
             </div>
             <div class="plan-step">
               <span class="plan-step-num">03</span>
@@ -134,8 +134,7 @@
             <div id="lunch-form-inner">
 
               <div class="lunch-rate">
-                <span class="lunch-rate-price">$12.99 <small>/ person</small></span>
-                <span class="lunch-rate-desc">Every person gets one sandwich of their choice, a bag of chips, and a drink.</span>
+                <span class="lunch-rate-price">$10.99 <small>/ person</small></span>
               </div>
 
               <div class="cater-section">
@@ -175,32 +174,22 @@
                     <div class="cater-item-price">people</div>
                   </div>
                 </div>
-                <p class="lunch-includes">Chips &amp; drinks for everyone — already in the price.</p>
+                <p class="lunch-includes">Includes Chips &amp; a fresh-baked cookie for everyone.</p>
               </div>
 
               <div class="cater-section">
-                <div class="cater-section-head"><span class="eyebrow">Step 02</span><h3>When &amp; Where</h3></div>
+                <div class="cater-section-head"><span class="eyebrow">Step 02</span><h3>When to Pick Up</h3></div>
                 <div class="cater-grid-2">
                   <div class="cater-field"><label for="l-date">Day</label><input id="l-date" name="date" type="date" required></div>
-                  <div class="cater-field"><label for="l-time">Lunch Time</label><input id="l-time" name="time" type="time" value="12:00" required></div>
+                  <div class="cater-field"><label for="l-time">Pickup Time</label><input id="l-time" name="time" type="time" value="12:00" required></div>
                 </div>
                 <div class="cater-field" style="margin-top:14px;">
-                  <label>Pickup or Delivery</label>
-                  <div class="cater-switch">
-                    <div class="cater-switch-label">How should lunch arrive?<small>Delivery available for Pittsburgh-area offices. Pickup at 500 Pine Hollow Rd.</small></div>
-                    <div class="cater-toggle" id="lunch-fulfill" data-active="delivery">
-                      <button type="button" class="cater-toggle-opt" data-prep="delivery">Deliver to Office</button>
-                      <button type="button" class="cater-toggle-opt" data-prep="pickup">Pickup</button>
-                    </div>
-                  </div>
-                </div>
-                <div class="cater-field" style="margin-top:14px;" id="lunch-address-field">
-                  <label for="l-address">Office Address</label>
-                  <input id="l-address" name="address" type="text" placeholder="Suite, street, city" autocomplete="street-address">
+                  <label>Pickup Location</label>
+                  <p class="lunch-pickup-note">Pickup at <strong>500 Pine Hollow Rd, McKees Rocks, PA 15136</strong>. Everything boxed and labeled at the counter — walk in, grab the boxes, done. Pickup only, no delivery.</p>
                 </div>
                 <div class="cater-field" style="margin-top:14px;">
                   <label for="l-notes">Notes</label>
-                  <textarea id="l-notes" name="notes" placeholder="Allergies, gate code, 'ask for Dana at the front desk'..."></textarea>
+                  <textarea id="l-notes" name="notes" placeholder="Allergies, special requests, etc."></textarea>
                 </div>
               </div>
 
@@ -298,7 +287,7 @@
           <li><a href="hot-foods/meatball-sandwich.html">Lil's Meatball Sandwich</a></li>
           <li><a href="hot-foods/banana-pepper-sandwich.html">Ernie's Banana Pepper</a></li>
           <li><a href="hot-foods/sausage-rolls.html">Lil's Sausage Rolls</a></li>
-          <li><a href="office-lunch.html">Office Lunch · $12.99</a></li>
+          <li><a href="office-lunch.html">Office Lunch · $10.99</a></li>
           <li><a href="catering.html">Catering Trays</a></li>
           <li><a href="menu.html">Full Menu</a></li>
         </ul>

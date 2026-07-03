@@ -1,2 +1,3 @@
 .DS_Store
 assets/img/family-original.webp
+_build/.env.local

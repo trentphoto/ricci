@@ -1,8 +1,8 @@
 /*
  * Ricci's Office Lunch order sheet.
  *
- * Flat-rate office lunch: $12.99/person — pick a sandwich for each person,
- * chips and a drink included. Lightweight returning-customer flow keyed by
+ * Flat-rate office lunch: $10.99/person — pick a sandwich for each person,
+ * chips and a fresh-baked cookie included. Lightweight returning-customer flow keyed by
  * email: first order is saved locally (and posted to the CRM); next visit,
  * enter your email (or be auto-recognized) and reorder in one tap.
  *
@@ -11,7 +11,7 @@
  * swaps lookupCustomer/saveOrder for CRM API calls (see js/crm.js).
  */
 (function () {
-  var PRICE_PER_PERSON = 12.99;
+  var PRICE_PER_PERSON = 10.99;
 
   var ITEMS = [
     { id: 'meatball', name: "Lil's Meatball Sandwich",  desc: 'Three hand-rolled meatballs, sauce, Grande cheese, Mancini\'s roll' },
@@ -63,8 +63,8 @@
         source: 'office-lunch',
         message: 'OFFICE LUNCH — ' + (profile.company || 'no company') + '\n' +
           lines.join('\n') + '\nTotal: $' + order.total.toFixed(2) +
-          '\n' + order.fulfill + ' at ' + order.time +
-          (order.address ? '\nDeliver to: ' + order.address : '') +
+          '\nPickup at ' + order.time +
+          '\n500 Pine Hollow Rd, McKees Rocks, PA 15136' +
           (order.notes ? '\nNotes: ' + order.notes : '') +
           (profile.newsletter ? '\nWants holiday specials newsletter.' : '')
       })
@@ -150,7 +150,7 @@
       html += '<div class="lunch-last-order">' +
         '<span class="eyebrow">Your Last Order</span>' +
         '<ul>' + orderLines(prev.items).map(function (l) { return '<li>' + l + '</li>'; }).join('') + '</ul>' +
-        '<p>' + prev.people + ' people · ' + money(prev.total) + ' · chips &amp; drinks included</p>' +
+        '<p>' + prev.people + ' people · ' + money(prev.total) + ' · chips &amp; a fresh-baked cookie included</p>' +
         '<div class="lunch-welcome-actions">' +
           '<button type="button" class="btn btn-primary" id="lunch-reorder">Reorder This</button>' +
           '<button type="button" class="btn btn-outline-dark" id="lunch-fresh">Start Fresh</button>' +
@@ -214,7 +214,7 @@
     var form = $('lunch-sheet');
     var people = headcount();
     if (people === 0) {
-      alert('Add at least one sandwich — every person gets a sandwich, chips, and a drink.');
+      alert('Add at least one sandwich — every person gets a sandwich, chips, and a fresh-baked cookie.');
       return;
     }
     var date = form.date.value;
@@ -223,12 +223,7 @@
       alert('Tell us the day and time you need lunch.');
       return;
     }
-    var fulfill = $('lunch-fulfill').getAttribute('data-active') === 'delivery' ? 'Delivery' : 'Pickup';
-    var address = form.address.value.trim();
-    if (fulfill === 'Delivery' && !address) {
-      alert('Where should we deliver? Add your office address.');
-      return;
-    }
+    var fulfill = 'Pickup';
     var name = form.name.value.trim();
     var email = form.email.value.trim();
     if (!name || !email || email.indexOf('@') < 1) {
@@ -244,7 +239,6 @@
       date: date,
       time: time,
       fulfill: fulfill,
-      address: address,
       notes: form.notes.value.trim()
     };
     var profile = {
@@ -268,16 +262,15 @@
       '<div class="cater-success" style="padding:40px 0;">' +
         '<h3>Lunch is handled, ' + profile.name.split(' ')[0] + '.</h3>' +
         '<div class="cater-success-pickup">' +
-          '<span class="eyebrow">' + order.fulfill + '</span>' +
+          '<span class="eyebrow">Pickup</span>' +
           '<p class="cater-success-date">' + formatDateDisplay(order.date, order.time) + '</p>' +
-          '<p class="cater-success-addr">' + (order.fulfill === 'Delivery'
-            ? order.address
-            : 'In-store pickup · 500 Pine Hollow Rd · McKees Rocks, PA 15136') + '</p>' +
+          '<p class="cater-success-addr">500 Pine Hollow Rd · McKees Rocks, PA 15136</p>' +
+          '<p class="cater-success-addr">Everything boxed up at the counter — walk in, grab the boxes, go.</p>' +
         '</div>' +
         '<div class="cater-success-summary">' +
           '<span class="eyebrow">Order Summary · ' + order.people + ' people</span>' +
           '<ul>' + lines + '</ul>' +
-          '<p class="cater-success-total">Chips &amp; drinks for everyone included.</p>' +
+          '<p class="cater-success-total">Chips &amp; a fresh-baked cookie for everyone included.</p>' +
           '<p class="cater-success-total">Total: <strong>' + money(order.total) + '</strong> (' + order.people + ' × ' + money(PRICE_PER_PERSON) + ')</p>' +
           (order.notes ? '<p class="cater-success-notes">Notes: ' + order.notes + '</p>' : '') +
         '</div>' +
@@ -307,14 +300,6 @@
         if (isNaN(parseInt(e.target.value, 10)) || parseInt(e.target.value, 10) < 0) e.target.value = 0;
         recalc();
       }
-    });
-
-    var fulfill = $('lunch-fulfill');
-    fulfill.addEventListener('click', function (e) {
-      var opt = e.target.closest('[data-prep]');
-      if (!opt) return;
-      fulfill.setAttribute('data-active', opt.getAttribute('data-prep'));
-      $('lunch-address-field').hidden = opt.getAttribute('data-prep') !== 'delivery';
     });
 
     $('lunch-submit').addEventListener('click', submitOrder);

@@ -6,7 +6,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>All Products — Ricci's Italian Sausage | Shipped Nationwide</title>
-  <meta name="description" content="Order Ricci's Italian Sausage online. Sweet, hot, gift boxes, and the Sausage Club. USDA inspected since 1973. Fresh-shipped nationwide." />
+  <meta name="description" content="Order Ricci's Italian Sausage bundles online. Gift boxes and curated packs shipped nationwide. USDA inspected since 1973." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -81,142 +81,61 @@
 
         <div class="section-header center">
           <span class="eyebrow">Fresh-Shipped Nationwide</span>
-          <h2>The Full Catalog.</h2>
-          <p>Every order packed for nationwide shipping. USDA inspected since 1973.</p>
+          <h2>Boxes &amp; Bundles.</h2>
+          <p>Curated packs, shipped nationwide. USDA inspected since 1973.</p>
+        </div>
+
+        <!-- SHIP-TO SELECTOR — prices below update with shipping baked in -->
+        <div class="ship-selector" id="ship-selector">
+          <div class="ship-selector-inner">
+            <span class="ship-selector-label">
+              Shipping to <strong id="ship-state-name">Pennsylvania</strong> —
+              prices below include shipping. No surprises at checkout.
+            </span>
+            <label class="ship-selector-field">
+              <span class="ship-selector-field-label">Change state</span>
+              <select id="ship-state" aria-label="Choose your shipping state"></select>
+            </label>
+          </div>
         </div>
 
         <div class="products-grid">
 
           <div class="product-card">
-            <div class="product-card-img">Photo Coming Soon</div>
-            <div class="product-card-body">
-              <span class="product-card-tag">Best Seller</span>
-              <h3>Classic Sweet Italian Sausage</h3>
-              <p>The original since 1945. The Sulmona family spice blend. 3 lbs, fresh.</p>
-              <div class="product-card-footer">
-                <div class="product-price">$59.95
-                  <span class="ship-note">+ Shipping · Arrives Frozen</span>
-                </div>
-                <a href="#" class="btn btn-outline-dark">Add to Cart</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="product-card">
             <div class="product-card-img">
-              <img src="assets/img/bg2.png" alt="Hot Italian Sausage links, grilled" />
+              <img src="assets/img/sweet-grilled-sausages.webp" alt="Four grilled sweet Italian sausage links in a cast iron pan with rosemary, chili peppers, and sea salt" width="1024" height="725" decoding="async" loading="lazy" />
             </div>
-            <div class="product-card-body">
-              <span class="product-card-tag">Fan Favorite</span>
-              <h3>Hot Italian Sausage</h3>
-              <p>Same family recipe, with crushed red pepper.
-                 A Pittsburgh staple for Sunday sauce. 3 lbs, fresh.</p>
-              <div class="product-card-footer">
-                <div class="product-price">$59.95
-                  <span class="ship-note">+ Shipping · Arrives Frozen</span>
-                </div>
-                <a href="#" class="btn btn-outline-dark">Add to Cart</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="product-card">
-            <div class="product-card-img">Photo Coming Soon</div>
-            <div class="product-card-body">
-              <span class="product-card-tag">Hand-Rolled</span>
-              <h3>Homemade Italian Meatballs</h3>
-              <p>Tender, hand-rolled, seasoned with the family spice blend.
-                 Made the way they're made at the counter. 2 lbs.</p>
-              <div class="product-card-footer">
-                <div class="product-price">$49.95
-                  <span class="ship-note">+ Shipping · Arrives Frozen</span>
-                </div>
-                <a href="#" class="btn btn-outline-dark">Add to Cart</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="product-card">
-            <div class="product-card-img">Photo Coming Soon</div>
             <div class="product-card-body">
               <span class="product-card-tag">Gift · Free Shipping</span>
               <h3>The Pittsburgh Italian Pack</h3>
               <p>Sweet sausage, hot sausage, and hand-rolled meatballs.
                  The full Sunday table.</p>
               <div class="product-card-footer">
-                <div class="product-price">$99.95
-                  <span class="ship-note">Free Shipping · Arrives Frozen</span>
+                <div class="product-price" data-base="189.00" data-tier="med">
+                  <span class="price-amount">$189.00</span>
+                  <span class="ship-note">Free shipping · Arrives frozen</span>
                 </div>
-                <a href="#" class="btn btn-primary">Add to Cart</a>
+                <a href="#" class="btn btn-primary" data-add-to-cart data-id="pittsburgh-italian-pack">Add to Cart</a>
               </div>
             </div>
           </div>
 
           <div class="product-card">
-            <div class="product-card-img">Photo Coming Soon</div>
+            <div class="product-card-img">
+              <img src="assets/img/sausage-roll.webp" alt="Lil's sausage rolls — Mancini's dough with hot sausage and cheese" decoding="async" loading="lazy" />
+            </div>
             <div class="product-card-body">
               <span class="product-card-tag">Gift Box · Free Shipping</span>
               <h3>The Ricci Legacy Gift Box</h3>
               <p>Our full range, beautifully packaged. Sweet, hot, meatballs,
-                 and stuffed peppers. The gift for the Italian food lover in
-                 your life.</p>
+                 stuffed peppers — includes two sausage rolls. The gift for
+                 the Italian food lover in your life.</p>
               <div class="product-card-footer">
-                <div class="product-price">$129.95
-                  <span class="ship-note">Free Shipping · Premium Packaging</span>
+                <div class="product-price" data-base="289.00" data-tier="large">
+                  <span class="price-amount">$289.00</span>
+                  <span class="ship-note">Free shipping · Premium packaging</span>
                 </div>
-                <a href="#" class="btn btn-primary">Add to Cart</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="product-card">
-            <div class="product-card-img">Photo Coming Soon</div>
-            <div class="product-card-body">
-              <span class="product-card-tag">Seasonal · Free Shipping</span>
-              <h3>Feast of the Seven Fishes Bundle</h3>
-              <p>The complete Italian Christmas Eve table. Sausage, meatballs,
-                 stuffed peppers — and a hand-written recipe card from
-                 the Ricci family.</p>
-              <div class="product-card-footer">
-                <div class="product-price">$149.95
-                  <span class="ship-note">Free Shipping · Limited Seasonal</span>
-                </div>
-                <a href="#" class="btn btn-primary">Add to Cart</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="product-card">
-            <div class="product-card-img">Photo Coming Soon</div>
-            <div class="product-card-body">
-              <span class="product-card-tag">Subscribe &amp; Save</span>
-              <h3>The Ricci Sausage Club</h3>
-              <p>A different variety every month. Rotating seasonal cuts,
-                 member-only recipes, and early access to limited editions.
-                 Cancel anytime.</p>
-              <div class="product-card-footer">
-                <div class="product-price">
-                  $59.95<span style="font-size:0.7em;color:#999;font-family:var(--font-sans);font-weight:400"> /mo</span>
-                  <span class="ship-note">Free Shipping · Cancel Anytime</span>
-                </div>
-                <a href="#" class="btn btn-primary">Subscribe</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="product-card">
-            <div class="product-card-img">Photo Coming Soon</div>
-            <div class="product-card-body">
-              <span class="product-card-tag">Charity Cookbook</span>
-              <h3>Mangia Salsiccia! Cookbook</h3>
-              <p>Three generations of recipes. The original sausage recipe
-                 is still a secret. Everything else is in the book.
-                 100% of proceeds support local charity.</p>
-              <div class="product-card-footer">
-                <div class="product-price">$24.95
-                  <span class="ship-note">Media Mail Shipping</span>
-                </div>
-                <a href="#" class="btn btn-outline-dark">Add to Cart</a>
+                <a href="#" class="btn btn-primary" data-add-to-cart data-id="ricci-legacy-gift-box">Add to Cart</a>
               </div>
             </div>
           </div>
@@ -337,6 +256,7 @@
   <script src="js/catering-modal.js" defer></script>
   <script src="js/order-modal.js" defer></script>
   <script src="js/crm.js" defer></script>
+  <script src="js/shipping.js" defer></script>
   <script src="js/cart.js" defer></script>
 </body>
 </html>

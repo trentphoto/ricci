@@ -14,8 +14,14 @@
     { id: 'buns',      name: "Mancini's Sausage Buns",    unit: 'per dozen',          price: 6.00 }
   ];
 
+  var TAX_RATE = 0.07;
+
   function money(n) {
     return '$' + n.toFixed(2);
+  }
+
+  function withTax(subtotal) {
+    return subtotal * (1 + TAX_RATE);
   }
 
   function itemRow(item) {
@@ -91,7 +97,7 @@
       '      </div>' +
       '    </form>' +
       '    <div class="cater-footer">' +
-      '      <div class="cater-total">Estimated Total<span id="cater-total">$0.00</span></div>' +
+      '      <div class="cater-total">Estimated Total <small>(incl. 7% tax)</small><span id="cater-total">$0.00</span></div>' +
       '      <div class="cater-actions">' +
       '        <button type="button" class="btn btn-primary" id="cater-submit">Submit Order</button>' +
       '      </div>' +
@@ -117,7 +123,7 @@
       if (row) row.classList.toggle('has-qty', q > 0);
     });
     var el = document.getElementById('cater-total');
-    if (el) el.textContent = money(total);
+    if (el) el.textContent = money(withTax(total));
   }
 
   function buildOrderSummary() {
@@ -138,7 +144,7 @@
       lines.push(line);
       total += q * it.price;
     });
-    return { lines: lines, total: total };
+    return { lines: lines, subtotal: total, total: withTax(total) };
   }
 
   function formatDateDisplay(dateVal, timeVal) {
@@ -221,7 +227,7 @@
 
     var message = 'CATERING REQUEST\n' +
       order.lines.join('\n') +
-      '\nEstimated Total: ' + money(order.total) +
+      '\nEstimated Total (incl. 7% tax): ' + money(order.total) +
       '\nPickup: ' + dateDisplay +
       '\nTrays: ' + prep +
       (notes ? '\nNotes: ' + notes : '');
@@ -279,7 +285,7 @@
           '<div class="cater-success-summary">' +
             '<span class="eyebrow">Order Summary</span>' +
             '<ul>' + summaryRows + '</ul>' +
-            '<p class="cater-success-total">Estimated Total: <strong>' + money(order.total) + '</strong></p>' +
+            '<p class="cater-success-total">Estimated Total (incl. 7% tax): <strong>' + money(order.total) + '</strong></p>' +
             (notes ? '<p class="cater-success-notes">Notes: ' + notes + '</p>' : '') +
             '<p style="margin-top:4px;font-size:0.8rem;color:#6b5544;">Trays: ' + prep + '</p>' +
           '</div>' +
