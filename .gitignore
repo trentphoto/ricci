@@ -1,3 +1,6 @@
 .DS_Store
-assets/img/family-original.webp
+site/assets/img/family-original.webp
 _build/.env.local
+.shopify/
+_build/shopify-app/
+_archive/
