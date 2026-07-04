@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "ricci-minimal-home": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<div style=\"max-width:36rem;margin:0 auto;padding:3rem 1.5rem 4rem;text-align:center;font-family:Georgia,'Times New Roman',serif;color:#2A221B;\"><p style=\"letter-spacing:0.12em;text-transform:uppercase;font-size:0.75rem;color:#7A261F;margin:0 0 0.75rem;\">Ricci's Italian Sausage · Est. 1945</p><h1 style=\"font-size:clamp(1.75rem,4vw,2.25rem);font-weight:400;margin:0 0 1rem;line-height:1.2;\">Order our gift boxes online</h1><p style=\"font-size:1.05rem;line-height:1.6;margin:0 0 1.75rem;color:#4a4038;\">Browse bundles, pick your state, and checkout here. Shipping is included in every price.</p><p style=\"margin:0 0 1rem;\"><a href=\"https://riccisausage.com/products.html\" style=\"display:inline-block;padding:0.85rem 1.75rem;background:#7A261F;color:#F0E6D0;text-decoration:none;border-radius:2px;font-family:'Source Sans 3',sans-serif;font-size:0.95rem;\">Shop at riccisausage.com</a></p><p style=\"font-size:0.9rem;margin:0;\">Questions? Call <a href=\"tel:+14123319531\" style=\"color:#7A261F;\">412-331-9531</a></p></div>"
+      }
+    }
+  },
+  "order": ["ricci-minimal-home"]
+}

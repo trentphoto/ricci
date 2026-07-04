@@ -1,0 +1,19 @@
+query ProductByHandle($handle: String!) {
+  productByHandle(handle: $handle) {
+    id
+    handle
+    title
+    status
+    variants(first: 10) {
+      nodes {
+        id
+        sku
+        price
+        selectedOptions {
+          name
+          value
+        }
+      }
+    }
+  }
+}

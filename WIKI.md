@@ -22,28 +22,38 @@ changes; it captures things that are **not** obvious from the file tree.
 
 ## Directory layout
 
+**Only `site/` is deployed** — Netlify's publish dir (`netlify.toml`). Everything
+outside `site/` (tooling, this wiki, archives) is never served publicly. Put any
+new page or asset **inside `site/`**.
+
 ```
-/                     root-level pages (hand-authored)
-  index, story, menu, catering, press, shop, products,
-  office-lunch, wholesale, faq, shipping, returns, privacy, terms (.html)
-shop/                 product detail pages   — hand-authored (was generated; see History)
-hot-foods/            prepared-food pages    — hand-authored (was generated; see History)
-css/styles.css        single shared stylesheet (brand tokens at top)
-js/                   vanilla JS, one IIFE per file, loaded with defer
-assets/
-  logo.png            green-oval Ricci's logo
-  img/                webp photos + storefront-sketch.webp (homepage hero)
-  favicon/            generated "R" monogram set (ico, 16/32 png, apple-touch, 512)
-_build/               Shopify sync script, variant map, env example
-shopify/              GraphQL queries/mutations + sync-bundles.sh wrapper
+site/                 ← Netlify publish dir. The entire public website.
+  *.html              root-level pages (hand-authored):
+                        index, story, menu, catering, press, shop, products,
+                        office-lunch, wholesale, faq, shipping, returns,
+                        privacy, terms, careers, 404
+  shop/               product detail pages   — hand-authored (was generated; see History)
+  hot-foods/          prepared-food pages    — hand-authored (was generated; see History)
+  css/styles.css      single shared stylesheet (brand tokens at top)
+  js/                 vanilla JS, one IIFE per file, loaded with defer
+  assets/
+    logo.png          green-oval Ricci's logo
+    img/              webp photos + storefront-sketch.webp (homepage hero)
+    favicon/          generated "R" monogram set (ico, 16/32 png, apple-touch, 512)
+netlify.toml          publish dir config — do not delete
+_build/               Shopify sync script, variant map, env example (NOT deployed)
+shopify/              GraphQL queries/mutations + sync-bundles.sh wrapper (NOT deployed)
 shopify.app.toml      linked Shopify CLI app config (app name: r1)
 _archive/             old page/style snapshots — ignore
+WIKI.md               this file (NOT deployed)
 ```
 
 Pages have **no templating** — the nav header and footer are copy-pasted into
-every page. Subpages in `shop/` and `hot-foods/` reference assets with `../`
-(e.g. `../css/styles.css`). Root pages use bare relative paths. When changing
-shared nav/footer markup, update every page (there are ~31).
+every page. Subpages in `site/shop/` and `site/hot-foods/` reference assets with
+`../` (e.g. `../css/styles.css`). Root pages use bare relative paths — except
+`site/404.html`, which is served at any URL depth and must use absolute paths
+(`/css/styles.css`). When changing shared nav/footer markup, update every page
+(there are ~32).
 
 ## JavaScript (`js/`)
 
@@ -176,6 +186,11 @@ SKUs: `RIC-PITT-A` … `RIC-PITT-E`, `RIC-LEGACY-A` … `RIC-LEGACY-E`.
 
 ### Cart → checkout handoff
 
+**Architecture:** `riccisausage.com` is the storefront. `shop.riccisausage.com` is
+**checkout only** — customers normally never browse the Shopify homepage. They add
+bundles on the marketing site, hit **Checkout**, and land on Shopify's checkout with
+the correct zone-priced variant pre-loaded.
+
 1. Customer adds bundles on `products.html` / `shop.html` (stored in
    `localStorage` key `ricci_cart`).
 2. Shipping state is in `localStorage` key `ricci_ship_state` (set on shop
@@ -183,10 +198,47 @@ SKUs: `RIC-PITT-A` … `RIC-PITT-E`, `RIC-LEGACY-A` … `RIC-LEGACY-E`.
 3. **Checkout** resolves state → zone (A–E), looks up the Shopify variant ID from
    `js/shopify-variants.js`, and redirects to:
    `https://shop.riccisausage.com/cart/{variantId}:{qty},...`
-4. Shopify handles payment, tax, and order confirmation on the shop subdomain.
+4. Shopify cart permalinks **go straight to checkout by default** (use
+   `?storefront=true` only if you want the cart page instead).
+5. Shopify handles payment, tax, and order confirmation.
 
 If zone variants aren't loaded or state is AK/HI, checkout shows an alert and
 prompts the customer to call.
+
+**Is it set up?** Yes, end-to-end. Marketing site (`js/cart.js` + `js/shopify-variants.js`)
+builds the permalink; both bundles are **published to the Online Store channel** (the sync
+script auto-publishes — see below), password is off, and permalinks 302 straight to checkout
+(verified 2026-07-04). Remaining optional: minimal Shopify homepage (see below).
+
+> **Gotcha:** cart permalinks return **HTTP 410** if the product isn't published to the
+> Online Store sales channel. The sync script now publishes automatically on every run
+> (requires `read_publications,write_publications` scopes on the store auth token).
+
+### Minimal Shopify homepage
+
+Shoppers who visit `shop.riccisausage.com` directly (not via checkout link) should
+see a simple page pointing them to `riccisausage.com/products.html` — not a full
+Dawn catalog.
+
+**Via API** (after re-auth with theme scopes):
+
+```bash
+shopify store auth --store tiyndf-za.myshopify.com \
+  --scopes read_products,write_products,read_themes,write_themes
+
+./shopify/sync-theme.sh
+```
+
+Source template: `shopify/theme/index.json` (single custom-liquid section).
+
+If the API returns a theme exemption error, do it manually in Admin:
+
+1. **Online Store → Themes → Customize**
+2. Homepage → remove extra sections → add **Custom liquid**
+3. Paste the HTML from `shopify/theme/index.json` → `custom_liquid` setting (or link to riccisausage.com)
+4. **Save**
+
+You do **not** need a polished Shopify theme for the cart handoff to work.
 
 ### Sync workflow (CLI)
 
@@ -196,7 +248,8 @@ prompts the customer to call.
 
 ```bash
 nvm use 22
-shopify store auth --store tiyndf-za.myshopify.com --scopes read_products,write_products
+shopify store auth --store tiyndf-za.myshopify.com \
+  --scopes read_products,write_products,read_themes,write_themes,read_publications,write_publications
 ```
 
 **Link app config** (already done for r1):
@@ -211,12 +264,13 @@ shopify app config link
 ./shopify/sync-bundles.sh          # live sync
 ./shopify/sync-bundles.sh --dry-run
 ./shopify/sync-bundles.sh --ping   # test connection only
+./shopify/sync-theme.sh            # minimal homepage on shop subdomain
 ```
 
 On success, writes:
 
 - `_build/shopify-variant-map.json` — reference copy for tooling
-- `js/shopify-variants.js` — loaded by `cart.js` at runtime
+- `site/js/shopify-variants.js` — loaded by `cart.js` at runtime
 
 **Re-run sync** whenever bundle base prices or zone add-ons change in
 `_build/sync-shopify-bundles.mjs` / `js/shipping.js`.
@@ -227,10 +281,10 @@ with GraphQL in `shopify/graphql/`. Variant weights are **not** set via API
 
 ### Manual Shopify checklist
 
-- [ ] Publish both bundle products to **Online Store** sales channel
+- [x] Publish both bundle products to **Online Store** sales channel (now automated by sync)
 - [ ] Confirm **free shipping** profile on bundles (shipping is baked into price)
 - [ ] Set variant weights in Admin if shipping labels need them
-- [ ] Verify test checkout from marketing site cart for zones A and E
+- [x] Verify checkout permalinks resolve for zones A and E (curl-verified 2026-07-04; still do a real test purchase)
 
 ## Known gaps / pre-launch checklist
 
@@ -239,8 +293,6 @@ with GraphQL in `shopify/graphql/`. Variant weights are **not** set via API
   across all 31 pages) before launch.
 - **No Open Graph / Twitter tags.** Favicon is done.
 - **No `sitemap.xml` / `robots.txt`** (and no `CNAME` if hosting on GitHub Pages).
-- **Claims to verify with the owner:** homepage "50 States We Now Ship To" and
-  "the only [Pittsburgh sausage maker] that also cooks."
 
 ## Conventions
 

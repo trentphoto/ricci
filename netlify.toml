@@ -1,0 +1,6 @@
+# Netlify config — riccisausage.com
+# Only site/ is published. Tooling (_build/, shopify/), WIKI.md, and _archive/
+# live outside it and are never deployed.
+
+[build]
+  publish = "site"

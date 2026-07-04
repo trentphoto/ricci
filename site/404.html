@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Analytics (GA4) — ID lives in js/analytics.js -->
+  <script async src="/js/analytics.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page Not Found — Ricci's Italian Sausage</title>
+  <meta name="description" content="That page doesn't exist. Head back to Ricci's Italian Sausage — fresh sausage, meatballs, and bundles shipped nationwide." />
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="icon" href="/assets/favicon/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16.png" />
+  <link rel="apple-touch-icon" href="/assets/favicon/apple-touch-icon.png" />
+</head>
+<body>
+
+  <!-- NOTE: 404.html is served at any URL depth, so all paths on this page
+       must be absolute (leading slash) — do not copy relative nav markup here. -->
+  <header class="site-header">
+    <nav class="nav" aria-label="Primary">
+      <a href="/index.html" class="nav-logo">
+        <img src="/assets/logo.png" alt="Ricci's Italian Sausage">
+      </a>
+      <div class="nav-menu">
+        <ul class="nav-links" id="primary-nav">
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/story.html">Our Story</a></li>
+          <li><a href="/menu.html">Menu</a></li>
+          <li><a href="/catering.html">Catering</a></li>
+          <li class="nav-shop"><a href="/shop.html">Shop</a></li>
+          <li><a href="/press.html">Press</a></li>
+          <li><a href="/index.html#visit">Visit</a></li>
+        </ul>
+      </div>
+      <div class="nav-cta">
+        <span class="nav-cart">Cart (0)</span>
+        <button type="button" class="btn btn-primary" data-open-order>Order Now</button>
+      </div>
+      <button type="button" class="nav-toggle" id="site-nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
+        <span class="nav-toggle-inner" aria-hidden="true">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </span>
+      </button>
+    </nav>
+    <div class="nav-backdrop" id="nav-backdrop" aria-hidden="true"></div>
+  </header>
+
+  <main>
+
+    <div class="page-hero">
+      <span class="eyebrow">404</span>
+      <h1>This Page Got <em style="color:var(--gold)">Lost in the Sauce.</em></h1>
+      <p>The page you're looking for doesn't exist — but the sausage sure does.</p>
+    </div>
+
+    <section class="story-body" style="text-align:center; padding-bottom:4rem;">
+      <p style="margin-bottom:1.5rem;">Try one of these instead:</p>
+      <p>
+        <a href="/index.html" class="btn btn-primary" style="margin:0 .4rem .8rem;">Back Home</a>
+        <a href="/shop.html" class="btn btn-primary" style="margin:0 .4rem .8rem;">Shop Bundles</a>
+      </p>
+      <p style="margin-top:1.5rem;">Or call us: <a href="tel:412-331-9531">412-331-9531</a></p>
+    </section>
+
+  </main>
+
+  <script src="/js/nav-drawer.js" defer></script>
+  <script src="/js/catering-modal.js" defer></script>
+  <script src="/js/order-modal.js" defer></script>
+  <script src="/js/cart.js" defer></script>
+</body>
+</html>

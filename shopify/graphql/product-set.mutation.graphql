@@ -1,0 +1,25 @@
+mutation ProductSet($input: ProductSetInput!, $synchronous: Boolean!) {
+  productSet(synchronous: $synchronous, input: $input) {
+    product {
+      id
+      handle
+      title
+      status
+      variants(first: 10) {
+        nodes {
+          id
+          sku
+          price
+          selectedOptions {
+            name
+            value
+          }
+        }
+      }
+    }
+    userErrors {
+      field
+      message
+    }
+  }
+}

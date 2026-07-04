@@ -1,0 +1,10 @@
+query Shop {
+  shop {
+    name
+    myshopifyDomain
+    currencyCode
+    plan {
+      displayName
+    }
+  }
+}
