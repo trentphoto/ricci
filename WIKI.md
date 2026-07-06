@@ -292,11 +292,27 @@ with GraphQL in `shopify/graphql/`. Variant weights are **not** set via API
   the placeholder ID `G-XXXXXXXXXX` — swap in the real Measurement ID (find/replace
   across all 31 pages) before launch.
 - **No Open Graph / Twitter tags.** Favicon is done.
-- **No `sitemap.xml` / `robots.txt`** (and no `CNAME` if hosting on GitHub Pages).
 
 ## Conventions
 
 - **Git commit messages:** single concise line, under 72 chars. No body.
 - **Images:** convert to `.webp` with `cwebp -q 86` before adding to `assets/img/`.
+- **Image gotchas (`assets/img/`):**
+  - `sausage-peppers.webp` is actually **hot sausage** with peppers, despite the
+    generic filename — only use it on hot-sausage (or Pittsburgh Pack) content.
+  - `sausage-roll.webp` is **Lil's baked sausage roll** (the hot-foods product,
+    literally a roll) — only use it on sausage-roll content, never as a stand-in
+    for hot/sweet sausage links. Sausage rolls are an **in-store hot food only**
+    — they don't ship, so the image doesn't belong on shop/products pages
+    (story.html is fine).
+  - Sandwich photos (added Jul 2026): `hot-sausage-sandwich.webp`,
+    `sweet-sausage-sandwich.webp`, `meatball-sandwich.webp`,
+    `meatball-sandwich-alt.webp`, `banana-pepper-sandwich.webp`. The banana pepper
+    one is **not in use yet** — no confirmed photo; the page shows a placeholder.
+  - Rope/link photos (added Jul 2026): `hot-links-pan.webp`, `sweet-links-pan.webp`
+    — grilled links in a pan. Use on **raw product pages** (shop, product cards),
+    **not** on hot-foods/sandwich content.
+  - Hero placeholders use the text "Photo coming soon"
+    (`product-hero-img--placeholder`).
 - Keep nav/footer markup in sync across **all** pages when editing by hand —
   there is no generator or shared template (see "History" above).
