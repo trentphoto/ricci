@@ -698,17 +698,35 @@ body.nav-drawer-open .nav-backdrop {
   .hero-slide.is-leaving { transform: none; }
 }
 
-/* Promo slide — Monday pepperoni-roll special */
+/* Promo slide — Monday pepperoni-roll special
+   Solid oxblood field; food image sits on the right (not full-bleed cover). */
 .hero--promo { background: var(--oxblood); }
 .hero--promo .hero-bg {
-  background:
-    linear-gradient(to bottom, rgba(30,8,6,0.35) 0%, rgba(30,8,6,0.55) 55%, rgba(30,8,6,0.9) 100%),
-    linear-gradient(90deg, rgba(30,8,6,0.62) 0%, rgba(30,8,6,0) 62%),
-    url('../assets/img/pepperoni-roll-hero.webp');
-  background-size: cover;
-  background-position: center;
+  background: transparent;
 }
-.hero-promo { max-width: 640px; }
+.hero--promo .hero-bg::after { display: none; }
+.hero--promo .hero-bg::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(48vw, 560px);
+  height: min(72vh, 520px);
+  background: url('../assets/img/pepperoni-roll-hero.webp') center / contain no-repeat;
+  pointer-events: none;
+  filter: drop-shadow(0 18px 40px rgba(0, 0, 0, 0.35));
+}
+.hero--promo .hero-content {
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 72px;
+}
+.hero-promo {
+  max-width: 520px;
+  position: relative;
+  z-index: 2;
+}
 .hero-promo-eyebrow {
   display: inline-block;
   font-family: var(--font-sans);
@@ -734,7 +752,45 @@ body.nav-drawer-open .nav-backdrop {
   max-width: 460px;
   margin: 0 0 34px;
 }
-.hero-promo-cta { font-size: 1.05rem; padding: 18px 44px; }
+.hero-promo-cta {
+  font-size: 1.05rem;
+  padding: 18px 44px;
+  background: var(--cream);
+  color: var(--oxblood);
+  border-color: var(--cream);
+}
+.hero-promo-cta:hover {
+  background: var(--white);
+  color: var(--oxblood-ink);
+  border-color: var(--white);
+}
+@media (max-width: 900px) {
+  .hero--promo .hero-bg::before {
+    width: min(70vw, 420px);
+    height: min(48vh, 360px);
+    right: -4%;
+    top: 38%;
+    opacity: 0.92;
+  }
+  .hero--promo .hero-content {
+    padding-bottom: 48px;
+  }
+  .hero-promo { max-width: 100%; }
+}
+@media (max-width: 640px) {
+  .hero--promo .hero-bg::before {
+    width: min(88vw, 340px);
+    height: 240px;
+    right: 50%;
+    top: 18%;
+    transform: translate(50%, 0);
+    opacity: 0.88;
+  }
+  .hero--promo .hero-content {
+    align-items: flex-end;
+    padding-top: 280px;
+  }
+}
 
 /* ============================================
    PRESS BAR
