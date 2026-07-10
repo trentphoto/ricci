@@ -58,7 +58,7 @@
       '    <div class="cater-header">' +
       '      <span class="eyebrow">Pepperoni Roll · Pre-Order</span>' +
       '      <h2 id="preorder-title">Reserve Your Pepperoni Rolls</h2>' +
-      '      <p>Pickup <strong>' + pickupLabel + '</strong> at 500 Pine Hollow Rd. Mondays only &mdash; reserve while they last.</p>' +
+      '      <p>$16.99 each. Pickup <strong>' + pickupLabel + '</strong> at 500 Pine Hollow Rd. Mondays only &mdash; reserve while they last.</p>' +
       '      <button type="button" class="cater-close" id="preorder-close" aria-label="Close">&times;</button>' +
       '    </div>' +
       '    <form class="cater-body" id="preorder-form" novalidate>' +
@@ -73,7 +73,7 @@
       '      <span class="crm-status" role="status" style="display:block;margin-top:18px;font-size:0.92rem;color:var(--red);"></span>' +
       '    </form>' +
       '    <div class="cater-footer">' +
-      '      <div class="cater-total" style="font-size:0.85rem;letter-spacing:0.02em;color:#6b5544;">Mondays Only · Limited Time</div>' +
+      '      <div class="cater-total" style="font-size:0.85rem;letter-spacing:0.02em;color:#6b5544;">$16.99 each · Mondays Only</div>' +
       '      <div class="cater-actions"><button type="button" class="btn btn-primary" id="preorder-submit">Reserve Now</button></div>' +
       '    </div>' +
       '  </div>' +
