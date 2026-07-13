@@ -296,7 +296,11 @@ with GraphQL in `shopify/graphql/`. Variant weights are **not** set via API
 ## Conventions
 
 - **Git commit messages:** single concise line, under 72 chars. No body.
-- **Images:** convert to `.webp` with `cwebp -q 86` before adding to `assets/img/`.
+- **Images:** convert to `.webp` before adding to `assets/img/`, using `cwebp`
+  (Homebrew: `brew install webp`). For photos wider than ~1200px, resize on the
+  way down to cut file size: `cwebp -q 78 -resize 1200 0 input.png -o output.webp`
+  (`-resize 1200 0` scales width to 1200 keeping aspect ratio). Aim for
+  ~80–200KB per image, in line with the rest of `assets/img/`.
 - **Image gotchas (`assets/img/`):**
   - `sausage-peppers.webp` is actually **hot sausage** with peppers, despite the
     generic filename — only use it on hot-sausage (or Pittsburgh Pack) content.
@@ -314,5 +318,34 @@ with GraphQL in `shopify/graphql/`. Variant weights are **not** set via API
     **not** on hot-foods/sandwich content.
   - Hero placeholders use the text "Photo coming soon"
     (`product-hero-img--placeholder`).
+  - "What's in the box" photos on `shop/pittsburgh-italian-pack.html` (added
+    Jul 2026): `sweet-sausage-coil-raw.webp`, `hot-sausage-coil-raw.webp`
+    (raw staged coils), `homemade-meatballs-bag.webp` (bagged, uncooked),
+    `sausage-rolls-tray.webp` (baked rolls). Used in `.menu-item-img` cards —
+    specific to this bundle page, not general-purpose product shots.
 - Keep nav/footer markup in sync across **all** pages when editing by hand —
   there is no generator or shared template (see "History" above).
+
+## Merchandising rules (2026-07: informational vs buyable)
+
+Every page has exactly one commerce job — do not blur these when editing:
+
+- **`shop.html`** — the only sales page. Buy buttons exist here and on the two
+  bundle PDPs (`shop/pittsburgh-italian-pack.html`, `shop/ricci-legacy-gift-box.html`).
+- **`products.html`** ("What We Make") — informational catalog. Bundles appear
+  with prices linking to their PDPs; everything else (case items, hot foods) is
+  informational with availability tags, never a price.
+- **`shop/{sweet-italian-sausage,hot-italian-sausage,italian-meatballs}.html`** —
+  story pages, NOT buyable. Hero uses `.avail-badges` (`--store` green /
+  `--ships` oxblood) instead of a price, and CTAs are "Order Pickup" (tel:) +
+  a link to the Pittsburgh Pack. Do not add prices or Add to Cart here.
+- **`shop/sausage-club.html`** — waitlist mode until subscriptions launch.
+  CTA anchors to `#club-waitlist` (email form, `data-source="sausage-club-waitlist"`).
+- **Suggestion cards** ("You Might Also Like" / catalog cards): bundles show
+  price + "Ships Nationwide"; individual products show
+  `<span class="ship-note">At the counter · In our bundles</span>` and no price.
+- **JSON-LD**: only the two bundle PDPs carry an `offers` block (prices must
+  match Zone A: $189 / $289). Story pages are `Product` schema without offers.
+
+When Square online pickup ordering launches, swap the "Order Pickup" tel: links
+for the Square ordering URL.

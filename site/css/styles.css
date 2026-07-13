@@ -903,6 +903,27 @@ body.nav-drawer-open .nav-backdrop {
   margin-bottom: 10px;
   display: block;
 }
+.product-card-tag--store { color: var(--badge-green); }
+
+/* Availability badges — in-store vs ships-in-bundle (product-detail heroes) */
+.avail-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.avail-badge {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 6px 12px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.avail-badge--store { color: var(--badge-green); }
+.avail-badge--ships { color: var(--oxblood); }
 .product-card h3 { margin-bottom: 10px; font-size: 1.3rem; }
 .product-card p {
   font-size: 0.92rem;
@@ -1115,6 +1136,7 @@ body.nav-drawer-open .nav-backdrop {
 .usda-copy h3 {
   font-size: 1.1rem;
   margin-bottom: 8px;
+  color: var(--white);
 }
 .usda-copy p {
   font-size: 0.9rem;
@@ -1966,6 +1988,17 @@ body.nav-drawer-open .nav-backdrop {
 .menu-item:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+}
+.menu-item-img {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  margin: -32px -32px 24px;
+}
+.menu-item-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 .menu-item-header {
   display: flex;

@@ -52,10 +52,11 @@ const BUNDLES = [
     base: 189,
     tier: "med",
     skuPrefix: "RIC-PITT",
-    weightLb: 8,
+    // TODO: confirm shipping weight incl. cold packs (12 lb of meat + 1 sausage roll)
+    weightLb: 13,
     description:
-      "<p>Sweet sausage, hot sausage, and hand-rolled meatballs — the full Sunday table. " +
-      "8 lbs total. Shipped frozen with shipping included in price.</p>",
+      "<p>5 lb sweet sausage, 5 lb hot sausage, 2 lb hand-rolled meatballs, and one of Lil's sausage rolls — " +
+      "the full Sunday table. Shipped frozen with shipping included in price.</p>",
     tags: ["Bundle", "Gift", "Free Shipping", "Frozen"],
   },
   {
@@ -64,10 +65,11 @@ const BUNDLES = [
     base: 289,
     tier: "large",
     skuPrefix: "RIC-LEGACY",
-    weightLb: 10,
+    // TODO: confirm shipping weight incl. cold packs (12 lb of meat + peppers, 2 rolls, qt of sauce)
+    weightLb: 17,
     description:
-      "<p>Sweet sausage, hot sausage, meatballs, stuffed peppers, and two sausage rolls — " +
-      "beautifully packaged. Shipped frozen with shipping included in price.</p>",
+      "<p>5 lb sweet sausage, 5 lb hot sausage, 2 lb meatballs, stuffed banana peppers, two sausage rolls, " +
+      "and a quart of homemade sauce — beautifully packaged. Shipped frozen with shipping included in price.</p>",
     tags: ["Bundle", "Gift Box", "Free Shipping", "Frozen"],
   },
 ];

@@ -28,7 +28,9 @@
 /shop/ricci-legacy-gift-box.html  /shop/ricci-legacy-gift-box  301!
 /shop/sausage-club.html  /shop/sausage-club  301!
 /shop/sweet-italian-sausage.html  /shop/sweet-italian-sausage  301!
-/smoked-sausage-pittsburgh.html  /smoked-sausage-pittsburgh  301!
+# smoked page parked 2026-07 (white-labeled product; relaunch later from _archive/)
+/smoked-sausage-pittsburgh.html  /products  301!
+/smoked-sausage-pittsburgh  /products  301!
 /story.html  /story  301!
 /sweet-italian-sausage-pittsburgh.html  /sweet-italian-sausage-pittsburgh  301!
 /terms.html  /terms  301!
