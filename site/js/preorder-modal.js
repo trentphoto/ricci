@@ -34,10 +34,10 @@
     return DAYS[d.getDay()] + ', ' + MONTHS[d.getMonth()] + ' ' + ordinal(d.getDate());
   }
 
-  // Pickup slots: 9:00 AM through 5:30 PM in 30-minute steps.
+  // Pickup slots: 11:00 AM through 5:30 PM in 30-minute steps.
   function timeOptions() {
     var out = '';
-    for (var m = 9 * 60; m <= 17 * 60 + 30; m += 30) {
+    for (var m = 11 * 60; m <= 17 * 60 + 30; m += 30) {
       var h = Math.floor(m / 60), mm = m % 60;
       var ampm = h >= 12 ? 'PM' : 'AM';
       var h12 = h % 12 || 12;
@@ -59,6 +59,7 @@
       '      <span class="eyebrow">Pepperoni Roll · Pre-Order</span>' +
       '      <h2 id="preorder-title">Reserve Your Pepperoni Rolls</h2>' +
       '      <p>$16.99 each. Pickup <strong>' + pickupLabel + '</strong> at 500 Pine Hollow Rd. Mondays only &mdash; reserve while they last.</p>' +
+      '      <p style="font-weight:600;">Earliest pickup is 11:00 AM.</p>' +
       '      <button type="button" class="cater-close" id="preorder-close" aria-label="Close">&times;</button>' +
       '    </div>' +
       '    <form class="cater-body" id="preorder-form" novalidate>' +
