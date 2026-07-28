@@ -57,6 +57,89 @@ body {
 img { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
 
+/* ── Tricolore nav accent ──────────────────
+   Two small squares — green + red — with the cream
+   header showing through the gap as the white band, so
+   the pair reads as the Italian flag. Sits in the
+   top-left of the sticky nav bar, centered in the 80px
+   header. Clickable — see nav-drawer.js for the wink. */
+.tricolore {
+  position: fixed;
+  top: 30px;      /* centers the 20px button in the 80px bar */
+  left: 20px;
+  z-index: 110;
+  display: inline-flex;
+  gap: 5px;
+  margin: 0;
+  padding: 4px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.15s ease;
+}
+.tricolore:hover  { transform: translateY(-1px); }
+.tricolore:active { transform: translateY(0) scale(0.92); }
+.tricolore:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+.tricolore i {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  opacity: 0.85;
+  transition: opacity 0.15s ease;
+}
+.tricolore:hover i { opacity: 1; }
+.tricolore .t-green { background: var(--badge-green); }
+.tricolore .t-red   { background: var(--badge-red); }
+
+/* Speech bubble for the wink */
+.tricolore-bubble {
+  position: fixed;
+  top: 66px;
+  left: 14px;
+  z-index: 111;
+  max-width: min(280px, 72vw);
+  padding: 10px 13px;
+  border-radius: 10px;
+  background: var(--charcoal);
+  color: var(--cream);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  line-height: 1.35;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  pointer-events: none;
+}
+.tricolore-bubble::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: 16px;
+  width: 10px;
+  height: 10px;
+  background: inherit;
+  border-radius: 2px;
+  transform: rotate(45deg);
+}
+.tricolore-bubble.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 600px) {
+  .tricolore { top: 31px; left: 12px; gap: 4px; }
+  .tricolore i { width: 10px; height: 10px; }
+  .tricolore-bubble { top: 62px; left: 10px; }
+}
+@media print { .tricolore, .tricolore-bubble { display: none; } }
+@media print { body::before, body::after { display: none; } }
+
 /* ── Typography ─────────────────────────── */
 h1, h2, h3, h4 {
   font-family: var(--font-serif);

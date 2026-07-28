@@ -84,3 +84,57 @@
 
   syncNavAria();
 })();
+
+/* ── Tricolore nav accent — click for a wink to the Italians ── */
+(function () {
+  if (document.querySelector('.tricolore')) return;
+
+  var phrases = [
+    'Break the spaghetti and Nonna breaks you. 🤌',
+    'Snapping sausage into little coins? Nonna wept.',
+    'Pineapple on pizza is a war crime. 🍍🚫',
+    'It’s sauce. It’s gravy. Don’t start a family feud.',
+    'Chicken does not go in the pasta. It just doesn’t.',
+    'Al dente or nothing, amico.',
+    'Alfredo “sauce” isn’t Italian. Sorry, not sorry.',
+    'Use your hands, not a garlic press — Nonna insists.',
+    'That much oregano? Perfetto. Keep going.',
+    'Meatballs on the spaghetti? Bellissimo chaos.'
+  ];
+
+  var btn = document.createElement('button');
+  btn.className = 'tricolore';
+  btn.type = 'button';
+  btn.setAttribute('aria-label', 'A little Italian wisdom');
+  btn.innerHTML = '<i class="t-green"></i><i class="t-red"></i>';
+
+  var bubble = document.createElement('div');
+  bubble.className = 'tricolore-bubble';
+  bubble.setAttribute('role', 'status');
+
+  var last = -1;
+  var hideTimer;
+
+  function say() {
+    var i = Math.floor(Math.random() * phrases.length);
+    if (i === last) i = (i + 1) % phrases.length;
+    last = i;
+    bubble.textContent = phrases[i];
+    bubble.classList.add('show');
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(hide, 3400);
+  }
+
+  function hide() {
+    bubble.classList.remove('show');
+  }
+
+  btn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    say();
+  });
+  document.addEventListener('click', hide);
+
+  document.body.appendChild(btn);
+  document.body.appendChild(bubble);
+})();
