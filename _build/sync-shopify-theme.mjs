@@ -22,7 +22,13 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const GRAPHQL = join(ROOT, "shopify", "graphql");
-const THEME_INDEX = join(ROOT, "shopify", "theme", "index.json");
+const THEME_DIR = join(ROOT, "shopify", "theme");
+
+// local source → theme file path
+const THEME_FILES = [
+  ["index.json", "templates/index.json"],
+  ["robots.txt.liquid", "templates/robots.txt.liquid"],
+];
 const BUILD = join(ROOT, "_build");
 const DRY_RUN = process.argv.includes("--dry-run");
 
@@ -103,16 +109,21 @@ function runGraphQL(queryFile, variables, { mutation = false } = {}) {
 }
 
 function main() {
-  const indexJson = readFileSync(THEME_INDEX, "utf8");
+  const files = THEME_FILES.map(([source, filename]) => ({
+    filename,
+    body: { type: "TEXT", value: readFileSync(join(THEME_DIR, source), "utf8") },
+  }));
   const store = storeDomain();
 
   console.log(DRY_RUN ? "=== DRY RUN ===\n" : "=== Shopify minimal theme sync ===\n");
-  console.log(`Store: ${store}`);
-  console.log(`Source: shopify/theme/index.json\n`);
+  console.log(`Store: ${store}\n`);
 
   if (DRY_RUN) {
-    console.log("Would upsert templates/index.json on the MAIN theme.");
-    console.log(indexJson.slice(0, 120) + "...");
+    console.log("Would upsert on the MAIN theme:");
+    for (const file of files) {
+      console.log(`  ${file.filename}`);
+      console.log(`    ${file.body.value.slice(0, 100).replace(/\n/g, " ")}...`);
+    }
     process.exit(0);
   }
 
@@ -127,10 +138,7 @@ function main() {
 
   const data = runGraphQL(join(GRAPHQL, "theme-files-upsert.mutation.graphql"), {
     themeId: mainTheme.id,
-    files: [{
-      filename: "templates/index.json",
-      body: { type: "TEXT", value: indexJson },
-    }],
+    files,
   }, { mutation: true });
 
   const payload = data?.themeFilesUpsert;
@@ -142,8 +150,8 @@ function main() {
     process.exit(1);
   }
 
-  const files = payload?.upsertedThemeFiles || [];
-  console.log(`✓ Updated ${files.map((f) => f.filename).join(", ") || "templates/index.json"}`);
+  const upserted = payload?.upsertedThemeFiles || [];
+  console.log(`✓ Updated ${upserted.map((f) => f.filename).join(", ") || files.map((f) => f.filename).join(", ")}`);
   if (payload?.job?.id) console.log(`  Job: ${payload.job.id}`);
   console.log("\nHomepage is minimal. Checkout handoff from riccisausage.com is unchanged.");
 }
