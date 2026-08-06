@@ -158,6 +158,7 @@
       padding: 100px 24px;
     }
     .ws-gate-inner { max-width: 560px; margin: 0 auto; text-align: center; }
+    .ws-gate-inner:has(#ws-price-sheet:not([hidden])) { max-width: 520px; }
     .ws-gate h2 {
       font-family: var(--font-serif);
       font-size: clamp(1.7rem, 3vw, 2.3rem);
@@ -185,27 +186,230 @@
       font-style: italic;
     }
 
-    /* Price sheet — deliberately plain B&W; to be designed later */
+    /* Price sheet — matches print design (Wholesale Price Sheet.dc.html) */
     .ws-sheet {
-      max-width: 640px;
+      max-width: 480px;
       margin: 0 auto;
-      background: #fff;
-      color: #000;
-      border: 1px solid #000;
-      padding: 40px 44px;
-      font-family: Georgia, "Times New Roman", serif;
       text-align: left;
     }
-    .ws-sheet-head { text-align: center; border-bottom: 1px solid #000; padding-bottom: 16px; margin-bottom: 20px; }
-    .ws-sheet-head h3 { font-size: 1.35rem; font-weight: 700; margin: 0 0 4px; color: #000; font-family: inherit; }
-    .ws-sheet-head p { margin: 2px 0; font-size: 0.9rem; color: #000; }
-    .ws-sheet table { width: 100%; border-collapse: collapse; }
-    .ws-sheet td { padding: 8px 0; border-bottom: 1px dotted #000; font-size: 0.98rem; vertical-align: top; }
-    .ws-sheet td.p { text-align: right; white-space: nowrap; }
-    .ws-sheet tr:last-child td { border-bottom: 0; }
-    .ws-sheet-foot { border-top: 1px solid #000; margin-top: 20px; padding-top: 14px; text-align: center; font-size: 0.85rem; }
-    .ws-sheet-foot p { margin: 2px 0; color: #000; }
-    @media (max-width: 560px) { .ws-sheet { padding: 28px 22px; } }
+    .ws-sheet-page {
+      position: relative;
+      box-sizing: border-box;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 36px 44px 32px;
+      font-family: var(--font-serif);
+      color: var(--ink);
+      background-color: var(--cream);
+      background-image:
+        radial-gradient(900px 500px at 85% -10%, rgba(122,38,31,0.05), transparent 60%),
+        radial-gradient(700px 450px at -10% 25%, rgba(84,96,47,0.05), transparent 60%);
+      box-shadow: 0 12px 40px rgba(42,34,27,0.12);
+    }
+    .ws-sheet-frame {
+      position: absolute;
+      pointer-events: none;
+    }
+    .ws-sheet-frame--outer {
+      top: 14px; left: 14px; right: 14px; bottom: 14px;
+      border: 1px solid var(--oxblood);
+    }
+    .ws-sheet-frame--inner {
+      top: 20px; left: 20px; right: 20px; bottom: 20px;
+      border: 1px solid var(--cream-edge);
+    }
+    .ws-sheet-logo {
+      position: relative;
+      width: 140px;
+      height: auto;
+      display: block;
+    }
+    .ws-sheet-since {
+      position: relative;
+      margin: 10px 0 0;
+      font-family: var(--font-sans);
+      font-size: 0.68rem;
+      letter-spacing: 0.28em;
+      font-weight: 600;
+      color: var(--ink-faint);
+      text-transform: uppercase;
+      text-align: center;
+    }
+    .ws-sheet-banner {
+      position: relative;
+      width: 100%;
+      margin-top: 14px;
+      background: var(--oxblood);
+      padding: 9px 0 10px;
+      text-align: center;
+      border-top: 1px solid var(--gold);
+      border-bottom: 1px solid var(--gold);
+    }
+    .ws-sheet-banner span {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.32em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+    .ws-sheet-usda {
+      position: relative;
+      margin: 10px 0 0;
+      text-align: center;
+      font-family: var(--font-sans);
+      font-size: 0.68rem;
+      line-height: 1.6;
+      letter-spacing: 0.02em;
+      color: var(--ink-soft);
+      max-width: 340px;
+    }
+    .ws-sheet-prices {
+      position: relative;
+      width: 100%;
+      margin: 14px 0 0;
+    }
+    .ws-sheet-row {
+      display: flex;
+      align-items: baseline;
+      padding: 3px 0;
+    }
+    .ws-sheet-item {
+      font-size: 0.98rem;
+      line-height: 1.25;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+    .ws-sheet-leader {
+      flex: 1;
+      border-bottom: 1px dotted #B9A98A;
+      margin: 0 8px 4px;
+      min-width: 12px;
+    }
+    .ws-sheet-price {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--oxblood);
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+    .ws-sheet-diamond {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      width: 150px;
+      margin-top: 10px;
+      color: var(--oxblood);
+      font-size: 0.55rem;
+      line-height: 1;
+    }
+    .ws-sheet-diamond::before,
+    .ws-sheet-diamond::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--cream-edge);
+    }
+    .ws-sheet-why {
+      position: relative;
+      width: 100%;
+      margin-top: 14px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      background: var(--oxblood);
+      padding: 12px 16px;
+      box-sizing: border-box;
+    }
+    .ws-sheet-why-label {
+      width: 84px;
+      flex: none;
+      font-style: italic;
+      font-size: 1.35rem;
+      line-height: 1.1;
+      color: var(--gold);
+    }
+    .ws-sheet-why-list {
+      flex: 1;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      color: var(--cream);
+    }
+    .ws-sheet-why-list li {
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      line-height: 1.4;
+      text-wrap: pretty;
+    }
+    .ws-sheet-tagline {
+      position: relative;
+      margin: 14px 0 0;
+      text-align: center;
+      font-style: italic;
+      font-size: 1.15rem;
+      line-height: 1.35;
+      color: var(--oxblood);
+      max-width: 330px;
+      text-wrap: pretty;
+    }
+    .ws-sheet-foot {
+      position: relative;
+      margin-top: auto;
+      width: 100%;
+      border-top: 1px solid var(--cream-edge);
+      padding-top: 12px;
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+    .ws-sheet-qr {
+      width: 52px;
+      height: 52px;
+      display: block;
+      flex-shrink: 0;
+    }
+    .ws-sheet-contact {
+      margin: 0;
+      text-align: right;
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      line-height: 1.7;
+      letter-spacing: 0.04em;
+      color: var(--ink-soft);
+      font-style: normal;
+    }
+    .ws-sheet-contact .ws-sheet-phone {
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: 0.1em;
+    }
+    .ws-sheet-contact .ws-sheet-url {
+      color: var(--oxblood);
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+    .ws-sheet-contact .ws-sheet-url:hover {
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    @media (max-width: 520px) {
+      .ws-sheet-page { padding: 28px 24px 24px; }
+      .ws-sheet-row .ws-sheet-item { font-size: 0.88rem; white-space: normal; }
+      .ws-sheet-row .ws-sheet-price { font-size: 0.88rem; }
+      .ws-sheet-why { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .ws-sheet-why-label { width: auto; }
+    }
   </style>
 </head>
 <body>
@@ -309,11 +513,7 @@
           opens right here.
         </p>
 
-        <!-- TODO(wiring): to send leads to the CRM, add data-crm="wholesale"
-             to this form and delete the temporary reveal script at the bottom
-             of the page — crm.js's data-success-panel will then handle the
-             reveal on successful submit. For now the sheet shows instantly. -->
-        <form class="ws-gate-form" id="ws-gate-form" data-source="wholesale-price-list" data-success-panel="#ws-price-sheet">
+        <form class="ws-gate-form" id="ws-gate-form" data-crm="wholesale" data-source="wholesale-price-list" data-success-panel="#ws-price-sheet">
           <div class="cater-field">
             <label for="ws-name">Business / Your Name</label>
             <input type="text" id="ws-name" name="name" required autocomplete="organization" />
@@ -331,29 +531,84 @@
           <span class="crm-status" role="status"></span>
         </form>
 
-        <!-- Revealed by crm.js on successful submit (data-success-panel).
-             Plain B&W on purpose — sheet design comes later. -->
+        <!-- Revealed on successful form submit (data-success-panel). -->
         <div class="ws-sheet" id="ws-price-sheet" hidden>
-          <div class="ws-sheet-head">
-            <h3>Ricci's Italian Sausage — Since 1945</h3>
-            <p>Since 1945 · McKees Rocks, PA</p>
-            <p><strong>Wholesale Price List</strong></p>
-            <p>USDA federally inspected facility since 1973</p>
-          </div>
-          <table>
-            <tr><td>Italian Sausage — Rope (Hot or Sweet)</td><td class="p">$4.19 / lb</td></tr>
-            <tr><td>Italian Sausage — Bulk (Hot or Sweet)</td><td class="p">$4.19 / lb</td></tr>
-            <tr><td>Italian Sausage Patties (Hot or Sweet)</td><td class="p">$4.29 / lb</td></tr>
-            <tr><td>Kulbassy</td><td class="p">$4.29 / lb</td></tr>
-            <tr><td>Breakfast Links</td><td class="p">$4.19 / lb</td></tr>
-            <tr><td>Banana Peppers</td><td class="p">$5.99 / lb</td></tr>
-            <tr><td>Hot Sausage Hoagies</td><td class="p">$39.99 / case</td></tr>
-          </table>
-          <div class="ws-sheet-foot">
-            <p>Free 1-lb sample of anything on this sheet · Weekly delivery routes</p>
-            <p><strong>(412) 331-9531</strong></p>
-            <p>500 Pine Hollow Rd, McKees Rocks PA 15136 · riccisausage.com</p>
-          </div>
+          <article class="ws-sheet-page">
+
+            <div class="ws-sheet-frame ws-sheet-frame--outer" aria-hidden="true"></div>
+            <div class="ws-sheet-frame ws-sheet-frame--inner" aria-hidden="true"></div>
+
+            <img class="ws-sheet-logo" src="assets/logo.png" alt="Ricci's Italian Sausage — Since 1945" width="280" height="auto" decoding="async" />
+
+            <p class="ws-sheet-since">Since 1945 · McKees Rocks, PA</p>
+
+            <div class="ws-sheet-banner">
+              <span>Wholesale Price List</span>
+            </div>
+
+            <p class="ws-sheet-usda"><em>USDA federally inspected facility since 1973</em></p>
+
+            <div class="ws-sheet-prices" role="list">
+              <div class="ws-sheet-row" role="listitem">
+                <span class="ws-sheet-item">Italian Sausage — Rope (Hot or Sweet)</span>
+                <span class="ws-sheet-leader" aria-hidden="true"></span>
+                <span class="ws-sheet-price">$4.19 / lb</span>
+              </div>
+              <div class="ws-sheet-row" role="listitem">
+                <span class="ws-sheet-item">Italian Sausage — Bulk (Hot or Sweet)</span>
+                <span class="ws-sheet-leader" aria-hidden="true"></span>
+                <span class="ws-sheet-price">$4.19 / lb</span>
+              </div>
+              <div class="ws-sheet-row" role="listitem">
+                <span class="ws-sheet-item">Italian Sausage Patties (Hot or Sweet)</span>
+                <span class="ws-sheet-leader" aria-hidden="true"></span>
+                <span class="ws-sheet-price">$4.29 / lb</span>
+              </div>
+              <div class="ws-sheet-row" role="listitem">
+                <span class="ws-sheet-item">Kulbassy</span>
+                <span class="ws-sheet-leader" aria-hidden="true"></span>
+                <span class="ws-sheet-price">$4.29 / lb</span>
+              </div>
+              <div class="ws-sheet-row" role="listitem">
+                <span class="ws-sheet-item">Breakfast Links</span>
+                <span class="ws-sheet-leader" aria-hidden="true"></span>
+                <span class="ws-sheet-price">$4.19 / lb</span>
+              </div>
+              <div class="ws-sheet-row" role="listitem">
+                <span class="ws-sheet-item">Banana Peppers</span>
+                <span class="ws-sheet-leader" aria-hidden="true"></span>
+                <span class="ws-sheet-price">$5.99 / lb</span>
+              </div>
+              <div class="ws-sheet-row" role="listitem">
+                <span class="ws-sheet-item">Hot Sausage Hoagies</span>
+                <span class="ws-sheet-leader" aria-hidden="true"></span>
+                <span class="ws-sheet-price">$39.99 / case</span>
+              </div>
+            </div>
+
+            <div class="ws-sheet-diamond" aria-hidden="true">◆</div>
+
+            <div class="ws-sheet-why">
+              <div class="ws-sheet-why-label">Why Ricci's</div>
+              <ul class="ws-sheet-why-list">
+                <li>Made fresh in-house daily for over 80 years — same recipe, consistent spec</li>
+                <li>Weekly delivery routes</li>
+                <li>Free 1-lb sample of anything on this sheet</li>
+              </ul>
+            </div>
+
+            <p class="ws-sheet-tagline">Eighty years in Pittsburgh.<br />Made fresh this morning for your kitchen.</p>
+
+            <footer class="ws-sheet-foot">
+              <img class="ws-sheet-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&amp;margin=0&amp;data=https://riccisausage.com/wholesale" width="52" height="52" alt="QR code to riccisausage.com/wholesale" loading="lazy" decoding="async" />
+              <address class="ws-sheet-contact">
+                <div class="ws-sheet-phone">(412) 331-9531</div>
+                <div>590 Pine Hollow Rd, McKees Rocks PA 15136</div>
+                <a class="ws-sheet-url" href="https://riccisausage.com/wholesale">riccisausage.com/wholesale</a>
+              </address>
+            </footer>
+
+          </article>
         </div>
 
         <p class="ws-gate-fineprint">
@@ -443,20 +698,5 @@
   <script src="js/nav-drawer.js" defer></script>
   <script src="js/crm.js" defer></script>
   <script src="js/cart.js" defer></script>
-
-  <!-- Temporary: reveal the price sheet instantly on submit. Remove once the
-       form is wired to the CRM (see TODO on the form above). -->
-  <script>
-    (function () {
-      var form = document.getElementById("ws-gate-form");
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
-        var sheet = document.getElementById("ws-price-sheet");
-        form.hidden = true;
-        sheet.hidden = false;
-        sheet.scrollIntoView({ behavior: "smooth", block: "center" });
-      });
-    })();
-  </script>
 </body>
 </html>
