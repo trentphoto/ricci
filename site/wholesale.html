@@ -6,20 +6,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Wholesale — Ricci's Italian Sausage | McKees Rocks, PA</title>
-  <meta name="description" content="Wholesale Italian sausage for restaurants, pizzerias, and markets. USDA inspected since 1973. On Pittsburgh's best menus for decades." />
-  <style>
-    body { color:#000; background:#fff; font-family: Georgia, "Times New Roman", serif; line-height:1.55; max-width:720px; margin:0 auto; padding:40px 20px; }
-    a { color:#000; }
-    h1 { font-size:2rem; line-height:1.2; margin:0 0 .25em; }
-    h2 { font-size:1.3rem; margin:2em 0 .4em; }
-    .eyebrow { text-transform:uppercase; letter-spacing:.1em; font-size:.8rem; font-weight:bold; }
-    .lede { font-size:1.15rem; }
-    .cta { font-weight:bold; }
-    nav.top a { margin-right:1em; }
-    ol li, ul li { margin:.4em 0; }
-    hr { border:none; border-top:1px solid #000; margin:2.5em 0; }
-    .stakes { font-style:italic; }
-  </style>
+  <meta name="description" content="Wholesale Italian sausage for restaurants, pizzerias, and markets. Made fresh in-house daily for over 80 years — same recipe, consistent spec. USDA federally inspected facility since 1973. Weekly delivery routes." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
   <link rel="icon" href="assets/favicon/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16.png" />
@@ -29,7 +20,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Ricci's Italian Sausage" />
   <meta property="og:title" content="Wholesale — Ricci's Italian Sausage | McKees Rocks, PA" />
-  <meta property="og:description" content="Wholesale Italian sausage for restaurants, pizzerias, and markets. USDA inspected since 1973. On Pittsburgh's best menus for decades." />
+  <meta property="og:description" content="Wholesale Italian sausage for restaurants, pizzerias, and markets. USDA federally inspected facility since 1973. Weekly delivery routes." />
   <meta property="og:url" content="https://riccisausage.com/wholesale" />
   <meta property="og:image" content="https://riccisausage.com/assets/img/og-image.webp" />
   <meta property="og:image:width" content="1200" />
@@ -37,101 +28,435 @@
   <meta property="og:image:alt" content="Ricci's Italian Sausage — Italian Tradition. Perfected. Since 1945." />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Wholesale — Ricci's Italian Sausage | McKees Rocks, PA" />
-  <meta name="twitter:description" content="Wholesale Italian sausage for restaurants, pizzerias, and markets. USDA inspected since 1973. On Pittsburgh's best menus for decades." />
+  <meta name="twitter:description" content="Wholesale Italian sausage for restaurants, pizzerias, and markets. USDA federally inspected facility since 1973. Weekly delivery routes." />
   <meta name="twitter:image" content="https://riccisausage.com/assets/img/og-image.webp" />
+
+  <style>
+    /* ── Wholesale page — minimal, elegant, editorial ── */
+    .ws-hero {
+      padding: 110px 24px 90px;
+      text-align: center;
+      background: var(--cream);
+    }
+    .ws-hero-inner { max-width: 780px; margin: 0 auto; }
+    .ws-hero .eyebrow::after {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: currentColor;
+      display: inline-block;
+    }
+    .ws-hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2.2rem, 4.6vw, 3.6rem);
+      line-height: 1.12;
+      color: var(--ink);
+      margin: 10px 0 26px;
+    }
+    .ws-hero h1 em { font-style: italic; color: var(--oxblood); }
+    .ws-hero-lead {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: var(--ink-soft);
+      max-width: 620px;
+      margin: 0 auto 34px;
+    }
+    .ws-hero-cta { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+    .ws-hero-meta {
+      margin-top: 40px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+
+    /* Product gallery — 4×1, swap images as needed */
+    .ws-gallery {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3px;
+      background: var(--cream-edge);
+    }
+    .ws-gallery figure { margin: 0; }
+    .ws-gallery img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      display: block;
+    }
+    @media (max-width: 640px) {
+      .ws-gallery { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* Diamond separator — echoes the flyer */
+    .ws-diamond {
+      text-align: center;
+      color: var(--oxblood);
+      font-size: 0.7rem;
+      letter-spacing: 0;
+      padding: 0 24px;
+      background: var(--cream);
+    }
+    .ws-diamond span {
+      display: inline-flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .ws-diamond span::before,
+    .ws-diamond span::after {
+      content: "";
+      width: 72px;
+      height: 1px;
+      background: var(--cream-edge);
+    }
+
+    /* Why Ricci's — three quiet columns */
+    .ws-why {
+      background: var(--cream);
+      padding: 90px 24px 100px;
+    }
+    .ws-why-inner { max-width: 1020px; margin: 0 auto; text-align: center; }
+    .ws-why h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.7rem, 3vw, 2.3rem);
+      color: var(--ink);
+      margin: 8px 0 56px;
+    }
+    .ws-why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+    .ws-why-col {
+      padding: 8px 36px;
+      border-left: 1px solid var(--cream-edge);
+    }
+    .ws-why-col:first-child { border-left: 0; }
+    .ws-why-col h3 {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+    .ws-why-col p {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: var(--ink-soft);
+      margin: 0 auto;
+      max-width: 300px;
+    }
+    @media (max-width: 800px) {
+      .ws-why-grid { grid-template-columns: 1fr; gap: 36px; }
+      .ws-why-col { border-left: 0; padding: 0 12px; }
+    }
+
+    /* Gate — form + revealed price sheet */
+    .ws-gate {
+      background: var(--white);
+      border-top: 1px solid var(--cream-edge);
+      padding: 100px 24px;
+    }
+    .ws-gate-inner { max-width: 560px; margin: 0 auto; text-align: center; }
+    .ws-gate h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.7rem, 3vw, 2.3rem);
+      color: var(--ink);
+      margin: 8px 0 18px;
+    }
+    .ws-gate-lead {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--ink-soft);
+      margin: 0 auto 44px;
+    }
+    .ws-gate-form { display: grid; gap: 22px; text-align: left; }
+    .ws-gate-form .crm-status {
+      display: block;
+      font-weight: 600;
+      color: var(--oxblood);
+      min-height: 1.4em;
+      text-align: center;
+    }
+    .ws-gate-fineprint {
+      margin-top: 28px;
+      font-size: 0.82rem;
+      color: var(--ink-faint);
+      font-style: italic;
+    }
+
+    /* Price sheet — deliberately plain B&W; to be designed later */
+    .ws-sheet {
+      max-width: 640px;
+      margin: 0 auto;
+      background: #fff;
+      color: #000;
+      border: 1px solid #000;
+      padding: 40px 44px;
+      font-family: Georgia, "Times New Roman", serif;
+      text-align: left;
+    }
+    .ws-sheet-head { text-align: center; border-bottom: 1px solid #000; padding-bottom: 16px; margin-bottom: 20px; }
+    .ws-sheet-head h3 { font-size: 1.35rem; font-weight: 700; margin: 0 0 4px; color: #000; font-family: inherit; }
+    .ws-sheet-head p { margin: 2px 0; font-size: 0.9rem; color: #000; }
+    .ws-sheet table { width: 100%; border-collapse: collapse; }
+    .ws-sheet td { padding: 8px 0; border-bottom: 1px dotted #000; font-size: 0.98rem; vertical-align: top; }
+    .ws-sheet td.p { text-align: right; white-space: nowrap; }
+    .ws-sheet tr:last-child td { border-bottom: 0; }
+    .ws-sheet-foot { border-top: 1px solid #000; margin-top: 20px; padding-top: 14px; text-align: center; font-size: 0.85rem; }
+    .ws-sheet-foot p { margin: 2px 0; color: #000; }
+    @media (max-width: 560px) { .ws-sheet { padding: 28px 22px; } }
+  </style>
 </head>
 <body>
 
-  <nav class="top">
-    <a href="index.html">Home</a>
-    <a href="menu.html">Menu</a>
-    <a href="catering.html">Catering</a>
-    <a href="shop.html">Shop</a>
-    <a href="story.html">Our Story</a>
-  </nav>
+  <header class="site-header">
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/logo.png" alt="Ricci's Italian Sausage">
+      </a>
+      <div class="nav-menu">
+        <ul class="nav-links" id="primary-nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="story.html">Our Story</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="catering.html">Catering</a></li>
+          <li class="nav-shop"><a href="shop.html">Shop</a></li>
+          <li><a href="press.html">Press</a></li>
+          <li><a href="index.html#visit">Visit</a></li>
+        </ul>
+      </div>
+      <div class="nav-cta">
+        <span class="nav-cart">Cart (0)</span>
+        <a href="tel:4123319531" class="btn btn-primary">Call · 412-331-9531</a>
+      </div>
+      <button type="button" class="nav-toggle" id="site-nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
+        <span class="nav-toggle-inner" aria-hidden="true">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </span>
+      </button>
+    </nav>
+    <div class="nav-backdrop" id="nav-backdrop" aria-hidden="true"></div>
+  </header>
 
-  <hr />
+  <main>
 
-  <!-- HERO -->
-  <span class="eyebrow">Wholesale</span>
-  <h1>Put Ricci's on Your Menu.</h1>
-  <p class="lede">
-    The sausage that's been on Pittsburgh's best pizzeria, bakery, and market
-    menus for decades — USDA inspected, made fresh in small batches, delivered
-    on a route we've run for years.
-  </p>
-  <p class="cta"><a href="mailto:wholesale@riccisausage.com">wholesale@riccisausage.com</a> &middot; <a href="tel:4123319531">412-331-9531</a></p>
+    <!-- HERO -->
+    <section class="ws-hero">
+      <div class="ws-hero-inner">
+        <span class="eyebrow">Wholesale · Since 1945 · McKees Rocks, PA</span>
+        <h1>Eighty years in Pittsburgh.<br />Made fresh <em>this morning</em> for your kitchen.</h1>
+        <p class="ws-hero-lead">
+          Ricci's Italian sausage has been made fresh in-house daily for over
+          80 years — same recipe, consistent spec. Weekly delivery routes to
+          restaurants, pizzerias, and markets across the region, from a USDA
+          federally inspected facility since 1973.
+        </p>
+        <div class="ws-hero-cta">
+          <a href="#price-list" class="btn btn-primary">Request the Price List</a>
+          <a href="tel:4123319531" class="btn btn-outline-dark">Call · 412-331-9531</a>
+        </div>
+        <p class="ws-hero-meta">USDA federally inspected facility since 1973</p>
+      </div>
+    </section>
 
-  <hr />
+    <div class="ws-gallery" aria-label="Product photos">
+      <figure><img src="assets/img/hot-sausage-coil-raw.webp" alt="Hot Italian sausage rope coil, raw" width="1024" height="768" loading="lazy" decoding="async" /></figure>
+      <figure><img src="assets/img/sweet-sausage-coil-raw.webp" alt="Sweet Italian sausage rope coil, raw" width="1024" height="768" loading="lazy" decoding="async" /></figure>
+      <figure><img src="assets/img/hot-sausage-coil-raw.webp" alt="" width="1024" height="768" loading="lazy" decoding="async" aria-hidden="true" /></figure>
+      <figure><img src="assets/img/sweet-sausage-coil-raw.webp" alt="" width="1024" height="768" loading="lazy" decoding="async" aria-hidden="true" /></figure>
+    </div>
 
-  <!-- PROBLEM -->
-  <h2>The Problem</h2>
-  <p>
-    Your customers can taste the difference between real sausage and the
-    commodity stuff. Mass-produced, filler-packed, frozen-from-who-knows-where
-    sausage drags down a great menu — and an unreliable supplier who shorts
-    your order or shows up late drags down your whole week. You need a product
-    you're proud to put your name next to, from someone who actually answers
-    the phone.
-  </p>
+    <div class="ws-diamond" aria-hidden="true"><span>◆</span></div>
 
-  <!-- GUIDE -->
-  <h2>On Pittsburgh's Best Tables Since 1945</h2>
-  <p>
-    Ricci's has supplied Pittsburgh's pizzerias, bakeries, restaurants, and
-    markets for decades. The same proprietary grind and Sulmona family spice
-    blend we've made since 1945 — hand-mixed, all natural, no additives, no
-    preservatives. USDA federally inspected since 1973, which means we can
-    ship and supply across state lines, not just down the street. We're a
-    family shop, run by people who pick up when you call.
-  </p>
+    <!-- WHY RICCI'S -->
+    <section class="ws-why">
+      <div class="ws-why-inner">
+        <span class="eyebrow">Why Ricci's</span>
+        <h2>The Case for the Case.</h2>
+        <div class="ws-why-grid">
+          <div class="ws-why-col">
+            <h3>Same Recipe, Consistent Spec</h3>
+            <p>Made fresh in-house daily for over 80 years. The grind, the
+               spice, the casing — the same every week, so your menu never
+               drifts.</p>
+          </div>
+          <div class="ws-why-col">
+            <h3>Weekly Delivery Routes</h3>
+            <p>Standing orders delivered on routes we've run for years. You
+               set the schedule; we keep it.</p>
+          </div>
+          <div class="ws-why-col">
+            <h3>Free 1-lb Sample</h3>
+            <p>A free one-pound sample of anything on the sheet. Get it in
+               your kitchen and taste it before you commit.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <!-- THE PLAN -->
-  <h2>How to Become an Account</h2>
-  <ol>
-    <li><strong>Reach out.</strong> Email or call the shop and tell us what
-        you run and what you need.</li>
-    <li><strong>Try it.</strong> We'll get samples in your hands so you and
-        your kitchen can taste it before you commit.</li>
-    <li><strong>Set your standing order.</strong> We'll set up delivery on a
-        schedule that works for you and keep it consistent — same quality,
-        every week.</li>
-  </ol>
+    <!-- GATED PRICE LIST -->
+    <section class="ws-gate" id="price-list">
+      <div class="ws-gate-inner">
+        <span class="eyebrow">Wholesale Price List</span>
+        <h2>See the Sheet.</h2>
+        <p class="ws-gate-lead">
+          Rope and bulk Italian sausage, patties, kulbassy, breakfast links,
+          banana peppers, and hot sausage hoagies — priced by the pound and
+          the case. Tell us where to reach you and the current price list
+          opens right here.
+        </p>
 
-  <!-- WHAT WE SUPPLY -->
-  <h2>What We Supply</h2>
-  <ul>
-    <li>Hot &amp; sweet rope sausage</li>
-    <li>Bulk sausage and patties</li>
-    <li>Custom grinds and spice levels on volume orders</li>
-    <li>Homemade meatballs and prepared items</li>
-  </ul>
-  <p>Restaurant, pizzeria, retailer, or market — we'd love to be on your menu.</p>
+        <!-- TODO(wiring): to send leads to the CRM, add data-crm="wholesale"
+             to this form and delete the temporary reveal script at the bottom
+             of the page — crm.js's data-success-panel will then handle the
+             reveal on successful submit. For now the sheet shows instantly. -->
+        <form class="ws-gate-form" id="ws-gate-form" data-source="wholesale-price-list" data-success-panel="#ws-price-sheet">
+          <div class="cater-field">
+            <label for="ws-name">Business / Your Name</label>
+            <input type="text" id="ws-name" name="name" required autocomplete="organization" />
+          </div>
+          <div class="cater-field">
+            <label for="ws-email">Email</label>
+            <input type="email" id="ws-email" name="email" required autocomplete="email" />
+          </div>
+          <div class="cater-field">
+            <label for="ws-phone">Phone <span style="text-transform:none;letter-spacing:0;font-weight:400;">(optional)</span></label>
+            <input type="tel" id="ws-phone" name="phone" autocomplete="tel" />
+          </div>
+          <input type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px" />
+          <p style="text-align:center;margin:6px 0 0;"><button type="submit" class="btn btn-primary">View the Price List</button></p>
+          <span class="crm-status" role="status"></span>
+        </form>
 
-  <!-- CTA / STAKES -->
-  <h2>Start the Conversation</h2>
-  <p>Tell us about your business and what you'd like to carry — we'll get samples and pricing to you.</p>
+        <!-- Revealed by crm.js on successful submit (data-success-panel).
+             Plain B&W on purpose — sheet design comes later. -->
+        <div class="ws-sheet" id="ws-price-sheet" hidden>
+          <div class="ws-sheet-head">
+            <h3>Ricci's Italian Sausage — Since 1945</h3>
+            <p>Since 1945 · McKees Rocks, PA</p>
+            <p><strong>Wholesale Price List</strong></p>
+            <p>USDA federally inspected facility since 1973</p>
+          </div>
+          <table>
+            <tr><td>Italian Sausage — Rope (Hot or Sweet)</td><td class="p">$4.19 / lb</td></tr>
+            <tr><td>Italian Sausage — Bulk (Hot or Sweet)</td><td class="p">$4.19 / lb</td></tr>
+            <tr><td>Italian Sausage Patties (Hot or Sweet)</td><td class="p">$4.29 / lb</td></tr>
+            <tr><td>Kulbassy</td><td class="p">$4.29 / lb</td></tr>
+            <tr><td>Breakfast Links</td><td class="p">$4.19 / lb</td></tr>
+            <tr><td>Banana Peppers</td><td class="p">$5.99 / lb</td></tr>
+            <tr><td>Hot Sausage Hoagies</td><td class="p">$39.99 / case</td></tr>
+          </table>
+          <div class="ws-sheet-foot">
+            <p>Free 1-lb sample of anything on this sheet · Weekly delivery routes</p>
+            <p><strong>(412) 331-9531</strong></p>
+            <p>500 Pine Hollow Rd, McKees Rocks PA 15136 · riccisausage.com</p>
+          </div>
+        </div>
 
-  <form data-crm="wholesale" data-success="Thanks — we'll reach out about getting you set up!" style="margin:1em 0;max-width:520px;">
-    <p style="margin:.5em 0;"><input type="text" name="name" placeholder="Business / your name" required style="width:100%;padding:8px;font:inherit;border:1px solid #000;"></p>
-    <p style="margin:.5em 0;"><input type="email" name="email" placeholder="Email" required style="width:100%;padding:8px;font:inherit;border:1px solid #000;"></p>
-    <p style="margin:.5em 0;"><input type="tel" name="phone" placeholder="Phone" style="width:100%;padding:8px;font:inherit;border:1px solid #000;"></p>
-    <p style="margin:.5em 0;"><textarea name="message" rows="4" placeholder="What are you looking to carry? Volume, delivery area, etc." style="width:100%;padding:8px;font:inherit;border:1px solid #000;"></textarea></p>
-    <input type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
-    <p style="margin:.5em 0;"><button type="submit" style="padding:10px 20px;font:inherit;font-weight:bold;background:#000;color:#fff;border:0;cursor:pointer;">Become an Account</button></p>
-    <span class="crm-status" role="status" style="display:block;font-weight:bold;"></span>
-  </form>
+        <p class="ws-gate-fineprint">
+          Prefer to talk it through? <a href="mailto:wholesale@riccisausage.com" style="color:var(--oxblood);text-decoration:underline;text-underline-offset:2px;">wholesale@riccisausage.com</a> · 412-331-9531
+        </p>
+      </div>
+    </section>
 
-  <p class="cta">Or email <a href="mailto:wholesale@riccisausage.com">wholesale@riccisausage.com</a> &middot; <a href="tel:4123319531">412-331-9531</a></p>
-  <p class="stakes">
-    Give your customers sausage worth coming back for — backed by a supplier
-    who's still answering the phone after 80 years.
-  </p>
+    <!-- CONTACT BAND -->
+    <section class="section-email">
+      <div class="container">
+        <span class="eyebrow">Become an Account</span>
+        <h2>Talk to Us Directly.</h2>
+        <p>We're a family shop. Tell us what you run and what you need —
+           we'll get a free sample and pricing in your hands.</p>
+        <p style="margin-top:20px;">
+          <a href="mailto:wholesale@riccisausage.com" class="btn btn-primary">wholesale@riccisausage.com</a>
+          <a href="tel:4123319531" class="btn btn-outline">412-331-9531</a>
+        </p>
+      </div>
+    </section>
 
-  <hr />
+  </main>
 
-  <p><a href="index.html">&larr; Back to Home</a></p>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","serviceType":"Wholesale Italian sausage supply","provider":{"@type":"LocalBusiness","name":"Ricci's Italian Sausage","telephone":"+14123319531","url":"https://riccisausage.com/","address":{"@type":"PostalAddress","streetAddress":"500 Pine Hollow Rd","addressLocality":"McKees Rocks","addressRegion":"PA","postalCode":"15136","addressCountry":"US"}},"areaServed":{"@type":"City","name":"Pittsburgh"},"description":"Wholesale Italian sausage for restaurants, pizzerias, and markets. Made fresh in-house daily for over 80 years. USDA federally inspected facility since 1973. Weekly delivery routes."}</script>
 
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo">
+          Ricci's
+          <span>Italian Sausage · Est. 1945</span>
+        </div>
+        <p>
+          A boutique Italian sausage maker — hand-mixed, small batches,
+          all natural. A family recipe from Sulmona, Italy. Made in
+          McKees Rocks, Pennsylvania since 1945. USDA-inspected.
+          Shipped nationwide.
+        </p>
+        <p style="margin-top:12px;">
+          <a href="tel:4123319531" style="color:var(--gold);font-family:var(--font-serif);font-size:1.05rem;">412-331-9531</a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>For Business</h4>
+        <ul>
+          <li><a href="co-packing.html">Co-Packing</a></li>
+          <li><a href="co-packing/private-label.html">Private Label</a></li>
+          <li><a href="co-packing/capabilities.html">Capabilities &amp; FAQ</a></li>
+          <li><a href="wholesale.html">Wholesale Accounts</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Shop · Ship Nationwide</h4>
+        <ul>
+          <li><a href="shop/pittsburgh-italian-pack.html">Pittsburgh Italian Pack</a></li>
+          <li><a href="shop/ricci-legacy-gift-box.html">Legacy Gift Box</a></li>
+          <li><a href="products.html">All Products</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="story.html">Our Story</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="press.html">Press</a></li>
+          <li><a href="index.html#visit">Visit the Shop</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Help</h4>
+        <ul>
+          <li><a href="shipping.html">Shipping Info</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="returns.html">Returns</a></li>
+          <li><a href="https://shop.riccisausage.com/account">Track Order</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Ricci's Italian Sausage. All rights reserved.</span>
+      <span><a href="https://maps.app.goo.gl/9rDvQrZiuCKRCmFE9" target="_blank" rel="noopener noreferrer">500 Pine Hollow Rd, McKees Rocks, PA 15136</a> · 412-331-9531</span>
+      <span><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span>
+    </div>
+  </footer>
+
+  <script src="js/nav-drawer.js" defer></script>
   <script src="js/crm.js" defer></script>
+  <script src="js/cart.js" defer></script>
+
+  <!-- Temporary: reveal the price sheet instantly on submit. Remove once the
+       form is wired to the CRM (see TODO on the form above). -->
+  <script>
+    (function () {
+      var form = document.getElementById("ws-gate-form");
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var sheet = document.getElementById("ws-price-sheet");
+        form.hidden = true;
+        sheet.hidden = false;
+        sheet.scrollIntoView({ behavior: "smooth", block: "center" });
+      });
+    })();
+  </script>
 </body>
 </html>
