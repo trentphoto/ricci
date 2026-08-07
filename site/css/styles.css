@@ -132,10 +132,9 @@ a { color: inherit; text-decoration: none; }
   transform: translateY(0);
 }
 
+/* Hidden on mobile — too cramped next to the nav at small widths. */
 @media (max-width: 600px) {
-  .tricolore { top: 31px; left: 12px; gap: 4px; }
-  .tricolore i { width: 10px; height: 10px; }
-  .tricolore-bubble { top: 62px; left: 10px; }
+  .tricolore, .tricolore-bubble { display: none; }
 }
 @media print { .tricolore, .tricolore-bubble { display: none; } }
 @media print { body::before, body::after { display: none; } }
@@ -284,6 +283,14 @@ p  { max-width: 660px; }
 }
 .site-header .nav-logo {
   font-size: 1.6rem;
+}
+@media (min-width: 601px) and (max-width: 1280px) {
+  /* clears the fixed .tricolore flag, which sits at left:20px
+     and is no longer inset by the nav's auto margins below this width.
+     Flag itself is hidden under 600px, so logo goes back flush left there. */
+  .site-header .nav-logo {
+    padding-left: 36px;
+  }
 }
 .nav-logo img {
   display: block;
@@ -1279,6 +1286,14 @@ body.nav-drawer-open .nav-backdrop {
 }
 .email-form button:hover { background: var(--red-dark); }
 
+/* Email form on a light section background (e.g. catering menu-pdf lead magnet) */
+#menu-pdf .email-form input {
+  background: var(--white);
+  color: var(--charcoal);
+  border-color: rgba(0,0,0,0.15);
+}
+#menu-pdf .email-form input::placeholder { color: rgba(0,0,0,0.4); }
+
 /* ============================================
    NOW HIRING — homepage banner
    ============================================ */
@@ -2120,6 +2135,39 @@ body.nav-drawer-open .nav-backdrop {
   object-fit: cover;
   display: block;
 }
+/* Typographic stand-in where a photo would go — deliberate, not a gap.
+   Fills the same 4/3 slot with the price set large on oxblood. */
+.menu-item-plate {
+  aspect-ratio: 4/3;
+  margin: -32px -32px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--red);
+  color: var(--cream);
+  text-align: center;
+  padding: 16px;
+}
+.menu-item-plate .plate-figure {
+  font-family: var(--font-serif);
+  font-size: clamp(2.4rem, 6vw, 3.4rem);
+  line-height: 1;
+}
+.menu-item-plate .plate-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.menu-item-plate .plate-rule {
+  width: 44px;
+  height: 1px;
+  background: rgba(240, 230, 208, 0.35);
+}
+
 .menu-item-header {
   display: flex;
   align-items: flex-start;
@@ -2660,6 +2708,12 @@ body.nav-drawer-open .nav-backdrop {
   max-width: 100%;
 }
 .visit-block .store-hours-row { font-size: 0.95rem; }
+.visit-block p a {
+  color: inherit;
+  border-bottom: 1px solid rgba(255,255,255,0.3);
+  transition: color 0.2s, border-color 0.2s;
+}
+.visit-block p a:hover { color: var(--gold); border-color: var(--gold); }
 .visit-phone {
   display: block;
   font-family: var(--font-serif);
@@ -2702,7 +2756,7 @@ body.nav-drawer-open .nav-backdrop {
   font-style: normal;
 }
 
-@media (min-width: 901px) {
+@media (min-width: 1201px) {
   body.nav-drawer-open {
     overflow: unset;
   }
@@ -2724,7 +2778,7 @@ body.nav-drawer-open .nav-backdrop {
 /* ============================================
    RESPONSIVE
    ============================================ */
-@media (max-width: 900px) {
+@media (max-width: 1200px) {
   .nav-toggle {
     display: flex;
   }
@@ -2773,8 +2827,46 @@ body.nav-drawer-open .nav-backdrop {
     display: block;
     padding: 1rem 0;
   }
+}
+@media (max-width: 480px) {
+  /* Cart + Order Now + hamburger no longer fit together; drop the
+     cart text so the toggle stays on-screen. Cart is still reachable
+     via the drawer/checkout flow. */
+  .nav-cart {
+    display: none;
+  }
+}
+@media (max-width: 360px) {
+  /* Logo + hamburger + Order Now still don't fit on one line. Rather
+     than hide the only way to order, wrap it to its own row under
+     the top bar and trim its padding. */
+  .nav {
+    flex-wrap: wrap;
+    height: auto;
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+  .nav-logo   { order: 1; }
+  .nav-menu   { order: 2; }
+  .nav-toggle { order: 3; }
+  .nav-cta {
+    order: 4;
+    width: 100%;
+    margin-top: 12px;
+    justify-content: center;
+  }
+  .nav-cta .btn-primary {
+    padding: 12px 20px;
+    width: 100%;
+    text-align: center;
+  }
+}
+@media (max-width: 900px) {
   .section-story-split { grid-template-columns: 1fr; }
-  .story-split-content { padding: 56px 32px; }
+  .story-split-content { padding: 56px 32px; align-items: center; text-align: center; }
+  .story-split-content p { max-width: 100%; }
+  .story-split-content p:first-of-type::first-letter { float: none; }
+  .story-split-content .btn { align-self: center; }
   .heritage-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .press-features-grid { grid-template-columns: 1fr; }
@@ -2921,6 +3013,231 @@ body.nav-drawer-open .nav-backdrop {
   font-size: 0.85rem;
   color: rgba(0,0,0,0.55);
 }
+.product-includes {
+  margin-bottom: 24px;
+  padding: 20px 22px;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+}
+.product-includes-heading {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin: 0 0 14px;
+}
+.product-includes-subhead {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.45);
+  margin: 16px 0 8px;
+}
+.product-includes-subhead:first-of-type {
+  margin-top: 0;
+}
+.product-includes-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.product-includes-list li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  align-items: baseline;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: var(--ink);
+}
+.product-includes-list li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.product-includes-qty {
+  flex: 0 0 auto;
+  min-width: 3.25rem;
+  font-family: var(--font-mono, var(--font-sans));
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: rgba(0,0,0,0.55);
+}
+.product-includes-name {
+  flex: 1 1 auto;
+  font-weight: 600;
+}
+.product-includes-detail {
+  flex: 1 1 100%;
+  padding-left: calc(3.25rem + 10px);
+  font-size: 0.85rem;
+  color: rgba(0,0,0,0.58);
+}
+.product-includes-note {
+  margin: 14px 0 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: rgba(0,0,0,0.55);
+}
+.product-includes a {
+  color: var(--red);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.product-includes a:hover {
+  color: var(--ink);
+}
+/* "What you get" card grid — full-width section under the hero.
+   Shares the lift-on-hover language of .menu-item but leads with the
+   quantity, since that's what a shopper is actually scanning for. */
+.includes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+/* Bundles list 4–6 items; let those wrap instead of squeezing to 3. */
+.includes-grid--wide {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+.includes-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border: 1px solid rgba(0,0,0,0.08);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.includes-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+}
+.includes-card-img {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+}
+.includes-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* Typographic stand-in where a photo isn't shot yet — same slot, same
+   weight, so a missing image reads as a choice rather than a hole. */
+.includes-card-plate {
+  aspect-ratio: 4/3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--red);
+  color: var(--cream);
+  text-align: center;
+  padding: 16px;
+}
+.includes-card-plate .plate-figure {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  line-height: 1;
+}
+.includes-card-plate .plate-rule {
+  width: 44px;
+  height: 1px;
+  background: rgba(240, 230, 208, 0.35);
+}
+.includes-card-plate .plate-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.includes-card-body {
+  padding: 26px 28px 30px;
+}
+.includes-card-tag {
+  display: inline-block;
+  margin-bottom: 12px;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.45);
+  border: 1px solid rgba(0,0,0,0.15);
+  padding: 4px 10px;
+}
+.includes-card-qty {
+  display: block;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+.includes-card h3 {
+  font-size: 1.15rem;
+  line-height: 1.3;
+  margin-bottom: 10px;
+}
+.includes-card p {
+  font-size: 0.95rem;
+  color: #666;
+  line-height: 1.7;
+}
+.includes-card a {
+  color: var(--red);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.includes-card a:hover {
+  color: var(--ink);
+}
+/* Divider between "At the counter" and "Shipped in our bundles" */
+.includes-group-label {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 48px 0 24px;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.45);
+}
+.includes-group-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(0,0,0,0.1);
+}
+.includes-group-label:first-child {
+  margin-top: 0;
+}
+.includes-note {
+  margin-top: 28px;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: #666;
+}
+/* Must live after the .includes-grid rules above — the shared 900px block
+   earlier in this file would be overridden by them. */
+@media (max-width: 980px) {
+  .includes-grid,
+  .includes-grid--wide { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .includes-grid,
+  .includes-grid--wide { grid-template-columns: 1fr; }
+}
+
 .product-prose {
   max-width: 760px;
   margin: 0 auto;
