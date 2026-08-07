@@ -48,6 +48,38 @@ _archive/             old page/style snapshots — ignore
 WIKI.md               this file (NOT deployed)
 ```
 
+### Internal linking & breadcrumbs
+
+Two pages look like catalogs but aren't the same thing:
+
+| Page | In main nav? | Lists |
+|---|---|---|
+| `products.html` "What We Make" | **No** | All 6 `shop/` pages + all 8 `hot-foods/` pages — the only complete index |
+| `shop.html` "Shop" | Yes | Only the 2 shippable bundles (Pittsburgh Pack, Legacy Gift Box) |
+
+`shop.html` is a conversion page for the two things you can actually buy online,
+not a directory. So the breadcrumb parent for `shop/*` is **`products.html`**,
+even though it isn't in the nav — it's the only page that lists all six.
+`hot-foods/*` breadcrumbs to `menu.html` (counter-only items; menu.html has the
+prices and is in the nav).
+
+Every `shop/*` and `hot-foods/*` page carries a `.breadcrumb` nav placed directly
+after `</header>`. Same markup as the `co-packing/` pages. Add one to any new
+subpage:
+
+```html
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../products.html">What We Make</a></li>
+    <li aria-current="page">Page Title</li>
+  </ol>
+</nav>
+```
+
+Known gap: `hot-foods/sweet-sausage-sandwich.html` is linked only from
+`products.html` — menu, shop, and index all skip it.
+
 Pages have **no templating** — the nav header and footer are copy-pasted into
 every page. Subpages in `site/shop/` and `site/hot-foods/` reference assets with
 `../` (e.g. `../css/styles.css`). Root pages use bare relative paths — except
@@ -285,6 +317,101 @@ with GraphQL in `shopify/graphql/`. Variant weights are **not** set via API
 - [ ] Confirm **free shipping** profile on bundles (shipping is baked into price)
 - [ ] Set variant weights in Admin if shipping labels need them
 - [x] Verify checkout permalinks resolve for zones A and E (curl-verified 2026-07-04; still do a real test purchase)
+
+## Product facts (get these right in copy)
+
+Source of truth for ingredient/pricing claims. Do not improvise seasoning
+details — if it isn't listed here, ask before writing it.
+
+**Sweet Italian sausage is NOT "the hot recipe minus the pepper."** They are two
+different blends. Sweet is the Abruzzo/Sulmona original; hot is the spiced one.
+
+| | Sweet (the original, 1945) | Hot |
+|---|---|---|
+| Seasoning | Pork, water, salt, **cracked black pepper**, dextrose | Crushed red pepper, **real paprika**, whole fennel seed, garlic |
+| Explicitly NOT in it | No fennel, no garlic, no paprika, no crushed red pepper | — |
+| Heat | None | Medium, builds slowly — "third bite, not the first" |
+
+- Both: natural casing, 22–25% fat, hand-mixed in ~200 lb batches daily,
+  all natural — no fillers, MSG, additives, or preservatives. USDA-inspected
+  daily since 1973.
+- **Never claim "no sugar"** on sweet — dextrose is in the blend. "Sweet" refers
+  to the absence of chili heat, nothing else; say that instead.
+### Packaging (got this wrong twice — read before writing any copy)
+
+Confirmed by the owner 2026-08-06. Write these exactly; don't embellish.
+
+| Item | How it's packed |
+|---|---|
+| Sweet / hot sausage, shipped | **A 5 lb box of rope.** Just a box. |
+| Sweet / hot sausage, counter | Loose by the pound, **or** bulk in 1 lb, 5 lb, and 10 lb bags. Same for both. |
+| Meatballs | Clear plastic bag. ~16 at 2 oz each = 2 lb. Raw, frozen. |
+| Stuffed banana peppers | Frozen, clear bag — same as the meatballs. |
+| Lil's sausage rolls | **Baked at the shop, then frozen.** |
+| San Marzano sauce | Plastic deli container (the cylinder tub). |
+| Bundle boxes | Items are labeled, packed in an insulated box with cold packs. |
+
+**Phrasing rules — these are the exact mistakes already made:**
+
+- Say **"a 5 lb box of rope."** Do **not** say "continuous," "one continuous
+  rope," "single coil," or anything implying it's unbroken end to end. That was
+  an embellishment on top of a correction — say only what's above.
+- **Never write a link count** ("~20 links") for a 5 lb box. Wrong, fixed
+  2026-08-06 across 6 pages. Links are a *counter* thing — hand-stuffed and
+  twisted at the shop.
+- **Never write "vacuum-sealed."** Nothing is. Removed from 15 places on
+  2026-08-06; 7 of those predated any AI edit and got propagated because they
+  looked established. Being already on the site ≠ verified.
+- **There is no recipe card.** The Sausage Club never included one — removed
+  from 9 places (body copy, meta description, og:, twitter:, JSON-LD) on
+  2026-08-06. Also killed the "Ricci family recipe in your first email" promise
+  on the waitlist form: same nonexistent thing, different delivery.
+- **No founding-member bonus sample.** The "+1 lb preview of next month's cut"
+  was not real. Removed 2026-08-06.
+- **Don't write copy that argues with a past mistake.** "A 5 lb box of rope —
+  *not links*" leaked an internal correction onto a product page. Customers
+  never saw the wrong version and don't need the rebuttal. State the fact.
+
+### Cooking directions: no numbers
+
+**No temperatures, no times, no quantities.** The specific ones on the site were
+all invented and were removed 2026-08-06 (meatballs 400°F/18–20 min/45 min
+covered; sausage 12–15 min stovetop, 15–18 min grill, 90 min in gravy, 160°F
+internal; "4 quarts of sauce"). None came from the shop.
+
+Write method and feel instead — "brown it in a heavy pan with a splash of
+water," "let it sit in simmering San Marzano sauce," "cook them through before
+serving." That's the register the rest of the site is in anyway.
+
+> Note for the owner: there is now **no doneness temperature anywhere** on the
+> site, including for raw pork products sold frozen. That was deliberate per
+> instruction. If you want a safe-handling line back, USDA's published figure
+> for ground pork is 160°F — that's a federal standard, not a Ricci claim, so
+> it's citable. Your call.
+
+- **Counter pricing:** $6.75 sandwich on a Mancini's roll · **$3.50/pc is a
+  cooked single link from the hot case**, not raw take-home. Raw is sold by the
+  pound at the counter or in a 5 lb box (rope, per above).
+
+### Open questions — DO NOT write copy on these until answered
+
+Fill in an answer and move it up into the verified list above. Until then, leave
+the slot blank or use the typographic plate stand-in. See `CLAUDE.md`.
+
+1. **Is the Sausage Club monthly box also a 5 lb box of rope?** TBD as of
+   2026-08-06. The page currently says it is — if that turns out wrong, fix
+   `shop/sausage-club.html`.
+
+The club is unlaunched, so treat the rest of that page as unverified too. Still
+live on it and never confirmed: the seasonal cut calendar (December = Feast of
+the Seven Fishes, May = fennel-and-orange, October = smoke-paprika), gift
+subscriptions in 3/6/12 months, and founding-member pricing.
+
+Answered and moved into the table above on 2026-08-06: 5 lb box is a plain box ·
+meatball bag · bundle labeling · insulated box + cold packs · rolls baked then
+frozen · peppers frozen in clear bags · sauce in a deli container · counter bulk
+bags · no recipe card · no bonus sample · no cooking numbers.
+- Hours/address: 500 Pine Hollow Rd, McKees Rocks · Mon–Fri 8:30–6, Sat 8:30–5.
 
 ## Known gaps / pre-launch checklist
 
