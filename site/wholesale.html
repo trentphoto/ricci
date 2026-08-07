@@ -63,8 +63,9 @@
     }
     .ws-hero-cta { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
     .ws-hero-meta {
-      margin-top: 40px;
-      font-size: 0.78rem;
+      margin: 40px auto 0;
+      text-align: center;
+      font-size: 0.98rem;
       font-weight: 600;
       letter-spacing: 0.18em;
       text-transform: uppercase;
@@ -78,13 +79,50 @@
       gap: 3px;
       background: var(--cream-edge);
     }
-    .ws-gallery figure { margin: 0; }
+    .ws-gallery figure { margin: 0; overflow: hidden; position: relative; }
+    .ws-gallery figcaption {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 12px;
+      text-align: center;
+      pointer-events: none;
+    }
+    .ws-gallery figcaption span {
+      display: inline-block;
+      padding: 6px 12px 5px;
+      background: rgba(20, 16, 14, 0.8);
+      color: #fff;
+      font-family: var(--font-sans);
+      font-size: 0.64rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .ws-gallery figcaption em {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+      text-transform: none;
+    }
+    .ws-gallery figcaption em::after {
+      content: " · ";
+      font-style: normal;
+    }
     .ws-gallery img {
       width: 100%;
+      height: auto;
       aspect-ratio: 4 / 3;
       object-fit: cover;
       display: block;
     }
+    /* Subject sits smaller in frame than its neighbours — zoom to match */
+    .ws-gallery img.ws-gallery-zoom { transform: scale(1.4); }
+    /* Portrait source — bias the crop lower so the bag isn't cut off at the top */
+    .ws-gallery img.ws-gallery-low { object-position: center 85%; transform: scale(1.25); }
     @media (max-width: 640px) {
       .ws-gallery { grid-template-columns: repeat(2, 1fr); }
     }
@@ -467,10 +505,22 @@
     </section>
 
     <div class="ws-gallery" aria-label="Product photos">
-      <figure><img src="assets/img/hot-sausage-coil-raw.webp" alt="Hot Italian sausage rope coil, raw" width="1024" height="768" loading="lazy" decoding="async" /></figure>
-      <figure><img src="assets/img/sweet-sausage-coil-raw.webp" alt="Sweet Italian sausage rope coil, raw" width="1024" height="768" loading="lazy" decoding="async" /></figure>
-      <figure><img src="assets/img/hot-sausage-coil-raw.webp" alt="" width="1024" height="768" loading="lazy" decoding="async" aria-hidden="true" /></figure>
-      <figure><img src="assets/img/sweet-sausage-coil-raw.webp" alt="" width="1024" height="768" loading="lazy" decoding="async" aria-hidden="true" /></figure>
+      <figure>
+        <img src="assets/img/hot-sausage-coil-raw.webp" alt="Hot Italian sausage rope coil, raw" width="1024" height="768" loading="lazy" decoding="async" />
+        <figcaption><span><em>Hot</em>Rope</span></figcaption>
+      </figure>
+      <figure>
+        <img src="assets/img/sweet-sausage-coil-raw.webp" alt="Sweet Italian sausage rope coil, raw" width="1024" height="768" loading="lazy" decoding="async" />
+        <figcaption><span><em>Sweet</em>Rope</span></figcaption>
+      </figure>
+      <figure>
+        <img class="ws-gallery-zoom" src="assets/img/hot-sausage-10lb-bulk-bag.webp" alt="Hot Italian sausage, 10 lb bulk bag" width="1200" height="900" loading="lazy" decoding="async" />
+        <figcaption><span><em>Hot</em>Bulk</span></figcaption>
+      </figure>
+      <figure>
+        <img class="ws-gallery-low" src="assets/img/sweet-sausage-5lb-bulk-bag.webp" alt="Sweet Italian sausage, 5 lb bulk bag" width="1017" height="1272" loading="lazy" decoding="async" />
+        <figcaption><span><em>Sweet</em>Bulk</span></figcaption>
+      </figure>
     </div>
 
     <div class="ws-diamond" aria-hidden="true"><span>◆</span></div>
@@ -612,7 +662,7 @@
         </div>
 
         <p class="ws-gate-fineprint">
-          Prefer to talk it through? <a href="mailto:wholesale@riccisausage.com" style="color:var(--oxblood);text-decoration:underline;text-underline-offset:2px;">wholesale@riccisausage.com</a> · 412-331-9531
+          Prefer to talk it through? <a href="tel:4123319531" style="color:var(--oxblood);text-decoration:underline;text-underline-offset:2px;">412-331-9531</a>
         </p>
       </div>
     </section>
@@ -625,8 +675,7 @@
         <p>We're a family shop. Tell us what you run and what you need —
            we'll get a free sample and pricing in your hands.</p>
         <p style="margin-top:20px;">
-          <a href="mailto:wholesale@riccisausage.com" class="btn btn-primary">wholesale@riccisausage.com</a>
-          <a href="tel:4123319531" class="btn btn-outline">412-331-9531</a>
+          <a href="tel:4123319531" class="btn btn-primary">412-331-9531</a>
         </p>
       </div>
     </section>
@@ -676,6 +725,9 @@
           <li><a href="menu.html">Menu</a></li>
           <li><a href="press.html">Press</a></li>
           <li><a href="index.html#visit">Visit the Shop</a></li>
+          <li><a href="italian-meatballs-pittsburgh.html">Meatballs in Pittsburgh</a></li>
+          <li><a href="hot-italian-sausage-pittsburgh.html">Hot Sausage in Pittsburgh</a></li>
+          <li><a href="sweet-italian-sausage-pittsburgh.html">Sweet Sausage in Pittsburgh</a></li>
         </ul>
       </div>
       <div class="footer-col">
