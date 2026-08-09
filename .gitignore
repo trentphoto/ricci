@@ -4,3 +4,4 @@ _build/.env.local
 .shopify/
 _build/shopify-app/
 _archive/
+redesign-concepts/
