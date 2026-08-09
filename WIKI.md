@@ -45,8 +45,26 @@ _build/               Shopify sync script, variant map, env example (NOT deploye
 shopify/              GraphQL queries/mutations + sync-bundles.sh wrapper (NOT deployed)
 shopify.app.toml      linked Shopify CLI app config (app name: r1)
 _archive/             old page/style snapshots — ignore
+_drafts/              finished pages held back from launch (NOT deployed)
 WIKI.md               this file (NOT deployed)
 ```
+
+### `_drafts/` — pages deliberately not live
+
+Complete, reviewed pages parked outside the publish dir. They are **not** served,
+not in `sitemap.xml`, not in `_redirects`, and nothing in `site/` links to them.
+
+To launch one: move it back into `site/`, add its `<loc>` to `sitemap.xml`, add
+the `.html → clean URL` 301 to `_redirects`, and restore the internal links.
+Then run `node _build/check-pages.mjs site/THE-PAGE.html`.
+
+Currently parked:
+
+- **Co-packing** (`co-packing.html`, `co-packing/private-label.html`,
+  `co-packing/capabilities.html`) — deferred 2026-08-09. The wholesale footer's
+  "For Business" column linked to all three while the files were untracked, so
+  the live site was serving three 404s; those links were removed at the same
+  time. Restore that footer block when these go live.
 
 ### Internal linking & breadcrumbs
 
