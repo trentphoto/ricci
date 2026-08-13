@@ -429,7 +429,7 @@ Answered and moved into the table above on 2026-08-06: 5 lb box is a plain box �
 meatball bag · bundle labeling · insulated box + cold packs · rolls baked then
 frozen · peppers frozen in clear bags · sauce in a deli container · counter bulk
 bags · no recipe card · no bonus sample · no cooking numbers.
-- Hours/address: 500 Pine Hollow Rd, McKees Rocks · Mon–Fri 8:30–6, Sat 8:30–5.
+- Hours/address: 500 Pine Hollow Rd, McKees Rocks · Mon–Fri 8:30–5, Sat 9–4.
 
 ## Known gaps / pre-launch checklist
 
