@@ -15,7 +15,10 @@
 /italian-meatballs-pittsburgh.html  /italian-meatballs-pittsburgh  301!
 /mckees-rocks-lunch.html  /mckees-rocks-lunch  301!
 /menu.html  /menu  301!
-/office-lunch.html  /office-lunch  301!
+/lunch.html  /lunch  301!
+# renamed 2026-08-27: /office-lunch -> /lunch (QR + print collateral point at /lunch)
+/office-lunch.html  /lunch  301!
+/office-lunch  /lunch  301!
 /press.html  /press  301!
 /privacy.html  /privacy  301!
 /products.html  /products  301!

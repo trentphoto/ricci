@@ -30,7 +30,7 @@ new page or asset **inside `site/`**.
 site/                 ← Netlify publish dir. The entire public website.
   *.html              root-level pages (hand-authored):
                         index, story, menu, catering, press, shop, products,
-                        office-lunch, wholesale, faq, shipping, returns,
+                        lunch, wholesale, faq, shipping, returns,
                         privacy, terms, careers, 404
   shop/               product detail pages   — hand-authored (was generated; see History)
   hot-foods/          prepared-food pages    — hand-authored (was generated; see History)
@@ -113,7 +113,7 @@ All files are IIFEs, no dependencies, included with `defer`.
 |------|------|
 | `crm.js` | Auto-binds any `<form data-crm="TYPE">` and POSTs JSON to `https://crm.riccisausage.com/api/<type>`. Types: `subscribe`, `catering`, `wholesale`, `general`. Reads `data-source`, `data-success`; uses an `_hp` honeypot and a `.crm-status` element for feedback. Override the backend with `window.CRM_BASE`. |
 | `catering-modal.js` | Builds the catering-request modal (tray menu, quantities, live total). On submit, POSTs to `/api/catering` with `source: "catering-modal"`; **only shows the success screen if the POST succeeds**, else prompts to call. Opened via `window.RicciCatering.open()` or any `[data-open-catering]` element. Collects name, **email (required)**, phone, pickup date/time, prep, notes. |
-| `office-lunch.js` | Office-lunch ordering UI. Keeps a profile/order history in `localStorage`; best-effort POST to `/api/catering` with `source: "office-lunch"`. |
+| `office-lunch.js` | Office-lunch ordering UI (served on `lunch.html`; script filename and CRM `source` tag kept as `office-lunch` so historical CRM data stays queryable). Keeps a profile/order history in `localStorage`; best-effort POST to `/api/catering` with `source: "office-lunch"`. |
 | `order-modal.js` | "Order Now" chooser (`[data-open-order]`). Routes: catering → `RicciCatering.open()`, pickup → `menu.html`, ship → `shop.html`. |
 | `nav-drawer.js` | Mobile nav toggle / backdrop. |
 | `shipping.js` | State-based all-in pricing. Maps US state → shipping zone (A–E), updates `.product-price[data-base][data-tier]` elements, persists state in `localStorage` (`ricci_ship_state`), fires `ricci:ship-state` on change. Exposes `window.RicciShipping` (`getState`, `getGroup`, `canShip`, `priceFor`, `stateName`). Loaded on `products.html` and `shop.html`. |
