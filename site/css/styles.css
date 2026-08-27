@@ -2231,6 +2231,27 @@ body.nav-drawer-open .nav-backdrop {
   padding: 10px 20px;
 }
 
+/* Meal upsell — sits under the sandwich grid */
+.meal-upsell {
+  margin-top: 24px;
+  background: var(--cream);
+  border: 1px solid var(--cream-edge);
+  padding: 32px;
+  text-align: center;
+}
+.meal-upsell p {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  line-height: 1.5;
+  color: var(--charcoal);
+  margin: 0;
+}
+.meal-upsell strong {
+  color: var(--red);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
 /* Daily specials */
 .specials-grid {
   display: grid;
@@ -3949,6 +3970,15 @@ body.cater-open { overflow: hidden; }
   text-align: right;
   font-weight: 700;
 }
+.cater-item-price small {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
 .cater-qty {
   display: flex;
   align-items: center;
@@ -4304,6 +4334,24 @@ body.cater-open { overflow: hidden; }
   font-family: var(--font-serif);
   font-style: italic;
   line-height: 1.45;
+}
+.lunch-min-note {
+  display: block;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-top: 2px;
+}
+.lunch-min-note.is-short {
+  color: var(--red);
+  font-weight: 600;
+}
+.btn:disabled,
+.btn[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 .lunch-includes {
   font-size: 0.88rem;

@@ -2,9 +2,17 @@
  * Ricci's Pepperoni Roll pre-order modal.
  *
  * Opens from any [data-open-preorder] button. Collects name, phone, quantity,
- * and pickup time, then posts to the CRM as a "general" contact (which emails
- * James automatically). The pickup date is always the UPCOMING MONDAY, computed
- * fresh on load — so it rolls forward on its own each week with no edits.
+ * and pickup time, posts to the CRM's /api/preorder, then sends the customer
+ * to the Square-hosted checkout page it returns. Pre-orders are PREPAID — the
+ * shop only sees a confirmed reservation after Square reports the charge.
+ *
+ * The pickup date is always the UPCOMING MONDAY, computed fresh on load — so it
+ * rolls forward on its own each week with no edits.
+ *
+ * No total is shown here on purpose. The price lives in one place (the CRM's
+ * PREORDER_UNIT_PRICE_CENTS) and Square's checkout page shows the real amount;
+ * a second copy in this file could drift and quote a customer a total we then
+ * don't charge.
  *
  * Reuses the .cater-* modal styles from css/styles.css.
  */
@@ -71,11 +79,12 @@
       '        <div class="cater-field"><label for="pre-qty">How Many?</label><input id="pre-qty" name="qty" type="number" min="1" value="1" inputmode="numeric" required></div>' +
       '        <div class="cater-field" style="grid-column:1/-1;"><label for="pre-time">Pickup Time &middot; ' + pickupLabel + '</label><select id="pre-time" name="time" required>' + timeOptions() + '</select></div>' +
       '      </div>' +
-      '      <span class="crm-status" role="status" style="display:block;margin-top:18px;font-size:0.92rem;color:var(--red);"></span>' +
+      '      <p style="margin:18px 0 0;font-size:0.85rem;color:#6b5544;">Pre-orders are paid in advance. The next step is Square\'s secure checkout &mdash; we never see your card details.</p>' +
+      '      <span class="crm-status" role="status" style="display:block;margin-top:10px;font-size:0.92rem;color:var(--red);"></span>' +
       '    </form>' +
       '    <div class="cater-footer">' +
-      '      <div class="cater-total" style="font-size:0.85rem;letter-spacing:0.02em;color:#6b5544;">$16.99 each · Mondays Only</div>' +
-      '      <div class="cater-actions"><button type="button" class="btn btn-primary" id="preorder-submit">Reserve Now</button></div>' +
+      '      <div class="cater-total" style="font-size:0.85rem;letter-spacing:0.02em;color:#6b5544;">$16.99 each · Paid at checkout</div>' +
+      '      <div class="cater-actions"><button type="button" class="btn btn-primary" id="preorder-submit">Continue to Payment</button></div>' +
       '    </div>' +
       '  </div>' +
       '</div>';
@@ -147,42 +156,53 @@
     var btn = document.getElementById('preorder-submit');
     var prev = btn.textContent;
     btn.disabled = true;
-    btn.textContent = 'Reserving…';
+    btn.textContent = 'Opening checkout…';
     status.textContent = '';
 
-    var message = 'PEPPERONI ROLL PRE-ORDER\n' +
-      'Quantity: ' + qty + '\n' +
-      'Pickup: ' + pickupLabel + ' at ' + time + '\n' +
-      'Phone: ' + phone;
-
     var base = window.CRM_BASE || 'https://riccis-crm.fly.dev';
-    fetch(base + '/api/general', {
+    fetch(base + '/api/preorder', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         name: name,
         email: email,
         phone: phone,
+        qty: qty,
         source: 'pepperoni-preorder',
-        event_date: isoDate(pickup),
-        headcount: String(qty),
-        message: message
+        pickup_date: isoDate(pickup),
+        pickup_label: pickupLabel,
+        pickup_time: time
       })
     }).then(function (res) {
       return res.json().catch(function () { return {}; }).then(function (j) {
-        return res.ok && j.ok;
+        return { ok: res.ok && j.ok, url: j.checkout_url, error: j.error, max: j.max };
       });
     }).catch(function () {
-      return false;
-    }).then(function (ok) {
-      if (!ok) {
-        btn.disabled = false;
-        btn.textContent = prev;
-        status.textContent = "Couldn't send just now — please try again, or call 412-331-9531.";
+      return { ok: false };
+    }).then(function (r) {
+      if (r.ok && r.url) {
+        // Leave the page — the reservation isn't real until Square takes payment.
+        window.location.href = r.url;
         return;
       }
-      renderSuccess(name, qty, time);
+      btn.disabled = false;
+      btn.textContent = prev;
+      status.textContent = errorMessage(r.error, r.max);
     });
+  }
+
+  function errorMessage(code, max) {
+    if (code === 'payments_unavailable' || code === 'checkout_unavailable') {
+      return 'Online pre-orders are temporarily unavailable — please call the shop at 412-331-9531 to reserve.';
+    }
+    if (code === 'invalid_quantity') {
+      return max
+        ? 'Please choose between 1 and ' + max + '. For larger orders, call 412-331-9531.'
+        : 'Please enter a valid quantity.';
+    }
+    if (code === 'invalid_email') return 'Please enter a valid email address.';
+    if (code === 'rate_limited') return 'Too many attempts — wait a moment and try again.';
+    return "Couldn't reach checkout just now — please try again, or call 412-331-9531.";
   }
 
   function wire() {

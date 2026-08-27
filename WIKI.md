@@ -410,6 +410,10 @@ serving." That's the register the rest of the site is in anyway.
 - **Counter pricing:** $6.75 sandwich on a Mancini's roll · **$3.50/pc is a
   cooked single link from the hot case**, not raw take-home. Raw is sold by the
   pound at the counter or in a 5 lb box (rope, per above).
+- **Office lunch pricing** (confirmed 2026-08-26): **$10.99/person** hot or
+  sweet sausage sandwich · **$12.99/person** Lil's meatball sandwich. Chips and
+  a fresh-baked cookie included at both. **10-person minimum.** Pickup only.
+  Prices live in `ITEMS` / `MIN_PEOPLE` in `js/office-lunch.js`.
 
 ### Open questions — DO NOT write copy on these until answered
 
@@ -419,6 +423,14 @@ the slot blank or use the typographic plate stand-in. See `CLAUDE.md`.
 1. **Is the Sausage Club monthly box also a 5 lb box of rope?** TBD as of
    2026-08-06. The page currently says it is — if that turns out wrong, fix
    `shop/sausage-club.html`.
+
+2. **Is the pepperoni roll $16.99?** TBD as of 2026-08-11. The figure is live in
+   three places (`js/preorder-modal.js`, and two JSON-LD blocks in `menu.html`
+   and `mckees-rocks-lunch.html`) but has never been verified against the wiki.
+   It now also decides what a real card gets charged: prepaid Square pre-orders
+   read the price from `PREORDER_UNIT_PRICE_CENTS` in the CRM env. That variable
+   has **no default** — until it is set, `/api/preorder` returns 503 and the
+   modal tells customers to call. Set it only from a confirmed price.
 
 The club is unlaunched, so treat the rest of that page as unverified too. Still
 live on it and never confirmed: the seasonal cut calendar (December = Feast of

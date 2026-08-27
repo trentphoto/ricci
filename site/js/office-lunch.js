@@ -1,8 +1,9 @@
 /*
  * Ricci's Office Lunch order sheet.
  *
- * Flat-rate office lunch: $10.99/person — pick a sandwich for each person,
- * chips and a fresh-baked cookie included. Lightweight returning-customer flow keyed by
+ * Office lunch, priced per person by sandwich: sausage $10.99, meatball
+ * $12.99, chips and a fresh-baked cookie included. Ten-person minimum.
+ * Lightweight returning-customer flow keyed by
  * email: first order is saved locally (and posted to the CRM); next visit,
  * enter your email (or be auto-recognized) and reorder in one tap.
  *
@@ -11,13 +12,19 @@
  * swaps lookupCustomer/saveOrder for CRM API calls (see js/crm.js).
  */
 (function () {
-  var PRICE_PER_PERSON = 10.99;
+  var MIN_PEOPLE = 10;
 
   var ITEMS = [
-    { id: 'meatball', name: "Lil's Meatball Sandwich",  desc: 'Three hand-rolled meatballs, sauce, Grande cheese, Mancini\'s roll' },
-    { id: 'hot',      name: 'Famous Hot Sausage',       desc: 'Hot Italian sausage, peppers & onions, sauce, Grande cheese' },
-    { id: 'sweet',    name: 'Sweet Sausage Sandwich',   desc: 'Sweet Italian sausage, peppers & onions, Grande cheese' }
+    { id: 'meatball', name: "Lil's Meatball Sandwich",  price: 12.99, desc: 'Three hand-rolled meatballs, sauce, Grande cheese, Mancini\'s roll' },
+    { id: 'hot',      name: 'Famous Hot Sausage',       price: 10.99, desc: 'Hot Italian sausage, peppers & onions, sauce, Grande cheese' },
+    { id: 'sweet',    name: 'Sweet Sausage Sandwich',   price: 10.99, desc: 'Sweet Italian sausage, peppers & onions, Grande cheese' }
   ];
+
+  function totalFor(items) {
+    return ITEMS.reduce(function (sum, it) {
+      return sum + (items[it.id] || 0) * it.price;
+    }, 0);
+  }
 
   var STORE_KEY = 'ricci_office_customers';
   var LAST_KEY = 'ricci_office_last_email';
@@ -91,7 +98,7 @@
     var lines = [];
     ITEMS.forEach(function (it) {
       var q = items[it.id] || 0;
-      if (q > 0) lines.push(q + ' x ' + it.name);
+      if (q > 0) lines.push(q + ' x ' + it.name + ' @ ' + money(it.price) + ' = ' + money(q * it.price));
     });
     return lines;
   }
@@ -122,13 +129,25 @@
 
   function recalc() {
     var people = headcount();
-    var total = people * PRICE_PER_PERSON;
     ITEMS.forEach(function (it) {
       var row = document.querySelector('.cater-item-row[data-item="' + it.id + '"]');
       if (row) row.classList.toggle('has-qty', getQty(it.id) > 0);
     });
     $('lunch-headcount').textContent = people === 1 ? '1 person' : people + ' people';
-    $('lunch-total').textContent = money(total);
+    $('lunch-total').textContent = money(totalFor(itemsFromSheet()));
+
+    var note = $('lunch-min-note');
+    if (note) {
+      var short = MIN_PEOPLE - people;
+      var under = people > 0 && short > 0;
+      note.textContent = under
+        ? (short === 1 ? '1 more person to reach the 10-person minimum'
+                       : short + ' more people to reach the 10-person minimum')
+        : MIN_PEOPLE + '-person minimum';
+      note.classList.toggle('is-short', under);
+    }
+    var btn = $('lunch-submit');
+    if (btn) btn.disabled = people < MIN_PEOPLE;
   }
 
   /* ---------- returning customer ---------- */
@@ -217,6 +236,10 @@
       alert('Add at least one sandwich — every person gets a sandwich, chips, and a fresh-baked cookie.');
       return;
     }
+    if (people < MIN_PEOPLE) {
+      alert('Office lunch has a ' + MIN_PEOPLE + '-person minimum — you have ' + people + '. Feeding a smaller group? Order from the menu or call 412-331-9531.');
+      return;
+    }
     var date = form.date.value;
     var time = form.time.value;
     if (!date || !time) {
@@ -235,7 +258,7 @@
       placedAt: new Date().toISOString(),
       items: itemsFromSheet(),
       people: people,
-      total: people * PRICE_PER_PERSON,
+      total: totalFor(itemsFromSheet()),
       date: date,
       time: time,
       fulfill: fulfill,
@@ -271,7 +294,7 @@
           '<span class="eyebrow">Order Summary · ' + order.people + ' people</span>' +
           '<ul>' + lines + '</ul>' +
           '<p class="cater-success-total">Chips &amp; a fresh-baked cookie for everyone included.</p>' +
-          '<p class="cater-success-total">Total: <strong>' + money(order.total) + '</strong> (' + order.people + ' × ' + money(PRICE_PER_PERSON) + ')</p>' +
+          '<p class="cater-success-total">Total: <strong>' + money(order.total) + '</strong> for ' + order.people + ' people</p>' +
           (order.notes ? '<p class="cater-success-notes">Notes: ' + order.notes + '</p>' : '') +
         '</div>' +
         '<p class="cater-success-contact">' + savedNote + '</p>' +
