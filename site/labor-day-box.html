@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Analytics (GA4) — ID lives in js/analytics.js -->
+  <script async src="/js/analytics.js"></script>
+  <!--
+    META PIXEL — not installed. Paste the base code here and fire a Purchase
+    event on the Square/checkout return before any ad spend starts.
+  -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Labor Day Box — 10 lb + 2 Quarts of Sauce, Shipped Frozen, $149 | Ricci's Italian Sausage</title>
+  <meta name="description" content="Ten pounds of Ricci's Italian sausage — five hot, five sweet — plus two quarts of Lil's homemade tomato sauce, packed frozen and shipped to your door before Labor Day. $149 with free shipping to PA, MD, NY and DE. Order by Wednesday, September 2." />
+  <meta name="robots" content="index, follow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon" href="assets/favicon/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16.png" />
+  <link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png" />
+  <!-- Canonical & social (Open Graph / Twitter) -->
+  <link rel="canonical" href="https://riccisausage.com/labor-day-box" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Ricci's Italian Sausage" />
+  <meta property="og:title" content="The Labor Day Box — 10 lb + 2 Quarts of Sauce, $149" />
+  <meta property="og:description" content="Five pounds hot, five pounds sweet, and two quarts of Lil's homemade tomato sauce. Packed frozen, at your door before the weekend. Free shipping to PA, MD, NY, DE. Order by Wednesday, September 2." />
+  <meta property="og:url" content="https://riccisausage.com/labor-day-box" />
+  <meta property="og:image" content="https://riccisausage.com/assets/img/og-image.webp" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Ricci's Italian Sausage — Italian Tradition. Perfected. Since 1945." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The Labor Day Box — 10 lb + 2 Quarts of Sauce, $149" />
+  <meta name="twitter:description" content="Five pounds hot, five pounds sweet, and two quarts of Lil's homemade tomato sauce. Packed frozen, at your door before the weekend. Free shipping to PA, MD, NY, DE." />
+  <meta name="twitter:image" content="https://riccisausage.com/assets/img/og-image.webp" />
+</head>
+<body>
+
+  <!--
+    Paid-traffic landing page. Deliberately NO primary nav and no catalog
+    footer — one offer, one CTA. Do not "sync the nav" onto this page.
+  -->
+  <header class="site-header ship-header">
+    <div class="ship-header-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/logo.png" alt="Ricci's Italian Sausage">
+      </a>
+      <div class="ship-header-cta">
+        <a href="#box" class="btn btn-primary">Order Now</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ══════════════════════════════════════════
+         HERO
+    ══════════════════════════════════════════ -->
+    <section class="page-hero labor-hero">
+      <div class="container labor-hero-grid">
+        <div class="labor-hero-copy">
+          <span class="eyebrow">Ships Frozen · Order by Wednesday</span>
+          <h1>Your Labor Day Sausage,<br /><em class="ship-hero-em">Shipped From Pittsburgh.</em></h1>
+          <p class="labor-hero-lead">
+            Ten pounds of Ricci's — five hot, five sweet — plus two quarts of
+            Lil's homemade tomato sauce, packed frozen and on your doorstep
+            before the weekend. Order by Wednesday, September&nbsp;2. That's the
+            last box that makes it before the holiday.
+          </p>
+          <div class="labor-hero-cta">
+            <a class="btn btn-primary btn-lg" href="#box" data-box-cta>Order Now — $149 · Free Shipping</a>
+          </div>
+          <p class="ship-terms">
+            Ships Tuesday and Wednesday &middot; Arrives Thursday or Friday &middot;
+            Free shipping to PA, MD, NY, DE
+          </p>
+        </div>
+        <!-- Both ropes, because that's literally the box: 5 lb hot, 5 lb sweet.
+             LCP images: no lazy-loading, dimensions set to hold the space. -->
+        <div class="labor-hero-figure labor-hero-figure--pair">
+          <figure>
+            <img src="assets/img/hot-grilled-sausages.webp"
+                 alt="Ricci's hot sausage grilled with char marks in a cast-iron grill pan"
+                 width="1024" height="725" fetchpriority="high" decoding="async" />
+            <figcaption>Hot &middot; 5 lb</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/img/sweet-grilled-sausages.webp"
+                 alt="Ricci's sweet sausage grilled with char marks in a cast-iron grill pan"
+                 width="1024" height="725" fetchpriority="high" decoding="async" />
+            <figcaption>Sweet &middot; 5 lb</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         COUNTDOWN
+         Derived from DEADLINE in js/labor-day-box.js — never hand-edited.
+         The static fallback names no number, so JS-off can't make it wrong.
+    ══════════════════════════════════════════ -->
+    <aside class="labor-countdown" aria-live="polite">
+      <p class="labor-countdown-line" id="ship-countdown">
+        Order by Wednesday, September 2. We're closed Sunday and Monday for the
+        holiday.
+      </p>
+    </aside>
+
+    <!-- ══════════════════════════════════════════
+         GUARANTEE
+         Wording is locked. It appears again, word for word, in the FAQ —
+         if you change one, change both.
+    ══════════════════════════════════════════ -->
+    <section class="ship-guarantee">
+      <div class="ship-guarantee-inner">
+        <span class="eyebrow">Our Guarantee</span>
+        <h2>If It's Not the Best Sausage You've Had, We'll Refund You.</h2>
+        <p>
+          Every box. No forms, no photos, nothing to send back. Call the shop at
+          <a href="tel:4123319531">412-331-9531</a> and we make it right. Same
+          family, same corner in McKees Rocks &mdash; we're not hard to find.
+        </p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         AS SEEN ON — third-party proof, high on the page for cold traffic
+    ══════════════════════════════════════════ -->
+    <div class="press-bar">
+      <div class="press-bar-inner">
+        <span class="press-bar-label">As Seen On</span>
+        <div class="press-items">
+          <span class="press-item">WQED — Meat Pittsburgh</span>
+          <span class="press-item">Pittsburgh Post-Gazette</span>
+          <span class="press-item">ESPN College GameDay</span>
+          <span class="press-item">SBA Family Business of the Year</span>
+          <span class="press-item">National Italian American Sports Hall of Fame</span>
+          <span class="press-item">YaJagoff</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         WHAT'S IN IT
+    ══════════════════════════════════════════ -->
+    <section class="menu-section" id="box">
+      <div class="container">
+        <div class="menu-section-header">
+          <span class="eyebrow">Ships Tuesday &amp; Wednesday</span>
+          <h2>Ten Pounds, Plus the Sauce.</h2>
+          <p class="offer-subhead">One insulated box, packed frozen. $149 shipped.</p>
+        </div>
+
+        <h3 class="offer-contents-head">What's in it</h3>
+        <div class="includes-grid">
+          <div class="includes-card">
+            <div class="includes-card-img">
+              <img src="assets/img/hot-sausage-coil-raw.webp" alt="Raw Ricci's hot rope sausage" loading="lazy" />
+            </div>
+            <div class="includes-card-body">
+              <span class="includes-card-qty">5 lb</span>
+              <h3>Hot Italian Sausage</h3>
+              <p>Crushed red pepper, real paprika, whole fennel seed.
+                 Uncooked rope in natural casing &mdash; cut it to whatever
+                 length you want. This is the one Pittsburgh grew up on.</p>
+            </div>
+          </div>
+          <div class="includes-card">
+            <div class="includes-card-img">
+              <img src="assets/img/sweet-sausage-coil-raw.webp" alt="Raw Ricci's sweet rope sausage" loading="lazy" />
+            </div>
+            <div class="includes-card-body">
+              <span class="includes-card-qty">5 lb</span>
+              <h3>Sweet Italian Sausage</h3>
+              <p>One of the two recipes the family brought over from Sulmona
+                 in 1945. Pork, salt, cracked black pepper &mdash; no fennel,
+                 no paprika. &ldquo;Sweet&rdquo; means no chili heat, and
+                 that's all it means.</p>
+            </div>
+          </div>
+          <div class="includes-card">
+            <div class="includes-card-img">
+              <img src="assets/img/lils-tomato-sauce-quart.webp" alt="A quart tub of Lil's Famous Homemade Tomato Sauce from Ricci's" loading="lazy" />
+            </div>
+            <div class="includes-card-body">
+              <span class="includes-card-qty">2 quarts</span>
+              <h3>Lil's Homemade Tomato Sauce</h3>
+              <p>Two 32 oz tubs of the sauce we make in the shop &mdash; fresh
+                 tomatoes, saut&eacute;ed onions, olive oil. Brown the sausage,
+                 drop it in, let it go low and slow.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Split, all hot, or all sweet. Drives every checkout button. -->
+        <div class="heat-pick ship-pick">
+          <span class="heat-pick-caption">Pick your ten pounds</span>
+          <div class="heat-switch heat-switch--three" id="box-switch" role="radiogroup" aria-label="Choose hot and sweet, all hot, or all sweet">
+            <span class="heat-switch-slab" aria-hidden="true"></span>
+            <label class="heat-switch-opt">
+              <input type="radio" name="box-mix" value="mixed" checked />
+              <span class="heat-switch-face">
+                <span class="heat-switch-name">Hot &amp; Sweet</span>
+                <span class="heat-switch-sub">5 lb &middot; 5 lb</span>
+              </span>
+            </label>
+            <label class="heat-switch-opt">
+              <input type="radio" name="box-mix" value="hot" />
+              <span class="heat-switch-face">
+                <span class="heat-switch-name">All Hot</span>
+                <span class="heat-switch-sub">10 lb</span>
+              </span>
+            </label>
+            <label class="heat-switch-opt">
+              <input type="radio" name="box-mix" value="sweet" />
+              <span class="heat-switch-face">
+                <span class="heat-switch-name">All Sweet</span>
+                <span class="heat-switch-sub">10 lb</span>
+              </span>
+            </label>
+          </div>
+          <p class="heat-pick-note" id="box-note">
+            Five pounds of each. If you're feeding people who don't agree about
+            pepper, this is the one.
+          </p>
+        </div>
+
+        <div class="offer-close">
+          <p class="offer-price">
+            $149
+            <span class="offer-price-terms">— shipped free to PA, MD, NY, DE</span>
+          </p>
+          <p class="offer-cta">
+            <a class="btn btn-primary btn-lg" href="#box" data-box-cta>Order Now</a>
+          </p>
+          <p class="ship-checkout-warning" id="checkout-warning" hidden></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         WHY THIS ONE
+    ══════════════════════════════════════════ -->
+    <section class="section-plan">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Eighty-one years in</span>
+          <h2>Eighty-One Years on Pine Hollow Road.</h2>
+          <p>
+            Most sausage is mass-produced, packed with fillers, and seasoned with
+            pre-ground dust that lost its flavor a year ago &mdash; a label full
+            of things you can't pronounce.
+          </p>
+        </div>
+        <div class="plan-grid">
+          <div class="plan-step">
+            <span class="plan-step-num">01</span>
+            <h3>Ground in Our Own Shop</h3>
+            <p>Hand-mixed in small batches in McKees Rocks, every day. Whole
+               fennel seed, real paprika, cracked black pepper.</p>
+          </div>
+          <div class="plan-step">
+            <span class="plan-step-num">02</span>
+            <h3>All Natural</h3>
+            <p>No fillers, no MSG, no additives, no preservatives. Natural
+               casing. That's the whole list.</p>
+          </div>
+          <div class="plan-step">
+            <span class="plan-step-num">03</span>
+            <h3>USDA-Inspected Since 1973</h3>
+            <p>Inspected every day we run &mdash; the same federal stamp you look
+               for at the meat case.</p>
+          </div>
+        </div>
+        <div class="labor-family-photo">
+          <img src="assets/img/family-original.webp" alt="Four members of the Ricci family in their McKees Rocks shop, with fresh coils of sausage on the table in front of them" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         HOW IT WORKS
+    ══════════════════════════════════════════ -->
+    <section class="section-apply">
+      <div class="apply-inner">
+        <div class="apply-header">
+          <span class="eyebrow">Three steps</span>
+          <h2>How It Works.</h2>
+        </div>
+        <div class="reserve-steps">
+          <div class="reserve-step">
+            <span class="reserve-step-num">01</span>
+            <h3>Order by Wednesday</h3>
+            <p>Pick hot-and-sweet or all hot. Checkout takes a minute.</p>
+          </div>
+          <div class="reserve-step">
+            <span class="reserve-step-num">02</span>
+            <h3>We Pack It Frozen</h3>
+            <p>Boxes go out Tuesday and Wednesday, packed cold in an insulated
+               shipper.</p>
+          </div>
+          <div class="reserve-step">
+            <span class="reserve-step-num">03</span>
+            <h3>It's There Before the Weekend</h3>
+            <p>Thursday or Friday at your door. Freeze it, or fire up the grill.</p>
+          </div>
+        </div>
+        <div class="reserve-buy">
+          <a class="btn btn-primary btn-lg" href="#box" data-box-cta>Order Now</a>
+        </div>
+        <p class="reserve-fineprint">
+          Free shipping to Pennsylvania, Maryland, New York and Delaware.
+          Order by Wednesday, September 2.
+        </p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         COOKING
+    ══════════════════════════════════════════ -->
+    <section class="menu-section">
+      <div class="container">
+        <div class="menu-section-header">
+          <span class="eyebrow">Once it lands</span>
+          <h2>Three Ways to Use It.</h2>
+        </div>
+        <div class="plan-grid">
+          <div class="plan-step">
+            <h3>On the Grill</h3>
+            <p>Whole rope, coiled, over medium heat, turned once. Peppers and
+               onions on the side.</p>
+          </div>
+          <div class="plan-step">
+            <h3>Sunday Gravy</h3>
+            <p>Brown it in batches, drop it into a pot of the sauce that came
+               with it, let it go low and slow. Serve over rigatoni.</p>
+          </div>
+          <div class="plan-step">
+            <h3>Sandwich Night</h3>
+            <p>Hot with peppers and onions. Sweet with sauce and Grande. Both on
+               a good roll.</p>
+          </div>
+        </div>
+        <p class="ship-freezer-note">
+          <strong>Freezer strategy:</strong> portion it into 1 lb bags before it
+          goes in the freezer, and pull what you need for any given dinner.
+        </p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         FINAL CTA
+    ══════════════════════════════════════════ -->
+    <section class="ship-final">
+      <div class="container">
+        <span class="eyebrow">Last call</span>
+        <h2>Order by Wednesday, September 2.</h2>
+        <p class="ship-final-lead">
+          We're closed Sunday and Monday for the holiday. Wednesday is the last
+          day a box goes out in time for the weekend.
+        </p>
+        <p class="ship-final-cta">
+          <a class="btn btn-primary btn-lg" href="#box" data-box-cta>Order Now</a>
+        </p>
+        <p class="ship-terms">
+          Free shipping &middot; Arrives frozen &middot; Order by Wednesday, September 2
+        </p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         FAQ
+    ══════════════════════════════════════════ -->
+    <article class="story-body ship-faq">
+      <h2>Questions</h2>
+
+      <h3>When will it get here?</h3>
+      <p>
+        Boxes ship Tuesday and Wednesday and arrive Thursday or Friday. Order by
+        Wednesday, September 2 to get it before the holiday weekend.
+      </p>
+
+      <h3>Will it still be frozen?</h3>
+      <p>
+        Yes. Each box is packed in an insulated shipper with cold packs, sized
+        for the trip. Put it in the freezer when it lands.
+      </p>
+
+      <h3>Can I get all hot, or all sweet?</h3>
+      <p>
+        Either one. Pick 10 lb hot or 10 lb sweet instead of the split — same
+        price, same box.
+      </p>
+
+      <h3>What's the sauce?</h3>
+      <p>
+        Two quart tubs of Lil's homemade tomato sauce, made at the shop and
+        packed in the same box. Every version of the box includes them.
+      </p>
+
+      <h3>Is shipping really free?</h3>
+      <p>
+        To Pennsylvania, Maryland, New York and Delaware, yes — it's in the
+        price. No surprises at checkout.
+      </p>
+
+      <h3>Can I just come pick it up?</h3>
+      <p>
+        Absolutely. 590 Pine Hollow Road, McKees Rocks. Open through Saturday
+        9/5 — Monday to Friday 8:30 to 5, Saturday 9 to 4 — and closed Sunday
+        and Monday for the holiday.
+      </p>
+
+      <h3>What if something's wrong?</h3>
+      <p>
+        If it's not the best sausage you've had, we'll refund you. No forms, no
+        photos, nothing to send back. Call the shop at
+        <a href="tel:4123319531">412-331-9531</a>.
+      </p>
+    </article>
+
+    <!-- ══════════════════════════════════════════
+         EMAIL CAPTURE
+    ══════════════════════════════════════════ -->
+    <section class="section-email">
+      <div class="container">
+        <span class="eyebrow">From the shop</span>
+        <h2>Get the Shop News.</h2>
+        <p>New products, seasonal boxes, and what's coming out of the case.</p>
+        <form class="email-form" data-crm="subscribe" data-source="labor-day-box" data-success="You're on the list.">
+          <input type="email" name="email" placeholder="Your email address" required />
+          <input type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px" />
+          <button type="submit">Sign Me Up</button>
+          <span class="crm-status" role="status" style="display:block;margin-top:8px;font-size:0.9rem;"></span>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Minimal footer. No catalog links — this page has one job. -->
+  <footer class="site-footer ship-footer">
+    <div class="footer-bottom">
+      <span>&copy; 2026 Ricci's Italian Sausage. All rights reserved.</span>
+      <span><a href="https://maps.app.goo.gl/9rDvQrZiuCKRCmFE9" target="_blank" rel="noopener noreferrer">590 Pine Hollow Rd, McKees Rocks, PA 15136</a> · <a href="tel:4123319531">412-331-9531</a></span>
+      <span><a href="products.html">What We Make</a> · <a href="shipping.html">Shipping</a> · <a href="returns.html">Returns</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span>
+    </div>
+  </footer>
+
+  <script src="js/crm.js" defer></script>
+  <script src="js/labor-day-box.js" defer></script>
+</body>
+</html>

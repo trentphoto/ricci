@@ -121,6 +121,7 @@ All files are IIFEs, no dependencies, included with `defer`.
 | `shopify-variants.js` | **Auto-generated** by `_build/sync-shopify-bundles.mjs`. Maps bundle slugs → Shopify variant GIDs per zone. Do not edit by hand — re-run sync after price changes. |
 | `hero-slider.js` | Homepage hero image rotation. |
 | `preorder-modal.js` | Pre-order modal UI. |
+| `labor-day.js` / `labor-day-box.js` | Seasonal Labor Day pages. Each owns a date-derived countdown, a product switch, and a `CHECKOUT` map. Separate offers — `labor-day.js` is the in-store $29.99 box (two-way hot/sweet switch, empty `CHECKOUT` falls back to `tel:`); `labor-day-box.js` is the $129 shipped box (three-way mixed/hot/sweet switch, one CTA and **no** phone fallback, so empty `CHECKOUT` disables the buttons and shows a warning). Delete with their pages. |
 
 ### Forms — all routed to the Fly CRM
 
@@ -342,17 +343,29 @@ Source of truth for ingredient/pricing claims. Do not improvise seasoning
 details — if it isn't listed here, ask before writing it.
 
 **Sweet Italian sausage is NOT "the hot recipe minus the pepper."** They are two
-different blends. Sweet is the Abruzzo/Sulmona original; hot is the spiced one.
+different blends.
 
-| | Sweet (the original, 1945) | Hot |
+**Both came over from Sulmona with the family in 1945** — confirmed by the owner
+2026-08-30. Neither one is "the original" at the other's expense, and the hot is
+not a later house invention. Earlier wording here ("Sweet is the Abruzzo/Sulmona
+original; hot is the spiced one") read as though only sweet had the 1945
+provenance, and copy was written from it that way. Say 1945 and Sulmona for
+either blend, or for both together.
+
+| | Sweet | Hot |
 |---|---|---|
-| Seasoning | Pork, water, salt, **cracked black pepper**, dextrose | Crushed red pepper, **real paprika**, whole fennel seed, garlic |
-| Explicitly NOT in it | No fennel, no garlic, no paprika, no crushed red pepper | — |
+| Seasoning | Pork, water, salt, **cracked black pepper**, dextrose | Crushed red pepper, **real paprika**, whole fennel seed |
+| Explicitly NOT in it | No fennel, no paprika, no crushed red pepper | — |
 | Heat | None | Medium, builds slowly — "third bite, not the first" |
 
 - Both: natural casing, 22–25% fat, hand-mixed in ~200 lb batches daily,
   all natural — no fillers, MSG, additives, or preservatives. USDA-inspected
   daily since 1973.
+- **Neither blend contains garlic** — corrected by the owner 2026-08-30. The
+  table used to list garlic in the hot seasoning and "no garlic" as a sweet-only
+  exclusion; both were wrong. Don't write garlic into either sausage, and don't
+  write "no garlic" as a thing that distinguishes sweet from hot — it doesn't.
+  (Meatballs *do* contain garlic. Different product.)
 - **Never claim "no sugar"** on sweet — dextrose is in the blend. "Sweet" refers
   to the absence of chili heat, nothing else; say that instead.
 ### Packaging (got this wrong twice — read before writing any copy)
@@ -432,6 +445,89 @@ the slot blank or use the typographic plate stand-in. See `CLAUDE.md`.
    has **no default** — until it is set, `/api/preorder` returns 503 and the
    modal tells customers to call. Set it only from a confirmed price.
 
+3. **Labor Day 2026 campaign (`site/labor-day.html`).** Added 2026-08-29,
+   scoped down to a single offer 2026-08-30. Confirmed by the owner: **The
+   Cookout Box, $29.99** — 5 lb rope (**hot or sweet, one or the other**,
+   chosen at Square checkout), **½ lb peppers and onions**, **18 Mancini's
+   sausage rolls**. **Five pounds of rope feeds about 20 people.** Prepaid, pickup only, through Sat 9/5. The second offer
+   ("Feed the Whole Block", 10 lbs at case price) was **dropped** — it never
+   had verified numbers and is gone from the page and the campaign doc.
+
+   The page has a hot/sweet switch (`.heat-switch`) that drives the rope card
+   image, name and seasoning copy, the blurb beneath it, and which Square item
+   the checkout button points at. Both blends' copy is read straight from the
+   Product facts table above — if that table changes, update `ROPE` in
+   `js/labor-day.js` too.
+
+   Still open:
+   - **Sauce naming.** The shipped box now includes **2 quarts of sauce**
+     (added 2026-08-30, price moved $129 → $149). The product photo's label
+     reads *"Lil's Famous Homemade Tomato Sauce," net wt. 32 oz (1 quart)*, but
+     the rest of the site calls it **San Marzano sauce**. `labor-day-box.html`
+     and the Shopify sync copy follow the label. Confirm which name is correct
+     and make the site consistent.
+   - **Packed shipping weight with the sauce.** `WEIGHT_LB` in
+     `_build/sync-shopify-labor-day.mjs` was bumped 12 → 17 as an allowance
+     (10 lb meat + 2 quart tubs + shipper). Not weighed — confirm before
+     shipping rates go live.
+   - **`labor-day-box.html` (the shipped 10 lb box) has no checkout URLs yet.**
+     `CHECKOUT` in `js/labor-day-box.js` is empty for all three mixes; that page
+     disables its buttons rather than degrading to tel:, so it must not run ads
+     until they're set. The pickup page (`labor-day.html`) **is** wired —
+     Square payment links, hot and sweet, set 2026-08-30.
+   - **The pickup page's Square links are Payment Links (`square.link/u/…`),
+     not Square Online items.** Payment Links don't track inventory, so there
+     is no automatic sold-out and no dashboard number for the Friday "[X] boxes
+     left" email. If a real cap matters, rebuild them as Online items.
+   - **Peppers & onions: cooked or raw?** The owner-supplied photo
+     (`peppers-onions.webp`) shows them charred. The card gives the name and
+     the weight and claims neither state.
+   - **Mancini's is 18 rolls, not loaves.** The original brief said "loaves of
+     Mancini's bread"; the owner's photo and confirmation are **sausage rolls**
+     (the buns). Ad copy says rolls.
+   - Not blocking, but flagged to the owner: ½ lb of peppers and onions across
+     5 lbs of sausage and 18 rolls is ~⅓ oz per roll.
+
+4. **Labor Day 2026 DTC shipped box (`site/labor-day-box.html`).** Added
+   2026-08-30. A **second, separate** offer from the in-store Cookout Box at
+   `/labor-day` — cold paid traffic (PA, MD, NY, DE), one offer, one CTA, no
+   nav and no catalog footer. Do not "sync the nav" onto it.
+
+   Owner-supplied in the campaign brief, treated as confirmed: **$129 for
+   10 lbs shipped frozen** — 5 lb hot + 5 lb sweet, **10 lb all hot**, or
+   **10 lb all sweet**, same price whichever — **free shipping to PA, MD, NY and DE**, **order by Wed
+   Sep 2**, ships Tue/Wed, arrives **Thu or Fri**. Guarantee: **full refund if
+   it isn't the best sausage you've had**, no forms, no photos, nothing to send
+   back, handled on the phone. The guarantee wording appears twice on the page
+   (hero and FAQ) and must stay identical in both.
+
+   Packaging on the page follows the table above: **two labeled 5 lb boxes of
+   rope inside an insulated shipper with cold packs.** The brief said "two
+   ropes" — that was rewritten, not copied.
+
+   Still open:
+   - **Checkout URLs.** `CHECKOUT` in `js/labor-day-box.js` has all three keys
+     (`mixed`, `hot`, `sweet`) empty. The page has **one CTA ("Order Now") and
+     no phone-order path**, so a missing URL disables every button and shows a
+     loud dashed warning strip under the offer rather than degrading to `tel:`
+     — it cannot reach paid traffic like that. **Launch blocker.** There is no
+     Shopify variant for a $129 10 lb box — the two existing bundles are
+     $189/$289 with zone pricing — so this needs its own product, and the
+     PA/MD/NY/DE restriction has to be enforced at checkout or an out-of-region
+     order eats the margin.
+   - **"One of only two USDA-inspected sausage makers in Pittsburgh with its
+     own retail counter — and the only one that also cooks."** In the brief and
+     already live on `hot-italian-sausage-pittsburgh.html`, but never verified
+     here. **Left off the new page** pending confirmation.
+   - **Reviews.** No section built — the brief says cut it rather than ship an
+     empty block. Needs 3 quotes with name + city.
+   - **Meta Pixel.** Not installed anywhere in the repo; the page carries a
+     commented placeholder in `<head>`.
+   - Cut as unverified, same as on the in-store page: "hot outsells sweet seven
+     to one," and "not a single ingredient changed since" on the sweet.
+
+   Campaign doc: `labor-day-dtc-campaign.md` (ads + build checklist).
+
 The club is unlaunched, so treat the rest of that page as unverified too. Still
 live on it and never confirmed: the seasonal cut calendar (December = Feast of
 the Seven Fishes, May = fennel-and-orange, October = smoke-paprika), gift
@@ -441,7 +537,7 @@ Answered and moved into the table above on 2026-08-06: 5 lb box is a plain box �
 meatball bag · bundle labeling · insulated box + cold packs · rolls baked then
 frozen · peppers frozen in clear bags · sauce in a deli container · counter bulk
 bags · no recipe card · no bonus sample · no cooking numbers.
-- Hours/address: 500 Pine Hollow Rd, McKees Rocks · Mon–Fri 8:30–5, Sat 9–4.
+- Hours/address: 590 Pine Hollow Rd, McKees Rocks · Mon–Fri 8:30–5, Sat 9–4.
 
 ## Known gaps / pre-launch checklist
 
@@ -473,6 +569,16 @@ bags · no recipe card · no bonus sample · no cooking numbers.
   - Rope/link photos (added Jul 2026): `hot-links-pan.webp`, `sweet-links-pan.webp`
     — grilled links in a pan. Use on **raw product pages** (shop, product cards),
     **not** on hot-foods/sandwich content.
+  - `mancinis-sausage-rolls-bag.webp` (added 2026-08-29, owner-supplied) — a
+    retail bag of **Mancini's Bakery sausage rolls**, i.e. the *buns*.
+    **Name collision, read carefully:** this is NOT `sausage-roll.webp` or
+    `sausage-rolls-tray.webp`, which are **Lil's sausage rolls** — our baked
+    hot-sausage-in-dough hot-foods item. Two unrelated products, nearly the
+    same name. Never swap one image for the other.
+  - `peppers-onions.webp` (added 2026-08-29, owner-supplied) — sliced red,
+    green and orange peppers with onions, **charred/cooked**, not raw. Used on
+    the Labor Day Cookout Box card. Whether the box item itself is cooked or
+    raw is unconfirmed — see "Open questions".
   - Hero placeholders use the text "Photo coming soon"
     (`product-hero-img--placeholder`).
   - "What's in the box" photos on `shop/pittsburgh-italian-pack.html` (added
