@@ -185,12 +185,12 @@
         'T' + pad(d.getHours()) + pad(d.getMinutes()) + '00';
     }
 
-    var details = "Catering pickup for " + name + ".\n" + orderLines.join('\n') + '\n\n500 Pine Hollow Rd, McKees Rocks, PA 15136';
+    var details = "Catering pickup for " + name + ".\n" + orderLines.join('\n') + '\n\n590 Pine Hollow Rd, McKees Rocks, PA 15136';
     return 'https://calendar.google.com/calendar/render?action=TEMPLATE' +
       '&text=' + encodeURIComponent("Ricci's Catering Pickup") +
       '&dates=' + gcalDate(startDate) + '/' + gcalDate(endDate) +
       '&details=' + encodeURIComponent(details) +
-      '&location=' + encodeURIComponent('500 Pine Hollow Rd, McKees Rocks, PA 15136');
+      '&location=' + encodeURIComponent('590 Pine Hollow Rd, McKees Rocks, PA 15136');
   }
 
   function submitOrder() {
@@ -279,7 +279,7 @@
           '<div class="cater-success-pickup">' +
             '<span class="eyebrow">Pickup</span>' +
             '<p class="cater-success-date">' + dateDisplay + '</p>' +
-            '<p class="cater-success-addr">In-store pickup · 500 Pine Hollow Rd · McKees Rocks, PA 15136</p>' +
+            '<p class="cater-success-addr">In-store pickup · 590 Pine Hollow Rd · McKees Rocks, PA 15136</p>' +
             calHtml +
           '</div>' +
           '<div class="cater-success-summary">' +

@@ -66,7 +66,7 @@
       '    <div class="cater-header">' +
       '      <span class="eyebrow">Pepperoni Roll · Pre-Order</span>' +
       '      <h2 id="preorder-title">Reserve Your Pepperoni Rolls</h2>' +
-      '      <p>$16.99 each. Pickup <strong>' + pickupLabel + '</strong> at 500 Pine Hollow Rd. Mondays only &mdash; reserve while they last.</p>' +
+      '      <p>$16.99 each. Pickup <strong>' + pickupLabel + '</strong> at 590 Pine Hollow Rd. Mondays only &mdash; reserve while they last.</p>' +
       '      <p style="font-weight:600;">Earliest pickup is 11:00 AM.</p>' +
       '      <button type="button" class="cater-close" id="preorder-close" aria-label="Close">&times;</button>' +
       '    </div>' +
@@ -119,7 +119,7 @@
           '<div class="cater-success-pickup">' +
             '<span class="eyebrow">Pickup</span>' +
             '<p class="cater-success-date">' + pickupLabel + ' at ' + time + '</p>' +
-            '<p class="cater-success-addr">In-store pickup · 500 Pine Hollow Rd · McKees Rocks, PA 15136</p>' +
+            '<p class="cater-success-addr">In-store pickup · 590 Pine Hollow Rd · McKees Rocks, PA 15136</p>' +
           '</div>' +
           '<div class="cater-success-summary">' +
             '<span class="eyebrow">Your Reservation</span>' +

@@ -71,7 +71,7 @@
         message: 'OFFICE LUNCH — ' + (profile.company || 'no company') + '\n' +
           lines.join('\n') + '\nTotal: $' + order.total.toFixed(2) +
           '\nPickup at ' + order.time +
-          '\n500 Pine Hollow Rd, McKees Rocks, PA 15136' +
+          '\n590 Pine Hollow Rd, McKees Rocks, PA 15136' +
           (order.notes ? '\nNotes: ' + order.notes : '') +
           (profile.newsletter ? '\nWants holiday specials newsletter.' : '')
       })
@@ -287,7 +287,7 @@
         '<div class="cater-success-pickup">' +
           '<span class="eyebrow">Pickup</span>' +
           '<p class="cater-success-date">' + formatDateDisplay(order.date, order.time) + '</p>' +
-          '<p class="cater-success-addr">500 Pine Hollow Rd · McKees Rocks, PA 15136</p>' +
+          '<p class="cater-success-addr">590 Pine Hollow Rd · McKees Rocks, PA 15136</p>' +
           '<p class="cater-success-addr">Everything boxed up at the counter — walk in, grab the boxes, go.</p>' +
         '</div>' +
         '<div class="cater-success-summary">' +
