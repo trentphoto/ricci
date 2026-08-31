@@ -3368,10 +3368,25 @@ body.nav-drawer-open .nav-backdrop {
   margin-top: 40px;
 }
 .plan-step {
-  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
   background: var(--cream);
   border: 1px solid var(--cream-dark);
   text-align: left;
+  overflow: hidden;
+}
+.plan-step-img {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+}
+.plan-step-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.plan-step-body {
+  padding: 32px 28px;
 }
 .plan-step-num {
   display: block;
@@ -5067,7 +5082,8 @@ body.cater-open { overflow: hidden; }
   color: rgba(255,255,255,0.65);
   font-size: 1rem;
 }
-.ship-final-cta { margin-top: 32px !important; }
+.ship-final-cta { margin-top: 32px !important; margin-inline: auto; }
+.ship-final .ship-terms { margin-inline: auto; }
 
 .ship-faq { padding-top: 64px; padding-bottom: 64px; }
 
