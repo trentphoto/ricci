@@ -1,5 +1,5 @@
 # Netlify config — riccisausage.com
-# Only site/ is published. Tooling (_build/, shopify/), docs/, and _archive/
+# Only site/ is published. Tooling (tools/), docs/, and _archive/
 # live outside it and are never deployed.
 
 [build]

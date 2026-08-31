@@ -61,7 +61,7 @@
   };
 
   /*
-   * The two ropes. Seasoning copy is verbatim from WIKI.md "Product facts" —
+   * The two ropes. Seasoning copy is verbatim from docs/WIKI.md "Product facts" —
    * they are DIFFERENT BLENDS, not one recipe with the pepper left out. Both
    * came from Sulmona in 1945, so neither note claims that heritage over the
    * other; the hero says it once for both. Sweet has dextrose in it, so never

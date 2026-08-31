@@ -1,6 +1,6 @@
 .DS_Store
-_build/.env.local
+tools/.env.local
 .shopify/
-_build/shopify-app/
+tools/shopify-app/
 _archive/
 redesign-concepts/

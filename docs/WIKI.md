@@ -41,12 +41,17 @@ site/                 ← Netlify publish dir. The entire public website.
     img/              webp photos + storefront-sketch.webp (homepage hero)
     favicon/          generated "R" monogram set (ico, 16/32 png, apple-touch, 512)
 netlify.toml          publish dir config — do not delete
-_build/               Shopify sync script, variant map, env example (NOT deployed)
-shopify/              GraphQL queries/mutations + sync-bundles.sh wrapper (NOT deployed)
+tools/                sync scripts, Shopify GraphQL, Square helpers (NOT deployed)
+  shopify/            GraphQL + sync-*.sh wrappers
+  square/             one-off Square catalog scripts
+  *.mjs               check-pages, sync-shopify-*
 shopify.app.toml      linked Shopify CLI app config (app name: r1)
 _archive/             old page/style snapshots — ignore
 _drafts/              finished pages held back from launch (NOT deployed)
-WIKI.md               this file (NOT deployed)
+docs/                 wiki, campaign briefs, SEO plans (NOT deployed)
+  WIKI.md             architecture reference — read this first
+  gnhf-seo-pages.md   non-branded SEO page backlog
+  labor-day-dtc-campaign.md
 ```
 
 ### `_drafts/` — pages deliberately not live
@@ -56,7 +61,7 @@ not in `sitemap.xml`, not in `_redirects`, and nothing in `site/` links to them.
 
 To launch one: move it back into `site/`, add its `<loc>` to `sitemap.xml`, add
 the `.html → clean URL` 301 to `_redirects`, and restore the internal links.
-Then run `node _build/check-pages.mjs site/THE-PAGE.html`.
+Then run `node tools/check-pages.mjs site/THE-PAGE.html`.
 
 Currently parked:
 
@@ -118,7 +123,7 @@ All files are IIFEs, no dependencies, included with `defer`.
 | `nav-drawer.js` | Mobile nav toggle / backdrop. |
 | `shipping.js` | State-based all-in pricing. Maps US state → shipping zone (A–E), updates `.product-price[data-base][data-tier]` elements, persists state in `localStorage` (`ricci_ship_state`), fires `ricci:ship-state` on change. Exposes `window.RicciShipping` (`getState`, `getGroup`, `canShip`, `priceFor`, `stateName`). Loaded on `products.html` and `shop.html`. |
 | `cart.js` | localStorage cart + nav dropdown. `[data-add-to-cart]` buttons add bundle items; prices sync with `RicciShipping`. Checkout builds a Shopify cart URL from `js/shopify-variants.js` using the customer's zone variant. Exposes `window.RicciCart`. |
-| `shopify-variants.js` | **Auto-generated** by `_build/sync-shopify-bundles.mjs`. Maps bundle slugs → Shopify variant GIDs per zone. Do not edit by hand — re-run sync after price changes. |
+| `shopify-variants.js` | **Auto-generated** by `tools/sync-shopify-bundles.mjs`. Maps bundle slugs → Shopify variant GIDs per zone. Do not edit by hand — re-run sync after price changes. |
 | `hero-slider.js` | Homepage hero image rotation. |
 | `preorder-modal.js` | Pre-order modal UI. |
 | `labor-day.js` / `labor-day-box.js` | Seasonal Labor Day pages. Each owns a date-derived countdown, a product switch, and a `CHECKOUT` map. Separate offers — `labor-day.js` is the in-store $29.99 box (two-way hot/sweet switch, empty `CHECKOUT` falls back to `tel:`); `labor-day-box.js` is the $129 shipped box (three-way mixed/hot/sweet switch, one CTA and **no** phone fallback, so empty `CHECKOUT` disables the buttons and shows a warning). Delete with their pages. |
@@ -184,7 +189,7 @@ There is no build step. If you ever need to recreate the generator, recover the
 old scripts from git history (they were removed in the commit that added this
 section) and re-sync their `<head>`/footer templates to current pages first.
 
-`_build/` now holds the Shopify sync tooling (see **Shopify** below). The old
+`tools/` now holds the Shopify sync tooling (see **Shopify** below). The old
 `shopify-products.csv` import file may still be present but the live catalog is
 managed via GraphQL sync.
 
@@ -208,7 +213,7 @@ managed via GraphQL sync.
 | Linked CLI app | **r1** (`shopify.app.toml`) |
 
 Always pass `--store tiyndf-za.myshopify.com` (or `SHOPIFY_STORE=tiyndf-za` in
-`_build/.env.local`) — **not** the admin slug.
+`tools/.env.local`) — **not** the admin slug.
 
 ### Product model
 
@@ -277,16 +282,16 @@ Dawn catalog.
 shopify store auth --store tiyndf-za.myshopify.com \
   --scopes read_products,write_products,read_themes,write_themes
 
-./shopify/sync-theme.sh
+./tools/shopify/sync-theme.sh
 ```
 
-Source template: `shopify/theme/index.json` (single custom-liquid section).
+Source template: `tools/shopify/theme/index.json` (single custom-liquid section).
 
 If the API returns a theme exemption error, do it manually in Admin:
 
 1. **Online Store → Themes → Customize**
 2. Homepage → remove extra sections → add **Custom liquid**
-3. Paste the HTML from `shopify/theme/index.json` → `custom_liquid` setting (or link to riccisausage.com)
+3. Paste the HTML from `tools/shopify/theme/index.json` → `custom_liquid` setting (or link to riccisausage.com)
 4. **Save**
 
 You do **not** need a polished Shopify theme for the cart handoff to work.
@@ -312,22 +317,22 @@ shopify app config link
 **Sync bundles** (creates/updates products + regenerates variant map):
 
 ```bash
-./shopify/sync-bundles.sh          # live sync
-./shopify/sync-bundles.sh --dry-run
-./shopify/sync-bundles.sh --ping   # test connection only
-./shopify/sync-theme.sh            # minimal homepage on shop subdomain
+./tools/shopify/sync-bundles.sh          # live sync
+./tools/shopify/sync-bundles.sh --dry-run
+./tools/shopify/sync-bundles.sh --ping   # test connection only
+./tools/shopify/sync-theme.sh            # minimal homepage on shop subdomain
 ```
 
 On success, writes:
 
-- `_build/shopify-variant-map.json` — reference copy for tooling
+- `tools/shopify-variant-map.json` — reference copy for tooling
 - `site/js/shopify-variants.js` — loaded by `cart.js` at runtime
 
 **Re-run sync** whenever bundle base prices or zone add-ons change in
-`_build/sync-shopify-bundles.mjs` / `js/shipping.js`.
+`tools/sync-shopify-bundles.mjs` / `js/shipping.js`.
 
-Implementation: `_build/sync-shopify-bundles.mjs` calls `shopify store execute`
-with GraphQL in `shopify/graphql/`. Variant weights are **not** set via API
+Implementation: `tools/sync-shopify-bundles.mjs` calls `shopify store execute`
+with GraphQL in `tools/shopify/graphql/`. Variant weights are **not** set via API
 (Shopify `productSet` limitation) — set manually in Admin if needed.
 
 ### Manual Shopify checklist
@@ -467,7 +472,7 @@ the slot blank or use the typographic plate stand-in. See `CLAUDE.md`.
      and the Shopify sync copy follow the label. Confirm which name is correct
      and make the site consistent.
    - **Packed shipping weight with the sauce.** `WEIGHT_LB` in
-     `_build/sync-shopify-labor-day.mjs` was bumped 12 → 17 as an allowance
+     `tools/sync-shopify-labor-day.mjs` was bumped 12 → 17 as an allowance
      (10 lb meat + 2 quart tubs + shipper). Not weighed — confirm before
      shipping rates go live.
    - **`labor-day-box.html` (the shipped 10 lb box) has no checkout URLs yet.**
@@ -526,7 +531,7 @@ the slot blank or use the typographic plate stand-in. See `CLAUDE.md`.
    - Cut as unverified, same as on the in-store page: "hot outsells sweet seven
      to one," and "not a single ingredient changed since" on the sweet.
 
-   Campaign doc: `labor-day-dtc-campaign.md` (ads + build checklist).
+   Campaign doc: `docs/labor-day-dtc-campaign.md` (ads + build checklist).
 
 The club is unlaunched, so treat the rest of that page as unverified too. Still
 live on it and never confirmed: the seasonal cut calendar (December = Feast of

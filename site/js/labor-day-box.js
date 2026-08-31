@@ -63,7 +63,7 @@
 
   /*
    * The three ways to buy ten pounds. Same price whichever you pick.
-   * Seasoning copy anywhere on this page comes from WIKI.md "Product facts" —
+   * Seasoning copy anywhere on this page comes from docs/WIKI.md "Product facts" —
    * hot and sweet are DIFFERENT BLENDS, not one recipe with the pepper left
    * out, and sweet has dextrose in it, so never phrase it as "no sugar."
    */

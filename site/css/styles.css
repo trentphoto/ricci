@@ -4594,7 +4594,7 @@ body.cater-open { overflow: hidden; }
 }
 
 /* Unfilled figures. Deliberately loud — this page cannot ship with any of
-   these still on it. See WIKI.md "Open questions". */
+   these still on it. See docs/WIKI.md "Open questions". */
 .tbd {
   display: inline-block;
   padding: 1px 8px;

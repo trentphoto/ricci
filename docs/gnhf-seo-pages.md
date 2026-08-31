@@ -36,8 +36,8 @@ The short version, which the linter enforces:
   serving". That is the register the whole site is already in.
 - Never "vacuum-sealed" (it isn't). Never "N links" (the 5 lb box is one
   continuous rope). Never "no sugar" about sweet (dextrose is in the blend).
-- Any product detail not in `WIKI.md` → "Product facts" does not get written.
-  Leave the slot blank, add the question to `WIKI.md` → "Open questions", and
+- Any product detail not in `docs/WIKI.md` → "Product facts" does not get written.
+  Leave the slot blank, add the question to `docs/WIKI.md` → "Open questions", and
   note it in `notes.md` so the morning review catches it.
 
 This means the recipe pages are **not** step-numbered recipes. They are
@@ -85,7 +85,7 @@ Every page links to at least one product page and one buyable page:
 ## Verification — the gate for each iteration
 
 ```
-node _build/check-pages.mjs site/THE-NEW-PAGE.html
+node tools/check-pages.mjs site/THE-NEW-PAGE.html
 ```
 
 Must exit 0. It fact-lints all 38+ pages and runs structure, head, canonical,
@@ -112,7 +112,7 @@ Record in `notes.md` after each page:
 
 - Which page was completed and its slug.
 - Every blank slot you left, and the fact you needed for it.
-- Anything you added to `WIKI.md` → "Open questions".
+- Anything you added to `docs/WIKI.md` → "Open questions".
 - Any judgment call that should be reviewed rather than accepted.
 
 ## Out of scope
