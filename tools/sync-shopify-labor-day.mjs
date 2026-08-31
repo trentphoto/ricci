@@ -9,9 +9,9 @@
  * labor-day-box.html gets its own inventory count and its own checkout URL.
  *
  * Usage:
- *   ./shopify/sync-labor-day.sh --ping
- *   ./shopify/sync-labor-day.sh --dry-run
- *   ./shopify/sync-labor-day.sh
+ *   ./tools/shopify/sync-labor-day.sh --ping
+ *   ./tools/shopify/sync-labor-day.sh --dry-run
+ *   ./tools/shopify/sync-labor-day.sh
  */
 
 import { spawnSync } from "node:child_process";
@@ -21,13 +21,13 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-const GRAPHQL = join(ROOT, "shopify", "graphql");
-const BUILD = join(ROOT, "_build");
+const TOOLS = join(ROOT, "tools");
+const GRAPHQL = join(TOOLS, "shopify", "graphql");
 const ARGS = new Set(process.argv.slice(2));
 const DRY_RUN = ARGS.has("--dry-run");
 const PING_ONLY = ARGS.has("--ping");
 
-loadEnvFile(join(BUILD, ".env.local"));
+loadEnvFile(join(TOOLS, ".env.local"));
 
 const PRICE = 149.0;
 // 10 lb of meat + two quart tubs of sauce + insulated shipper and cold packs.
@@ -115,7 +115,7 @@ function readTomlDevStore() {
 function storeDomain() {
   const raw = process.env.SHOPIFY_STORE || readTomlDevStore();
   if (!raw) {
-    console.error("✗ Set SHOPIFY_STORE in _build/.env.local or [build].dev_store_url in shopify.app.toml");
+    console.error("✗ Set SHOPIFY_STORE in tools/.env.local or [build].dev_store_url in shopify.app.toml");
     process.exit(1);
   }
   return raw.includes(".myshopify.com") ? raw : `${raw}.myshopify.com`;
@@ -369,7 +369,7 @@ async function main() {
         checkoutUrl: checkoutUrl(store, variant.id),
       };
     }
-    const outPath = join(BUILD, "shopify-labor-day-map.json");
+    const outPath = join(TOOLS, "shopify-labor-day-map.json");
     writeFileSync(outPath, JSON.stringify(map, null, 2) + "\n");
     console.log(`✓ Wrote ${outPath}`);
     console.log("\nPaste these into CHECKOUT in site/js/labor-day-box.js:");

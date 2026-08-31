@@ -1,0 +1,29 @@
+{
+  "mixed": {
+    "handle": "labor-day-box-hot-and-sweet",
+    "productId": "gid://shopify/Product/15848787280032",
+    "variantId": "gid://shopify/ProductVariant/58785280393376",
+    "sku": "RIC-LABOR-MIX",
+    "price": "149.00",
+    "title": "The Labor Day Box — Hot & Sweet (10 lb + 2 qt Sauce)",
+    "checkoutUrl": "https://tiyndf-za.myshopify.com/cart/58785280393376:1"
+  },
+  "hot": {
+    "handle": "labor-day-box-all-hot",
+    "productId": "gid://shopify/Product/15848787411104",
+    "variantId": "gid://shopify/ProductVariant/58785280524448",
+    "sku": "RIC-LABOR-HOT",
+    "price": "149.00",
+    "title": "The Labor Day Box — All Hot (10 lb + 2 qt Sauce)",
+    "checkoutUrl": "https://tiyndf-za.myshopify.com/cart/58785280524448:1"
+  },
+  "sweet": {
+    "handle": "labor-day-box-all-sweet",
+    "productId": "gid://shopify/Product/15848787509408",
+    "variantId": "gid://shopify/ProductVariant/58785280589984",
+    "sku": "RIC-LABOR-SWEET",
+    "price": "149.00",
+    "title": "The Labor Day Box — All Sweet (10 lb + 2 qt Sauce)",
+    "checkoutUrl": "https://tiyndf-za.myshopify.com/cart/58785280589984:1"
+  }
+}

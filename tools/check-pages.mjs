@@ -2,13 +2,13 @@
 // Verification gate for site/ pages. Used as the per-iteration check for
 // autonomous runs, but fine to run by hand:
 //
-//   node _build/check-pages.mjs                        # fact-lint all pages
-//   node _build/check-pages.mjs site/some-page.html    # full check on one page
+//   node tools/check-pages.mjs                        # fact-lint all pages
+//   node tools/check-pages.mjs site/some-page.html    # full check on one page
 //
 // Two layers:
 //   1. Fact lint  — runs over every page, always. Catches the invented
 //      cook temps / times / quantities / packaging claims described in
-//      CLAUDE.md and WIKI.md "Cooking directions: no numbers".
+//      CLAUDE.md and docs/WIKI.md "Cooking directions: no numbers".
 //   2. Page check — structural + head + link checks, only for pages named
 //      on the command line.
 
@@ -29,7 +29,7 @@ const warn = (file, msg) => warnings.push(`${file}: ${msg}`);
 // These encode claims that have actually gone wrong on this site before.
 const FACT_RULES = [
   ['cook temperature', /\b\d{2,3}\s*(?:°\s*F|degrees?\b|&deg;\s*F)/i,
-    'no temperatures anywhere on the site — see WIKI.md "Cooking directions: no numbers"'],
+    'no temperatures anywhere on the site — see docs/WIKI.md "Cooking directions: no numbers"'],
   ['cook time', /\b\d+\s*(?:–|-|to\s)?\s*\d*\s*(?:min(?:ute)?s?|hours?|hrs?)\b(?=[^<]{0,80}\b(?:cook|bake|brown|simmer|grill|roast|fry|heat|oven|pan|gravy|sauce)\b)/i,
     'no cook times'],
   ['cook time (trailing)', /\b(?:cook|bake|brown|simmer|grill|roast|fry|heat)[^<.]{0,60}?\b\d+\s*(?:–|-|to\s)?\s*\d*\s*(?:min(?:ute)?s?|hours?|hrs?)\b/i,

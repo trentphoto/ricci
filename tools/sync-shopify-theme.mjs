@@ -10,8 +10,8 @@
  *     --scopes read_products,write_products,read_themes,write_themes
  *
  * Usage:
- *   ./shopify/sync-theme.sh
- *   ./shopify/sync-theme.sh --dry-run
+ *   ./tools/shopify/sync-theme.sh
+ *   ./tools/shopify/sync-theme.sh --dry-run
  */
 
 import { spawnSync } from "node:child_process";
@@ -21,18 +21,18 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-const GRAPHQL = join(ROOT, "shopify", "graphql");
-const THEME_DIR = join(ROOT, "shopify", "theme");
+const TOOLS = join(ROOT, "tools");
+const GRAPHQL = join(TOOLS, "shopify", "graphql");
+const THEME_DIR = join(TOOLS, "shopify", "theme");
 
 // local source → theme file path
 const THEME_FILES = [
   ["index.json", "templates/index.json"],
   ["robots.txt.liquid", "templates/robots.txt.liquid"],
 ];
-const BUILD = join(ROOT, "_build");
 const DRY_RUN = process.argv.includes("--dry-run");
 
-loadEnvFile(join(BUILD, ".env.local"));
+loadEnvFile(join(TOOLS, ".env.local"));
 
 function loadEnvFile(path) {
   if (!existsSync(path)) return;
@@ -57,7 +57,7 @@ function readTomlDevStore() {
 function storeDomain() {
   const raw = process.env.SHOPIFY_STORE || readTomlDevStore();
   if (!raw) {
-    console.error("✗ Set SHOPIFY_STORE in _build/.env.local or dev_store_url in shopify.app.toml");
+    console.error("✗ Set SHOPIFY_STORE in tools/.env.local or dev_store_url in shopify.app.toml");
     process.exit(1);
   }
   return raw.includes(".myshopify.com") ? raw : `${raw}.myshopify.com`;
@@ -146,7 +146,7 @@ function main() {
     console.error("✗ Theme upsert failed:");
     for (const err of payload.userErrors) console.error(`  ${err.message}`);
     console.error("\nShopify may block theme file edits unless your app has a theme exemption.");
-    console.error("Use the manual steps in WIKI.md → Shopify → Minimal homepage (Admin).");
+    console.error("Use the manual steps in docs/WIKI.md → Shopify → Minimal homepage (Admin).");
     process.exit(1);
   }
 

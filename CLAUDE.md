@@ -1,6 +1,6 @@
 # Ricci's Italian Sausage — working rules
 
-Read `WIKI.md` for architecture. This file is about how to behave in this repo.
+Read `docs/WIKI.md` for architecture. This file is about how to behave in this repo.
 
 ## Do not invent product facts. Ever.
 
@@ -8,7 +8,7 @@ This is a real business selling real food. Wrong copy on this site is a wrong
 claim to a paying customer, and some of it (packaging, ingredients, USDA status,
 allergens) is a compliance problem, not a style problem.
 
-**The rule:** if a product detail is not in `WIKI.md` → "Product facts", you do
+**The rule:** if a product detail is not in `docs/WIKI.md` → "Product facts", you do
 not write it. Not a plausible version, not a placeholder, not "something
 reasonable to fill the slot." You ask.
 
@@ -31,7 +31,7 @@ method, cold-chain handling, certifications, dates, awards, press mentions.
 
 1. Leave the slot empty, or use the `.includes-card-plate` / `.menu-item-plate`
    typographic stand-in, which is designed for exactly this.
-2. Write the question down in "Open questions" in `WIKI.md`.
+2. Write the question down in "Open questions" in `docs/WIKI.md`.
 3. Tell the user in your reply, plainly, that you left it blank and why.
 
 Do **not** copy a detail from a sibling page and assume it transfers. The wrong
