@@ -3374,6 +3374,10 @@ body.nav-drawer-open .nav-backdrop {
   border: 1px solid var(--cream-dark);
   text-align: left;
   overflow: hidden;
+  padding: 32px 28px;
+}
+.plan-step:has(.plan-step-img) {
+  padding: 0;
 }
 .plan-step-img {
   aspect-ratio: 4/3;
