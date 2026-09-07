@@ -789,6 +789,82 @@ body.nav-drawer-open .nav-backdrop {
   .hero-slide.is-leaving { transform: none; }
 }
 
+/* Closure slide — holiday notice.
+   The storefront line art, dimmed to a deep oxblood night, with a cream
+   placard hung in front of it like the sign in the door. */
+.hero--closed { background: var(--oxblood-ink); }
+.hero--closed .hero-bg {
+  background:
+    linear-gradient(180deg, rgba(42,12,10,0.82) 0%, rgba(42,12,10,0.88) 55%, rgba(26,8,7,0.96) 100%),
+    url('../assets/img/storefront-sketch.webp');
+  background-size: cover, cover;
+  background-position: center top, center top;
+}
+.hero--closed .hero-bg::after { display: none; }
+.hero--closed .hero-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+.hero-closed-sign {
+  position: relative;
+  max-width: 620px;
+  text-align: center;
+  padding: 48px 56px 52px;
+  background: var(--cream);
+  border: 1px solid var(--cream-edge);
+  outline: 1px solid rgba(240,230,208,0.35);
+  outline-offset: 10px;
+  box-shadow: 0 26px 60px rgba(0,0,0,0.45);
+  transform: rotate(-1.2deg);
+}
+.hero-closed-rule {
+  display: block;
+  width: 56px;
+  height: 2px;
+  margin: 0 auto;
+  background: var(--oxblood);
+  opacity: 0.7;
+}
+.hero-closed-eyebrow {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--oxblood);
+  margin: 20px 0 14px;
+}
+.hero-closed-title {
+  font-family: var(--font-serif);
+  color: var(--charcoal);
+  font-size: clamp(2.6rem, 6.5vw, 4.4rem);
+  line-height: 0.98;
+  font-weight: 700;
+  margin: 0 0 18px;
+}
+.hero-closed-sub {
+  color: var(--ink-soft);
+  font-size: 1.08rem;
+  line-height: 1.65;
+  max-width: 420px;
+  margin: 0 auto 26px;
+}
+@media (max-width: 640px) {
+  .hero-closed-sign {
+    padding: 36px 26px 40px;
+    outline-offset: 7px;
+    transform: rotate(-0.8deg);
+  }
+  .hero-closed-sub { font-size: 1rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-closed-sign { transform: none; }
+}
+
 /* Promo slide — Monday pepperoni-roll special
    Solid oxblood field; food image sits on the right (not full-bleed cover). */
 .hero--promo { background: var(--oxblood); }
