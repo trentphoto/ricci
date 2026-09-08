@@ -1,0 +1,32 @@
+<!--
+  Reusable hero-slider "closed / temporary notice" slide.
+
+  Used for one-off closures or holiday notices in the home hero slider
+  (#home-hero in site/index.html). Drop this markup in as a new slide,
+  fill in the placeholders, and update the surrounding slides' data-slide
+  index / aria-label "Slide N of M" to match the new total. hero-slider.js
+  reads slide count dynamically (slides.length) so no JS changes are needed.
+
+  Last used: Labor Day 2026 closure notice (added ~2026-08, removed
+  2026-09-08 once the holiday had passed).
+
+  Fill in:
+    - eyebrow: the date, e.g. "Monday, September 7"
+    - title: e.g. "Closed for<br />Labor&nbsp;Day"
+    - sub: reopen info, e.g. "We're back Tuesday, September 8 at 8:30 AM."
+    - data-slide / aria-label index and total to match current slide count
+-->
+<div class="hero-slide hero--closed" data-slide="0" role="group" aria-roledescription="slide" aria-label="Slide 1 of N">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-content">
+    <div class="hero-closed-sign">
+      <span class="hero-closed-rule" aria-hidden="true"></span>
+      <span class="hero-closed-eyebrow">{{DATE}}</span>
+      <h2 class="hero-closed-title">{{TITLE}}</h2>
+      <p class="hero-closed-sub">
+        {{REOPEN_MESSAGE}}
+      </p>
+      <span class="hero-closed-rule" aria-hidden="true"></span>
+    </div>
+  </div>
+</div>
