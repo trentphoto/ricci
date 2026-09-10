@@ -200,6 +200,8 @@ p  { max-width: 660px; }
 .section-apply .eyebrow,
 .section-email .eyebrow,
 .menu-section-dark .eyebrow,
+.pdp-hero .eyebrow,
+.pdp-final .eyebrow,
 .footer-col h4 { color: var(--gold); }
 
 /* ── Utility ────────────────────────────── */
@@ -3110,6 +3112,17 @@ body.nav-drawer-open .nav-backdrop {
   font-size: 0.85rem;
   color: rgba(0,0,0,0.55);
 }
+.product-guarantee {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  color: var(--ink);
+  border-top: 1px solid rgba(0,0,0,0.1);
+  padding-top: 16px;
+  margin-top: 4px;
+}
+.product-guarantee strong {
+  color: var(--oxblood);
+}
 .product-includes {
   margin-bottom: 24px;
   padding: 20px 22px;
@@ -3303,6 +3316,95 @@ body.nav-drawer-open .nav-backdrop {
 }
 .includes-card a:hover {
   color: var(--ink);
+}
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+.review-card {
+  background: var(--white);
+  border: 1px solid rgba(0,0,0,0.08);
+  padding: 24px 26px;
+}
+.review-quote {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+.review-attribution {
+  font-size: 0.8rem;
+  color: rgba(0,0,0,0.55);
+}
+.press-review-card {
+  grid-column: span 3;
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) 1.4fr;
+  background: var(--white);
+  border: 1px solid rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+.press-review-card img {
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  object-fit: cover;
+  display: block;
+}
+.press-review-card-body {
+  padding: 22px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+@media (max-width: 700px) {
+  .press-review-card {
+    grid-column: 1 / -1;
+    grid-template-columns: 1fr;
+  }
+  .press-review-card img {
+    aspect-ratio: 16/9;
+    min-height: 0;
+  }
+}
+.press-review-card .press-source {
+  display: block;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.press-review-card h3 {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  line-height: 1.35;
+  margin-bottom: 8px;
+}
+.press-review-card p {
+  font-size: 0.88rem;
+  color: rgba(0,0,0,0.65);
+  line-height: 1.6;
+}
+.press-review-card a {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 0.82rem;
+  color: var(--red);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.section-photo {
+  margin: 40px auto 0;
+  max-width: 820px;
+  border: 1px solid var(--cream-dark);
+}
+.section-photo img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 /* Divider between "At the counter" and "Shipped in our bundles" */
 .includes-group-label {
@@ -5217,4 +5319,376 @@ body.cater-open { overflow: hidden; }
   .heat-switch--three .heat-switch-sub { font-size: 0.62rem; }
   .btn-lg { padding: 16px 22px; font-size: 0.88rem; }
   .ship-guarantee { padding: 44px 20px; }
+}
+
+/* ============================================
+   SHIPPED-BUNDLE PDP
+   shop/pittsburgh-italian-pack.html — and available to
+   shop/ricci-legacy-gift-box.html, which is the same offer shape.
+
+   Deliberately NOT built on the .labor-* / .ship-* blocks above: those
+   are marked delete-with-the-page seasonal CSS, and these pages are
+   permanent. Visual language is borrowed, the rules are their own.
+   ============================================ */
+
+/* Hero — rides on .page-hero (charcoal ground, gold eyebrow, white h1)
+   and breaks its centred layout into photo | offer. Split rather than
+   text-over-photo: a scrim heavy enough to carry copy mutes the food,
+   which is the wrong trade on a page selling the food. */
+.pdp-hero {
+  padding: 64px 24px 68px;
+  text-align: left;
+  border-bottom: 1px solid rgba(217,184,138,0.18);
+}
+.pdp-hero-grid {
+  display: grid;
+  grid-template-columns: 1.02fr 0.98fr;
+  gap: 56px;
+  align-items: center;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+/* One plate shot over three contents thumbs — the manifest in pictures,
+   captions carrying the weights so the box is legible before any copy. */
+.pdp-gallery { display: grid; gap: 12px; }
+.pdp-gallery figure {
+  margin: 0;
+  position: relative;
+  background: var(--charcoal);
+  border: 1px solid rgba(217,184,138,0.28);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.42);
+}
+.pdp-gallery img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.pdp-gallery-main img { aspect-ratio: 16 / 10; }
+.pdp-gallery-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.pdp-gallery-strip img { aspect-ratio: 1 / 1; }
+.pdp-gallery figcaption {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 6px 11px;
+  background: rgba(42,34,27,0.9);
+  color: var(--gold);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Offer column */
+.pdp-buy h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(2.1rem, 4vw, 3.1rem);
+  line-height: 1.04;
+  color: var(--white);
+  margin: 8px 0 16px;
+}
+.pdp-buy-lead {
+  max-width: 38em;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.74);
+}
+
+/* What's in it, as a packing slip. Weights left, item right. */
+.pdp-manifest {
+  list-style: none;
+  margin: 26px 0 0;
+  padding: 18px 22px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(217,184,138,0.24);
+}
+.pdp-manifest li {
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  font-size: 0.98rem;
+  line-height: 1.45;
+  color: rgba(255,255,255,0.84);
+}
+.pdp-manifest li:first-child { padding-top: 0; }
+.pdp-manifest li:last-child { border-bottom: 0; padding-bottom: 0; }
+.pdp-manifest-qty {
+  flex: 0 0 4.2rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.pdp-manifest-total {
+  margin-top: 14px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+}
+
+/* The shared ship-to selector is built for cream sections — restate it
+   for the dark hero rather than shipping a light slab into it. */
+.pdp-buy .ship-selector {
+  margin: 24px 0 0;
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(217,184,138,0.24);
+}
+.pdp-buy .ship-selector-label { color: rgba(255,255,255,0.72); }
+.pdp-buy .ship-selector-label strong { color: var(--white); }
+.pdp-buy .ship-selector-field-label { color: var(--gold); }
+.pdp-buy .ship-selector select {
+  background: var(--charcoal);
+  color: var(--white);
+  border-color: rgba(217,184,138,0.32);
+}
+
+.pdp-price {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 26px;
+}
+.pdp-price .price-amount {
+  font-family: var(--font-serif);
+  font-size: clamp(2.1rem, 4vw, 2.6rem);
+  line-height: 1;
+  color: var(--white);
+}
+.pdp-price .ship-note {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+/* Global .is-noship turns the note oxblood — invisible on charcoal. */
+.pdp-price.is-noship .ship-note { color: #E9B0A8; }
+
+.pdp-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 22px;
+}
+.pdp-cta .btn { padding: 16px 30px; }
+.pdp-cta .btn-outline { border-color: rgba(255,255,255,0.55); }
+.pdp-buy .pdp-note {
+  margin-top: 18px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.62);
+}
+.pdp-buy .pdp-note strong { color: var(--gold); }
+
+/* Four-up fact strip directly under the hero — the objections a cold
+   visitor has before they read anything, answered in one band. */
+.pdp-trustbar {
+  background: var(--cream);
+  border-bottom: 1px solid var(--cream-dark);
+}
+.pdp-trustbar-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.pdp-trust {
+  padding: 22px 26px;
+  border-left: 1px solid rgba(0,0,0,0.09);
+}
+.pdp-trust:first-child { padding-left: 0; border-left: 0; }
+.pdp-trust b {
+  display: block;
+  margin-bottom: 5px;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+.pdp-trust span {
+  font-family: var(--font-serif);
+  font-size: 0.98rem;
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+/* Guarantee band. Same wording as the hero note — change one, change both. */
+.pdp-guarantee {
+  background: var(--cream);
+  border-top: 1px solid var(--cream-edge);
+  border-bottom: 1px solid var(--cream-edge);
+  padding: 60px 24px;
+}
+.pdp-guarantee-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+.pdp-guarantee h2 {
+  font-size: clamp(1.5rem, 3.4vw, 2.1rem);
+  margin-bottom: 14px;
+}
+.pdp-guarantee p {
+  color: var(--ink-soft);
+  font-size: 1.02rem;
+  line-height: 1.75;
+}
+.pdp-guarantee a { color: var(--red); font-weight: 600; }
+
+/* Value math — three figures, no card chrome pretending to be content. */
+.pdp-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 40px;
+  background: var(--white);
+  border: 1px solid var(--cream-dark);
+}
+.pdp-stat {
+  padding: 30px 26px;
+  text-align: center;
+  border-left: 1px solid var(--cream-dark);
+}
+.pdp-stat:first-child { border-left: 0; }
+.pdp-stat-figure {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: clamp(1.7rem, 3.4vw, 2.4rem);
+  line-height: 1;
+  color: var(--red);
+}
+.pdp-stat-label {
+  display: block;
+  margin-top: 10px;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* Closing CTA */
+.pdp-final {
+  background: var(--charcoal);
+  padding: var(--section-pad);
+  text-align: center;
+}
+.pdp-final h2 { color: var(--white); margin-bottom: 16px; }
+.pdp-final-lead {
+  max-width: 620px;
+  margin: 0 auto;
+  color: rgba(255,255,255,0.68);
+  font-size: 1.02rem;
+}
+.pdp-final-price {
+  display: block;
+  margin-top: 30px;
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  color: var(--white);
+}
+.pdp-final-price .ship-note {
+  display: block;
+  margin-top: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.pdp-final-price.is-noship .ship-note { color: #E9B0A8; }
+.pdp-final-cta {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 26px;
+}
+
+/* Suggestion cards, on the brand beige instead of --cream-dark.
+   #E7DCC1 as a card fill reads as a second, duller beige beside the real
+   one (#F0E6D0) — see docs/WIKI.md → "Beige: --cream is the beige."
+   Scoped to this page's grid on purpose: .product-card is shared by ~30
+   pages that haven't been looked at yet. */
+.products-grid--cream .product-card { background: var(--cream); }
+
+/* Sticky buy bar — phone/tablet only, where the hero CTA scrolls away
+   and there's no sidebar to pin it to. Price rides on .product-price so
+   shipping.js keeps it in step with the hero. */
+.pdp-buybar { display: none; }
+@media (max-width: 900px) {
+  .pdp-buybar {
+    display: flex;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 90;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 11px 16px;
+    background: var(--charcoal);
+    border-top: 2px solid var(--gold);
+    box-shadow: 0 -8px 24px rgba(0,0,0,0.3);
+  }
+  .pdp-buybar .price-amount {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    color: var(--white);
+  }
+  .pdp-buybar .ship-note {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.56rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .pdp-buybar.is-noship .ship-note { color: #E9B0A8; }
+  .pdp-buybar .btn { padding: 13px 22px; }
+  /* Only pages that carry the bar pay for the clearance. */
+  body.has-buybar { padding-bottom: 74px; }
+}
+
+@media (max-width: 980px) {
+  .pdp-hero-grid { grid-template-columns: 1fr; gap: 36px; }
+  .pdp-buy-lead, .pdp-manifest { max-width: none; }
+  .pdp-trustbar-inner { grid-template-columns: repeat(2, 1fr); }
+  .pdp-trust { padding: 18px 22px; }
+  .pdp-trust:nth-child(odd) { padding-left: 0; border-left: 0; }
+  .pdp-trust:nth-child(n+3) { border-top: 1px solid rgba(0,0,0,0.09); }
+}
+
+@media (max-width: 640px) {
+  .pdp-hero { padding: 48px 20px 52px; }
+  .pdp-gallery-strip { gap: 8px; }
+  .pdp-cta .btn { width: 100%; text-align: center; }
+  .pdp-trustbar-inner { grid-template-columns: 1fr; }
+  .pdp-trust {
+    padding: 16px 0;
+    border-left: 0;
+    border-top: 1px solid rgba(0,0,0,0.09);
+  }
+  .pdp-trust:first-child { border-top: 0; }
+  .pdp-stats { grid-template-columns: 1fr; }
+  .pdp-stat { border-left: 0; border-top: 1px solid var(--cream-dark); }
+  .pdp-stat:first-child { border-top: 0; }
 }

@@ -154,6 +154,26 @@ no shared nav) — but it still loads `crm.js`.
   `.hero-textblock`, and a fade to cream `rgb(247,230,210)` at the bottom for
   legibility.
 
+### Beige: `--cream` is the beige. Don't fill anything with `--cream-dark`.
+
+`--cream-dark` (`#E7DCC1`) is a duller, greyer beige than the brand cream
+(`--cream`, `#F0E6D0`). As a **fill** it doesn't read as a shade of the brand
+color — it reads as a second, wrong beige sitting next to the right one. Called
+out by the owner 2026-09-10 on the suggestion cards at the bottom of
+`shop/pittsburgh-italian-pack.html`.
+
+**The rule:** for any surface a customer reads content on — cards, panels,
+bands, section backgrounds — use `--cream`, `--white`, or a dark token. Do not
+use `--cream-dark`.
+
+Still fine, and not what this is about:
+
+- `--cream-edge` (`#D9CBAB`) and `--cream-dark` as **1px hairlines/borders**.
+- Existing uses elsewhere. Only `shop/pittsburgh-italian-pack.html` was changed
+  (`.products-grid--cream` scopes the card fill; `.pdp-guarantee` uses `--cream`).
+  `.product-card` is shared by ~30 pages and still fills with `--cream-dark` —
+  fix those when you touch them, not in a sweep.
+
 ### Color on dark backgrounds
 
 Default `.eyebrow` color is `--oxblood` (`#7A261F`). That reads well on cream
