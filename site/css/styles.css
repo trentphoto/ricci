@@ -3505,6 +3505,38 @@ body.nav-drawer-open .nav-backdrop {
   .section-plan { padding: 56px 0; }
 }
 
+/* ── Awning variant (homepage "Three Ways") ──
+   Cream section, white cards, red-and-white awning stripe across the
+   card top. Scoped to .plan-awning so the plain .plan-step cards on
+   catering/lunch/shop/labor-day are untouched. */
+.section-plan.plan-awning { background: var(--cream); }
+.plan-awning .section-header { text-align: center; }
+.plan-awning .plan-grid { gap: 26px; }
+.plan-awning .plan-step {
+  position: relative;
+  background: var(--white);
+  text-align: center;
+  padding: 38px 28px 30px;
+}
+.plan-awning .plan-step::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 8px;
+  background: repeating-linear-gradient(
+    90deg, var(--red) 0 22px, var(--white) 22px 44px);
+}
+.plan-step-kicker {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--green);
+}
+.plan-awning .plan-step h3 { margin: 14px 0 10px; font-size: 1.45rem; }
+.plan-awning .plan-step p:has(.btn) { justify-content: center; gap: 10px; }
+
 /* ============================================
    SUCCESS SECTION
    ============================================ */
