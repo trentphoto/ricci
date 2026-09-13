@@ -6077,6 +6077,73 @@ body.cater-open { overflow: hidden; }
 }
 .camp-ctaband .btn { white-space: nowrap; }
 
+/* Thanksgiving recipe — a readable cookbook spread between the box and
+   cost-per-plate sections. The left rail scans like a shopping list while
+   the numbered method keeps the original recipe's sequence explicit. */
+.thanksgiving-recipe-card {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.78fr) minmax(0, 1.35fr);
+  max-width: 940px;
+  margin: 38px auto 0;
+  background: var(--white);
+  border: 1px solid var(--cream-edge);
+  border-top: 4px solid var(--red);
+  box-shadow: 0 12px 32px rgba(42, 34, 27, 0.08);
+}
+.thanksgiving-recipe-card > div { padding: 34px 38px; }
+.thanksgiving-recipe-ingredients {
+  background: var(--cream-dark);
+  border-right: 1px solid var(--cream-edge);
+}
+.thanksgiving-recipe-card h3 {
+  margin: 0 0 20px;
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  color: var(--ink);
+}
+.thanksgiving-recipe-card ul,
+.thanksgiving-recipe-card ol {
+  margin: 0;
+  color: var(--ink-soft);
+  line-height: 1.65;
+}
+.thanksgiving-recipe-card ul { list-style: none; padding: 0; }
+.thanksgiving-recipe-card ul li {
+  padding: 9px 0;
+  border-bottom: 1px solid var(--cream-edge);
+}
+.thanksgiving-recipe-card ul li:last-child { border-bottom: 0; }
+.thanksgiving-recipe-tip {
+  margin: 20px 0 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--cream-edge);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+.thanksgiving-recipe-tip strong { color: var(--red); }
+.thanksgiving-recipe-card ol { padding-left: 1.3rem; }
+.thanksgiving-recipe-card ol li { padding: 0 0 12px 8px; }
+.thanksgiving-recipe-card ol li:last-child { padding-bottom: 0; }
+.thanksgiving-recipe-note {
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 20px 28px;
+  background: var(--charcoal);
+  color: rgba(255,255,255,0.78);
+  line-height: 1.6;
+}
+.thanksgiving-recipe-note strong { color: var(--gold); }
+.thanksgiving-recipe-note span {
+  display: block;
+  margin-top: 7px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.56);
+}
+.thanksgiving-recipe-note a { color: var(--gold); }
+
 /* FAQ as an accordion — five answers scan as five questions, and the one
    a visitor actually came for isn't buried in a wall of prose. */
 .camp-faq { max-width: 760px; margin: 0 auto; }
@@ -6161,6 +6228,13 @@ body.cater-open { overflow: hidden; }
     padding: 22px 20px;
   }
   .camp-ctaband .btn { width: 100%; }
+  .thanksgiving-recipe-card { grid-template-columns: 1fr; }
+  .thanksgiving-recipe-card > div { padding: 28px 22px; }
+  .thanksgiving-recipe-ingredients {
+    border-right: 0;
+    border-bottom: 1px solid var(--cream-edge);
+  }
+  .thanksgiving-recipe-note { padding: 18px 22px; }
   .camp-faq details p { padding-right: 0; }
   .gameday-page .pdp-stat { min-height: 0; }
 }
