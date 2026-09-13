@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Analytics (GA4) — ID lives in js/analytics.js -->
+  <script async src="/js/analytics.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!--
+    Live upon deployment through Nov 18, 2026. js/thanksgiving-sausage.js writes the countdown
+    and redirects to the standing PDP once the cutoff passes — do not
+    remove that script tag before archiving this page for the season.
+  -->
+  <title>Sausage for Thanksgiving Stuffing — Pre-Order by Nov 18 | Ricci's, Est. 1945</title>
+  <meta name="description" content="Ricci's Italian sausage for the stuffing, shipped frozen with the shipping already paid for. Pre-order by November 18 for Thanksgiving delivery." />
+  <meta name="robots" content="index, follow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="icon" href="../assets/favicon/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon/favicon-16.png" />
+  <link rel="apple-touch-icon" href="../assets/favicon/apple-touch-icon.png" />
+  <!-- Canonical & social (Open Graph / Twitter) -->
+  <link rel="canonical" href="https://riccisausage.com/shop/thanksgiving-sausage" />
+  <meta property="og:type" content="product" />
+  <meta property="og:site_name" content="Ricci's Italian Sausage" />
+  <meta property="og:title" content="Sausage for Thanksgiving Stuffing — Pre-Order by Nov 18" />
+  <meta property="og:description" content="Ricci's Italian sausage for the stuffing, shipped frozen. Pre-order by November 18 for Thanksgiving delivery." />
+  <meta property="og:url" content="https://riccisausage.com/shop/thanksgiving-sausage" />
+  <meta property="og:image" content="https://riccisausage.com/assets/img/og-image.webp" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Ricci's Italian Sausage — Italian Tradition. Perfected. Since 1945." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Sausage for Thanksgiving Stuffing — Pre-Order by Nov 18" />
+  <meta name="twitter:description" content="Ricci's Italian sausage for the stuffing, shipped frozen. Pre-order by November 18 for Thanksgiving delivery." />
+  <meta name="twitter:image" content="https://riccisausage.com/assets/img/og-image.webp" />
+</head>
+<body class="has-buybar">
+
+  <!--
+    Campaign landing page — same product, same checkout as
+    shop/pittsburgh-italian-pack.html ($189 base, zone-priced by
+    js/shipping.js, data-buy-now id "pittsburgh-italian-pack").
+    Deliberately no primary nav and no catalog footer: one offer, one CTA.
+    Do not "sync the nav" onto this page. Take it down (or let the redirect
+    in js/thanksgiving-sausage.js handle it) after Nov 18.
+
+    Layout rides the permanent .pdp-* components, not the seasonal
+    .labor-* / .ship-* blocks — see the CAMPAIGN LANDING PAGES block in
+    css/styles.css.
+  -->
+  <header class="site-header">
+    <div class="camp-header-inner">
+      <a href="../index.html" class="nav-logo">
+        <img src="../assets/logo.png" alt="Ricci's Italian Sausage">
+      </a>
+      <div class="camp-header-cta">
+        <a href="tel:4123319531" class="camp-header-phone">412-331-9531</a>
+        <a href="https://shop.riccisausage.com/products/pittsburgh-italian-pack" class="btn btn-primary" data-buy-now data-id="pittsburgh-italian-pack">Pre-Order Now</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Deadline strip. js/thanksgiving-sausage.js rewrites this line with
+       the live day count; the static text is the fallback if JS is off. -->
+  <div class="camp-urgency" aria-live="polite">
+    <p id="thanksgiving-countdown">Pre-order by November 18 for Thanksgiving delivery.</p>
+  </div>
+
+  <main>
+
+    <!-- ══════════════════════════════════════════
+         HERO — offer, not a poster. Photos left, the whole decision
+         (what's in it, what it costs where you live, the guarantee)
+         in one column on the right.
+    ══════════════════════════════════════════ -->
+    <section class="page-hero pdp-hero">
+      <div class="pdp-hero-grid">
+        <div class="pdp-gallery">
+          <figure class="pdp-gallery-main">
+            <img src="../assets/img/sausage-peppers.webp"
+                 alt="Ricci's hot Italian sausage with peppers and onions in a pan"
+                 width="1500" height="1135" fetchpriority="high" decoding="async" />
+          </figure>
+          <div class="pdp-gallery-strip">
+            <figure>
+              <img src="../assets/img/sweet-sausage-coil-raw.webp" alt="Raw Ricci's sweet rope sausage" loading="lazy" />
+              <figcaption>Sweet &middot; 5 lb</figcaption>
+            </figure>
+            <figure>
+              <img src="../assets/img/hot-sausage-coil-raw.webp" alt="Raw Ricci's hot rope sausage" loading="lazy" />
+              <figcaption>Hot &middot; 5 lb</figcaption>
+            </figure>
+            <figure>
+              <img src="../assets/img/homemade-meatballs-bag.webp" alt="Hand-rolled Ricci's meatballs, raw, in a clear bag" loading="lazy" />
+              <figcaption>Meatballs &middot; 2 lb</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <div class="pdp-buy">
+          <span class="eyebrow">Pre-Order by November 18</span>
+          <h1>The Stuffing Is the Dish Everyone Argues About.</h1>
+          <p class="pdp-buy-lead">
+            Settle it. Ricci's Italian sausage, made in McKees Rocks since
+            1945, shipped frozen to your door in time for Thanksgiving &mdash;
+            with meatballs and a sausage roll for the rest of the week.
+          </p>
+
+          <ul class="pdp-manifest">
+            <li><span class="pdp-manifest-qty">5 lb</span><span>Sweet Italian sausage &mdash; a 5 lb box of rope</span></li>
+            <li><span class="pdp-manifest-qty">5 lb</span><span>Hot Italian sausage &mdash; a 5 lb box of rope</span></li>
+            <li><span class="pdp-manifest-qty">2 lb</span><span>Hand-rolled meatballs &mdash; ~16 at 2 oz, raw, in a clear bag</span></li>
+            <li><span class="pdp-manifest-qty">1</span><span>Lil's sausage roll &mdash; baked at the shop, then frozen</span></li>
+          </ul>
+          <p class="pdp-manifest-total">12+ lbs total &middot; labeled and packed in an insulated box with cold packs</p>
+
+          <!-- Zone pricing: the price shown here is the price charged.
+               js/shipping.js rewrites .product-price[data-base][data-tier]
+               and the state label — don't rename either. -->
+          <div class="ship-selector" id="ship-selector">
+            <div class="ship-selector-inner">
+              <span class="ship-selector-label">
+                Shipping to <strong id="ship-state-name">Pennsylvania</strong> &mdash;
+                the price below includes shipping. No surprises at checkout.
+              </span>
+              <label class="ship-selector-field">
+                <span class="ship-selector-field-label">Change state</span>
+                <select id="ship-state" aria-label="Choose your shipping state"></select>
+              </label>
+            </div>
+          </div>
+
+          <div class="product-price pdp-price" data-base="189.00" data-tier="med">
+            <span class="price-amount">$189.00</span>
+            <span class="ship-note">Free Shipping &middot; Arrives Frozen</span>
+          </div>
+          <div class="pdp-cta">
+            <a class="btn btn-primary" href="https://shop.riccisausage.com/products/pittsburgh-italian-pack" data-buy-now data-id="pittsburgh-italian-pack">Pre-Order Now</a>
+            <a href="tel:4123319531" class="btn btn-outline">Call &middot; 412-331-9531</a>
+          </div>
+          <p class="pdp-note"><strong>Cook one link.</strong> If it isn't the best Italian sausage you've had, tell us and we'll refund the box in full &mdash; keep the rest. We're not asking you to ship frozen meat back to Pennsylvania.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         TRUST STRIP — the four questions a cold visitor has before
+         they read anything else.
+    ══════════════════════════════════════════ -->
+    <div class="pdp-trustbar">
+      <div class="pdp-trustbar-inner">
+        <div class="pdp-trust">
+          <b>The box</b>
+          <span>12+ lbs &mdash; sweet, hot, meatballs, sausage roll</span>
+        </div>
+        <div class="pdp-trust">
+          <b>How it ships</b>
+          <span>Frozen, in an insulated box with cold packs</span>
+        </div>
+        <div class="pdp-trust">
+          <b>Shipping</b>
+          <span>Built into the price you see above</span>
+        </div>
+        <div class="pdp-trust">
+          <b>The shop</b>
+          <span>USDA-inspected daily since 1973</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         PROBLEM — the campaign angle, kept to one screen.
+    ══════════════════════════════════════════ -->
+    <section class="menu-section">
+      <div class="container product-prose">
+        <span class="eyebrow">You know how this goes</span>
+        <h2>Everything Else Gets Planned Weeks Ahead.</h2>
+        <p>
+          The turkey's ordered. The pie's on the list. And then the stuffing
+          &mdash; the dish people actually go back for &mdash; ends up made with
+          whatever sausage was left at the store the Tuesday before.
+        </p>
+        <p>
+          Order it now, put it in the freezer, and stop thinking about it.
+        </p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         THE BOX — same manifest as the Pittsburgh Italian Pack, with the
+         buy action repeated underneath it.
+    ══════════════════════════════════════════ -->
+    <section class="menu-section menu-section-alt" id="box">
+      <div class="container">
+        <div class="menu-section-header">
+          <span class="eyebrow">What you get</span>
+          <h2>Everything in the Box.</h2>
+          <p>All USDA-inspected, hand-mixed, all natural &mdash; no fillers, no MSG, no additives, no preservatives.</p>
+        </div>
+        <div class="includes-grid includes-grid--wide">
+          <div class="includes-card">
+            <div class="includes-card-img">
+              <img src="../assets/img/sweet-sausage-coil-raw.webp" alt="Sweet Italian sausage links" loading="lazy" />
+            </div>
+            <div class="includes-card-body">
+              <span class="includes-card-qty">5 lb</span>
+              <h3><a href="sweet-italian-sausage.html">Sweet Italian Sausage</a></h3>
+              <p>A 5 lb box of hand-stuffed, uncooked rope in natural casing &mdash; cut it to length yourself.</p>
+            </div>
+          </div>
+          <div class="includes-card">
+            <div class="includes-card-img">
+              <img src="../assets/img/hot-sausage-coil-raw.webp" alt="Hot Italian sausage links" loading="lazy" />
+            </div>
+            <div class="includes-card-body">
+              <span class="includes-card-qty">5 lb</span>
+              <h3><a href="hot-italian-sausage.html">Hot Italian Sausage</a></h3>
+              <p>A 5 lb box of uncooked rope &mdash; crushed red pepper, paprika, whole fennel seed.</p>
+            </div>
+          </div>
+          <div class="includes-card">
+            <div class="includes-card-img">
+              <img src="../assets/img/homemade-meatballs-bag.webp" alt="Hand-rolled Italian meatballs" loading="lazy" />
+            </div>
+            <div class="includes-card-body">
+              <span class="includes-card-qty">2 lb</span>
+              <h3><a href="italian-meatballs.html">Hand-Rolled Meatballs</a></h3>
+              <p>~16 uncooked meatballs at 2 oz each in a clear bag &mdash; Lil's recipe.</p>
+            </div>
+          </div>
+          <div class="includes-card">
+            <div class="includes-card-img">
+              <img src="../assets/img/sausage-rolls-tray.webp" alt="Lil's sausage rolls fresh from the oven" loading="lazy" />
+            </div>
+            <div class="includes-card-body">
+              <span class="includes-card-qty">1</span>
+              <h3><a href="../hot-foods/sausage-rolls.html">Lil's Sausage Roll</a></h3>
+              <p>Mancini's dough, hot sausage, Grande cheese &mdash; baked at the shop, then frozen.</p>
+            </div>
+          </div>
+        </div>
+        <p class="includes-note">12+ lbs total. Arrives frozen, packed with cold packs. Shipping included.</p>
+
+        <div class="camp-ctaband product-price" data-base="189.00" data-tier="med">
+          <div class="camp-ctaband-copy">
+            <span class="price-amount">$189.00</span>
+            <span class="ship-note">Free Shipping &middot; Arrives Frozen</span>
+          </div>
+          <a class="btn btn-primary btn-lg" href="https://shop.riccisausage.com/products/pittsburgh-italian-pack" data-buy-now data-id="pittsburgh-italian-pack">Pre-Order by Nov 18</a>
+        </div>
+      </div>
+    </section>
+
+    <!--
+      EXTRA MODULE — "Lil's stuffing method," this page only. Not built:
+      there's no verified recipe in docs/WIKI.md and the wiki explicitly
+      flags that the site has never carried a real recipe card (see
+      "Packaging" phrasing rules). Left out rather than invented. Ask the
+      owner for Lil's actual method before adding this section — same
+      shape as the module below, uncomment once you have real copy.
+
+      <section class="menu-section">
+        <div class="container product-prose">
+          <span class="eyebrow">Lil's method</span>
+          <h2>How Lil Makes the Stuffing.</h2>
+          <p>[six-line method, sweet sausage]</p>
+        </div>
+      </section>
+    -->
+
+    <!-- ══════════════════════════════════════════
+         COST PER PLATE
+    ══════════════════════════════════════════ -->
+    <section class="menu-section">
+      <div class="container product-prose">
+        <span class="eyebrow">The math</span>
+        <h2>Twelve Pounds. Six Dinners. About $8 a Plate.</h2>
+        <p>Stuffing Thursday. Sausage and peppers Friday. Meatball subs for whoever's still in the house. Twelve-plus pounds runs a family of four through roughly six dinners &mdash; for less than one check at an Italian restaurant that isn't using sausage this good.</p>
+        <div class="pdp-stats">
+          <div class="pdp-stat">
+            <span class="pdp-stat-figure">12+ lbs</span>
+            <span class="pdp-stat-label">Sweet, hot, meatballs, roll</span>
+          </div>
+          <div class="pdp-stat">
+            <span class="pdp-stat-figure">~6 dinners</span>
+            <span class="pdp-stat-label">Family of four</span>
+          </div>
+          <div class="pdp-stat">
+            <span class="pdp-stat-figure">~$8 a plate</span>
+            <span class="pdp-stat-label">Shipping included</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         PROOF — moved up ahead of the shipping mechanics: it answers
+         "is it worth it," which is the objection that stops the order.
+    ══════════════════════════════════════════ -->
+    <section class="menu-section menu-section-alt">
+      <div class="container">
+        <div class="menu-section-header">
+          <span class="eyebrow">From the counter</span>
+          <h2>What People Say.</h2>
+        </div>
+        <div class="reviews-grid">
+          <div class="review-card">
+            <p class="review-quote">"Amazing sausage and meatball subs! Staff was great and inviting. Cannot wait to go back. Must stop and prices are great."</p>
+            <p class="review-attribution">&mdash; Marc J., Google Reviews &middot; McKees Rocks</p>
+          </div>
+          <div class="review-card">
+            <p class="review-quote">"Love their sausages! Living in NC, it's hard to find truly great Italian food, so every time we come back to the Pittsburgh area, we make sure to stock up and bring some home with us."</p>
+            <p class="review-attribution">&mdash; Dale P., Google Reviews &middot; McKees Rocks</p>
+          </div>
+          <div class="review-card">
+            <p class="review-quote">"Best sausage in Pittsburgh! I've had the hot and sweet. Both are awesome... I've bought from them for years and will just keep doing so."</p>
+            <p class="review-attribution">&mdash; Josh C., Google Reviews &middot; McKees Rocks</p>
+          </div>
+          <div class="press-review-card">
+            <img src="../assets/img/espn.jpg" alt="Pat McAfee and the ESPN GameDay crew eating Ricci's Italian Sausage, served by Joe Caliguire" loading="lazy" />
+            <div class="press-review-card-body">
+              <span class="press-source">As Seen On &middot; ESPN College GameDay</span>
+              <h3>Pat McAfee &amp; the ESPN GameDay Crew Ate Our Sausage.</h3>
+              <p>Served by Joe &amp; Dean Caliguire when the GameDay crew came to Pittsburgh.</p>
+              <a href="../press.html">See the full story</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         GUARANTEE — wording matches the hero note. Change one, change
+         both. .pdp-guarantee (cream), not .ship-guarantee (--cream-dark):
+         see docs/WIKI.md → "Beige: --cream is the beige."
+    ══════════════════════════════════════════ -->
+    <section class="pdp-guarantee">
+      <div class="pdp-guarantee-inner">
+        <span class="eyebrow">Our guarantee</span>
+        <h2>Cook One Link. If It Isn't the Best, We Refund the Box.</h2>
+        <p>
+          If it isn't the best Italian sausage you've had, email us and we
+          refund the box in full &mdash; keep the rest. We're not asking you to
+          ship frozen meat back to Pennsylvania. Made in McKees Rocks since
+          1945: <a href="tel:4123319531">412-331-9531</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         HOW IT ARRIVES — mirrors the coldchain module on the PDP; no
+         ship-day cadence or shelf life claimed — see docs/WIKI.md
+         "Open questions" #5.
+    ══════════════════════════════════════════ -->
+    <section class="menu-section">
+      <div class="container">
+        <div class="menu-section-header">
+          <span class="eyebrow">How it ships</span>
+          <h2>It Shows Up Frozen. Every Time.</h2>
+        </div>
+        <div class="coldchain">
+          <div class="coldchain-step">
+            <span class="coldchain-mark" aria-hidden="true"></span>
+            <span class="coldchain-stage">At the shop</span>
+            <h3>Frozen, not chilled</h3>
+            <p>Everything goes into the box hard-frozen from our USDA-inspected facility &mdash; the same one that's been inspected every day we run since 1973.</p>
+          </div>
+          <div class="coldchain-step">
+            <span class="coldchain-mark" aria-hidden="true"></span>
+            <span class="coldchain-stage">In transit</span>
+            <h3>Insulated box, cold packs</h3>
+            <p>Each item is labeled and packed in an insulated box with cold packs, sized for the trip to your door.</p>
+          </div>
+          <div class="coldchain-step">
+            <span class="coldchain-mark" aria-hidden="true"></span>
+            <span class="coldchain-stage">At your door</span>
+            <h3>Straight to the freezer</h3>
+            <p>Put it in the freezer when it lands. When you're ready to cook, thaw it in the refrigerator &mdash; never on the counter.</p>
+          </div>
+        </div>
+        <p class="coldchain-note">
+          Order cutoffs and transit times are on the
+          <a href="../shipping.html">Shipping page</a>. If any of it arrives
+          warm or thawed, we replace it or refund you &mdash; see
+          <a href="../returns.html">Returns</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         PROVENANCE
+    ══════════════════════════════════════════ -->
+    <section class="section-plan">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Eighty-one years in</span>
+          <h2>1945: A Basement in McKees Rocks.</h2>
+          <p>
+            Ernest and Stella Ricci brought the family spice blend from
+            Sulmona, Italy and started mixing it by hand in the basement of
+            their McKees Rocks home. Same recipe, three generations later,
+            still made in McKees Rocks.
+          </p>
+        </div>
+        <div class="section-photo">
+          <img src="../assets/img/family-original.webp" alt="Four members of the Ricci family in their McKees Rocks shop, with fresh coils of sausage on the table in front of them" loading="lazy" />
+        </div>
+        <p class="product-prose" style="text-align:center;margin-top:24px;">
+          <a href="../story.html" class="btn btn-outline-dark">Read the Full Story</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         FAQ — accordion. First one open: it's the objection this page's
+         traffic arrives with. No arrival day is claimed anywhere — see
+         docs/WIKI.md "Open questions" #5.
+    ══════════════════════════════════════════ -->
+    <section class="menu-section menu-section-alt">
+      <div class="container">
+        <div class="menu-section-header">
+          <span class="eyebrow">Questions</span>
+          <h2>Before You Order.</h2>
+        </div>
+        <div class="camp-faq">
+          <details open>
+            <summary>When exactly does it arrive?</summary>
+            <p>
+              Pre-order by November 18 and we'll get it moving with plenty of
+              time for Thanksgiving. Exact ship days and transit windows are on
+              the <a href="../shipping.html">Shipping page</a>. After November 18
+              we can't guarantee Thanksgiving delivery.
+            </p>
+          </details>
+          <details>
+            <summary>What if I'm not home when it arrives?</summary>
+            <p>
+              We send every order frozen via two-day service in a sealed,
+              insulated box with cold packs. Bring it inside when it arrives
+              and refrigerate or freeze it promptly.
+            </p>
+          </details>
+          <details>
+            <summary>How long does it keep?</summary>
+            <p>
+              Frozen in the freezer until you're ready to cook it, thawed in the
+              refrigerator &mdash; never on the counter. Specific windows are on
+              the <a href="../shipping.html">Shipping page</a>.
+            </p>
+          </details>
+          <details>
+            <summary>Can I ship it to a different address?</summary>
+            <p>
+              Yes &mdash; enter it at checkout, useful if you're sending it
+              straight to whoever's hosting.
+            </p>
+          </details>
+          <details>
+            <summary>Can I choose all hot or all sweet?</summary>
+            <p>
+              This bundle is a fixed pack &mdash; sweet, hot, meatballs, and a
+              sausage roll. For a custom mix, call the shop at
+              <a href="tel:4123319531">412-331-9531</a>.
+            </p>
+          </details>
+          <details>
+            <summary>Why is shipping free?</summary>
+            <p>
+              It isn't tacked on at checkout &mdash; it's already built into the
+              price you see. Pick your state above and that's the number you pay.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         CLOSING CTA — the deadline restated. The lead line is rewritten
+         by js/thanksgiving-sausage.js with the live day count.
+    ══════════════════════════════════════════ -->
+    <section class="pdp-final">
+      <div class="container">
+        <span class="eyebrow">Last call</span>
+        <h2>Pre-Order by November 18.</h2>
+        <p class="pdp-final-lead" id="thanksgiving-countdown-final">
+          After the 18th we can't promise Thanksgiving delivery. Order cutoffs
+          and transit times are on the <a href="../shipping.html">Shipping page</a>.
+        </p>
+        <span class="product-price pdp-final-price" data-base="189.00" data-tier="med">
+          <span class="price-amount">$189.00</span>
+          <span class="ship-note">Free Shipping &middot; Arrives Frozen</span>
+        </span>
+        <p class="pdp-final-cta">
+          <a class="btn btn-primary btn-lg" href="https://shop.riccisausage.com/products/pittsburgh-italian-pack" data-buy-now data-id="pittsburgh-italian-pack">Pre-Order Now</a>
+          <a href="tel:4123319531" class="btn btn-outline">Call &middot; 412-331-9531</a>
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Sticky buy bar. CSS-only, ≤900px, where the hero CTA has scrolled
+       away. Fourth .product-price on the page — shipping.js keeps them all
+       in step. body.has-buybar pays for the clearance. -->
+  <div class="pdp-buybar product-price" data-base="189.00" data-tier="med">
+    <span>
+      <span class="price-amount">$189.00</span>
+      <span class="ship-note">Free shipping &middot; Arrives frozen</span>
+    </span>
+    <a href="https://shop.riccisausage.com/products/pittsburgh-italian-pack" class="btn btn-primary" data-buy-now data-id="pittsburgh-italian-pack">Pre-Order</a>
+  </div>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"When exactly does it arrive?","acceptedAnswer":{"@type":"Answer","text":"Pre-order by November 18 and we'll get it moving with plenty of time for Thanksgiving. Exact ship days and transit windows are on our Shipping page. After November 18 we can't guarantee Thanksgiving delivery."}},{"@type":"Question","name":"What if I'm not home when it arrives?","acceptedAnswer":{"@type":"Answer","text":"We send every order frozen via two-day service in a sealed, insulated box with cold packs. Bring it inside when it arrives and refrigerate or freeze it promptly."}},{"@type":"Question","name":"How long does it keep?","acceptedAnswer":{"@type":"Answer","text":"Frozen in the freezer until you're ready to cook it, thawed in the refrigerator — never on the counter. Specific windows are on our Shipping page."}},{"@type":"Question","name":"Can I ship it to a different address?","acceptedAnswer":{"@type":"Answer","text":"Yes — enter it at checkout, useful if you're sending it straight to whoever's hosting."}},{"@type":"Question","name":"Can I choose all hot or all sweet?","acceptedAnswer":{"@type":"Answer","text":"This bundle is a fixed pack — sweet, hot, meatballs, and a sausage roll. For a custom mix, call the shop at 412-331-9531."}},{"@type":"Question","name":"Why is shipping free?","acceptedAnswer":{"@type":"Answer","text":"Shipping isn't tacked on at checkout — it's already built into the price shown for your state."}}]}</script>
+
+  <!-- Minimal footer. No catalog links — this page has one job. -->
+  <footer class="site-footer ship-footer">
+    <div class="footer-bottom">
+      <span>&copy; 2026 Ricci's Italian Sausage. All rights reserved.</span>
+      <span><a href="https://maps.app.goo.gl/9rDvQrZiuCKRCmFE9" target="_blank" rel="noopener noreferrer">590 Pine Hollow Rd, McKees Rocks, PA 15136</a> &middot; <a href="tel:4123319531">412-331-9531</a></span>
+      <span><a href="../products.html">What We Make</a> &middot; <a href="../shipping.html">Shipping</a> &middot; <a href="../returns.html">Returns</a> &middot; <a href="../privacy.html">Privacy</a> &middot; <a href="../terms.html">Terms</a></span>
+    </div>
+  </footer>
+
+  <script src="../js/crm.js" defer></script>
+  <script src="../js/shipping.js" defer></script>
+  <script src="../js/buy-now.js" defer></script>
+  <script src="../js/thanksgiving-sausage.js" defer></script>
+</body>
+</html>

@@ -127,6 +127,7 @@ All files are IIFEs, no dependencies, included with `defer`.
 | `shopify-variants.js` | **Auto-generated** by `tools/sync-shopify-bundles.mjs`. Maps bundle slugs → Shopify variant GIDs per zone. Do not edit by hand — re-run sync after price changes. |
 | `hero-slider.js` | Homepage hero image rotation. |
 | `preorder-modal.js` | Pre-order modal UI. |
+| `thanksgiving-sausage.js` | Seasonal page `shop/thanksgiving-sausage.html`. Two jobs: redirect to `/shop/pittsburgh-italian-pack` once the **Nov 18, 2026** cutoff passes (checked first, independent of any markup), then write the live day count into `#thanksgiving-countdown` (deadline strip) and `#thanksgiving-countdown-final` (closing CTA). Both targets are optional — the static HTML already states the deadline. Delete with the page. |
 | `labor-day.js` / `labor-day-box.js` | Seasonal Labor Day pages. Each owns a date-derived countdown, a product switch, and a `CHECKOUT` map. Separate offers — `labor-day.js` is the in-store $29.99 box (two-way hot/sweet switch, empty `CHECKOUT` falls back to `tel:`); `labor-day-box.js` is the $129 shipped box (three-way mixed/hot/sweet switch, one CTA and **no** phone fallback, so empty `CHECKOUT` disables the buttons and shows a warning). Delete with their pages. |
 
 ### Forms — all routed to the Fly CRM
@@ -359,7 +360,7 @@ with GraphQL in `tools/shopify/graphql/`. Variant weights are **not** set via AP
 ### Manual Shopify checklist
 
 - [x] Publish both bundle products to **Online Store** sales channel (now automated by sync)
-- [ ] Confirm **free shipping** profile on bundles (shipping is baked into price)
+- [x] Confirm **free shipping** profile on bundles (shipping is baked into price; owner-confirmed 2026-09-12)
 - [ ] Set variant weights in Admin if shipping labels need them
 - [x] Verify checkout permalinks resolve for zones A and E (curl-verified 2026-07-04; still do a real test purchase)
 
@@ -386,7 +387,7 @@ either blend, or for both together.
 
 - Both: natural casing, 22–25% fat, hand-mixed in ~200 lb batches daily,
   all natural — no fillers, MSG, additives, or preservatives. USDA-inspected
-  daily since 1973.
+  daily since 1973. Ingredient claims reconfirmed by the owner 2026-09-12.
 - **Neither blend contains garlic** — corrected by the owner 2026-08-30. The
   table used to list garlic in the hot seasoning and "no garlic" as a sweet-only
   exclusion; both were wrong. Don't write garlic into either sausage, and don't
@@ -640,8 +641,26 @@ bags · no recipe card · no bonus sample · no cooking numbers.
 
 Every page has exactly one commerce job — do not blur these when editing:
 
-- **`shop.html`** — the only sales page. Buy buttons exist here and on the two
-  bundle PDPs (`shop/pittsburgh-italian-pack.html`, `shop/ricci-legacy-gift-box.html`).
+- **`shop.html`** — the only sales page. Buy buttons exist here, on the two
+  bundle PDPs (`shop/pittsburgh-italian-pack.html`, `shop/ricci-legacy-gift-box.html`),
+  and on the campaign landing pages below.
+- **Campaign landing pages** — `shop/gameday-crate.html`,
+  `shop/thanksgiving-sausage.html`. Not separate products: both sell the
+  **Pittsburgh Italian Pack** (`data-buy-now data-id="pittsburgh-italian-pack"`,
+  `data-base="189.00" data-tier="med"`) under a seasonal angle. No nav, no
+  catalog footer, one offer, one CTA — don't "sync the nav" onto them. They
+  load `shipping.js` so every price on the page is the customer's real
+  zone price, and carry `FAQPage` JSON-LD only — **no `offers` block**, so
+  they can't compete with the PDP in search. Layout rides the permanent
+  `.pdp-*` components plus the `CAMPAIGN LANDING PAGES` block in
+  `css/styles.css` (`.camp-*`), deliberately *not* the seasonal
+  `.labor-*` / `.ship-*` blocks, which are marked delete-with-their-page.
+  Owner-confirmed 2026-09-12: bundle shipping is included for every eligible
+  state; customers may call the shop for a custom shipped mix; the named Google
+  reviews and Pat McAfee/ESPN GameDay story and attribution are substantiated.
+  Orders ship frozen via two-day service and have consistently arrived cold.
+  Do not publish a specific unattended-box duration; tell customers to bring
+  the delivery inside and refrigerate or freeze it promptly.
 - **`products.html`** ("What We Make") — informational catalog. Bundles appear
   with prices linking to their PDPs; everything else (case items, hot foods) is
   informational with availability tags, never a price.
