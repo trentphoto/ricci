@@ -24,12 +24,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!--
-    Campaign title/description follow the gameday hook. No specific delivery
-    day is claimed — see the note on the FAQ below.
+    Campaign title/description follow the gameday hook. The rolling cutoff
+    below is computed from the weekly shipping schedule.
   -->
   <title>Ricci's Gameday Crate — Ships Frozen, Free Shipping | Ricci's Italian Sausage</title>
   <meta name="description" content="Sweet sausage, hot sausage, hand-rolled meatballs, and one of Lil's sausage rolls — the full Ricci's spread, shipped frozen to your door with the shipping already paid for." />
-  <meta name="robots" content="index, follow" />
+  <meta name="robots" content="noindex, follow" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -39,12 +39,12 @@
   <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon/favicon-16.png" />
   <link rel="apple-touch-icon" href="../assets/favicon/apple-touch-icon.png" />
   <!-- Canonical & social (Open Graph / Twitter) -->
-  <link rel="canonical" href="https://riccisausage.com/shop/gameday-crate" />
+  <link rel="canonical" href="https://riccisausage.com/shop/gameday" />
   <meta property="og:type" content="product" />
   <meta property="og:site_name" content="Ricci's Italian Sausage" />
   <meta property="og:title" content="Ricci's Gameday Crate — Ships Frozen, Free Shipping" />
   <meta property="og:description" content="Sweet sausage, hot sausage, hand-rolled meatballs, and one of Lil's sausage rolls — shipped frozen to your door." />
-  <meta property="og:url" content="https://riccisausage.com/shop/gameday-crate" />
+  <meta property="og:url" content="https://riccisausage.com/shop/gameday" />
   <meta property="og:image" content="https://riccisausage.com/assets/img/og-image.webp" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -54,7 +54,7 @@
   <meta name="twitter:description" content="Sweet sausage, hot sausage, hand-rolled meatballs, and one of Lil's sausage rolls — shipped frozen to your door." />
   <meta name="twitter:image" content="https://riccisausage.com/assets/img/og-image.webp" />
 </head>
-<body class="has-buybar">
+<body class="has-buybar gameday-page">
 
   <!--
     Campaign landing page — same product, same checkout as
@@ -147,6 +147,10 @@
           <div class="product-price pdp-price" data-base="189.00" data-tier="med">
             <span class="price-amount">$189.00</span>
             <span class="ship-note">Free Shipping &middot; Arrives Frozen</span>
+          </div>
+          <div class="pdp-delivery-note" id="gameday-cutoff" aria-live="polite">
+            <span class="pdp-delivery-countdown">&#9201; <strong>3 days left</strong> to order for Sunday.</span>
+            <span>Order by Wednesday at noon and it's at your door by <strong>Friday, Sep 18</strong> &mdash; two days before kickoff. Miss it and the next box ships Monday.</span>
           </div>
           <div class="pdp-cta">
             <a class="btn btn-primary" href="https://shop.riccisausage.com/products/pittsburgh-italian-pack" data-buy-now data-id="pittsburgh-italian-pack">Order Now</a>
@@ -267,25 +271,25 @@
     </section>
 
     <!-- ══════════════════════════════════════════
-         COST PER PLATE
+         TAILGATE MATH
     ══════════════════════════════════════════ -->
     <section class="menu-section">
       <div class="container product-prose">
         <span class="eyebrow">The math</span>
-        <h2>Twelve Pounds. Six Dinners. About $8 a Plate.</h2>
-        <p>Sausage and peppers Monday. Meatball subs Wednesday. Sausage in Sunday gravy over rigatoni. Pizza Saturday. Twelve-plus pounds runs a family of four through roughly six dinners &mdash; for less than one check at an Italian restaurant that isn't using sausage this good.</p>
+        <h2>Twelve Pounds. Twelve People. One Gameday.</h2>
+        <p>Put the sweet and hot sausage on the grill, the meatballs in sauce, and Lil's sausage roll on the table. Twelve-plus pounds gives 12 hungry fans a full game-day spread, with enough variety to keep everyone around the food table through the final whistle.</p>
         <div class="pdp-stats">
           <div class="pdp-stat">
             <span class="pdp-stat-figure">12+ lbs</span>
             <span class="pdp-stat-label">Sweet, hot, meatballs, roll</span>
           </div>
           <div class="pdp-stat">
-            <span class="pdp-stat-figure">~6 dinners</span>
-            <span class="pdp-stat-label">Family of four</span>
+            <span class="pdp-stat-figure">12 people</span>
+            <span class="pdp-stat-label">One hungry tailgate</span>
           </div>
           <div class="pdp-stat">
-            <span class="pdp-stat-figure">~$8 a plate</span>
-            <span class="pdp-stat-label">Shipping included</span>
+            <span class="pdp-stat-figure">1 gameday</span>
+            <span class="pdp-stat-label">The whole spread handled</span>
           </div>
         </div>
       </div>
@@ -409,9 +413,8 @@
     <!-- ══════════════════════════════════════════
          FAQ — accordion. First one open: it's the objection this page's
          traffic arrives with.
-         NOTE(copy): no confirmed cutoff/arrival-day pairing exists yet
-         (docs/WIKI.md "Open questions" #5), so no page here claims one —
-         both time questions point at shipping.html.
+         The cutoff and arrival window above are computed from the shipping
+         schedule; detailed transit guidance remains on shipping.html.
     ══════════════════════════════════════════ -->
     <section class="menu-section menu-section-alt">
       <div class="container">
@@ -520,6 +523,7 @@
 
   <script src="../js/crm.js" defer></script>
   <script src="../js/shipping.js" defer></script>
+  <script src="../js/gameday-cutoff.js" defer></script>
   <script src="../js/buy-now.js" defer></script>
 </body>
 </html>

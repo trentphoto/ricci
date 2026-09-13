@@ -644,7 +644,7 @@ Every page has exactly one commerce job — do not blur these when editing:
 - **`shop.html`** — the only sales page. Buy buttons exist here, on the two
   bundle PDPs (`shop/pittsburgh-italian-pack.html`, `shop/ricci-legacy-gift-box.html`),
   and on the campaign landing pages below.
-- **Campaign landing pages** — `shop/gameday-crate.html`,
+- **Campaign landing pages** — `shop/gameday.html`,
   `shop/thanksgiving-sausage.html`. Not separate products: both sell the
   **Pittsburgh Italian Pack** (`data-buy-now data-id="pittsburgh-italian-pack"`,
   `data-base="189.00" data-tier="med"`) under a seasonal angle. No nav, no

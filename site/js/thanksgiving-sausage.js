@@ -15,7 +15,7 @@
  * Same pattern as the retired js/labor-day-box.js — see _archive/labor-day-2026/.
  */
 (function () {
-  var DEADLINE = "2026-11-18"; // last day to order for Thanksgiving delivery
+  var DEADLINE = "2026-11-18"; // last day to order for arrival before Thanksgiving
   var STANDING_PDP = "/shop/pittsburgh-italian-pack";
 
   function midnight(iso) {
@@ -40,19 +40,19 @@
 
     if (days > 1) {
       strip = "<strong>" + days + " days left to order.</strong> " +
-        "Order by November 18 for Thanksgiving delivery.";
+        "Order by Nov 18 and it's in your freezer before Thanksgiving.";
       closing = "<strong>" + days + " days left.</strong> After the 18th we " +
-        "can't promise Thanksgiving delivery.";
+        "can't promise it'll be in your freezer before Thanksgiving.";
     } else if (days === 1) {
       strip = "<strong>Tomorrow is the last day to order.</strong> " +
-        "Order by November 18 for Thanksgiving delivery.";
+        "Order by Nov 18 and it's in your freezer before Thanksgiving.";
       closing = "<strong>Tomorrow is the last day.</strong> After the 18th we " +
-        "can't promise Thanksgiving delivery.";
+        "can't promise it'll be in your freezer before Thanksgiving.";
     } else {
       strip = "<strong>Today's the last day to order.</strong> " +
         "Orders after today can't be promised for Thanksgiving.";
       closing = "<strong>Today's the last day.</strong> After today we can't " +
-        "promise Thanksgiving delivery.";
+        "promise it'll be in your freezer before Thanksgiving.";
     }
 
     var ship = ' Order cutoffs and transit times are on the ' +
