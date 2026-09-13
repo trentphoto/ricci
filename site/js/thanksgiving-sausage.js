@@ -1,5 +1,5 @@
 /*
- * Thanksgiving Sausage pre-order page (shop/thanksgiving-sausage.html).
+ * Thanksgiving Sausage order page (shop/thanksgiving-sausage.html).
  * Live upon deployment through Nov 18, 2026. After the cutoff this redirects
  * to the standing product page rather than showing a stale countdown.
  *
@@ -39,17 +39,17 @@
     var strip, closing;
 
     if (days > 1) {
-      strip = "<strong>" + days + " days left to pre-order.</strong> " +
+      strip = "<strong>" + days + " days left to order.</strong> " +
         "Order by November 18 for Thanksgiving delivery.";
       closing = "<strong>" + days + " days left.</strong> After the 18th we " +
         "can't promise Thanksgiving delivery.";
     } else if (days === 1) {
-      strip = "<strong>Tomorrow is the last day to pre-order.</strong> " +
+      strip = "<strong>Tomorrow is the last day to order.</strong> " +
         "Order by November 18 for Thanksgiving delivery.";
       closing = "<strong>Tomorrow is the last day.</strong> After the 18th we " +
         "can't promise Thanksgiving delivery.";
     } else {
-      strip = "<strong>Today's the last day to pre-order.</strong> " +
+      strip = "<strong>Today's the last day to order.</strong> " +
         "Orders after today can't be promised for Thanksgiving.";
       closing = "<strong>Today's the last day.</strong> After today we can't " +
         "promise Thanksgiving delivery.";

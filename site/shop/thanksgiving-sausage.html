@@ -2,6 +2,23 @@
 <html lang="en">
 <head>
   <!-- Google Analytics (GA4) — ID lives in js/analytics.js -->
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '27399609273050282');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=27399609273050282&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
   <script async src="/js/analytics.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,8 +28,8 @@
     and redirects to the standing PDP once the cutoff passes — do not
     remove that script tag before archiving this page for the season.
   -->
-  <title>Sausage for Thanksgiving Stuffing — Pre-Order by Nov 18 | Ricci's, Est. 1945</title>
-  <meta name="description" content="Ricci's Italian sausage for the stuffing, shipped frozen with the shipping already paid for. Pre-order by November 18 for Thanksgiving delivery." />
+  <title>Sausage for Thanksgiving Stuffing — Order by Nov 18 | Ricci's, Est. 1945</title>
+  <meta name="description" content="Order the Pittsburgh Italian Pack now, have it shipped frozen, and keep it in your freezer for Thanksgiving. Shipping included. Order by November 18." />
   <meta name="robots" content="index, follow" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -26,16 +43,16 @@
   <link rel="canonical" href="https://riccisausage.com/shop/thanksgiving-sausage" />
   <meta property="og:type" content="product" />
   <meta property="og:site_name" content="Ricci's Italian Sausage" />
-  <meta property="og:title" content="Sausage for Thanksgiving Stuffing — Pre-Order by Nov 18" />
-  <meta property="og:description" content="Ricci's Italian sausage for the stuffing, shipped frozen. Pre-order by November 18 for Thanksgiving delivery." />
+  <meta property="og:title" content="Sausage for Thanksgiving Stuffing — Order by Nov 18" />
+  <meta property="og:description" content="Order the Pittsburgh Italian Pack now, have it shipped frozen, and keep it in your freezer for Thanksgiving. Order by November 18." />
   <meta property="og:url" content="https://riccisausage.com/shop/thanksgiving-sausage" />
   <meta property="og:image" content="https://riccisausage.com/assets/img/og-image.webp" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="Ricci's Italian Sausage — Italian Tradition. Perfected. Since 1945." />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Sausage for Thanksgiving Stuffing — Pre-Order by Nov 18" />
-  <meta name="twitter:description" content="Ricci's Italian sausage for the stuffing, shipped frozen. Pre-order by November 18 for Thanksgiving delivery." />
+  <meta name="twitter:title" content="Sausage for Thanksgiving Stuffing — Order by Nov 18" />
+  <meta name="twitter:description" content="Order the Pittsburgh Italian Pack now, have it shipped frozen, and keep it in your freezer for Thanksgiving. Order by November 18." />
   <meta name="twitter:image" content="https://riccisausage.com/assets/img/og-image.webp" />
 </head>
 <body class="has-buybar">
@@ -59,7 +76,7 @@
       </a>
       <div class="camp-header-cta">
         <a href="tel:4123319531" class="camp-header-phone">412-331-9531</a>
-        <a href="https://shop.riccisausage.com/products/pittsburgh-italian-pack" class="btn btn-primary" data-buy-now data-id="pittsburgh-italian-pack">Pre-Order Now</a>
+        <a href="https://shop.riccisausage.com/products/pittsburgh-italian-pack" class="btn btn-primary" data-buy-now data-id="pittsburgh-italian-pack">Order Now</a>
       </div>
     </div>
   </header>
@@ -67,7 +84,7 @@
   <!-- Deadline strip. js/thanksgiving-sausage.js rewrites this line with
        the live day count; the static text is the fallback if JS is off. -->
   <div class="camp-urgency" aria-live="polite">
-    <p id="thanksgiving-countdown">Pre-order by November 18 for Thanksgiving delivery.</p>
+    <p id="thanksgiving-countdown">Order by November 18 for Thanksgiving delivery.</p>
   </div>
 
   <main>
@@ -102,12 +119,14 @@
         </div>
 
         <div class="pdp-buy">
-          <span class="eyebrow">Pre-Order by November 18</span>
+          <span class="eyebrow">Order by November 18</span>
           <h1>The Stuffing Is the Dish Everyone Argues About.</h1>
           <p class="pdp-buy-lead">
-            Settle it. Ricci's Italian sausage, made in McKees Rocks since
-            1945, shipped frozen to your door in time for Thanksgiving &mdash;
-            with meatballs and a sausage roll for the rest of the week.
+            Settle it with our Pittsburgh Italian Pack: sweet and hot Italian
+            sausage for the stuffing, plus hand-rolled meatballs and one of
+            Lil's sausage rolls for the rest of the week. Made in McKees Rocks
+            since 1945. Order now, have it shipped frozen, and keep it in your
+            freezer until Thanksgiving.
           </p>
 
           <ul class="pdp-manifest">
@@ -139,7 +158,7 @@
             <span class="ship-note">Free Shipping &middot; Arrives Frozen</span>
           </div>
           <div class="pdp-cta">
-            <a class="btn btn-primary" href="https://shop.riccisausage.com/products/pittsburgh-italian-pack" data-buy-now data-id="pittsburgh-italian-pack">Pre-Order Now</a>
+            <a class="btn btn-primary" href="https://shop.riccisausage.com/products/pittsburgh-italian-pack" data-buy-now data-id="pittsburgh-italian-pack">Order Now</a>
             <a href="tel:4123319531" class="btn btn-outline">Call &middot; 412-331-9531</a>
           </div>
           <p class="pdp-note"><strong>Cook one link.</strong> If it isn't the best Italian sausage you've had, tell us and we'll refund the box in full &mdash; keep the rest. We're not asking you to ship frozen meat back to Pennsylvania.</p>
@@ -185,7 +204,9 @@
           whatever sausage was left at the store the Tuesday before.
         </p>
         <p>
-          Order it now, put it in the freezer, and stop thinking about it.
+          Order now and we'll ship your box on our regular shipping schedule.
+          Keep it frozen when it arrives, then thaw in the refrigerator when
+          you're ready to cook for Thanksgiving.
         </p>
       </div>
     </section>
@@ -198,7 +219,7 @@
       <div class="container">
         <div class="menu-section-header">
           <span class="eyebrow">What you get</span>
-          <h2>Everything in the Box.</h2>
+          <h2>Inside the Pittsburgh Italian Pack.</h2>
           <p>All USDA-inspected, hand-mixed, all natural &mdash; no fillers, no MSG, no additives, no preservatives.</p>
         </div>
         <div class="includes-grid includes-grid--wide">
@@ -243,14 +264,14 @@
             </div>
           </div>
         </div>
-        <p class="includes-note">12+ lbs total. Arrives frozen, packed with cold packs. Shipping included.</p>
+        <p class="includes-note">12+ lbs total. Arrives frozen, packed with cold packs. Shipping included. <a href="https://shop.riccisausage.com/products/pittsburgh-italian-pack">View the Pittsburgh Italian Pack in our online shop.</a></p>
 
         <div class="camp-ctaband product-price" data-base="189.00" data-tier="med">
           <div class="camp-ctaband-copy">
             <span class="price-amount">$189.00</span>
             <span class="ship-note">Free Shipping &middot; Arrives Frozen</span>
           </div>
-          <a class="btn btn-primary btn-lg" href="https://shop.riccisausage.com/products/pittsburgh-italian-pack" data-buy-now data-id="pittsburgh-italian-pack">Pre-Order by Nov 18</a>
+          <a class="btn btn-primary btn-lg" href="https://shop.riccisausage.com/products/pittsburgh-italian-pack" data-buy-now data-id="pittsburgh-italian-pack">Order Now</a>
         </div>
       </div>
     </section>
@@ -430,8 +451,9 @@
           <details open>
             <summary>When exactly does it arrive?</summary>
             <p>
-              Pre-order by November 18 and we'll get it moving with plenty of
-              time for Thanksgiving. Exact ship days and transit windows are on
+              Your order ships on our regular shipping schedule. We don't hold it
+              until Thanksgiving &mdash; keep the box frozen when it arrives.
+              Order by November 18 for Thanksgiving delivery. Ship days and transit windows are on
               the <a href="../shipping.html">Shipping page</a>. After November 18
               we can't guarantee Thanksgiving delivery.
             </p>
@@ -485,7 +507,7 @@
     <section class="pdp-final">
       <div class="container">
         <span class="eyebrow">Last call</span>
-        <h2>Pre-Order by November 18.</h2>
+        <h2>Order by November 18.</h2>
         <p class="pdp-final-lead" id="thanksgiving-countdown-final">
           After the 18th we can't promise Thanksgiving delivery. Order cutoffs
           and transit times are on the <a href="../shipping.html">Shipping page</a>.
@@ -495,7 +517,7 @@
           <span class="ship-note">Free Shipping &middot; Arrives Frozen</span>
         </span>
         <p class="pdp-final-cta">
-          <a class="btn btn-primary btn-lg" href="https://shop.riccisausage.com/products/pittsburgh-italian-pack" data-buy-now data-id="pittsburgh-italian-pack">Pre-Order Now</a>
+          <a class="btn btn-primary btn-lg" href="https://shop.riccisausage.com/products/pittsburgh-italian-pack" data-buy-now data-id="pittsburgh-italian-pack">Order Now</a>
           <a href="tel:4123319531" class="btn btn-outline">Call &middot; 412-331-9531</a>
         </p>
       </div>
@@ -511,10 +533,10 @@
       <span class="price-amount">$189.00</span>
       <span class="ship-note">Free shipping &middot; Arrives frozen</span>
     </span>
-    <a href="https://shop.riccisausage.com/products/pittsburgh-italian-pack" class="btn btn-primary" data-buy-now data-id="pittsburgh-italian-pack">Pre-Order</a>
+    <a href="https://shop.riccisausage.com/products/pittsburgh-italian-pack" class="btn btn-primary" data-buy-now data-id="pittsburgh-italian-pack">Order Now</a>
   </div>
 
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"When exactly does it arrive?","acceptedAnswer":{"@type":"Answer","text":"Pre-order by November 18 and we'll get it moving with plenty of time for Thanksgiving. Exact ship days and transit windows are on our Shipping page. After November 18 we can't guarantee Thanksgiving delivery."}},{"@type":"Question","name":"What if I'm not home when it arrives?","acceptedAnswer":{"@type":"Answer","text":"We send every order frozen via two-day service in a sealed, insulated box with cold packs. Bring it inside when it arrives and refrigerate or freeze it promptly."}},{"@type":"Question","name":"How long does it keep?","acceptedAnswer":{"@type":"Answer","text":"Frozen in the freezer until you're ready to cook it, thawed in the refrigerator — never on the counter. Specific windows are on our Shipping page."}},{"@type":"Question","name":"Can I ship it to a different address?","acceptedAnswer":{"@type":"Answer","text":"Yes — enter it at checkout, useful if you're sending it straight to whoever's hosting."}},{"@type":"Question","name":"Can I choose all hot or all sweet?","acceptedAnswer":{"@type":"Answer","text":"This bundle is a fixed pack — sweet, hot, meatballs, and a sausage roll. For a custom mix, call the shop at 412-331-9531."}},{"@type":"Question","name":"Why is shipping free?","acceptedAnswer":{"@type":"Answer","text":"Shipping isn't tacked on at checkout — it's already built into the price shown for your state."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"When exactly does it arrive?","acceptedAnswer":{"@type":"Answer","text":"Your order ships on our regular shipping schedule. We don't hold it until Thanksgiving — keep the box frozen when it arrives. Order by November 18 for Thanksgiving delivery. Ship days and transit windows are on our Shipping page. After November 18 we can't guarantee Thanksgiving delivery."}},{"@type":"Question","name":"What if I'm not home when it arrives?","acceptedAnswer":{"@type":"Answer","text":"We send every order frozen via two-day service in a sealed, insulated box with cold packs. Bring it inside when it arrives and refrigerate or freeze it promptly."}},{"@type":"Question","name":"How long does it keep?","acceptedAnswer":{"@type":"Answer","text":"Frozen in the freezer until you're ready to cook it, thawed in the refrigerator — never on the counter. Specific windows are on our Shipping page."}},{"@type":"Question","name":"Can I ship it to a different address?","acceptedAnswer":{"@type":"Answer","text":"Yes — enter it at checkout, useful if you're sending it straight to whoever's hosting."}},{"@type":"Question","name":"Can I choose all hot or all sweet?","acceptedAnswer":{"@type":"Answer","text":"This bundle is a fixed pack — sweet, hot, meatballs, and a sausage roll. For a custom mix, call the shop at 412-331-9531."}},{"@type":"Question","name":"Why is shipping free?","acceptedAnswer":{"@type":"Answer","text":"Shipping isn't tacked on at checkout — it's already built into the price shown for your state."}}]}</script>
 
   <!-- Minimal footer. No catalog links — this page has one job. -->
   <footer class="site-footer ship-footer">
