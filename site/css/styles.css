@@ -5832,6 +5832,84 @@ body.cater-open { overflow: hidden; }
   margin-top: 26px;
 }
 
+/* Cold chain — three stops on one unbroken rule. Deliberately typographic:
+   there is no photo of a cold pack worth shipping, and the two facts that
+   used to sit here as "?" plates (ship-day cadence, shelf life) are still
+   unconfirmed, so the block states neither. The continuous top rule is the
+   point — the chain doesn't break. */
+.coldchain {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 2px solid var(--red);
+}
+.coldchain-step {
+  position: relative;
+  padding: 34px 30px 4px;
+  border-left: 1px solid var(--cream-dark);
+}
+.coldchain-step:first-child { border-left: 0; padding-left: 0; }
+/* Stop marker, punched through the rule above it. */
+.coldchain-mark {
+  position: absolute;
+  top: -7px;
+  left: 30px;
+  width: 12px;
+  height: 12px;
+  background: var(--red);
+  border: 3px solid var(--white);
+  border-radius: 50%;
+}
+.coldchain-step:first-child .coldchain-mark { left: 0; }
+.coldchain-stage {
+  display: block;
+  margin-bottom: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.coldchain-step h3 {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  line-height: 1.25;
+  margin: 0 0 10px;
+  color: var(--ink);
+}
+.coldchain-step p {
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  margin: 0;
+}
+.coldchain-note {
+  max-width: 720px;
+  margin: 36px auto 0;
+  text-align: center;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--ink-faint);
+}
+.coldchain-note a {
+  color: var(--red);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+@media (max-width: 780px) {
+  .coldchain { grid-template-columns: 1fr; border-top: 0; }
+  .coldchain-step {
+    padding: 26px 0 26px 26px;
+    border-left: 2px solid var(--red);
+  }
+  .coldchain-step:first-child { padding-left: 26px; border-left: 2px solid var(--red); }
+  .coldchain-step:last-child { padding-bottom: 4px; }
+  .coldchain-mark { top: 30px; left: -7px; }
+  .coldchain-step:first-child .coldchain-mark { left: -7px; }
+}
+
 /* Suggestion cards, on the brand beige instead of --cream-dark.
    #E7DCC1 as a card fill reads as a second, duller beige beside the real
    one (#F0E6D0) — see docs/WIKI.md → "Beige: --cream is the beige."

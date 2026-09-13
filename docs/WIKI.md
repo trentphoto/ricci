@@ -123,6 +123,7 @@ All files are IIFEs, no dependencies, included with `defer`.
 | `nav-drawer.js` | Mobile nav toggle / backdrop. |
 | `shipping.js` | State-based all-in pricing. Maps US state → shipping zone (A–E), updates `.product-price[data-base][data-tier]` elements, persists state in `localStorage` (`ricci_ship_state`), fires `ricci:ship-state` on change. Exposes `window.RicciShipping` (`getState`, `getGroup`, `canShip`, `priceFor`, `stateName`). Loaded on `products.html` and `shop.html`. |
 | `cart.js` | localStorage cart + nav dropdown. `[data-add-to-cart]` buttons add bundle items; prices sync with `RicciShipping`. Checkout builds a Shopify cart URL from `js/shopify-variants.js` using the customer's zone variant. Exposes `window.RicciCart`. |
+| `buy-now.js` | Single-item, straight-to-Shopify checkout. `[data-buy-now]` + `data-id` resolves the shipping state to a zone (via `RicciShipping`, else `localStorage` + its own mirror), loads `shopify-variants.js`, and redirects to `/cart/{variantId}:1`. No localStorage cart, no cart popup. AK/HI (zone X) get told to call instead. Loaded on `shop/pittsburgh-italian-pack.html`, alongside `cart.js` — which still runs there for the nav cart. Don't put `[data-buy-now]` and `[data-add-to-cart]` on the same button. |
 | `shopify-variants.js` | **Auto-generated** by `tools/sync-shopify-bundles.mjs`. Maps bundle slugs → Shopify variant GIDs per zone. Do not edit by hand — re-run sync after price changes. |
 | `hero-slider.js` | Homepage hero image rotation. |
 | `preorder-modal.js` | Pre-order modal UI. |
@@ -552,6 +553,27 @@ the slot blank or use the typographic plate stand-in. See `CLAUDE.md`.
      to one," and "not a single ingredient changed since" on the sweet.
 
    Campaign doc: `docs/labor-day-dtc-campaign.md` (ads + build checklist).
+
+5. **Pittsburgh Pack cold chain: ship-day cadence and shelf life.** Both were
+   `.menu-item-plate` "?" stand-ins in the "How it ships" block on
+   `shop/pittsburgh-italian-pack.html`. Removed 2026-09-10 so the page could
+   go live — the section now states neither, and links to `shipping.html`
+   instead. Two things to answer:
+
+   - **Which days do shipped boxes actually go out, and what's the order
+     cutoff?** Nothing on the PDP claims a schedule.
+   - **How long does the box keep, frozen and in the fridge once thawed?**
+     The PDP says only "freezer when it lands, thaw in the refrigerator" —
+     no windows.
+
+   **Contradiction to resolve first:** `shipping.html` already states a
+   cadence and a shelf life in detail — "we pack and ship Monday through
+   Wednesday," "we do not ship Thursday, Friday, Saturday, or Sunday,"
+   "1–3 business days" transit, order cutoffs at "Sunday–Tuesday by 12 PM ET,"
+   and "refrigerator (if cooking within 2 days)." None of that is in this
+   wiki, and the PDP was carrying "?" plates for the same facts, so one of
+   the two pages is wrong. Confirm with the owner, then either put the real
+   numbers on the PDP or fix `shipping.html`.
 
 The club is unlaunched, so treat the rest of that page as unverified too. Still
 live on it and never confirmed: the seasonal cut calendar (December = Feast of
