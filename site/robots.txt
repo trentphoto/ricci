@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /cookbook
+Disallow: /recipe-card
+Disallow: /downloads/
 
 Sitemap: https://riccisausage.com/sitemap.xml

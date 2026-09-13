@@ -1,6 +1,7 @@
 # .html -> clean URL (301). Consolidates duplicate content.
 /careers.html  /careers  301!
 /catering.html  /catering  301!
+/cookbook.html  /cookbook  301!
 /faq.html  /faq  301!
 /hot-foods/banana-pepper-sandwich.html  /hot-foods/banana-pepper-sandwich  301!
 /hot-foods/hot-sausage-sandwich.html  /hot-foods/hot-sausage-sandwich  301!
@@ -24,6 +25,7 @@
 /press.html  /press  301!
 /privacy.html  /privacy  301!
 /products.html  /products  301!
+/recipe-card.html  /recipe-card  301!
 /returns.html  /returns  301!
 /shipping.html  /shipping  301!
 /shop.html  /shop  301!

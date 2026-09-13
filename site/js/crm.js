@@ -16,7 +16,8 @@
   var CRM_BASE = window.CRM_BASE || "https://riccis-crm.fly.dev";
   window.CRM_BASE = CRM_BASE; // publish so other scripts share one config
   var FIELDS = ["email", "name", "phone", "message", "event_date", "headcount", "source",
-                "age", "years_experience", "availability", "position"];
+                "age", "years_experience", "availability", "position", "asset", "variant",
+                "utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"];
 
   function val(form, name) {
     var el = form.elements[name];
@@ -56,7 +57,7 @@
     var panelSel = form.getAttribute("data-success-panel");
     var panel = panelSel ? document.querySelector(panelSel) : null;
 
-    function succeed() {
+    function succeed(data) {
       if (panel) {
         form.hidden = true;
         panel.hidden = false;
@@ -65,6 +66,12 @@
         statusEl.textContent = message({ ok: true }, form);
       }
       form.reset();
+      if (data) {
+        form.dispatchEvent(new CustomEvent("ricci:crm-success", {
+          bubbles: true,
+          detail: { type: type, data: data },
+        }));
+      }
     }
 
     form.addEventListener("submit", async function (e) {
@@ -84,7 +91,7 @@
       if (statusEl) statusEl.textContent = "Sending…";
       var r = await post(path, data);
       if (btn) btn.disabled = false;
-      if (r.ok) succeed();
+      if (r.ok) succeed(data);
       else if (statusEl) statusEl.textContent = message(r, form);
     });
   }

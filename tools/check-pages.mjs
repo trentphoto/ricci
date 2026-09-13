@@ -79,6 +79,7 @@ function checkPage(file) {
   if (!existsSync(file)) return fail(file, 'file does not exist');
   const html = readFileSync(file, 'utf8');
   const isRoot = dirname(file) === SITE;
+  const isNoindex = /<meta\s+name="robots"\s+content="[^"]*noindex/i.test(html);
 
   if (html.length < 4000) fail(file, `suspiciously short (${html.length} bytes) — page looks like a stub`);
   if (!/^<!DOCTYPE html>/i.test(html.trim())) fail(file, 'missing <!DOCTYPE html>');
@@ -124,14 +125,14 @@ function checkPage(file) {
   }
 
   // must funnel somewhere buyable
-  if (!/href="[^"]*(?:shop|products|menu)(?:\.html|\/|")/.test(html)) {
+  if (!isNoindex && !/href="[^"]*(?:shop|products|menu)(?:\.html|\/|")/.test(html)) {
     fail(file, 'no internal link to shop / products / menu — every content page should funnel');
   }
 
   // registration in sitemap + redirects
   const sitemap = readFileSync(join(SITE, 'sitemap.xml'), 'utf8');
   const cleanUrl = `${ORIGIN}/${relative(SITE, file).replace(/\.html$/, '')}`;
-  if (!sitemap.includes(`<loc>${cleanUrl}</loc>`)) {
+  if (!isNoindex && !sitemap.includes(`<loc>${cleanUrl}</loc>`)) {
     fail(file, `not registered in sitemap.xml — add <url><loc>${cleanUrl}</loc></url>`);
   }
   const redirects = readFileSync(join(SITE, '_redirects'), 'utf8');

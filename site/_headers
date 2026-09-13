@@ -1,0 +1,10 @@
+/cookbook
+  X-Robots-Tag: noindex, nofollow
+/cookbook.html
+  X-Robots-Tag: noindex, nofollow
+/recipe-card
+  X-Robots-Tag: noindex, nofollow
+/recipe-card.html
+  X-Robots-Tag: noindex, nofollow
+/downloads/*
+  X-Robots-Tag: noindex, nofollow
