@@ -160,6 +160,11 @@
     whenVariantsReady(function () {
       var url = buildCheckoutUrl();
       if (url) {
+        if (window.RicciPixel) {
+          window.RicciPixel.initiateCheckout(getCart().map(function (it) {
+            return { id: it.id, qty: it.qty || 1 };
+          }));
+        }
         window.location.href = url;
         return;
       }

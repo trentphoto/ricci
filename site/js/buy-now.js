@@ -111,7 +111,11 @@
 
     whenVariantsReady(function () {
       var url = checkoutUrl(id);
-      if (url) { window.location.href = url; return; }
+      if (url) {
+        if (window.RicciPixel) window.RicciPixel.initiateCheckout([{ id: id, qty: 1 }]);
+        window.location.href = url;
+        return;
+      }
       btn.textContent = label;
       btn.removeAttribute("aria-busy");
       window.alert(
