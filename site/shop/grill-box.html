@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="../js/grill-experiment.js" data-variant="original"></script>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '27399609273050282');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=27399609273050282&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+  <!-- Google Analytics (GA4) — ID lives in js/analytics.js -->
+  <script async src="/js/analytics.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!--
+    ══════════════════════════════════════════════════════════════════════
+    THE SUNDAY GRILL BOX — a SEPARATE OFFER from shop/gameday.html.
+
+    gameday.html sells the Pittsburgh Italian Pack (12+ lbs, zone-priced
+    $189–$221) under a game-day angle. This page sells a different box:
+    10 lb of rope + 2 lb of peppers and onions, FLAT $189 everywhere.
+    Do not merge them, and do not copy prices, manifests or shipping copy
+    between the two.
+
+    CHECKOUT is wired (2026-09-17): three flat-$189 Shopify products, one
+    per mix — grill-box-hot-and-sweet / -all-hot / -all-sweet, mapped in
+    tools/shopify-grill-box-map.json. If a URL in js/grill-box.js is ever
+    blanked, the CTAs disable themselves and show a dashed warning strip.
+
+    Campaign landing page conventions (docs/WIKI.md → Merchandising rules):
+    no primary nav, no catalog footer, one offer, one CTA, FAQPage JSON-LD
+    only — no `offers` block, so it can't compete with the PDP in search.
+    Layout rides the permanent .pdp-* components plus .camp-* / .heat-*.
+    Don't "sync the nav" onto it.
+    ══════════════════════════════════════════════════════════════════════
+  -->
+  <title>The Sunday Grill Box — 10 lb of Ricci's, Shipped Frozen | Ricci's Italian Sausage</title>
+  <meta name="description" content="Ten pounds of Ricci's Italian sausage — all hot, all sweet, or five pounds of each — plus 2 lb of peppers and onions. Shipped frozen from McKees Rocks. $189, shipping included." />
+  <meta name="robots" content="noindex, follow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="icon" href="../assets/favicon/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon/favicon-16.png" />
+  <link rel="apple-touch-icon" href="../assets/favicon/apple-touch-icon.png" />
+  <!-- Canonical & social (Open Graph / Twitter) -->
+  <link rel="canonical" href="https://riccisausage.com/shop/grill-box" />
+  <meta property="og:type" content="product" />
+  <meta property="og:site_name" content="Ricci's Italian Sausage" />
+  <meta property="og:title" content="The Sunday Grill Box — 10 lb of Ricci's, Shipped Frozen" />
+  <meta property="og:description" content="Ten pounds of Ricci's Italian sausage plus 2 lb of peppers and onions, shipped frozen. $189, shipping included." />
+  <meta property="og:url" content="https://riccisausage.com/shop/grill-box" />
+  <meta property="og:image" content="https://riccisausage.com/assets/img/og-image.webp" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Ricci's Italian Sausage — Italian Tradition. Perfected. Since 1945." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The Sunday Grill Box — 10 lb of Ricci's, Shipped Frozen" />
+  <meta name="twitter:description" content="Ten pounds of Ricci's Italian sausage plus 2 lb of peppers and onions, shipped frozen. $189, shipping included." />
+  <meta name="twitter:image" content="https://riccisausage.com/assets/img/og-image.webp" />
+</head>
+<body class="has-buybar grill-page">
+
+  <header class="site-header">
+    <div class="camp-header-inner">
+      <a href="../index.html" class="nav-logo">
+        <img src="../assets/logo.png" alt="Ricci's Italian Sausage">
+      </a>
+      <div class="camp-header-cta">
+        <a href="tel:4123319531" class="camp-header-phone">412-331-9531</a>
+        <a class="btn btn-primary" data-grill-cta>Order Now</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ══════════════════════════════════════════
+         HERO — the Labor Day shipped-box layout (.labor-hero): copy left,
+         the two skillet shots stacked right. Same hero as
+         shop/gameday.html, different offer — don't sync copy between them.
+
+         The figures show the two BLENDS, not the box contents: this offer
+         is 10 lb of either or five pounds of each, so the captions name
+         the blend and carry no weight.
+
+         NO PICKER HERE — same shape as the archived labor-day-box.html
+         hero. The hero states the default box (half and half) and sells
+         it; the choice is made once, at the #box picker, which rewrites
+         #grill-mix-manifest and every [data-grill-cta] on the page. Don't
+         add a second switch back up here.
+
+         The column keeps .pdp-buy alongside .labor-hero-copy for the
+         .pdp-buy h1 treatment. The guarantee .pdp-note that used to sit
+         here is gone — it lives once, in .pdp-guarantee below.
+
+         FLAT $189 — no .ship-selector, no data-base/data-tier, and
+         js/shipping.js is deliberately not loaded. Don't add zone pricing
+         back without a zone-priced Shopify product behind it.
+
+         No new CSS — .labor-hero*, .heat-* and .ship-terms all already
+         ship in css/styles.css.
+    ══════════════════════════════════════════ -->
+    <section class="page-hero labor-hero">
+      <div class="container labor-hero-grid">
+        <div class="labor-hero-copy pdp-buy">
+          <span class="eyebrow">Ships Frozen &middot; Free Shipping</span>
+          <h1>Bring the Crowd. We'll Bring the Sausage.</h1>
+          <p class="labor-hero-lead">
+            Ten pounds of Ricci's Italian sausage and a bag of peppers and
+            onions, shipped frozen from Pittsburgh &mdash; for the grill, the
+            skillet, and the whole crew. You bring the buns.
+          </p>
+          <div class="labor-hero-body">
+            <p><em>10 lb</em> <span id="grill-mix-manifest" data-grill-manifest>5 lb hot rope + 5 lb sweet rope — two labeled 5 lb boxes</span></p>
+            <!-- Live: the #box picker rewrites this, so the hero manifest can
+                 never contradict what's actually in the cart. -->
+            <p><em>2 lb</em> Peppers and onions &mdash; one 32 oz bag</p>
+          </div>
+
+          <div class="product-price pdp-price">
+            <span class="price-amount">$189.00</span>
+            <span class="ship-note">Free shipping &middot; Arrives cold &middot; One-time purchase</span>
+          </div>
+          <div class="pdp-cta">
+            <a class="btn btn-primary btn-lg" data-grill-cta>Order Now &mdash; $189 &middot; Free Shipping</a>
+          </div>
+          <p class="ship-terms">
+            12 lbs total &middot; Labeled and packed in an insulated box with
+            cold packs &middot; Shipping included
+          </p>
+        </div>
+
+        <!-- The two blends, captioned by name only — see the section note
+             above on why no weights here. LCP images: no lazy-loading,
+             dimensions set to hold the space. -->
+        <div class="labor-hero-figure labor-hero-figure--pair">
+          <figure>
+            <img src="../assets/img/hot-grilled-sausages.webp"
+                 alt="Ricci's hot sausage grilled with char marks in a cast-iron grill pan"
+                 width="1024" height="725" fetchpriority="high" decoding="async" />
+            <figcaption>Hot</figcaption>
+          </figure>
+          <figure>
+            <img src="../assets/img/sweet-grilled-sausages.webp"
+                 alt="Ricci's sweet sausage grilled with char marks in a cast-iron grill pan"
+                 width="1024" height="725" fetchpriority="high" decoding="async" />
+            <figcaption>Sweet</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         TRUST STRIP
+    ══════════════════════════════════════════ -->
+    <div class="pdp-trustbar">
+      <div class="pdp-trustbar-inner">
+        <div class="pdp-trust">
+          <b>The box</b>
+          <span>10 lb of rope &mdash; hot, sweet, or both &mdash; plus 2 lb of peppers and onions</span>
+        </div>
+        <div class="pdp-trust">
+          <b>How it ships</b>
+          <span>Packed frozen, in an insulated box with cold packs</span>
+        </div>
+        <div class="pdp-trust">
+          <b>Shipping</b>
+          <span>Built into the $189 &mdash; nothing added at checkout</span>
+        </div>
+        <div class="pdp-trust">
+          <b>The shop</b>
+          <span>USDA-inspected daily since 1973</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         WHAT'S IN IT — the labor-day-box.html contents block, rebuilt for
+         this offer: three .includes-cards (hot rope, sweet rope, peppers)
+         under an .offer-contents-head, with the mix switch repeated below
+         them where the decision actually gets made.
+
+         The two rope cards are LIVE: because this box can be all hot or
+         all sweet, a fixed "5 lb" on each would be a false manifest for
+         two of the three mixes. js/grill-box.js rewrites both qty badges
+         from MIX[key].qty and dims the blend that isn't in the box
+         (.is-out). Don't hard-code weights back into them.
+
+         The peppers card states the name and the weight and nothing else:
+         whether the bag is cooked or raw is unconfirmed (docs/WIKI.md →
+         Open questions). Don't write "roasted," "charred," or "fresh-cut"
+         here from the photo.
+
+         Blend copy is straight from docs/WIKI.md → "Product facts". No
+         ship-day cadence here (Labor Day's eyebrow said "Ships Tuesday &
+         Wednesday" — that cadence is still open for this box), and the
+         price band stays .camp-ctaband rather than Labor Day's
+         .offer-close, which carried a zone-specific shipping line.
+    ══════════════════════════════════════════ -->
+    <section class="menu-section menu-section-alt" id="box">
+      <div class="container">
+        <div class="menu-section-header">
+          <span class="eyebrow">What you get</span>
+          <h2>Ten Pounds, Plus the Peppers.</h2>
+          <p class="offer-subhead">One insulated box, packed frozen. $189 shipped.</p>
+        </div>
+
+        <h3 class="offer-contents-head">What's in it</h3>
+        <div class="includes-grid">
+          <div class="includes-card" data-grill-card="hot">
+            <div class="includes-card-img">
+              <img src="../assets/img/hot-sausage-coil-raw.webp" alt="Raw Ricci's hot rope sausage" loading="lazy" />
+            </div>
+            <div class="includes-card-body">
+              <span class="includes-card-qty" data-grill-qty="hot">5 lb</span>
+              <h3>Hot Italian Sausage</h3>
+              <p>Crushed red pepper, real paprika, whole fennel seed.
+                 Uncooked rope in natural casing &mdash; cut it to whatever
+                 length you want. This is the one Pittsburgh grew up on.</p>
+            </div>
+          </div>
+          <div class="includes-card" data-grill-card="sweet">
+            <div class="includes-card-img">
+              <img src="../assets/img/sweet-sausage-coil-raw.webp" alt="Raw Ricci's sweet rope sausage" loading="lazy" />
+            </div>
+            <div class="includes-card-body">
+              <span class="includes-card-qty" data-grill-qty="sweet">5 lb</span>
+              <h3>Sweet Italian Sausage</h3>
+              <p>One of the two recipes the family brought over from Sulmona
+                 in 1945. Pork, salt, cracked black pepper &mdash; no fennel,
+                 no paprika. &ldquo;Sweet&rdquo; means no chili heat, and
+                 that's all it means.</p>
+            </div>
+          </div>
+          <div class="includes-card">
+            <div class="includes-card-img">
+              <img src="../assets/img/peppers-onions.webp" alt="Sliced red, green and orange peppers with onions" loading="lazy" />
+            </div>
+            <div class="includes-card-body">
+              <span class="includes-card-qty">2 lb</span>
+              <h3>Peppers &amp; Onions</h3>
+              <p>One 32 oz bag &mdash; the classic pairing, in the pan or on
+                 the grill alongside the rope.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Second instance of the hero switch. Its own radio name so both
+             groups keep a visible checked state; js/grill-box.js syncs them
+             and drives every [data-grill-cta] off the shared selection. -->
+        <div class="heat-pick" data-grill-switch-wrap>
+          <span class="heat-pick-caption">Pick your ten pounds</span>
+          <div class="heat-switch heat-switch--three" data-grill-switch>
+            <span class="heat-switch-slab" aria-hidden="true"></span>
+            <label class="heat-switch-opt">
+              <input type="radio" name="grill-mix-box" value="mixed" checked />
+              <span class="heat-switch-face">
+                <span class="heat-switch-name">Hot &amp; Sweet</span>
+                <span class="heat-switch-sub">5 lb &middot; 5 lb</span>
+              </span>
+            </label>
+            <label class="heat-switch-opt">
+              <input type="radio" name="grill-mix-box" value="hot" />
+              <span class="heat-switch-face">
+                <span class="heat-switch-name">All Hot</span>
+                <span class="heat-switch-sub">10 lb</span>
+              </span>
+            </label>
+            <label class="heat-switch-opt">
+              <input type="radio" name="grill-mix-box" value="sweet" />
+              <span class="heat-switch-face">
+                <span class="heat-switch-name">All Sweet</span>
+                <span class="heat-switch-sub">10 lb</span>
+              </span>
+            </label>
+          </div>
+          <p class="heat-pick-note" data-grill-note aria-live="polite">
+            Half and half. Five pounds of hot, five pounds of sweet &mdash; the
+            way most people order it when they can't decide.
+          </p>
+        </div>
+
+        <p class="includes-note">12 lbs total. Packed frozen with cold packs, arrives cold. Shipping included. Buns, sauce and sides aren't in the box.</p>
+
+        <div class="camp-ctaband">
+          <div class="camp-ctaband-copy">
+            <span class="price-amount">$189.00</span>
+            <span class="ship-note">Free shipping &middot; Arrives cold</span>
+          </div>
+          <a class="btn btn-primary btn-lg" data-grill-cta>Order Now</a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         HOW IT WORKS — labor-day-box.html's charcoal .section-apply block.
+
+         The Labor Day copy was a CALENDAR ("Order by Wednesday" / "Boxes go
+         out Tuesday and Wednesday" / "Thursday or Friday at your door") and
+         a zone fineprint ("free shipping to PA, MD, NY, DE ... order by
+         Wednesday, September 2"). None of that transfers: this box is flat
+         $189 nationwide with no campaign deadline, and its cutoff, ship days
+         and transit time are all still unconfirmed (docs/WIKI.md → Open
+         questions #5). So the three steps state only what's confirmed and
+         the fineprint points at the Shipping page instead of naming days.
+         Do not fill the days back in from the Labor Day page.
+
+         Note: this page also has the white "Three Steps and You're Done."
+         .section-plan below. Two three-step sections is one too many —
+         pick one.
+    ══════════════════════════════════════════ -->
+    <!-- ══════════════════════════════════════════
+         HOW IT WORKS — one section, merged 2026-09-18: the charcoal
+         .section-apply / .reserve-* treatment from labor-day-box.html
+         wrapped around this page's own three steps. The white
+         .section-plan version that used to follow it is gone; don't
+         re-add a second three-step block.
+
+         The Labor Day copy that came with this treatment was a CALENDAR
+         ("Order by Wednesday" / "out Tuesday and Wednesday" / "Thursday or
+         Friday at your door") over a zone fineprint (PA, MD, NY, DE).
+         None of it transfers: flat $189 nationwide, no deadline, and the
+         cutoff, ship days and transit time are all still unconfirmed
+         (docs/WIKI.md → Open questions #5). The fineprint links the
+         Shipping page rather than naming days. Don't fill them back in.
+    ══════════════════════════════════════════ -->
+    <section class="section-apply">
+      <div class="apply-inner">
+        <div class="apply-header">
+          <span class="eyebrow">Good Sundays start here</span>
+          <h2>Three Steps and You're Done.</h2>
+        </div>
+        <div class="reserve-steps">
+          <div class="reserve-step">
+            <span class="reserve-step-num">01</span>
+            <h3>Pick Your Blend</h3>
+            <p>Hot, sweet, or five pounds of each. One box, one decision, same
+               price either way.</p>
+          </div>
+          <div class="reserve-step">
+            <span class="reserve-step-num">02</span>
+            <h3>We Pack It Cold</h3>
+            <p>Everything goes in hard-frozen, labeled, into an insulated box
+               with cold packs.</p>
+          </div>
+          <div class="reserve-step">
+            <span class="reserve-step-num">03</span>
+            <h3>Make It a Sunday</h3>
+            <p>Rope on the grill, peppers and onions alongside, and settle in
+               with your people.</p>
+          </div>
+        </div>
+        <div class="reserve-buy">
+          <a class="btn btn-primary btn-lg" data-grill-cta>Order Now</a>
+        </div>
+        <p class="reserve-fineprint">
+          Shipping is built into the $189 &mdash; nothing added at checkout.
+          Order cutoffs and transit times are on the
+          <a href="../shipping.html">Shipping page</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         THE MATH — "five pounds feeds about twenty" is the shop's own
+         figure (docs/WIKI.md, owner-confirmed for the Cookout Box);
+         ten pounds is that doubled. No sandwich count and no per-portion
+         ounce figure is claimed — the draft's "~40 sandwiches at 4 oz raw"
+         was never verified against actual cooked yield.
+    ══════════════════════════════════════════ -->
+    <section class="menu-section">
+      <div class="container product-prose">
+        <span class="eyebrow">The math</span>
+        <h2>Ten Pounds Feeds About Forty.</h2>
+        <p>Five pounds of rope feeds about twenty people &mdash; that's the number the shop works from for a party. Ten pounds is two of those: a full crowd, one order, nothing picked over.</p>
+        <div class="pdp-stats">
+          <div class="pdp-stat">
+            <span class="pdp-stat-figure">12 lbs</span>
+            <span class="pdp-stat-label">10 lb rope + 2 lb peppers &amp; onions</span>
+          </div>
+          <div class="pdp-stat">
+            <span class="pdp-stat-figure">~40 people</span>
+            <span class="pdp-stat-label">One good crowd</span>
+          </div>
+          <div class="pdp-stat">
+            <span class="pdp-stat-figure">$189</span>
+            <span class="pdp-stat-label">Shipping included, one-time</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         PROOF — named Google reviews + the ESPN GameDay story; both
+         substantiated per docs/WIKI.md (owner-confirmed 2026-09-12).
+    ══════════════════════════════════════════ -->
+    <section class="menu-section menu-section-alt">
+      <div class="container">
+        <div class="menu-section-header">
+          <span class="eyebrow">From the counter</span>
+          <h2>What People Say.</h2>
+        </div>
+        <div class="reviews-grid">
+          <div class="review-card">
+            <p class="review-quote">"If you haven't had hot sausage from this place, stop what you're doing and go get it. I will never get my sausage anywhere else now. The best sausage I've ever had!"</p>
+            <p class="review-attribution">&mdash; Adam K., Google Reviews &middot; McKees Rocks</p>
+          </div>
+          <div class="review-card">
+            <p class="review-quote">"Best sausage in Pittsburgh! I've had the hot and sweet. Both are awesome... I've bought from them for years and will just keep doing so."</p>
+            <p class="review-attribution">&mdash; Josh C., Google Reviews &middot; McKees Rocks</p>
+          </div>
+          <div class="review-card">
+            <p class="review-quote">"Love their sausages! Living in NC, it's hard to find truly great Italian food, so every time we come back to the Pittsburgh area, we make sure to stock up and bring some home with us."</p>
+            <p class="review-attribution">&mdash; Dale P., Google Reviews &middot; McKees Rocks</p>
+          </div>
+          <div class="press-review-card">
+            <img src="../assets/img/espn.jpg" alt="Pat McAfee and the ESPN GameDay crew eating Ricci's Italian Sausage, served by Joe Caliguire" loading="lazy" />
+            <div class="press-review-card-body">
+              <span class="press-source">As Seen On &middot; ESPN College GameDay</span>
+              <h3>Pat McAfee &amp; the ESPN GameDay Crew Ate Our Sausage.</h3>
+              <p>Served by Joe &amp; Dean Caliguire when the GameDay crew came to Pittsburgh.</p>
+              <a href="../press.html">See the full story</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         GUARANTEE — the only place this wording appears; the hero's
+         duplicate .pdp-note was removed. .pdp-guarantee (--cream), never
+         .ship-guarantee (--cream-dark) — see docs/WIKI.md → "Beige".
+    ══════════════════════════════════════════ -->
+    <section class="pdp-guarantee">
+      <div class="pdp-guarantee-inner">
+        <span class="eyebrow">Our guarantee</span>
+        <h2>Cook One Link. If It Isn't the Best, We'll Make It Right.</h2>
+        <p>
+          <strong>Cook one link.</strong> If it isn't the best Italian sausage you've had, tell us within 30 days and we'll replace the box or refund it — your call. Either way, keep what's left. We're not asking you to ship frozen meat back to Pennsylvania.
+        </p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         HOW IT ARRIVES — no ship-day cadence, no transit time, no shelf
+         life stated here. Those are still open (docs/WIKI.md → Open
+         questions #5, where shipping.html and the PDP contradict each
+         other). Link the Shipping page; don't fill these in from a
+         sibling page.
+    ══════════════════════════════════════════ -->
+    <section class="menu-section">
+      <div class="container">
+        <div class="menu-section-header">
+          <span class="eyebrow">How it ships</span>
+          <h2>It Goes Out Frozen. Every Time.</h2>
+        </div>
+        <div class="coldchain">
+          <div class="coldchain-step">
+            <span class="coldchain-mark" aria-hidden="true"></span>
+            <span class="coldchain-stage">At the shop</span>
+            <h3>Frozen, not chilled</h3>
+            <p>Both boxes of rope and the peppers go into the shipper hard-frozen from our USDA-inspected facility &mdash; the same one that's been inspected every day we run since 1973.</p>
+          </div>
+          <div class="coldchain-step">
+            <span class="coldchain-mark" aria-hidden="true"></span>
+            <span class="coldchain-stage">In transit</span>
+            <h3>Insulated box, cold packs</h3>
+            <p>Each item is labeled and packed in an insulated box with cold packs, sized for the trip to your door.</p>
+          </div>
+          <div class="coldchain-step">
+            <span class="coldchain-mark" aria-hidden="true"></span>
+            <span class="coldchain-stage">At your door</span>
+            <h3>Straight to the freezer</h3>
+            <p>Put it in the freezer when it lands. When you're ready to cook, thaw it in the refrigerator &mdash; never on the counter.</p>
+          </div>
+        </div>
+        <p class="coldchain-note">
+          Order cutoffs and transit times are on the
+          <a href="../shipping.html">Shipping page</a>. If any of it arrives
+          warm or thawed, we replace it or refund you &mdash; see
+          <a href="../returns.html">Returns</a>.
+        </p>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         COOKING — labor-day-box.html's "Three Ways to Use It", with the
+         sauce taken out of it. That box included Lil's sauce,
+         so its gravy card read "drop it into a pot of the sauce that came
+         with it." THIS box has no sauce in it — the line now says a pot of
+         sauce, full stop. Don't reintroduce "the sauce that came with it."
+
+         Method and feel only, no temperatures, times or quantities
+         (docs/WIKI.md → "Cooking directions: no numbers").
+    ══════════════════════════════════════════ -->
+    <section class="menu-section menu-section-alt">
+      <div class="container">
+        <div class="menu-section-header">
+          <span class="eyebrow">Once it lands</span>
+          <h2>Three Ways to Use It.</h2>
+        </div>
+        <div class="plan-grid">
+          <div class="plan-step">
+            <div class="plan-step-img">
+              <img src="../assets/img/hot-sausage-on-grill.webp" alt="Ricci's hot sausage coiled on the grill" loading="lazy" />
+            </div>
+            <div class="plan-step-body">
+              <h3>On the Grill</h3>
+              <p>Whole rope, coiled, over medium heat, turned once. Peppers and
+                 onions on the side.</p>
+            </div>
+          </div>
+          <div class="plan-step">
+            <div class="plan-step-img">
+              <img src="../assets/img/slow-cooked-sweet.webp" alt="Ricci's sweet sausage simmering in Sunday gravy" loading="lazy" />
+            </div>
+            <div class="plan-step-body">
+              <h3>Sunday Gravy</h3>
+              <p>Brown it in batches, drop it into a pot of sauce, let it go low
+                 and slow. Serve over rigatoni.</p>
+            </div>
+          </div>
+          <div class="plan-step">
+            <div class="plan-step-img">
+              <img src="../assets/img/hot-sausage-sandwich.webp" alt="Ricci's hot sausage sandwich with peppers and onions" loading="lazy" />
+            </div>
+            <div class="plan-step-body">
+              <h3>Sandwich Night</h3>
+              <p>Hot with peppers and onions. Sweet with sauce and Grande. Both on
+                 a good roll.</p>
+            </div>
+          </div>
+        </div>
+        <p class="ship-freezer-note">
+          <strong>Freezer strategy:</strong> portion it into 1 lb bags before it
+          goes in the freezer, and pull what you need for any given dinner.
+        </p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         PROVENANCE
+    ══════════════════════════════════════════ -->
+    <section class="section-plan">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Eighty-one years in</span>
+          <h2>1945: A Basement in McKees Rocks.</h2>
+          <p>
+            Ernest and Stella Ricci brought the family spice blend from Sulmona,
+            Italy and started mixing it by hand in the basement of their McKees
+            Rocks home. Both blends &mdash; sweet and hot &mdash; came over with
+            them. Same recipes, three generations later, still made in McKees
+            Rocks.
+          </p>
+        </div>
+        <div class="section-photo">
+          <img src="../assets/img/family-original.webp" alt="Four members of the Ricci family in their McKees Rocks shop, with fresh coils of sausage on the table in front of them" loading="lazy" />
+        </div>
+        <p class="product-prose" style="text-align:center;margin-top:24px;">
+          <a href="../story.html" class="btn btn-outline-dark">Read the Full Story</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- USDA -->
+    <div class="section-usda">
+      <div class="usda-inner">
+        <div class="usda-badge">USDA<br />Federal<br />Inspected<br />Est. 1973</div>
+        <div class="usda-copy">
+          <h3>USDA Inspected Every Day Since 1973.</h3>
+          <p>The same federal stamp you look for at the meat case. We've held that standard for fifty-plus years without missing a day.</p>
+        </div>
+        <a href="../story.html" class="btn btn-outline">Learn More</a>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         FAQ — accordion. First one open: it's the objection this page's
+         traffic arrives with. Nothing here states a cutoff, a transit
+         time or a shelf life.
+    ══════════════════════════════════════════ -->
+    <section class="menu-section menu-section-alt">
+      <div class="container">
+        <div class="menu-section-header">
+          <span class="eyebrow">Questions</span>
+          <h2>Before You Order.</h2>
+        </div>
+        <div class="camp-faq">
+          <details open>
+            <summary>What exactly comes in the box?</summary>
+            <p>
+              Ten pounds of Italian sausage &mdash; two labeled 5 lb boxes of
+              uncooked rope in natural casing &mdash; and one 32 oz bag of
+              peppers and onions. Choose all hot, all sweet, or five pounds of
+              each. Buns, sauce, drinks and sides aren't included. Everything
+              is raw, and it leaves the shop frozen; photos are serving suggestions.
+            </p>
+          </details>
+          <details>
+            <summary>How many people does it feed?</summary>
+            <p>
+              Five pounds of rope feeds about twenty, so ten pounds runs a crowd
+              of roughly forty. Actual yield depends on how you portion it and
+              what else is on the table.
+            </p>
+          </details>
+          <details>
+            <summary>Is this a subscription?</summary>
+            <p>
+              No. One box, $189, shipping included. No recurring charges.
+            </p>
+          </details>
+          <details>
+            <summary>Can I mix it differently?</summary>
+            <p>
+              The three mixes above are what ships at this price. For anything
+              else, call the shop at <a href="tel:4123319531">412-331-9531</a>
+              &mdash; we'll put together a custom shipped order over the phone.
+            </p>
+          </details>
+          <details>
+            <summary>What's the difference between hot and sweet?</summary>
+            <p>
+              Two different blends, not one recipe with the pepper left in or
+              out. Hot is crushed red pepper, real paprika and whole fennel
+              seed &mdash; medium heat that builds on the third bite, not the
+              first. Sweet is cracked black pepper, with no fennel, no paprika
+              and no chili heat. Both are all natural: no fillers, no MSG, no
+              additives, no preservatives.
+            </p>
+          </details>
+          <details>
+            <summary>What if I'm not home when it arrives?</summary>
+            <p>
+              It ships frozen in an insulated box with cold packs. Bring
+              it inside when it arrives and refrigerate or freeze it promptly.
+            </p>
+          </details>
+          <details>
+            <summary>Why is shipping free?</summary>
+            <p>
+              It isn't tacked on at checkout &mdash; it's already built into the
+              $189. The price you see is the price you pay.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         CLOSING CTA
+    ══════════════════════════════════════════ -->
+    <section class="pdp-final">
+      <div class="container">
+        <span class="eyebrow">Your Sunday, sorted</span>
+        <h2>Good Sausage. Good Company.</h2>
+        <p class="pdp-final-lead">
+          Ten pounds of rope and a bag of peppers and onions, shipped frozen
+          straight from the shop on Pine Hollow Road, with the shipping already
+          paid for.
+        </p>
+        <span class="product-price pdp-final-price">
+          <span class="price-amount">$189.00</span>
+          <span class="ship-note">Free shipping &middot; Arrives cold</span>
+        </span>
+        <p class="pdp-final-cta">
+          <a class="btn btn-primary btn-lg" data-grill-cta>Order Now</a>
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Sticky buy bar. CSS-only, ≤900px, where the hero CTA has scrolled
+       away. Flat price, so no data-base/data-tier — shipping.js isn't
+       loaded here. body.has-buybar pays for the clearance. -->
+  <div class="pdp-buybar product-price">
+    <span>
+      <span class="price-amount">$189.00</span>
+      <span class="ship-note">Free shipping &middot; Arrives cold</span>
+    </span>
+    <a class="btn btn-primary" data-grill-cta>Order Now</a>
+  </div>
+
+  <!-- FAQPage only. No `offers` block on campaign landing pages — it would
+       compete with the bundle PDPs in search. See docs/WIKI.md. -->
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What exactly comes in the box?","acceptedAnswer":{"@type":"Answer","text":"Ten pounds of Italian sausage — two labeled 5 lb boxes of uncooked rope in natural casing — and one 32 oz bag of peppers and onions. Choose all hot, all sweet, or five pounds of each. Buns, sauce, drinks and sides aren't included. Everything is raw, and it leaves the shop frozen."}},{"@type":"Question","name":"How many people does it feed?","acceptedAnswer":{"@type":"Answer","text":"Five pounds of rope feeds about twenty, so ten pounds runs a crowd of roughly forty. Actual yield depends on how you portion it and what else is on the table."}},{"@type":"Question","name":"Is this a subscription?","acceptedAnswer":{"@type":"Answer","text":"No. One box, $189, shipping included. No recurring charges."}},{"@type":"Question","name":"Can I mix it differently?","acceptedAnswer":{"@type":"Answer","text":"The three mixes shown are what ships at this price. For anything else, call the shop at 412-331-9531 and we'll put together a custom shipped order over the phone."}},{"@type":"Question","name":"What's the difference between hot and sweet?","acceptedAnswer":{"@type":"Answer","text":"Two different blends. Hot is crushed red pepper, real paprika and whole fennel seed — medium heat that builds on the third bite, not the first. Sweet is cracked black pepper, with no fennel, no paprika and no chili heat. Both are all natural: no fillers, no MSG, no additives, no preservatives."}},{"@type":"Question","name":"What if I'm not home when it arrives?","acceptedAnswer":{"@type":"Answer","text":"It ships frozen in an insulated box with cold packs. Bring it inside when it arrives and refrigerate or freeze it promptly."}},{"@type":"Question","name":"Why is shipping free?","acceptedAnswer":{"@type":"Answer","text":"Shipping isn't tacked on at checkout — it's already built into the $189."}}]}</script>
+
+  <!-- Minimal footer. No catalog links — this page has one job. -->
+  <footer class="site-footer ship-footer">
+    <div class="footer-bottom">
+      <span>&copy; 2026 Ricci's Italian Sausage. All rights reserved.</span>
+      <span><a href="https://maps.app.goo.gl/9rDvQrZiuCKRCmFE9" target="_blank" rel="noopener noreferrer">590 Pine Hollow Rd, McKees Rocks, PA 15136</a> &middot; <a href="tel:4123319531">412-331-9531</a></span>
+      <span><a href="../products.html">What We Make</a> &middot; <a href="../shipping.html">Shipping</a> &middot; <a href="../returns.html">Returns</a> &middot; <a href="../privacy.html">Privacy</a> &middot; <a href="../terms.html">Terms</a></span>
+    </div>
+  </footer>
+
+  <!-- No shipping.js (flat price), no buy-now.js / pixel-events.js (they
+       resolve a zone variant from js/shopify-variants.js, and this box
+       has no Shopify product yet). Wire those in when checkout exists. -->
+  <script src="../js/grill-box.js" defer></script>
+  <script src="../js/crm.js" defer></script>
+  <script src="../js/grill-events.js" defer></script>
+</body>
+</html>

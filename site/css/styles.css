@@ -401,6 +401,7 @@ p  { max-width: 660px; }
   display: inline-block;
 }
 /* Dark-bg variant — eyebrows inside charcoal/oxblood sections (never --oxblood/--red here) */
+.grill-page .pdp-guarantee .eyebrow,
 .section-success .eyebrow,
 .section-usda .eyebrow,
 .page-hero .eyebrow,
@@ -5473,6 +5474,130 @@ body.cater-open { overflow: hidden; }
 .heat-switch--three .heat-switch-opt { padding: 16px 6px 14px; }
 .heat-switch--three .heat-switch-name { font-size: 0.95rem; }
 
+/* ── Grill box hero: picker vs. button ────────────────────────────────────
+   The .heat-switch was built as the hero of the Labor Day page, where it was
+   the only interactive thing above the fold. On shop/grill-box.html it sits
+   in the #box contents section, under the three cards and above that
+   section's buy band, and at full size it out-weighs the button — a big
+   charcoal plate with three display-serif names reads as the primary action,
+   which is exactly backwards on a page whose job is the order.
+
+   So here the switch is demoted to a control: sans small-caps instead of
+   serif display, tighter padding, a quieter note. The button is promoted to
+   full width. Scoped to .grill-page so the archived Labor Day pages keep the
+   original proportions. */
+.grill-page .heat-pick {
+  max-width: none;
+  margin-top: 30px;
+}
+.grill-page .heat-switch--three .heat-switch-opt { padding: 11px 6px 10px; }
+.grill-page .heat-switch--three .heat-switch-name {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.grill-page .heat-switch-sub {
+  font-size: 0.56rem;
+  margin-top: 5px;
+}
+/* Keeps a floor so switching mixes doesn't shove the button up and down,
+   but well under the 3.2em the display-serif version needed. */
+.grill-page .heat-pick-note {
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  line-height: 1.55;
+  min-height: 2.9em;
+  margin-top: 12px;
+}
+/* One action, full width — unambiguously the heaviest thing in the column.
+   text-align is explicit: .btn has none of its own, so a full-width button
+   inside the left-aligned .labor-hero would hug its label to the left edge. */
+.grill-page .pdp-cta { margin-top: 18px; }
+.grill-page .pdp-cta .btn-primary {
+  width: 100%;
+  padding: 20px 34px;
+  font-size: 1rem;
+  text-align: center;
+}
+
+/* The trust strip is --cream everywhere else, but on this page it lands
+   directly between the charcoal hero and the --cream "What you get"
+   section, so cream-on-cream erased the seam. White here keeps the
+   charcoal → white → cream rhythm. */
+.grill-page .pdp-trustbar { background: var(--white); }
+
+/* Guarantee on charcoal. The shared .pdp-guarantee is --cream with
+   --cream-edge hairlines; here it sits between the cream reviews block and
+   the white cold-chain section, where a third beige panel disappeared. Dark
+   makes the one promise on the page a stop. Text colours mirror .pdp-buy's
+   note-on-charcoal treatment (gold lead-in, white head, warm-white body).
+   The eyebrow joins the shared dark-bg list above rather than being
+   recoloured here. */
+.grill-page .pdp-guarantee {
+  background: var(--charcoal);
+  border-top: 1px solid rgba(217,184,138,0.28);
+  border-bottom: 1px solid rgba(217,184,138,0.28);
+}
+.grill-page .pdp-guarantee h2 { color: var(--white); }
+.grill-page .pdp-guarantee p { color: rgba(255,255,255,0.74); }
+.grill-page .pdp-guarantee p strong { color: var(--gold); }
+.grill-page .pdp-guarantee a { color: var(--gold); }
+
+/* Ship notes — readable, not stamped. The pdp and camp defaults set these
+   in mono small-caps at 0.62-0.7rem with 0.14em tracking, which reads as a
+   legal stamp: three real selling points ("free shipping", "arrives frozen",
+   "one-time purchase") were the hardest line on the page to actually read.
+   Sans, sentence case, a few sizes up, same gold and red.
+   (Do not write a star-slash inside a CSS comment — an earlier version of
+   this note spelled the class prefixes with wildcards and closed itself
+   early, which ate the rule below.) */
+.grill-page .pdp-price .ship-note,
+.grill-page .pdp-final-price .ship-note,
+.grill-page .camp-ctaband-copy .ship-note,
+.grill-page .pdp-buybar .ship-note {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-transform: none;
+}
+/* .pdp-price is a baseline flex row — fine for a 0.7rem mono stamp beside
+   the figure, crowded once the note is a readable 0.98rem sentence. Stack
+   it under the price instead. */
+.grill-page .pdp-price {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+.grill-page .pdp-price .ship-note { font-size: 0.98rem; }
+.grill-page .pdp-final-price .ship-note { font-size: 0.95rem; }
+.grill-page .camp-ctaband-copy .ship-note { font-size: 0.9rem; }
+.grill-page .pdp-buybar .ship-note { font-size: 0.82rem; }
+
+/* A rope card for a blend that isn't in the chosen mix. Dimmed rather than
+   hidden: the pair is the point — you can see what you traded away. The badge
+   reads OUT_LABEL, a longer string than "5 lb", so its tracking loosens up.
+   See js/grill-box.js. */
+.grill-page .includes-card.is-out { opacity: 0.44; }
+.grill-page .includes-card.is-out .includes-card-qty {
+  color: var(--ink-faint);
+  letter-spacing: 0.12em;
+}
+
+/* Closing CTA — the last thing on the page and the twin of the hero button,
+   so it carries the hero's weight instead of the default .btn-lg. Width is
+   capped rather than 100% (the section is full-container, not a column), and
+   centered explicitly so it doesn't depend on .pdp-final-cta's flex. */
+.grill-page .pdp-final-cta .btn-primary {
+  width: 100%;
+  max-width: 420px;
+  padding: 22px 34px;
+  font-size: 1.05rem;
+  text-align: center;
+  margin-inline: auto;
+}
+
 /* No checkout URL set — the page has no phone-order path, so this has to be
    impossible to miss rather than a quiet degrade. See js/labor-day-box.js. */
 .ship-checkout-warning {
@@ -5527,7 +5652,15 @@ body.cater-open { overflow: hidden; }
   .heat-switch--three .heat-switch-opt { padding: 12px 4px 11px; }
   .heat-switch--three .heat-switch-name { font-size: 0.78rem; }
   .heat-switch--three .heat-switch-sub { font-size: 0.62rem; }
+  /* The .grill-page rules above are 3 classes deep, so they outrank the
+     two-class rules in this block — they need their own narrow-screen
+     entries or the switch never tightens on a phone. */
+  .grill-page .heat-switch--three .heat-switch-opt { padding: 11px 3px 10px; }
+  .grill-page .heat-switch--three .heat-switch-name { font-size: 0.7rem; letter-spacing: 0.05em; }
+  .grill-page .heat-switch-sub { font-size: 0.52rem; }
+  .grill-page .pdp-cta .btn-primary { padding: 17px 22px; font-size: 0.92rem; }
   .btn-lg { padding: 16px 22px; font-size: 0.88rem; }
+  .grill-page .pdp-final-cta .btn-primary { padding: 18px 22px; font-size: 0.95rem; }
   .ship-guarantee { padding: 44px 20px; }
 }
 
@@ -6238,3 +6371,242 @@ body.cater-open { overflow: hidden; }
   .camp-faq details p { padding-right: 0; }
   .gameday-page .pdp-stat { min-height: 0; }
 }
+
+/* Sunday Grill Box experiment. Scoped so the existing control is unchanged. */
+.gx { background: var(--white); color: var(--ink); font-family: var(--font-sans); font-size: 18px; line-height: 1.6; margin: 0; }
+.gx *, .gx *::before, .gx *::after { box-sizing: border-box; }
+.gx h1, .gx h2, .gx h3, .gx p, .gx figure { margin: 0; }
+.gx p { max-width: none; }
+.gx h1, .gx h2, .gx h3 { color: inherit; text-transform: none; }
+.gx h1 { font: 700 clamp(44px, 5.8vw, 78px)/1.07 var(--font-serif); letter-spacing: -.055em; }
+.gx h2 { font: 700 clamp(30px, 3.5vw, 46px)/1.16 var(--font-serif); letter-spacing: -.04em; }
+.gx h3 { font: 700 24px/1.25 var(--font-serif); letter-spacing: -.025em; }
+.gx p + p { margin-top: 18px; }
+.gx img { display: block; max-width: 100%; height: auto; }
+.gx figure { min-width: 0; }
+.gx figcaption { font-size: 12px; color: var(--ink-soft); padding-top: 9px; }
+.gx a { color: inherit; }
+.gx .gx-wrap { width: min(1180px, calc(100% - 64px)); margin-inline: auto; }
+.gx .gx-narrow { width: min(650px, calc(100% - 48px)); margin-inline: auto; }
+.gx .gx-section { padding-block: 88px; scroll-margin-top: 25px; }
+.gx .gx-kicker { font: 700 12px/1.5 var(--font-sans); text-transform: uppercase; letter-spacing: .14em; margin-bottom: 20px; color: var(--oxblood); }
+.gx .gx-lead { font-size: clamp(19px, 2vw, 22px); line-height: 1.55; margin-top: 24px; }
+.gx .gx-small { font-size: 14px; line-height: 1.5; margin-top: 14px; }
+.gx .gx-muted { color: var(--ink-soft); }
+.gx .gx-center { text-align: center; }
+.gx .gx-intro { max-width: 590px; margin: 22px auto 36px; }
+.gx .gx-header { display: flex; align-items: center; justify-content: space-between; padding-block: 18px; gap: 25px; }
+.gx .gx-header img { width: 125px; height: 72px; object-fit: contain; }
+.gx .gx-header nav { display: flex; gap: 28px; font-size: 15px; font-weight: 600; }
+.gx .gx-header nav a { text-decoration: none; }
+.gx .gx-header-note { text-align: right; font-size: 13px; line-height: 1.6; }
+.gx .gx-header-note strong { font-weight: 600; }
+.gx .gx-button { display: inline-flex; align-items: center; justify-content: center; gap: 22px; padding: 18px 28px; min-height: 58px; background: var(--oxblood); color: white; text-decoration: none; border: 1px solid transparent; border-radius: 3px; font: 700 17px/1.3 var(--font-sans); text-align: center; transition: background .15s; }
+.gx .gx-button:hover { background: var(--oxblood-ink); }
+.gx .gx-button-small { padding: 12px 20px; min-height: 46px; font-size: 15px; }
+.gx .gx-wide { width: 100%; }
+.gx .gx-last-cta { margin-top: 32px; }
+.gx a:focus-visible, .gx summary:focus-visible { outline: 3px solid var(--olive); outline-offset: 5px; }
+.gx .gx-skip { position: fixed; top: -100px; left: 20px; background: white; color: var(--ink); padding: 12px; z-index: 1000; }
+.gx .gx-skip:focus { top: 10px; }
+.gx .gx-price { font: 700 42px/1.1 var(--font-sans); letter-spacing: -.035em; }
+.gx .gx-price span { display: block; font: 400 14px/1.5 var(--font-sans); letter-spacing: 0; margin-top: 9px; }
+.gx .gx-manifest { margin-block: 28px; border-top: 1px solid var(--cream-edge); }
+.gx .gx-manifest p { padding: 18px 0; border-bottom: 1px solid var(--cream-edge); margin: 0; }
+.gx .gx-manifest strong { display: block; font-size: 20px; }
+.gx .gx-manifest span { display: block; font-size: 15px; color: var(--ink-soft); margin-top: 2px; }
+.gx .gx-picker { border: 0; padding: 0; margin: 24px 0 0; min-width: 0; }
+.gx .gx-picker legend { padding: 0; margin-bottom: 12px; font-weight: 600; font-size: 16px; }
+.gx .gx-options { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.gx .gx-options label { position: relative; cursor: pointer; }
+.gx .gx-options input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.gx .gx-options label > span { display: block; padding: 14px 6px; border: 1px solid var(--cream-edge); border-radius: 3px; text-align: center; font-size: 15px; font-weight: 600; background: white; color: var(--ink); }
+.gx .gx-options small { display: block; font-weight: 400; font-size: 12px; margin-top: 3px; }
+.gx .gx-options input:checked + span { border-color: var(--oxblood); box-shadow: inset 0 0 0 1px var(--oxblood); background: #fff8f6; color: var(--oxblood); }
+.gx .gx-options input:focus-visible + span { outline: 3px solid var(--olive); outline-offset: 3px; }
+.gx .gx-mix-note { min-height: 68px; font-size: 14px; line-height: 1.5; color: var(--ink-soft); margin: 14px 0 20px; }
+.gx .gx-faq h2 { margin-bottom: 30px; }
+.gx .gx-faq details { border-bottom: 1px solid var(--cream-edge); }
+.gx .gx-faq summary { padding: 21px 28px 21px 0; cursor: pointer; font-weight: 600; font-size: 17px; }
+.gx .gx-faq details p { font-size: 16px; padding: 0 0 24px; }
+.gx .gx-footer { border-top: 1px solid var(--cream-edge); padding: 36px 24px; text-align: center; font-size: 13px; }
+.gx .gx-footer p + p { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin: 12px 0; }
+.gx .gx-mobile-buy { display: none; }
+/* Shared proof and serving ideas; each design keeps its own spacing and surfaces. */
+.gx .gx-reviews { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; margin-top: 36px; text-align: left; }
+.gx .gx-reviews figure { padding-top: 24px; border-top: 2px solid var(--oxblood); }
+.gx .gx-reviews blockquote { margin: 0; font-size: 17px; line-height: 1.65; }
+.gx .gx-reviews figcaption { padding-top: 18px; font-size: 13px; }
+.gx .gx-press { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 40px; margin-top: 50px; text-align: left; }
+.gx .gx-press > img { width: 100%; }
+.gx .gx-press h3 { font-size: clamp(25px, 2.8vw, 36px); }
+.gx .gx-press h3 + p { margin-top: 18px; font-size: 17px; }
+.gx .gx-press a { display: inline-block; margin-top: 22px; font-size: 16px; font-weight: 600; text-decoration: underline; text-underline-offset: 4px; }
+.gx .gx-cooking-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px; margin-top: 36px; text-align: left; }
+.gx .gx-cooking-grid img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.gx .gx-cooking-grid article > div { padding-top: 22px; }
+.gx .gx-cooking-grid h3 { margin-bottom: 12px; }
+.gx .gx-cooking-grid p { font-size: 16px; }
+.gx .gx-freezer-note { margin-top: 34px; padding-top: 22px; border-top: 1px solid var(--cream-edge); font-size: 15px; text-align: center; }
+.gx-minimal .gx-social, .gx-minimal .gx-cooking { max-width: 780px; }
+.gx-minimal .gx-reviews { grid-template-columns: 1fr; gap: 24px; max-width: 650px; margin-inline: auto; }
+.gx-minimal .gx-cooking-grid { gap: 20px; }
+.gx-minimal .gx-cooking-grid h3 { font-size: 21px; }
+.gx-butcher .gx-cooking-grid article { background: var(--cream); }
+.gx-butcher .gx-cooking-grid article > div { padding: 24px; }
+.gx-table .gx-social { border-top: 1px solid var(--cream-edge); }
+.gx-table .gx-press { background: white; gap: 0; }
+.gx-table .gx-press > div { padding: 32px; }
+@media (max-width: 720px) {
+  .gx .gx-reviews { grid-template-columns: 1fr; gap: 26px; }
+  .gx .gx-press { grid-template-columns: 1fr; gap: 24px; margin-top: 36px; }
+  .gx .gx-cooking-grid { grid-template-columns: 1fr; gap: 32px; }
+  .gx .gx-cooking-grid img { aspect-ratio: 4 / 3; }
+  .gx .gx-cooking-grid h3 { font-size: 25px; }
+  .gx-table .gx-press { gap: 0; }
+  .gx-table .gx-press > div { padding: 24px; }
+}
+/* The box contents always show the raw rope and peppers, with live blend weights. */
+.gx .gx-contents-strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 32px; }
+.gx .gx-contents-strip img { width: 100%; aspect-ratio: 1; object-fit: contain; background: white; }
+/* Crop the white bands baked into the peppers photo to fill its square frame. */
+.gx .gx-contents-peppers { aspect-ratio: 1; overflow: hidden; }
+.gx .gx-contents-peppers img { height: 100%; object-fit: cover; transform: scale(1.34); }
+.gx .gx-contents-strip figcaption { padding-top: 16px; font-size: 14px; line-height: 1.5; }
+.gx .gx-contents-strip figcaption > span, .gx .gx-contents-strip strong { display: block; }
+.gx .gx-contents-strip strong { color: var(--ink); font-size: 18px; margin-bottom: 4px; }
+.gx .gx-contents-qty { display: block; color: var(--oxblood); font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+.gx [data-grill-card].is-out img { opacity: .4; }
+.gx [data-grill-card].is-out .gx-contents-qty { color: var(--ink-soft); }
+.gx-butcher .gx-box-products img { aspect-ratio: 1; object-fit: contain; background: white; }
+@media (max-width: 520px) {
+  .gx .gx-contents-strip { grid-template-columns: 1fr; gap: 20px; }
+  .gx .gx-contents-strip figure { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 18px; align-items: center; text-align: left; }
+  .gx .gx-contents-strip figcaption { padding: 0; }
+  .gx .gx-contents-strip strong { font-size: 17px; }
+}
+/* B: deliberately quiet, narrow, white, and centered. */
+.gx-minimal .gx-header { justify-content: center; padding-block: 26px; }
+.gx-minimal .gx-minimal-hero { max-width: 780px; text-align: center; padding-top: 48px; }
+.gx-minimal .gx-lead { max-width: 550px; margin-inline: auto; }
+.gx-minimal .gx-price { margin-block: 26px; font-size: 36px; }
+.gx-minimal .gx-minimal-photo { margin-top: 54px; }
+.gx-minimal .gx-minimal-photo img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
+.gx-minimal .gx-section { padding-block: 66px; text-align: center; }
+.gx-minimal .gx-rule { border-top: 1px solid var(--cream-edge); border-bottom: 1px solid var(--cream-edge); }
+.gx-minimal .gx-rule h2 { margin-bottom: 24px; }
+.gx-minimal .gx-faq { text-align: left; }
+.gx-minimal .gx-faq h2 { text-align: center; }
+/* C: DTC meat-box structure: photo hero, benefit strip, product cards, steps. */
+.gx-butcher { --oxblood: #962c26; --oxblood-ink: #74201b; }
+.gx-butcher .gx-announcement { text-align: center; padding: 10px 20px; color: white; background: var(--oxblood); font-size: 11px; font-weight: 700; letter-spacing: .13em; }
+.gx-butcher .gx-butcher-hero { display: grid; grid-template-columns: 1fr 1fr; background: var(--cream); }
+.gx-butcher .gx-butcher-copy { padding: clamp(38px, 5.5vw, 84px) max(32px, calc((100vw - 1180px) / 2)); padding-right: 45px; align-self: center; }
+.gx-butcher .gx-butcher-copy h1 { font-size: clamp(42px, 4.8vw, 66px); }
+.gx-butcher .gx-butcher-copy h1 em { color: var(--oxblood); }
+.gx-butcher .gx-butcher-copy .gx-button { margin-top: 28px; }
+.gx-butcher .gx-butcher-hero figure { position: relative; min-height: 580px; }
+.gx-butcher .gx-butcher-hero figure img { width: 100%; height: 100%; object-fit: cover; position: absolute; }
+.gx-butcher .gx-butcher-hero figcaption { position: absolute; bottom: 0; left: 0; width: 100%; padding: 28px 20px 12px; color: white; background: linear-gradient(transparent, #000b); }
+.gx-butcher .gx-benefits { display: grid; grid-template-columns: repeat(4, 1fr); padding: 25px max(24px, calc((100vw - 1180px) / 2)); gap: 20px; background: var(--oxblood); color: white; text-align: center; font-size: 14px; font-weight: 600; }
+.gx-butcher .gx-product-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; text-align: left; }
+.gx-butcher .gx-product-grid article { background: var(--cream); }
+.gx-butcher .gx-product-grid img { width: 100%; aspect-ratio: 1.25; object-fit: cover; }
+.gx-butcher .gx-product-grid article > div { padding: 26px; }
+.gx-butcher .gx-product-grid h3 { font-size: 23px; margin-bottom: 12px; }
+.gx-butcher .gx-product-grid p { font-size: 16px; }
+.gx-butcher .gx-product-grid .gx-kicker { font-size: 10px; margin-bottom: 10px; }
+.gx-butcher .gx-butcher-how { background: var(--cream); }
+.gx-butcher .gx-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px; margin-top: 45px; }
+.gx-butcher .gx-steps article > span { display: inline-grid; place-items: center; width: 48px; height: 48px; border: 1px solid var(--oxblood); border-radius: 50%; color: var(--oxblood); font-size: 14px; margin-bottom: 22px; }
+.gx-butcher .gx-steps h3 { margin-bottom: 14px; }
+.gx-butcher .gx-steps p { font-size: 16px; }
+.gx-butcher .gx-box-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 85px; align-items: center; }
+.gx-butcher .gx-order-card { border: 1px solid var(--cream-edge); padding: 36px; background: var(--cream); }
+.gx-butcher .gx-order-card .gx-button { margin-top: 20px; }
+/* D: editorial food photograph + immediate, complete order decision. */
+.gx-table { background: var(--cream); }
+.gx-table .gx-table-hero { display: grid; grid-template-columns: 1.08fr 1fr; column-gap: 58px; padding-block: 32px 64px; }
+.gx-table .gx-table-heading { grid-column: 1; grid-row: 1; margin-bottom: 30px; }
+.gx-table h1 { font-size: clamp(44px, 5.5vw, 72px); }
+.gx-table h1 em { color: var(--oxblood); font-weight: 400; }
+.gx-table .gx-table-heading .gx-lead { font-size: 20px; max-width: 520px; margin-top: 18px; }
+.gx-table .gx-table-photo { grid-column: 1; grid-row: 2; position: relative; align-self: start; }
+.gx-table .gx-table-photo img { width: 100%; aspect-ratio: 1.45; object-fit: cover; }
+.gx-table .gx-photo-stamp { position: absolute; right: 18px; bottom: 46px; padding: 18px; background: var(--cream); color: var(--oxblood); border: 1px solid var(--oxblood); font-size: 11px; font-weight: 700; line-height: 1.65; letter-spacing: .07em; transform: rotate(-5deg); box-shadow: 0 0 0 5px var(--cream); }
+.gx-table .gx-table-order { grid-column: 2; grid-row: 1 / 3; background: white; border-top: 4px solid var(--oxblood); padding: 36px; align-self: center; box-shadow: 0 12px 40px #2a221b0a; }
+.gx-table .gx-order-heading { display: flex; align-items: start; gap: 20px; justify-content: space-between; }
+.gx-table .gx-order-heading h2 { font-size: 30px; }
+.gx-table .gx-order-heading .gx-price { font-size: 38px; text-align: right; white-space: nowrap; }
+.gx-table .gx-order-heading .gx-price span { font-size: 12px; }
+.gx-table .gx-table-order > .gx-small { text-align: center; }
+.gx-table .gx-table-proof { background: var(--oxblood); color: white; }
+.gx-table .gx-table-proof > div { display: grid; grid-template-columns: repeat(3, 1fr); padding-block: 30px; gap: 35px; }
+.gx-table .gx-table-proof p { display: flex; align-items: center; gap: 18px; margin: 0; }
+.gx-table .gx-table-proof strong { font: 400 26px/1.2 var(--font-serif); color: var(--gold); white-space: nowrap; }
+.gx-table .gx-table-proof span { font-size: 13px; line-height: 1.5; }
+.gx-table .gx-table-story { display: grid; grid-template-columns: 1fr 1fr; gap: 85px; align-items: center; }
+.gx-table .gx-table-story img { width: 100%; aspect-ratio: .95; object-fit: cover; }
+.gx-table .gx-table-close { padding: 75px 24px; color: white; background: var(--oxblood); }
+.gx-table .gx-table-close .gx-kicker { color: var(--gold); }
+.gx-table .gx-table-close h2 { font-size: clamp(42px, 5vw, 68px); margin-bottom: 22px; }
+.gx-table .gx-table-close .gx-button { background: var(--cream); color: var(--oxblood); }
+.gx-table .gx-table-close .gx-button:hover { background: white; }
+@media (max-width: 1000px) {
+  .gx-table .gx-table-hero { column-gap: 28px; }
+  .gx-table .gx-table-order { padding: 25px; }
+  .gx-table .gx-order-heading h2 { font-size: 26px; }
+  .gx-table .gx-table-proof p { display: block; }
+  .gx-table .gx-table-proof span { display: block; margin-top: 8px; }
+  .gx-butcher .gx-box-grid, .gx-table .gx-table-story { gap: 35px; }
+  .gx-butcher .gx-header nav { gap: 18px; }
+  .gx-butcher .gx-butcher-hero figure { min-height: 530px; }
+}
+@media (max-width: 720px) {
+  .gx .gx-wrap { width: calc(100% - 40px); }
+  .gx .gx-section { padding-block: 54px; }
+  .gx .gx-header { padding-block: 12px; }
+  .gx .gx-header img { width: 105px; height: 61px; }
+  .gx .gx-header-note { font-size: 11px; }
+  .gx .gx-header nav { display: none; }
+  .gx .gx-kicker { font-size: 10px; margin-bottom: 14px; }
+  .gx .gx-button { padding-inline: 18px; font-size: 16px; }
+  .gx .gx-button-small { font-size: 14px; min-height: 44px; padding: 12px 16px; }
+  .gx .gx-options label > span { font-size: 14px; }
+  .gx .gx-mobile-buy { position: fixed; bottom: 0; left: 0; right: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 20px calc(12px + env(safe-area-inset-bottom)); background: white; border-top: 1px solid var(--cream-edge); box-shadow: 0 -3px 15px #00000008; }
+  .gx .gx-mobile-buy > span { font-size: 12px; }
+  .gx .gx-mobile-buy strong { display: block; font-size: 22px; line-height: 1.2; }
+  .gx-butcher, .gx-table { padding-bottom: calc(80px + env(safe-area-inset-bottom)); }
+  .gx-minimal .gx-minimal-hero { padding-top: 30px; }
+  .gx-minimal .gx-minimal-photo { margin-top: 35px; }
+  .gx-minimal .gx-section { padding-block: 48px; }
+  .gx-butcher .gx-butcher-hero { grid-template-columns: 1fr; }
+  .gx-butcher .gx-butcher-copy { padding: 36px 24px; }
+  .gx-butcher .gx-butcher-copy h1 { font-size: 46px; }
+  .gx-butcher .gx-butcher-hero figure { min-height: 0; aspect-ratio: 1.5; }
+  .gx-butcher .gx-benefits { grid-template-columns: 1fr 1fr; gap: 18px; font-size: 12px; padding: 22px; }
+  .gx-butcher .gx-product-grid { grid-template-columns: 1fr; gap: 22px; }
+  .gx-butcher .gx-product-grid article { display: grid; grid-template-columns: .85fr 1fr; align-items: center; }
+  .gx-butcher .gx-product-grid img { height: 100%; aspect-ratio: auto; min-height: 205px; }
+  .gx-butcher .gx-product-grid article > div { padding: 20px 16px; }
+  .gx-butcher .gx-product-grid h3 { font-size: 22px; }
+  .gx-butcher .gx-product-grid p { font-size: 14px; }
+  .gx-butcher .gx-steps { grid-template-columns: 1fr; gap: 32px; margin-top: 32px; }
+  .gx-butcher .gx-steps article { max-width: 320px; margin-inline: auto; }
+  .gx-butcher .gx-steps article > span { margin-bottom: 12px; }
+  .gx-butcher .gx-box-grid { grid-template-columns: 1fr; }
+  .gx-butcher .gx-order-card { padding: 24px; }
+  .gx-table .gx-table-hero { grid-template-columns: 1fr; padding-block: 22px 42px; }
+  .gx-table .gx-table-heading { grid-column: 1; grid-row: 1; margin-bottom: 22px; }
+  .gx-table h1 { font-size: 49px; }
+  .gx-table .gx-table-photo { grid-column: 1; grid-row: 2; margin-bottom: 24px; }
+  .gx-table .gx-table-photo img { aspect-ratio: 1.8; }
+  .gx-table .gx-photo-stamp { font-size: 9px; padding: 10px; bottom: 42px; }
+  .gx-table .gx-table-order { grid-column: 1; grid-row: 3; padding: 24px; }
+  .gx-table .gx-table-proof > div { gap: 14px; padding-block: 24px; }
+  .gx-table .gx-table-proof strong { font-size: 20px; white-space: normal; }
+  .gx-table .gx-table-proof span { font-size: 11px; }
+  .gx-table .gx-table-story { grid-template-columns: 1fr; gap: 28px; }
+  .gx-table .gx-table-story img { aspect-ratio: 1.25; }
+}
+@media (prefers-reduced-motion: reduce) { .gx .gx-button { transition: none; } }
