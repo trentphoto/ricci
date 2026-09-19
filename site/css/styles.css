@@ -4922,7 +4922,15 @@ body.cater-open { overflow: hidden; }
 
 /* ============================================
    LABOR DAY CAMPAIGN PAGE (labor-day.html)
-   Seasonal page — safe to delete this block and the page together.
+
+   NOT safe to delete any more. The Labor Day pages themselves
+   are archived (_archive/labor-day-2026/), but shop/gameday.html now uses
+   this block's hero: .labor-hero, .labor-hero-grid, .labor-hero-lead and
+   .labor-hero-figure--pair (plus .ship-terms / .ship-hero-em further
+   down). Check shop/gameday.html before removing anything here.
+
+   The rest of the block — .labor-countdown, .labor-map, .labor-closed-banner,
+   .labor-family-photo — has no remaining consumer.
    ============================================ */
 
 /* Hero — rides on .page-hero (charcoal, gold eyebrow) but breaks its centred
@@ -5962,7 +5970,7 @@ body.cater-open { overflow: hidden; }
   justify-content: center;
   flex-wrap: wrap;
   gap: 14px;
-  margin-top: 26px;
+  margin: 26px auto 0;
 }
 
 /* Cold chain — three stops on one unbroken rule. Deliberately typographic:
