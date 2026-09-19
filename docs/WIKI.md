@@ -576,6 +576,47 @@ the slot blank or use the typographic plate stand-in. See `CLAUDE.md`.
    the two pages is wrong. Confirm with the owner, then either put the real
    numbers on the PDP or fix `shipping.html`.
 
+6. **The Sunday Grill Box (`site/shop/grill-box.html`).** Added 2026-09-17.
+   A **separate offer** from `shop/gameday.html` — that page sells the
+   Pittsburgh Italian Pack under a game-day angle; this one is a different
+   box at a different price structure. Do not merge them or copy manifests,
+   prices or shipping copy between the two.
+
+   Owner-supplied via the campaign draft, treated as confirmed: **$189 flat,
+   shipping included, one-time** — **10 lb of rope** (all hot, all sweet, or
+   5 lb of each, same price whichever) plus **one 32 oz bag of peppers and
+   onions**. Packaging follows the table above: two labeled 5 lb boxes of
+   rope in an insulated shipper with cold packs.
+
+   Still open — **launch blockers first:**
+   - **Checkout URLs.** `CHECKOUT` in `js/grill-box.js` is empty for all
+     three mixes (`mixed`, `hot`, `sweet`). There is no Shopify variant for
+     a 10 lb grill box, and the page has one CTA and **no phone-order
+     fallback**, so every button disables itself and shows a dashed warning
+     strip. **Do not point ads at this page until they're set.**
+   - **Flat $189 vs. zone pricing.** Confirmed with the owner 2026-09-17 as
+     flat everywhere, so `shipping.js` is deliberately not loaded and the
+     price carries no `data-base`/`data-tier`. `shop/gameday.html` was
+     brought to the same flat model the same day. The Pittsburgh Pack is
+     $189–$221 by zone for 12+ lbs, so a flat $189 on 12 lbs to Zone E
+     costs margin. **AK/HI (zone X) is not handled at all** — the Pack's
+     `buy-now.js` tells those customers to call; this page doesn't.
+   - **Peppers & onions: cooked or raw?** Same unanswered question as the
+     Labor Day box (see #3). The card and the FAQ give the name and the
+     weight and claim neither state; the page uses `peppers-onions.webp`,
+     which shows them charred.
+   - **Yield.** The page says "five pounds feeds about twenty, so ten pounds
+     runs about forty," derived from the owner-confirmed Cookout Box figure
+     in #3. The draft's "~40 sandwiches at 4 oz raw per sandwich" was **not**
+     carried over — never verified against actual cooked yield.
+   - **Order cutoff and arrival window.** Nothing is claimed; the page links
+     `shipping.html`. Blocked behind the same contradiction as #5.
+   - **Product name.** The draft called it "The Sunday Game Day Box"; renamed
+     to **The Sunday Grill Box** (file/slug `grill-box`) to avoid colliding
+     with the existing `shop/gameday.html` campaign. Confirm the name.
+   - **Not in `sitemap.xml`.** `noindex, follow`, redirect added to
+     `_redirects`. Add the `<loc>` if and when it launches.
+
 The club is unlaunched, so treat the rest of that page as unverified too. Still
 live on it and never confirmed: the seasonal cut calendar (December = Feast of
 the Seven Fishes, May = fennel-and-orange, October = smoke-paprika), gift
@@ -653,8 +694,36 @@ Every page has exactly one commerce job — do not blur these when editing:
   zone price, and carry `FAQPage` JSON-LD only — **no `offers` block**, so
   they can't compete with the PDP in search. Layout rides the permanent
   `.pdp-*` components plus the `CAMPAIGN LANDING PAGES` block in
-  `css/styles.css` (`.camp-*`), deliberately *not* the seasonal
-  `.labor-*` / `.ship-*` blocks, which are marked delete-with-their-page.
+  `css/styles.css` (`.camp-*`).
+
+  **Exception, added 2026-09-17:** `shop/gameday.html` and
+  `shop/grill-box.html` both use the
+  Labor Day shipped-box hero — `.labor-hero` / `.labor-hero-grid` /
+  `.labor-hero-figure--pair` (two stacked skillet shots, hot and sweet)
+  with `.ship-terms` under the CTA, instead of the `.pdp-hero` gallery. The
+  copy column keeps `.pdp-buy` as well, because the charcoal-background
+  treatments for `.ship-selector` and `.pdp-note` are scoped to it. So the
+  `.labor-*` / `.ship-*` blocks are **no longer** delete-with-their-page
+  even though both Labor Day pages are archived — the header comment on
+  that block in `css/styles.css` says which selectors are now load-bearing.
+  Everything below the hero still rides `.pdp-*` / `.camp-*`.
+  **Flat pricing, 2026-09-17.** `shop/gameday.html` no longer zone-prices.
+  The `.ship-selector` state picker is gone from the hero, all four
+  `.product-price` blocks are static `$189.00` with no
+  `data-base`/`data-tier`, and `js/shipping.js` is no longer loaded.
+  `shop/grill-box.html` was flat from the start.
+
+  **Open, and it matters:** the CTAs still carry
+  `data-buy-now data-id="pittsburgh-italian-pack"`, and `js/buy-now.js`
+  resolves a **zone** variant — $189 in Zone A up to $221 in Zone E. With
+  no picker on the page, a Zone E visitor now sees $189 and is sent to a
+  $221 variant. Either build a flat-priced Shopify product for this
+  campaign and repoint the CTAs at it, or drop `buy-now.js` and link the
+  plain product URL. Left wired as-is pending that call — **do not run
+  paid traffic at out-of-Zone-A states until it's resolved.**
+  (`js/pixel-events.js` reads the same zone variant for its
+  ViewContent value, so it is off by the same amount.)
+
   Owner-confirmed 2026-09-12: bundle shipping is included for every eligible
   state; customers may call the shop for a custom shipped mix; the named Google
   reviews and Pat McAfee/ESPN GameDay story and attribution are substantiated.
