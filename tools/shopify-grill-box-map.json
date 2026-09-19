@@ -1,0 +1,29 @@
+{
+  "mixed": {
+    "handle": "grill-box-hot-and-sweet",
+    "productId": "gid://shopify/Product/15875701735584",
+    "variantId": "gid://shopify/ProductVariant/58926159691936",
+    "sku": "RIC-GRILL-MIX",
+    "price": "189.00",
+    "title": "The Sunday Grill Box — Hot & Sweet (10 lb + 2 lb Peppers & Onions)",
+    "checkoutUrl": "https://tiyndf-za.myshopify.com/cart/58926159691936:1"
+  },
+  "hot": {
+    "handle": "grill-box-all-hot",
+    "productId": "gid://shopify/Product/15875701833888",
+    "variantId": "gid://shopify/ProductVariant/58926159823008",
+    "sku": "RIC-GRILL-HOT",
+    "price": "189.00",
+    "title": "The Sunday Grill Box — All Hot (10 lb + 2 lb Peppers & Onions)",
+    "checkoutUrl": "https://tiyndf-za.myshopify.com/cart/58926159823008:1"
+  },
+  "sweet": {
+    "handle": "grill-box-all-sweet",
+    "productId": "gid://shopify/Product/15875701932192",
+    "variantId": "gid://shopify/ProductVariant/58926159921312",
+    "sku": "RIC-GRILL-SWEET",
+    "price": "189.00",
+    "title": "The Sunday Grill Box — All Sweet (10 lb + 2 lb Peppers & Onions)",
+    "checkoutUrl": "https://tiyndf-za.myshopify.com/cart/58926159921312:1"
+  }
+}

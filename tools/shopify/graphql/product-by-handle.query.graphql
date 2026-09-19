@@ -4,6 +4,12 @@ query ProductByHandle($handle: String!) {
     handle
     title
     status
+    media(first: 20) {
+      nodes {
+        id
+        mediaContentType
+      }
+    }
     variants(first: 10) {
       nodes {
         id

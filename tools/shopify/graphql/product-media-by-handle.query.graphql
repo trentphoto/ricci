@@ -1,0 +1,21 @@
+query ProductMediaByHandle($handle: String!) {
+  productByHandle(handle: $handle) {
+    id
+    handle
+    title
+    media(first: 20) {
+      nodes {
+        id
+        mediaContentType
+        alt
+        ... on MediaImage {
+          image {
+            url
+            width
+            height
+          }
+        }
+      }
+    }
+  }
+}
