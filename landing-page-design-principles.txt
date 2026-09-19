@@ -1,0 +1,67 @@
+LANDING PAGE DESIGN AND CRO PRINCIPLES
+
+The four versions test different ways of helping someone feel ready to order.
+They share the same offer, product choices, and now the same core proof and
+food photography.
+
+ORIGINAL
+
+Design approach: A thorough sales page covering the offer, contents, process,
+value, reviews, guarantee, shipping, and story.
+
+CRO hypothesis: Answer enough objections that an unfamiliar visitor becomes
+comfortable buying. Its strength is reassurance; its risk is length.
+
+MINIMAL
+
+Design approach: Centered white layout, narrow reading width, generous
+spacing, and restrained typography.
+
+CRO hypothesis: Reduce distraction and make the offer easy to understand.
+Product photos and proof support the decision without competing for attention.
+Its risk is feeling less distinctive or persuasive.
+
+BUTCHERBOX-INSPIRED
+
+Design approach: Familiar food-commerce structure: large food hero, benefits
+strip, product cards, simple steps, then ordering.
+
+CRO hypothesis: Make an unfamiliar brand feel easy to shop. Visitors can
+quickly understand what they get and how it works. Its risk is looking like
+other meat-delivery brands.
+
+TABLE / CUSTOM
+
+Design approach: Warm editorial styling, emotional headline, prominent food
+photography, and a complete order panel beside the hero on desktop.
+
+CRO hypothesis: Combine appetite and the feeling of gathering with family
+with an immediate, practical buying decision. Its risk is that the emotional
+opening won't resonate with everyone.
+
+SHARED CONVERSION PRINCIPLES
+
+1. Make the offer explicit: $189, shipping included, one-time purchase.
+   Those details sit close to the buying decision.
+
+2. Keep the decision small: three blend choices, one price, one checkout
+   destination.
+
+3. Use photos for two jobs: cooked food creates appetite; raw coils and the
+   contents section explain what actually arrives.
+
+4. Put proof behind the promise: customer reviews provide personal
+   reassurance; the ESPN feature adds recognizable credibility.
+
+5. Help people picture using it: the grill, gravy, and sandwich sections turn
+   a large quantity of sausage into familiar meals.
+
+6. Keep ordering accessible: repeated Buy buttons, plus mobile sticky buttons
+   on Butcher and Table.
+
+The strongest hypothesis for Table is that desire and clarity work best
+together: "I want that meal" and "I understand exactly what I'm buying."
+
+These are hypotheses, not established winners. Because we're measuring Buy
+clicks, the experiment will tell us which presentation gets more people to
+checkout—not necessarily which produces more sales.
