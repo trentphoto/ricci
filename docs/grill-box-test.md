@@ -72,8 +72,11 @@ node tools/check-pages.mjs site/shop/grill-box.html site/shop/grill-box-minimal.
 node --test tools/grill-experiment/browser.test.mjs
 ```
 
-CRM implementation lives in `../riccis-crm/src/experiments.ts`, with the route
-and protected dashboard mounted in `src/index.ts`. Its checks are
+CRM implementation lives in `../riccis-crm/src/experiments.ts` — since
+2026-09-22 a registry of experiment specs shared with the meatball framing test
+(`docs/meatball-framing-test.md`), storing every test in one
+`experiment_visitors` table and serving `/api/experiments/:slug/events`. The
+route and protected dashboard are mounted in `src/index.ts`. Its checks are
 `bun test src/experiments.test.ts` and `./node_modules/.bin/tsc --noEmit`, run
 from that repository. Route integration was also verified against an isolated
 in-memory database, including CORS, invalid/oversized payloads, and admin login.
