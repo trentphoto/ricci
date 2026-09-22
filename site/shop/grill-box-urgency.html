@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script src="../js/grill-experiment.js" data-variant="original"></script>
+  <!-- Standalone urgency candidate; excluded from the active grill-box-v1 experiment. -->
   <!-- Meta Pixel Code -->
   <script>
   !function(f,b,e,v,n,t,s)
@@ -53,17 +53,18 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/grill-urgency.css" />
   <link rel="icon" href="../assets/favicon/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon-32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon/favicon-16.png" />
   <link rel="apple-touch-icon" href="../assets/favicon/apple-touch-icon.png" />
   <!-- Canonical & social (Open Graph / Twitter) -->
-  <link rel="canonical" href="https://riccisausage.com/shop/grill-box" />
+  <link rel="canonical" href="https://riccisausage.com/shop/grill-box-urgency" />
   <meta property="og:type" content="product" />
   <meta property="og:site_name" content="Ricci's Italian Sausage" />
   <meta property="og:title" content="The Sunday Grill Box — 10 lb of Ricci's, Shipped Frozen" />
   <meta property="og:description" content="Ten pounds of Ricci's Italian sausage plus 2 lb of peppers and onions, shipped frozen. $189, shipping included." />
-  <meta property="og:url" content="https://riccisausage.com/shop/grill-box" />
+  <meta property="og:url" content="https://riccisausage.com/shop/grill-box-urgency" />
   <meta property="og:image" content="https://riccisausage.com/assets/img/og-image.webp" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -132,6 +133,11 @@
             <p><em>2 lb</em> Peppers and onions &mdash; one 32 oz bag</p>
           </div>
 
+          <aside class="grill-deadline" data-grill-deadline hidden aria-label="Order deadline">
+            <strong class="grill-deadline-heading">Get it in time for the weekend.</strong>
+            <p data-deadline-copy></p>
+            <p class="grill-deadline-clock" role="timer" aria-live="off"><span data-deadline-clock></span> left to order</p>
+          </aside>
           <div class="product-price pdp-price">
             <span class="price-amount">$189.00</span>
             <span class="ship-note">Free shipping &middot; Arrives cold &middot; One-time purchase</span>
@@ -139,9 +145,10 @@
           <div class="pdp-cta">
             <a class="btn btn-primary btn-lg" data-grill-cta href="https://tiyndf-za.myshopify.com/cart/58926159691936:1">Order Now &mdash; $189 &middot; Free Shipping</a>
           </div>
-          <p class="ship-terms">
-            12 lbs total &middot; Labeled and packed in an insulated box with
-            cold packs &middot; Shipping included
+          <p class="ship-terms grill-fulfillment">
+            <span>12 lbs total</span>
+            <span>Packed cold and insulated</span>
+            <span>Shipping included</span>
           </p>
         </div>
 
@@ -610,8 +617,8 @@
               Ten pounds of Italian sausage &mdash; two labeled 5 lb boxes of
               uncooked rope in natural casing &mdash; and one 32 oz bag of
               peppers and onions. Choose all hot, all sweet, or five pounds of
-              each. Buns, sauce, drinks and sides aren't included. Everything
-              is raw, and it leaves the shop frozen; photos are serving suggestions.
+              each. Buns, sauce, drinks and sides aren't included. The sausage
+              is raw. The box leaves the shop frozen; photos are serving suggestions.
             </p>
           </details>
           <details>
@@ -677,6 +684,7 @@
           straight from the shop on Pine Hollow Road, with the shipping already
           paid for.
         </p>
+        <p class="grill-deadline-repeat" data-deadline-repeat hidden></p>
         <span class="product-price pdp-final-price">
           <span class="price-amount">$189.00</span>
           <span class="ship-note">Free shipping &middot; Arrives cold</span>
@@ -702,7 +710,7 @@
 
   <!-- FAQPage only. No `offers` block on campaign landing pages — it would
        compete with the bundle PDPs in search. See docs/WIKI.md. -->
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What exactly comes in the box?","acceptedAnswer":{"@type":"Answer","text":"Ten pounds of Italian sausage — two labeled 5 lb boxes of uncooked rope in natural casing — and one 32 oz bag of peppers and onions. Choose all hot, all sweet, or five pounds of each. Buns, sauce, drinks and sides aren't included. Everything is raw, and it leaves the shop frozen."}},{"@type":"Question","name":"How many people does it feed?","acceptedAnswer":{"@type":"Answer","text":"Five pounds of rope feeds about twenty, so ten pounds runs a crowd of roughly forty. Actual yield depends on how you portion it and what else is on the table."}},{"@type":"Question","name":"Is this a subscription?","acceptedAnswer":{"@type":"Answer","text":"No. One box, $189, shipping included. No recurring charges."}},{"@type":"Question","name":"Can I mix it differently?","acceptedAnswer":{"@type":"Answer","text":"The three mixes shown are what ships at this price. For anything else, call the shop at 412-331-9531 and we'll put together a custom shipped order over the phone."}},{"@type":"Question","name":"What's the difference between hot and sweet?","acceptedAnswer":{"@type":"Answer","text":"Two different blends. Hot is crushed red pepper, real paprika and whole fennel seed — medium heat that builds on the third bite, not the first. Sweet is cracked black pepper, with no fennel, no paprika and no chili heat. Both are all natural: no fillers, no MSG, no additives, no preservatives."}},{"@type":"Question","name":"What if I'm not home when it arrives?","acceptedAnswer":{"@type":"Answer","text":"It ships frozen in an insulated box with cold packs. Bring it inside when it arrives and refrigerate or freeze it promptly."}},{"@type":"Question","name":"Why is shipping free?","acceptedAnswer":{"@type":"Answer","text":"Shipping isn't tacked on at checkout — it's already built into the $189."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What exactly comes in the box?","acceptedAnswer":{"@type":"Answer","text":"Ten pounds of Italian sausage — two labeled 5 lb boxes of uncooked rope in natural casing — and one 32 oz bag of peppers and onions. Choose all hot, all sweet, or five pounds of each. Buns, sauce, drinks and sides aren't included. The sausage is raw. The box leaves the shop frozen."}},{"@type":"Question","name":"How many people does it feed?","acceptedAnswer":{"@type":"Answer","text":"Five pounds of rope feeds about twenty, so ten pounds runs a crowd of roughly forty. Actual yield depends on how you portion it and what else is on the table."}},{"@type":"Question","name":"Is this a subscription?","acceptedAnswer":{"@type":"Answer","text":"No. One box, $189, shipping included. No recurring charges."}},{"@type":"Question","name":"Can I mix it differently?","acceptedAnswer":{"@type":"Answer","text":"The three mixes shown are what ships at this price. For anything else, call the shop at 412-331-9531 and we'll put together a custom shipped order over the phone."}},{"@type":"Question","name":"What's the difference between hot and sweet?","acceptedAnswer":{"@type":"Answer","text":"Two different blends. Hot is crushed red pepper, real paprika and whole fennel seed — medium heat that builds on the third bite, not the first. Sweet is cracked black pepper, with no fennel, no paprika and no chili heat. Both are all natural: no fillers, no MSG, no additives, no preservatives."}},{"@type":"Question","name":"What if I'm not home when it arrives?","acceptedAnswer":{"@type":"Answer","text":"It ships frozen in an insulated box with cold packs. Bring it inside when it arrives and refrigerate or freeze it promptly."}},{"@type":"Question","name":"Why is shipping free?","acceptedAnswer":{"@type":"Answer","text":"Shipping isn't tacked on at checkout — it's already built into the $189."}}]}</script>
 
   <!-- Minimal footer. No catalog links — this page has one job. -->
   <footer class="site-footer ship-footer">
@@ -718,6 +726,6 @@
        has no Shopify product yet). Wire those in when checkout exists. -->
   <script src="../js/grill-box.js" defer></script>
   <script src="../js/crm.js" defer></script>
-  <script src="../js/grill-events.js" defer></script>
+  <script src="../js/grill-urgency.js" defer></script>
 </body>
 </html>
