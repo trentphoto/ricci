@@ -14,6 +14,7 @@
 (function () {
   var ITEMS = [
     { id: 'rolls',     name: "Lil's Sausage Rolls",       unit: 'each',             price: 15.99 },
+    { id: 'pepperoni_roll', name: 'Pepperoni Roll',       unit: 'each',             price: 16.99 },
     { id: 'pep_sm',    name: 'Stuffed Banana Peppers',    unit: 'Small Tray (6 pc)',  price: 20.95 },
     { id: 'pep_lg',    name: 'Stuffed Banana Peppers',    unit: 'Large Tray (12 pc)', price: 41.95 },
     { id: 'hot_sm',    name: 'Hot Italian Sausage',       unit: 'Small Tray (12 pc)', price: 39.95 },
@@ -28,6 +29,9 @@
   ];
 
   var TAX_RATE = 0.07;
+  var reviewing = false;
+  var previousFocus;
+  var sectionVisibility = [];
 
   function money(n) {
     return '$' + n.toFixed(2);
@@ -54,11 +58,11 @@
       '<div class="cater-item-name">' + item.name +
         '<small>' + item.unit + '</small>' +
       '</div>' +
-      '<div class="cater-qty">' +
+      '<div class="cater-quantity-wrap"><div class="cater-qty">' +
         '<button type="button" data-qty-step="-1" aria-label="Decrease">−</button>' +
-        '<input type="number" min="0" value="0" data-qty="' + item.id + '" inputmode="numeric">' +
+        '<input type="number" min="0" step="1" value="0" aria-label="Quantity: ' + item.name + ' ' + item.unit + '" data-qty="' + item.id + '" inputmode="numeric">' +
         '<button type="button" data-qty-step="1" aria-label="Increase">+</button>' +
-      '</div>' +
+      '</div>' + (item.id === 'buns' ? '<small class="cater-bun-count" id="cater-bun-count" aria-live="polite">0 buns · 12 per dozen</small>' : '') + '</div>' +
       '<div class="cater-item-price">' + money(item.price) + '</div>' +
       extra +
     '</div>';
@@ -95,8 +99,8 @@
       '          <div class="cater-switch">' +
       '            <div class="cater-switch-label">How would you like the trays?<small>Prepared hot = ready to serve. Cool down = chilled for reheating at home.</small></div>' +
       '            <div class="cater-toggle" id="c-prep-toggle" data-active="hot">' +
-      '              <button type="button" class="cater-toggle-opt" data-prep="hot">Hot</button>' +
-      '              <button type="button" class="cater-toggle-opt" data-prep="cool">Cool Down</button>' +
+      '              <button type="button" class="cater-toggle-opt" data-prep="hot" aria-pressed="true">Hot</button>' +
+      '              <button type="button" class="cater-toggle-opt" data-prep="cool" aria-pressed="false">Cool Down</button>' +
       '            </div>' +
       '          </div>' +
       '        </div>' +
@@ -109,12 +113,24 @@
       '        <div class="cater-section-head"><span class="eyebrow">Step 04</span><h3>Notes</h3></div>' +
       '        <div class="cater-field"><label for="c-notes">Anything else we should know?</label><textarea id="c-notes" name="notes" placeholder="Headcount, allergies, special requests..."></textarea></div>' +
       '      </div>' +
+      '      <section class="cater-review" id="cater-review" hidden aria-labelledby="cater-review-title">' +
+      '        <h3 id="cater-review-title" tabindex="-1">Review your order</h3>' +
+      '        <div id="cater-review-lines"></div>' +
+      '        <dl class="cater-review-totals" id="cater-review-totals"></dl>' +
+      '        <div class="cater-review-details">' +
+      '          <div><h4>Pickup</h4><p id="cater-review-pickup"></p></div>' +
+      '          <div><h4>Contact</h4><p id="cater-review-contact"></p></div>' +
+      '          <div id="cater-review-notes-block"><h4>Notes</h4><p id="cater-review-notes"></p></div>' +
+      '        </div>' +
+      '        <p class="cater-review-note">Your order is confirmed after payment. Final pricing is shown at checkout.</p>' +
+      '        <button type="button" class="btn btn-outline-dark" id="cater-edit">Edit order</button>' +
+      '      </section>' +
       '      <span class="crm-status cater-status" role="status"></span>' +
       '    </form>' +
       '    <div class="cater-footer">' +
       '      <div class="cater-total">Estimated Total <small>(incl. 7% tax)</small><span id="cater-total">$0.00</span></div>' +
       '      <div class="cater-actions">' +
-      '        <button type="button" class="btn btn-primary" id="cater-submit">Continue to Payment</button>' +
+      '        <button type="button" class="btn btn-primary" id="cater-submit">Review Order</button>' +
       '      </div>' +
       '    </div>' +
       '  </div>' +
@@ -139,6 +155,67 @@
     });
     var el = document.getElementById('cater-total');
     if (el) el.textContent = money(withTax(total));
+    var buns = document.getElementById('cater-bun-count');
+    if (buns) buns.textContent = (getQty('buns') * 12) + ' buns · 12 per dozen';
+  }
+
+  function editOrder() {
+    reviewing = false;
+    document.querySelectorAll('#cater-form > .cater-section').forEach(function (section, i) {
+      section.hidden = sectionVisibility[i] || false;
+    });
+    document.getElementById('cater-review').hidden = true;
+    document.getElementById('cater-submit').textContent = 'Review Order';
+    var first = document.querySelector('#cater-form .cater-section:not([hidden]) input');
+    if (first) first.focus();
+  }
+
+  function reviewOrder(lines) {
+    var container = document.getElementById('cater-review-lines');
+    container.replaceChildren();
+    var subtotal = 0;
+    lines.forEach(function (line) {
+      var item = ITEMS.find(function (it) { return it.id === line.id; });
+      subtotal += item.price * line.qty;
+      var row = document.createElement('div');
+      row.className = 'cater-review-line';
+      var label = document.createElement('span');
+      var name = document.createElement('strong');
+      name.className = 'cater-review-name';
+      name.textContent = item.name;
+      var detail = document.createElement('small');
+      detail.className = 'cater-review-description';
+      detail.textContent = 'Qty ' + line.qty + ' · ' + item.unit +
+        (line.id === 'buns' ? ' (' + line.qty * 12 + ' buns)' : '') +
+        (line.sauce ? ' · With tomato sauce' : '') +
+        (line.lasagnaKind ? ' · ' + line.lasagnaKind + ' sausage' : '');
+      label.append(name, detail);
+      var price = document.createElement('strong');
+      price.className = 'cater-review-price';
+      price.textContent = money(item.price * line.qty);
+      row.append(label, price);
+      container.appendChild(row);
+    });
+    document.getElementById('cater-review-totals').innerHTML =
+      '<dt>Subtotal</dt><dd>' + money(subtotal) + '</dd>' +
+      '<dt>Estimated tax (7%)</dt><dd>' + money(subtotal * TAX_RATE) + '</dd>' +
+      '<dt class="cater-review-grand-total">Estimated total</dt><dd class="cater-review-grand-total">' + money(withTax(subtotal)) + '</dd>';
+    var fields = document.getElementById('cater-form').elements;
+    var pickup = new Date(fields.date.value + 'T' + fields.time.value);
+    document.getElementById('cater-review-pickup').textContent = pickup.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' }) + ' at ' + pickup.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }) + '\nIn-store pickup · ' +
+      (document.getElementById('c-prep-toggle').dataset.active === 'cool' ? 'Chilled for reheating' : 'Prepared hot');
+    document.getElementById('cater-review-contact').textContent = fields.name.value + '\n' + fields.email.value + '\n' + fields.phone.value;
+    document.getElementById('cater-review-notes').textContent = fields.notes.value;
+    document.getElementById('cater-review-notes-block').hidden = !fields.notes.value.trim();
+    sectionVisibility = [];
+    document.querySelectorAll('#cater-form > .cater-section').forEach(function (section) {
+      sectionVisibility.push(section.hidden);
+      section.hidden = true;
+    });
+    reviewing = true;
+    document.getElementById('cater-review').hidden = false;
+    document.getElementById('cater-submit').textContent = 'Continue to Payment';
+    document.getElementById('cater-review-title').focus();
   }
 
   /** Read the cart into {id, qty, sauce?, lasagnaKind?} lines — no prices, no names. */
@@ -226,8 +303,15 @@
     }
 
     var btn = document.getElementById('cater-submit');
+    if (btn.disabled) return;
+    if (!reviewing) {
+      status.textContent = '';
+      reviewOrder(lines);
+      return;
+    }
     var prevLabel = btn.textContent;
     btn.disabled = true;
+    document.getElementById('cater-edit').disabled = true;
     btn.textContent = 'Opening checkout…';
     status.textContent = '';
 
@@ -258,6 +342,7 @@
         return;
       }
       btn.disabled = false;
+      document.getElementById('cater-edit').disabled = false;
       btn.textContent = prevLabel;
       status.textContent = errorMessage(r.error);
     });
@@ -273,6 +358,7 @@
   function openModal() {
     var modal = document.getElementById('cater-modal');
     if (!modal) return;
+    previousFocus = document.activeElement;
     modal.classList.add('is-open');
     document.body.classList.add('cater-open');
     var dateInput = document.getElementById('c-date');
@@ -288,6 +374,7 @@
     if (!modal) return;
     modal.classList.remove('is-open');
     document.body.classList.remove('cater-open');
+    if (previousFocus && previousFocus.isConnected) previousFocus.focus();
   }
 
   function wire() {
@@ -307,6 +394,12 @@
     });
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+      if (e.key === 'Tab' && modal.classList.contains('is-open')) {
+        var focusable = Array.from(modal.querySelectorAll('button:not(:disabled), input:not([tabindex="-1"]), textarea, [tabindex="0"]')).filter(function (el) { return el.getClientRects().length; });
+        var first = focusable[0], last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
     });
 
     modal.addEventListener('click', function (e) {
@@ -322,7 +415,7 @@
 
     modal.addEventListener('input', function (e) {
       if (e.target.matches('input[data-qty]')) {
-        if (parseInt(e.target.value, 10) < 0 || isNaN(parseInt(e.target.value, 10))) e.target.value = 0;
+        e.target.value = Math.max(0, parseInt(e.target.value, 10) || 0);
         recalcTotal();
       }
     });
@@ -332,14 +425,17 @@
       var opt = e.target.closest('[data-prep]');
       if (!opt) return;
       toggle.setAttribute('data-active', opt.getAttribute('data-prep'));
+      toggle.querySelectorAll('[data-prep]').forEach(function (button) {
+        button.setAttribute('aria-pressed', String(button === opt));
+      });
     });
 
     document.getElementById('cater-submit').addEventListener('click', submitOrder);
+    document.getElementById('cater-edit').addEventListener('click', editOrder);
+    document.getElementById('cater-form').addEventListener('submit', function (e) { e.preventDefault(); submitOrder(); });
 
     var dateInput = document.getElementById('c-date');
-    var tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    dateInput.min = tomorrow.toISOString().split('T')[0];
+    dateInput.min = tomorrowISO();
   }
 
   window.RicciCatering = { open: openModal };

@@ -366,6 +366,13 @@ with GraphQL in `tools/shopify/graphql/`. Variant weights are **not** set via AP
 
 ## Product facts (get these right in copy)
 
+- **Pepperoni roll catering price:** $16.99 each, confirmed by the owner
+  2026-09-24. Listed directly below sausage rolls.
+
+- **Catering buns:** one quantity is one dozen (12 buns), confirmed by the
+  owner 2026-09-19. The modal shows a live bun count; do not equate buns with
+  a guaranteed number of guests fed.
+
 Source of truth for ingredient/pricing claims. Do not improvise seasoning
 details — if it isn't listed here, ask before writing it.
 
@@ -456,6 +463,19 @@ serving." That's the register the rest of the site is in anyway.
   Prices live in `ITEMS` / `MIN_PEOPLE` in `js/office-lunch.js`.
 
 ### Open questions — DO NOT write copy on these until answered
+
+- **Catering page (2026-09-24):** the selected ivory table design now serves
+  `catering.html`, with the original “You're Feeding a Crowd” headline.
+  Minimal, table, and separate ivory URLs redirect to `/catering`. The order
+  card becomes full width at 1,100px and below. Shared catalog and payment
+  scripts power the inline form, with tomorrow at 1 PM prefilled, back buttons
+  at both ends, and animated hot/chilled icons with reduced-motion support.
+  The 24-hour notice was removed from the card header only; pickup validation
+  remains unchanged. Existing tray prices, portions, and 7% estimated tax are
+  carried forward; only the pepperoni roll price was newly confirmed here.
+- **Pepperoni roll pickup days:** no separate catering-day restriction has
+  been confirmed; the catering form uses its normal pickup selection. The
+  separate pepperoni preorder flow still selects Monday.
 
 Fill in an answer and move it up into the verified list above. Until then, leave
 the slot blank or use the typographic plate stand-in. See `CLAUDE.md`.
