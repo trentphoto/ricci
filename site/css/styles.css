@@ -2211,6 +2211,9 @@ body.nav-drawer-open .nav-backdrop {
 .press-card-body a.press-link:hover {
   border-color: var(--red);
 }
+.press-card-body a.press-link + a.press-link {
+  margin-left: 20px;
+}
 
 /* Pull quote */
 .press-pullquote {
