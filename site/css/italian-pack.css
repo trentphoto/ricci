@@ -1,0 +1,28 @@
+/* Shared purchase buttons for all Pittsburgh Italian Pack variations. */
+.pdp-cta .btn-primary {
+  width: 100%;
+  padding: 20px 34px;
+  font-size: 1rem;
+  text-align: center;
+  justify-content: center;
+}
+.pdp-final-cta .btn-primary {
+  width: 100%;
+  max-width: 420px;
+  padding: 22px 34px;
+  font-size: 1.05rem;
+  text-align: center;
+  justify-content: center;
+  margin-inline: auto;
+}
+.pdp-buybar .btn-primary {
+  padding: 17px 26px;
+  font-size: 1rem;
+  text-align: center;
+  justify-content: center;
+}
+@media (max-width: 600px) {
+  .pdp-cta .btn-primary,
+  .pdp-final-cta .btn-primary { padding: 20px 22px; }
+  .pdp-buybar .btn-primary { padding: 17px 22px; }
+}
