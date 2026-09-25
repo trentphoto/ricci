@@ -58,6 +58,26 @@
 .flow-ivory .flow-sticky a { background: var(--red); }
 .flow-ivory .plan-step-num { color: var(--red); }
 .flow-ivory .plan-step p { color: var(--ink-soft); }
+.flow-ivory .flow-planning { padding: 72px 0; }
+.flow-ivory .flow-planning-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 24px;
+}
+.flow-ivory .flow-planning-card {
+  padding: 28px;
+  background: var(--white);
+  border: 1px solid var(--cream-edge);
+}
+.flow-ivory .flow-planning-card h3 { color: var(--red); margin-bottom: 16px; }
+.flow-ivory .flow-planning-card ul { padding-left: 20px; color: var(--ink-soft); }
+.flow-ivory .flow-planning-card li { margin-bottom: 12px; line-height: 1.65; }
+.flow-ivory .flow-planning-card li:last-child { margin-bottom: 0; }
+.flow-ivory .flow-planning-card strong { color: var(--ink); }
+@media (max-width: 900px) {
+  .flow-ivory .flow-planning { padding: 48px 0; }
+  .flow-ivory .flow-planning-grid { grid-template-columns: 1fr; }
+}
 .flow-ivory .flow-back {
   min-height: 48px;
   padding: 14px 20px;
