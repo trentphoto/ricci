@@ -468,7 +468,7 @@ the slot blank or use the typographic plate stand-in. See `CLAUDE.md`.
    three places (`js/preorder-modal.js`, and two JSON-LD blocks in `menu.html`
    and `mckees-rocks-lunch.html`) but has never been verified against the wiki.
    It now also decides what a real card gets charged: prepaid Square pre-orders
-   read the price from `PREORDER_UNIT_PRICE_CENTS` in the CRM env. That variable
+   read the price from `PEPPERONI_ROLL_PRICE_CENTS` in the CRM env. That variable
    has **no default** — until it is set, `/api/preorder` returns 503 and the
    modal tells customers to call. Set it only from a confirmed price.
 
