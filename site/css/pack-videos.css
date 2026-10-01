@@ -1,0 +1,202 @@
+/* "Made by Hand" video rows for the Pittsburgh Italian Pack pages.
+   Player behavior lives in js/pack-videos.js. */
+.pack-video-row {
+  display: grid;
+  grid-template-columns: minmax(0, 2.1fr) minmax(0, 1fr);
+  gap: 48px;
+  align-items: center;
+}
+.pack-video-row + .pack-video-row {
+  margin-top: 96px;
+}
+.pack-video-row--flip .pack-video-media {
+  order: 0;
+}
+
+.pack-video-media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--charcoal);
+}
+.pack-video-media > img,
+.pack-video-media iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+.pack-video-media > img {
+  object-fit: cover;
+}
+.pack-video-media.is-ready > img {
+  display: none;
+}
+/* No ID yet: keep the poster and say so. */
+.pack-video-media[data-youtube-id=""]::after {
+  content: "Video coming soon";
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  padding: 6px 12px;
+  background: rgba(42, 34, 27, 0.8);
+  color: var(--cream);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* Full-frame unmute target with a light, even tint. */
+.pack-video-sound {
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  border:0;
+  border-radius:0;
+  background:rgba(42, 34, 27, 0.08);
+  color:white;
+  text-shadow:0 2px 8px #000;
+  font:600 clamp(20px,3vw,28px)/1.2 var(--font-sans);
+  cursor:pointer;
+}
+.pack-video-sound[hidden] { display:none; }
+.pack-video-sound:focus-visible { outline:3px solid #b67a46; outline-offset:-6px; }
+
+.pack-video-copy h3 {
+  font-size: 1.5rem;
+  line-height: 1.25;
+  margin-bottom: 12px;
+}
+.pack-video-copy p {
+  color: var(--ink-soft);
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+.pack-video-copy a {
+  color: var(--red);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.pack-video-copy a:hover {
+  color: var(--ink);
+}
+
+.pack-videos-credit {
+  margin-top: 56px;
+  font-size: 0.8rem;
+  color: var(--ink-faint);
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .pack-video-row {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  .pack-video-row + .pack-video-row {
+    margin-top: 56px;
+  }
+  .pack-video-row--flip .pack-video-media {
+    order: 0;
+  }
+}
+/* Keep a usable YouTube link if scripts, embeds or autoplay are blocked. */
+.pack-video-media { min-height:200px; }
+.pack-video-media > img { pointer-events:none; }
+.pack-video-media.is-ready > img { display:block; }
+.pack-video-media.is-playing > img { display:none; }
+.pack-video-fallback { position:absolute; left:14px; bottom:14px; z-index:1; padding:10px 14px; background:#29231edb; color:white; font-size:14px; }
+.pack-video-media.is-ready .pack-video-fallback { display:none; }
+.pack-videos h2 { margin-bottom:36px; }
+.pack-video-sound { min-height:44px; }
+.pack-video-sound:focus-visible { outline:3px solid #b67a46; outline-offset:3px; }
+.pack-video-media video { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; background:#29231e; }
+
+/* Both process films share the same generous width, across all variants. */
+.pack-videos { padding-block:88px; }
+.pack-videos > .container,
+.gx .pack-videos > .container {
+  width:min(1320px, calc(100% - 64px));
+  max-width:none;
+  margin-inline:auto;
+  padding-inline:0;
+}
+.pack-video-row > * { min-width:0; }
+.pack-video-copy .pack-video-product { margin:24px 0 0; }
+.pack-video-product img {
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:4 / 3;
+  object-fit:contain;
+  background:#fff;
+}
+.pack-video-product figcaption {
+  margin-top:10px;
+  font-size:14px;
+  line-height:1.5;
+  color:var(--ink-soft);
+}
+@media(max-width:900px) {
+  .pack-videos { padding-block:56px; }
+  .pack-videos > .container,
+  .gx .pack-videos > .container { width:calc(100% - 40px); }
+  .pack-video-copy .pack-video-product { max-width:420px; }
+}
+
+/* Approved process sections shared across the Italian Pack test. */
+.pack-videos.pack-videos--rolls { background:#fffcf5; }
+.pack-videos > .container > h2 { margin-bottom:36px; }
+
+.pack-videos pack-roll-memory {
+ display:grid;
+ grid-template-columns:minmax(0, 280px) minmax(0, 520px);
+ justify-content:center;
+ align-items:center;
+ gap:48px;
+ margin-top:64px;
+ padding-top:48px;
+ border-top:1px solid #e5ddce;
+}
+.pack-videos pack-roll-memory img { display:block; width:100%; height:auto; }
+.pack-videos pack-roll-memory h3 { margin:12px 0 20px; font-size:clamp(28px, 3vw, 38px); }
+@media(max-width:640px) {
+ .pack-videos pack-roll-memory { grid-template-columns:1fr; gap:24px; margin-top:40px; padding-top:32px; }
+ .pack-videos pack-roll-memory figure { max-width:320px; }
+}
+
+.pack-videos.pack-videos--meatballs > .container > h2,
+.pack-videos.pack-videos--rolls > .container > h2 { margin-bottom:12px; }
+.pack-videos pack-process-subhead { margin-bottom:36px; }
+.pack-videos pack-process-subhead .gx-kicker { margin-bottom:8px; }
+.pack-videos pack-process-subhead .pack-process-lead { margin-top:0; font-size:clamp(20px, 2.2vw, 26px); line-height:1.4; }
+
+.pack-videos.pack-videos--meatballs { background:#eae0cb; }
+.pack-videos { color:var(--ink); }
+.pack-videos > .container > h2 {
+ font:700 clamp(30px, 3.5vw, 46px)/1.16 var(--font-serif);
+ letter-spacing:-.04em;
+ text-transform:none;
+ color:inherit;
+}
+.pack-videos .gx-kicker {
+ font:600 12px/1.5 var(--font-sans);
+ letter-spacing:.15em;
+ text-transform:uppercase;
+ color:#812c24;
+}
+.pack-videos .pack-video-copy h3 { font:700 32px/1.25 var(--font-serif); letter-spacing:-.025em; color:inherit; }
+.pack-videos .pack-roll-memory figure { margin:0; }
+.pack-videos .pack-roll-memory p { max-width:none; }
+@media(max-width:900px) {
+ .pack-videos .pack-video-copy h3 { font-size:28px; }
+}
