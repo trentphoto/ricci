@@ -19,7 +19,7 @@ window.RicciShopifyVariants = {
       "C": {
         "variantId": "gid://shopify/ProductVariant/58140080111776",
         "sku": "RIC-PITT-C",
-        "price": "205.00",
+        "price": "210.00",
         "label": "Zone C — Southeast"
       },
       "D": {
@@ -31,7 +31,7 @@ window.RicciShopifyVariants = {
       "E": {
         "variantId": "gid://shopify/ProductVariant/58140080177312",
         "sku": "RIC-PITT-E",
-        "price": "221.00",
+        "price": "233.00",
         "label": "Zone E — West"
       }
     }

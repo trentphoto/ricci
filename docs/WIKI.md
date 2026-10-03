@@ -254,9 +254,9 @@ Zone prices (med / large):
 |------|------------|--------|
 | A | $189 | $289 |
 | B | $197 | $301 |
-| C | $205 | $311 |
+| C | $210 | $311 |
 | D | $213 | $321 |
-| E | $221 | $331 |
+| E | $233 | $331 |
 
 AK and HI are zone X — no cold-ship; checkout is blocked in the cart UI.
 

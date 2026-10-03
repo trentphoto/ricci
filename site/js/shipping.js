@@ -48,9 +48,9 @@
   var SHIP = {
     A: { small: 0,  med: 0,  large: 0  },
     B: { small: 6,  med: 8,  large: 12 },
-    C: { small: 12, med: 16, large: 22 },
+    C: { small: 12, med: 21, large: 22 },
     D: { small: 18, med: 24, large: 32 },
-    E: { small: 24, med: 32, large: 42 }
+    E: { small: 24, med: 44, large: 42 }
   };
 
   var STATE_NAMES = {

@@ -32,9 +32,9 @@ loadEnvFile(join(TOOLS, ".env.local"));
 const SHIP = {
   A: { med: 0, large: 0 },
   B: { med: 8, large: 12 },
-  C: { med: 16, large: 22 },
+  C: { med: 21, large: 22 },
   D: { med: 24, large: 32 },
-  E: { med: 32, large: 42 },
+  E: { med: 44, large: 42 },
 };
 
 const ZONES = [
