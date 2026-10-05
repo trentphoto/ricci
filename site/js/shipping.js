@@ -99,7 +99,7 @@
       }
       el.classList.remove("is-noship");
       amountEl.textContent = fmt(priceFor(base, tier, group));
-      if (noteEl) noteEl.textContent = "Free shipping to " + state + " · Arrives frozen";
+      if (noteEl) noteEl.textContent = "Free shipping to " + state + " · Ships frozen";
     });
 
     // reflect selection in the picker + label

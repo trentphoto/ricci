@@ -45,6 +45,12 @@ same burden. If it isn't in the wiki, flag it rather than carrying it forward.
 
 ## Copy conventions
 
+- **Never promise the box arrives frozen.** No "Arrives frozen", "Shows up
+  frozen", "frozen to your door", "on your doorstep frozen", or delivery-day
+  promises ("in 2 days"). Say what we control: **ships frozen**, packed in an
+  insulated box with cold packs. Thaw-on-arrival is handled by the Returns
+  policy, stated as a remedy, not a prediction ("If any of it arrives warm…").
+
 - Never write "no sugar" about sweet sausage — dextrose is in the blend.
 - Sweet is not "hot minus the pepper." Different blends. See the wiki table.
 - Prices: `$6.75` sandwich, `$3.50/pc` is a **cooked** link from the hot case.
