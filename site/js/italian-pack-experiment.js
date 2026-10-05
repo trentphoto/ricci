@@ -1,9 +1,9 @@
-/* Pittsburgh Italian Pack: three live versions; three review-only drafts. Preview with ?preview=1.
+/* Pittsburgh Italian Pack: six live versions. Preview with ?preview=1.
  * Deploy CRM italian-pack-v2 tracking before publishing. */
 (function () {
   "use strict";
   var experiment = "italian-pack-v2";
-  var variants = ["control", "free", "grill-pan"];
+  var variants = ["control", "free", "grill-pan", "minimal", "butcher", "table"];
   var paths = {
     control: "/shop/pittsburgh-italian-pack",
     free: "/shop/pittsburgh-italian-pack-free",
@@ -12,11 +12,9 @@
     butcher: "/shop/pittsburgh-italian-pack-butcher",
     table: "/shop/pittsburgh-italian-pack-table"
   };
-  var drafts = ["minimal", "butcher", "table"];
   var current = document.currentScript.getAttribute("data-variant");
   var query = new URLSearchParams(location.search);
   var preview = query.get("preview") === "1" ||
-    drafts.indexOf(current) !== -1 ||
     !/^(www\.)?riccisausage\.com$/.test(location.hostname);
   var bot = /bot|crawler|spider|facebookexternalhit|HeadlessChrome/i.test(navigator.userAgent);
   var context = { experiment: experiment, variant: current, preview: preview, visitor: null, active: false };

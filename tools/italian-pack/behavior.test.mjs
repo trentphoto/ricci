@@ -11,23 +11,14 @@ function assign(current, random=0, cookie='', search='') {
  vm.runInNewContext(allocator,{window,document,URLSearchParams,Uint8Array,navigator:{userAgent:'test visitor'},location:{hostname:'riccisausage.com',search,hash:'#box',replace:v=>destination=v}});
  return {context:window.RicciItalianPackExperiment,cookie,destination};
 }
-test('draft designs never allocate or track, including production without preview flag',()=>{
- for(const variant of ['minimal','butcher','table']) {
-  const result=assign(variant);
-  assert.equal(result.context.preview,true);
-  assert.equal(result.context.active,false);
-  assert.equal(result.destination,undefined);
-  assert.equal(result.cookie,'');
- }
-});
-test('three live allocations and saved assignments remain unchanged',()=>{
- for(const [n,variant] of ['control','free','grill-pan'].entries()) {
+test('six live allocations and saved assignments',()=>{
+ for(const [n,variant] of ['control','free','grill-pan','minimal','butcher','table'].entries()) {
   const result=assign('control',n,'','?utm_source=facebook');
   assert.equal(result.context.variant,variant);
   if(n) assert.match(result.destination,/\?utm_source=facebook#box$/);
   assert.equal(assign(variant,0,result.cookie).context.active,true);
  }
- assert.equal(assign('control',0,'','?preview=1').context.active,false);
+ assert.equal(assign('minimal',0,'','?preview=1').context.active,false);
 });
 const videoCode=readFileSync('site/js/pack-videos.js','utf8');
 async function players(reduced=false, native=false) {

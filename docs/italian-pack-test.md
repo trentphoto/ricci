@@ -1,11 +1,12 @@
 # Pittsburgh Italian Pack — period v2 and design review
 
-A–C remain live with equal probability (one third each): control, FREE meatball
+As of 2026-10-04 all six versions (A–F) are live, one sixth each for new
+visitors; returning A–C browsers keep their saved version. A–C are: control, FREE meatball
 wording, and control wording with Hot/Sweet grill pan hero photos. Campaign URL:
 `/shop/pittsburgh-italian-pack`. Existing cookie `ricci_italian_pack_v2`, endpoint
 `/api/experiments/italian-pack-v2/events`, and accumulated results remain intact.
 
-Three new designs are registered as D–F in the same CRM test, staged as drafts:
+D–F were added to the same CRM test (period v2), so counts before 2026-10-04 are A–C only:
 
 | Version | Review path | Design |
 | --- | --- | --- |
@@ -13,9 +14,7 @@ Three new designs are registered as D–F in the same CRM test, staged as drafts
 | E | `/shop/pittsburgh-italian-pack-butcher.html?preview=1` | Large food photograph, freezer benefits, order card, process steps |
 | F | `/shop/pittsburgh-italian-pack-table.html?preview=1` | Warm cream, family story, Sunday dinner framing |
 
-Drafts receive zero traffic and never emit experiment events, even when loaded
-on production without `?preview=1`. The CRM rejects draft events and shows
-preview links on their rows. Preview visits are excluded on every version.
+The CRM shows preview links on the D–F rows. Preview visits are excluded on every version.
 The production preview links work after these site files have been published.
 
 All six pages now share two “How it’s made” sections after the box contents /
