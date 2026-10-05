@@ -5836,6 +5836,23 @@ body.cater-open { overflow: hidden; }
   color: rgba(255,255,255,0.5);
 }
 
+/* Single-product boxes: the count is the headline, not a footnote. */
+.pdp-manifest--count li { align-items: center; gap: 20px; }
+.pdp-manifest--count .pdp-manifest-qty {
+  flex: 0 0 auto;
+  font-family: var(--font-serif, 'Libre Caslon Text', serif);
+  font-size: 4.5rem;
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: 0;
+}
+.pdp-manifest--count strong {
+  display: block;
+  font-size: 1.25rem;
+  color: #fff;
+  margin-bottom: 2px;
+}
+
 /* The shared ship-to selector is built for cream sections — restate it
    for the dark hero rather than shipping a light slab into it. */
 .pdp-buy .ship-selector {
