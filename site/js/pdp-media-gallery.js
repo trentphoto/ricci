@@ -20,6 +20,7 @@
         var img = button.querySelector("img");
         photo.src = img.getAttribute("src");
         photo.alt = img.alt;
+        photo.style.objectFit = button.getAttribute("data-fit") || "cover";
       }
       caption.textContent = button.getAttribute("data-caption");
       thumbs.forEach(function (t) { t.setAttribute("aria-pressed", String(t === button)); });

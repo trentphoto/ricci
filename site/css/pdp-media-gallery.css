@@ -18,3 +18,4 @@
   background: rgba(0,0,0,0.6); color: #fff; font-size: 14px;
 }
 @media (max-width: 600px) { .pdp-media-thumbs { gap: 6px; } .pdp-media-thumb { font-size: 0.65rem; padding: 2px; } }
+
