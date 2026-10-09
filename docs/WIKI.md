@@ -459,6 +459,9 @@ serving." That's the register the rest of the site is in anyway.
 > for ground pork is 160°F — that's a federal standard, not a Ricci claim, so
 > it's citable. Your call.
 
+- **Wholesale reach** (confirmed 2026-10-09): nationwide. Pittsburgh-area
+  accounts get weekly route delivery; farther away, wholesale ships frozen —
+  method depends on location. Don't promise transit times or arrival state.
 - **Counter pricing:** $6.75 sandwich on a Mancini's roll · **$3.50/pc is a
   cooked single link from the hot case**, not raw take-home. Raw is sold by the
   pound at the counter or in a 5 lb box (rope, per above).
