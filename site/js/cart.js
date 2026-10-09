@@ -138,7 +138,8 @@
     return m ? m[1] : null;
   }
 
-  function buildCheckoutUrl() {
+  /* [{ variantId: gid, qty }] for the current zone, or null if any item can't be resolved. */
+  function buildCheckoutLines() {
     var map = window.RicciShopifyVariants;
     if (!map) return null;
     var zone = checkoutZone();
@@ -149,23 +150,39 @@
     for (var i = 0; i < items.length; i++) {
       var entry = map[items[i].id];
       if (!entry || !entry.zones || !entry.zones[zone]) return null;
-      var vid = variantNumericId(entry.zones[zone].variantId);
-      if (!vid) return null;
-      lines.push(vid + ":" + (items[i].qty || 1));
+      var gid = entry.zones[zone].variantId;
+      if (!variantNumericId(gid)) return null;
+      lines.push({ variantId: gid, qty: items[i].qty || 1 });
     }
-    return lines.length ? SHOP_URL + "/cart/" + lines.join(",") : null;
+    return lines;
+  }
+
+  /* Permalink fallback if the Cart API call fails. */
+  function permalinkUrl(lines) {
+    return SHOP_URL + "/cart/" + lines.map(function (l) {
+      return variantNumericId(l.variantId) + ":" + l.qty;
+    }).join(",");
+  }
+
+  function loadShopifyCart() {
+    if (window.RicciShopifyCart || document.querySelector('script[src$="js/shopify-cart.js"]')) return;
+    var s = document.createElement("script");
+    s.src = basePrefix() + "js/shopify-cart.js";
+    document.head.appendChild(s);
   }
 
   function goCheckout() {
     whenVariantsReady(function () {
-      var url = buildCheckoutUrl();
-      if (url) {
+      var lines = buildCheckoutLines();
+      if (lines && lines.length) {
         if (window.RicciPixel) {
           window.RicciPixel.initiateCheckout(getCart().map(function (it) {
             return { id: it.id, qty: it.qty || 1 };
           }));
         }
-        window.location.href = url;
+        var fallback = permalinkUrl(lines);
+        if (window.RicciShopifyCart) window.RicciShopifyCart.checkout(lines, fallback);
+        else window.location.href = fallback;
         return;
       }
       window.alert(
@@ -432,6 +449,7 @@
 
     renderPanel();
     updateNavCount();
+    loadShopifyCart();
     whenVariantsReady(function () { /* variants ready for checkout */ });
 
     cartTrigger.addEventListener("click", function (e) {

@@ -253,10 +253,10 @@ Zone prices (med / large):
 | Zone | Pittsburgh | Legacy |
 |------|------------|--------|
 | A | $189 | $289 |
-| B | $197 | $301 |
-| C | $210 | $311 |
-| D | $213 | $321 |
-| E | $233 | $331 |
+| B | $199 | $299 |
+| C | $209 | $319 |
+| D | $219 | $329 |
+| E | $239 | $339 |
 
 AK and HI are zone X — no cold-ship; checkout is blocked in the cart UI.
 
@@ -274,10 +274,15 @@ the correct zone-priced variant pre-loaded.
 2. Shipping state is in `localStorage` key `ricci_ship_state` (set on shop
    pages via `shipping.js`).
 3. **Checkout** resolves state → zone (A–E), looks up the Shopify variant ID from
-   `js/shopify-variants.js`, and redirects to:
-   `https://shop.riccisausage.com/cart/{variantId}:{qty},...`
-4. Shopify cart permalinks **go straight to checkout by default** (use
-   `?storefront=true` only if you want the cart page instead).
+   `js/shopify-variants.js`, and builds the
+   Shopify lines for that zone.
+4. `js/shopify-cart.js` (Storefront **Cart API**, public token) runs `cartCreate`
+   with those lines plus cart attributes — last-touch UTMs/fbclid, landing page,
+   referrer, Italian Pack experiment variant — and prefills the email if the
+   visitor submitted a CRM form. Attributes land on the order as
+   `note_attributes` (visible in the `orders/paid` webhook). The browser goes to
+   the returned `checkoutUrl`. If the API call fails or takes >6s, it falls back
+   to the permalink `https://shop.riccisausage.com/cart/{variantId}:{qty},...`.
 5. Shopify handles payment, tax, and order confirmation.
 
 If zone variants aren't loaded or state is AK/HI, checkout shows an alert and

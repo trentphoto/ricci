@@ -13,25 +13,25 @@ window.RicciShopifyVariants = {
       "B": {
         "variantId": "gid://shopify/ProductVariant/58140080079008",
         "sku": "RIC-PITT-B",
-        "price": "197.00",
+        "price": "199.00",
         "label": "Zone B — Mid"
       },
       "C": {
         "variantId": "gid://shopify/ProductVariant/58140080111776",
         "sku": "RIC-PITT-C",
-        "price": "210.00",
+        "price": "209.00",
         "label": "Zone C — Southeast"
       },
       "D": {
         "variantId": "gid://shopify/ProductVariant/58140080144544",
         "sku": "RIC-PITT-D",
-        "price": "213.00",
+        "price": "219.00",
         "label": "Zone D — Central"
       },
       "E": {
         "variantId": "gid://shopify/ProductVariant/58140080177312",
         "sku": "RIC-PITT-E",
-        "price": "233.00",
+        "price": "239.00",
         "label": "Zone E — West"
       }
     }
@@ -49,25 +49,97 @@ window.RicciShopifyVariants = {
       "B": {
         "variantId": "gid://shopify/ProductVariant/58140080308384",
         "sku": "RIC-LEGACY-B",
-        "price": "301.00",
+        "price": "299.00",
         "label": "Zone B — Mid"
       },
       "C": {
         "variantId": "gid://shopify/ProductVariant/58140080341152",
         "sku": "RIC-LEGACY-C",
-        "price": "311.00",
+        "price": "319.00",
         "label": "Zone C — Southeast"
       },
       "D": {
         "variantId": "gid://shopify/ProductVariant/58140080373920",
         "sku": "RIC-LEGACY-D",
-        "price": "321.00",
+        "price": "329.00",
         "label": "Zone D — Central"
       },
       "E": {
         "variantId": "gid://shopify/ProductVariant/58140080406688",
         "sku": "RIC-LEGACY-E",
-        "price": "331.00",
+        "price": "339.00",
+        "label": "Zone E — West"
+      }
+    }
+  },
+  "meatball-dinner-kit": {
+    "productId": "gid://shopify/Product/15904329531552",
+    "title": "Lil's Meatball Dinner Kit",
+    "zones": {
+      "A": {
+        "variantId": "gid://shopify/ProductVariant/67645778526368",
+        "sku": "RIC-MEATKIT-A",
+        "price": "189.00",
+        "label": "Zone A — Nearby"
+      },
+      "B": {
+        "variantId": "gid://shopify/ProductVariant/67645778559136",
+        "sku": "RIC-MEATKIT-B",
+        "price": "199.00",
+        "label": "Zone B — Mid"
+      },
+      "C": {
+        "variantId": "gid://shopify/ProductVariant/67645778591904",
+        "sku": "RIC-MEATKIT-C",
+        "price": "209.00",
+        "label": "Zone C — Southeast"
+      },
+      "D": {
+        "variantId": "gid://shopify/ProductVariant/67645778624672",
+        "sku": "RIC-MEATKIT-D",
+        "price": "219.00",
+        "label": "Zone D — Central"
+      },
+      "E": {
+        "variantId": "gid://shopify/ProductVariant/67645778657440",
+        "sku": "RIC-MEATKIT-E",
+        "price": "239.00",
+        "label": "Zone E — West"
+      }
+    }
+  },
+  "sausage-roll-box": {
+    "productId": "gid://shopify/Product/15904329760928",
+    "title": "Lil's Sausage Roll Box",
+    "zones": {
+      "A": {
+        "variantId": "gid://shopify/ProductVariant/67645778886816",
+        "sku": "RIC-ROLLBOX-A",
+        "price": "189.00",
+        "label": "Zone A — Nearby"
+      },
+      "B": {
+        "variantId": "gid://shopify/ProductVariant/67645778919584",
+        "sku": "RIC-ROLLBOX-B",
+        "price": "199.00",
+        "label": "Zone B — Mid"
+      },
+      "C": {
+        "variantId": "gid://shopify/ProductVariant/67645778952352",
+        "sku": "RIC-ROLLBOX-C",
+        "price": "209.00",
+        "label": "Zone C — Southeast"
+      },
+      "D": {
+        "variantId": "gid://shopify/ProductVariant/67645778985120",
+        "sku": "RIC-ROLLBOX-D",
+        "price": "219.00",
+        "label": "Zone D — Central"
+      },
+      "E": {
+        "variantId": "gid://shopify/ProductVariant/67645779017888",
+        "sku": "RIC-ROLLBOX-E",
+        "price": "239.00",
         "label": "Zone E — West"
       }
     }

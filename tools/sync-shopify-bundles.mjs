@@ -9,6 +9,9 @@
  *   ./tools/shopify/sync-bundles.sh --ping
  *   ./tools/shopify/sync-bundles.sh --dry-run
  *   ./tools/shopify/sync-bundles.sh
+ *   ./tools/shopify/sync-bundles.sh --only=lils-meatballs-10-lb   (comma-separated handles)
+ *
+ * A bundle with status: "DRAFT" is created unpublished; the Online Store publish step is skipped.
  *
  * Optional tools/.env.local:
  *   SHOPIFY_STORE=tiyndf-za   (permanent myshopify subdomain — see Settings → Domains)
@@ -26,15 +29,16 @@ const GRAPHQL = join(TOOLS, "shopify", "graphql");
 const ARGS = new Set(process.argv.slice(2));
 const DRY_RUN = ARGS.has("--dry-run");
 const PING_ONLY = ARGS.has("--ping");
+const ONLY = (process.argv.find((a) => a.startsWith("--only=")) || "").slice(7).split(",").filter(Boolean);
 
 loadEnvFile(join(TOOLS, ".env.local"));
 
 const SHIP = {
   A: { med: 0, large: 0 },
-  B: { med: 8, large: 12 },
-  C: { med: 21, large: 22 },
-  D: { med: 24, large: 32 },
-  E: { med: 44, large: 42 },
+  B: { med: 10, large: 10 },
+  C: { med: 20, large: 30 },
+  D: { med: 30, large: 40 },
+  E: { med: 50, large: 50 },
 };
 
 const ZONES = [
@@ -71,6 +75,34 @@ const BUNDLES = [
       "<p>5 lb sweet sausage, 5 lb hot sausage, 2 lb meatballs, stuffed banana peppers, two sausage rolls, " +
       "and a quart of homemade sauce — beautifully packaged. Shipped frozen with shipping included in price.</p>",
     tags: ["Bundle", "Gift Box", "Free Shipping", "Frozen"],
+  },
+  {
+    handle: "meatball-dinner-kit",
+    title: "Lil's Meatball Dinner Kit",
+    base: 189,
+    tier: "med",
+    skuPrefix: "RIC-MEATKIT",
+    // TODO: confirm shipping weight incl. cold packs (10 lb meatballs + 3 qt sauce)
+    weightLb: 17,
+    status: "ACTIVE",
+    description:
+      "<p>10 lb of Lil's hand-rolled meatballs and 3 quarts of homemade sauce. Three Sunday dinners. " +
+      "Shipped frozen with shipping included in price.</p>",
+    tags: ["Meatballs", "Free Shipping", "Frozen"],
+  },
+  {
+    handle: "sausage-roll-box",
+    title: "Lil's Sausage Roll Box",
+    base: 189,
+    tier: "med",
+    skuPrefix: "RIC-ROLLBOX",
+    // TODO: confirm shipping weight incl. cold packs (6 rolls)
+    weightLb: 8,
+    status: "ACTIVE",
+    description:
+      "<p>Six of Lil's sausage rolls, baked at the shop, then frozen. " +
+      "Shipped frozen with shipping included in price.</p>",
+    tags: ["Sausage Rolls", "Free Shipping", "Frozen"],
   },
 ];
 
@@ -113,9 +145,9 @@ function buildProductSetInput(bundle, existingId) {
     handle: bundle.handle,
     descriptionHtml: bundle.description,
     vendor: "Ricci's Italian Sausage",
-    productType: "Bundle",
+    productType: bundle.productType || "Bundle",
     tags: bundle.tags,
-    status: "ACTIVE",
+    status: bundle.status || "ACTIVE",
     productOptions: [
       { name: "Shipping Zone", values: ZONES.map((z) => ({ name: z.label })) },
     ],
@@ -250,7 +282,8 @@ function verifyProduct(bundle, product) {
   const bySku = new Map((product.variants || []).map((v) => [v.sku, v]));
 
   if (product.handle !== bundle.handle) errors.push(`handle mismatch: ${product.handle}`);
-  if (product.status && product.status !== "active") errors.push(`status is ${product.status}`);
+  const wantStatus = (bundle.status || "ACTIVE").toLowerCase();
+  if (product.status && product.status !== wantStatus) errors.push(`status is ${product.status}, want ${wantStatus}`);
 
   for (const want of desired) {
     const got = bySku.get(want.sku);
@@ -343,7 +376,12 @@ async function main() {
   }
 
   const results = [];
-  for (const bundle of BUNDLES) {
+  const targets = ONLY.length ? BUNDLES.filter((b) => ONLY.includes(b.handle)) : BUNDLES;
+  if (ONLY.length && targets.length !== ONLY.length) {
+    console.error(`✗ Unknown handle in --only (${ONLY.join(", ")})`);
+    process.exit(1);
+  }
+  for (const bundle of targets) {
     const result = { handle: bundle.handle, title: bundle.title, ok: false, errors: [], changes: [] };
     try {
       if (DRY_RUN) {
@@ -368,7 +406,7 @@ async function main() {
           sku: v.sku,
           price: v.price,
         }));
-        if (publicationId && verified?.id) {
+        if (publicationId && verified?.id && (bundle.status || "ACTIVE") === "ACTIVE") {
           publishProduct(verified.id, publicationId);
           result.published = true;
         }
@@ -383,10 +421,12 @@ async function main() {
 
   const allOk = results.every((r) => r.ok);
   if (!DRY_RUN && allOk) {
-    const map = extractVariantMap(results.filter((r) => r.product).map((r) => ({
+    const mapPath = join(TOOLS, "shopify-variant-map.json");
+    const prior = existsSync(mapPath) ? JSON.parse(readFileSync(mapPath, "utf8")) : {};
+    const map = { ...prior, ...extractVariantMap(results.filter((r) => r.product).map((r) => ({
       bundle: BUNDLES.find((b) => b.handle === r.handle),
       product: r.product,
-    })));
+    }))) };
     const outPath = join(TOOLS, "shopify-variant-map.json");
     writeFileSync(outPath, JSON.stringify(map, null, 2) + "\n");
     console.log(`✓ Wrote ${outPath}`);

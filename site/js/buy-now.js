@@ -81,15 +81,28 @@
     return m ? m[1] : null;
   }
 
-  function checkoutUrl(id) {
+  function variantGid(id) {
     var map = window.RicciShopifyVariants;
     if (!map) return null;
     var zone = currentZone();
     if (!zone) return null;
     var entry = map[id];
     if (!entry || !entry.zones || !entry.zones[zone]) return null;
-    var vid = variantNumericId(entry.zones[zone].variantId);
-    return vid ? SHOP_URL + "/cart/" + vid + ":1" : null;
+    var gid = entry.zones[zone].variantId;
+    return variantNumericId(gid) ? gid : null;
+  }
+
+  /* Permalink — the fallback if the Cart API call fails. */
+  function checkoutUrl(id) {
+    var gid = variantGid(id);
+    return gid ? SHOP_URL + "/cart/" + variantNumericId(gid) + ":1" : null;
+  }
+
+  function loadShopifyCart() {
+    if (window.RicciShopifyCart || document.querySelector('script[src$="js/shopify-cart.js"]')) return;
+    var s = document.createElement("script");
+    s.src = basePrefix() + "js/shopify-cart.js";
+    document.head.appendChild(s);
   }
 
   function buy(btn) {
@@ -113,7 +126,11 @@
       var url = checkoutUrl(id);
       if (url) {
         if (window.RicciPixel) window.RicciPixel.initiateCheckout([{ id: id, qty: 1 }]);
-        window.location.href = url;
+        if (window.RicciShopifyCart) {
+          window.RicciShopifyCart.checkout([{ variantId: variantGid(id), qty: 1 }], url);
+        } else {
+          window.location.href = url;
+        }
         return;
       }
       btn.textContent = label;
@@ -126,6 +143,7 @@
   }
 
   function wire() {
+    loadShopifyCart();
     document.querySelectorAll("[data-buy-now]").forEach(function (btn) {
       if (btn.__buyNowBound) return;
       btn.__buyNowBound = true;

@@ -47,10 +47,10 @@
      PirateShip deltas. Group A = 0 (baked into base price). */
   var SHIP = {
     A: { small: 0,  med: 0,  large: 0  },
-    B: { small: 6,  med: 8,  large: 12 },
-    C: { small: 12, med: 21, large: 22 },
-    D: { small: 18, med: 24, large: 32 },
-    E: { small: 24, med: 44, large: 42 }
+    B: { small: 6,  med: 10, large: 10 },
+    C: { small: 12, med: 20, large: 30 },
+    D: { small: 18, med: 30, large: 40 },
+    E: { small: 24, med: 50, large: 50 }
   };
 
   var STATE_NAMES = {
