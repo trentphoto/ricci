@@ -61,23 +61,30 @@
     "mutation($input: CartInput!) { cartCreate(input: $input) {" +
     " cart { checkoutUrl } userErrors { field message } } }";
 
-  function createCart(lines) {
-    var input = {
-      lines: lines.map(function (l) { return { merchandiseId: l.variantId, quantity: l.qty || 1 }; }),
-      attributes: attributes()
-    };
-    var email = read(EMAIL_KEY);
-    if (email) input.buyerIdentity = { email: email };
-
+  function gql(query, variables) {
     return fetch(ENDPOINT, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "X-Shopify-Storefront-Access-Token": TOKEN
       },
-      body: JSON.stringify({ query: CART_CREATE, variables: { input: input } })
-    })
-      .then(function (r) { return r.json(); })
+      body: JSON.stringify({ query: query, variables: variables || {} })
+    }).then(function (r) { return r.json(); });
+  }
+
+  function createCart(lines) {
+    var input = {
+      lines: lines.map(function (l) {
+        var line = { merchandiseId: l.variantId, quantity: l.qty || 1 };
+        if (l.sellingPlanId) line.sellingPlanId = l.sellingPlanId;
+        return line;
+      }),
+      attributes: attributes()
+    };
+    var email = read(EMAIL_KEY);
+    if (email) input.buyerIdentity = { email: email };
+
+    return gql(CART_CREATE, { input: input })
       .then(function (json) {
         var res = json && json.data && json.data.cartCreate;
         if (!res || !res.cart || (res.userErrors && res.userErrors.length)) {
@@ -87,7 +94,7 @@
       });
   }
 
-  /* lines: [{ variantId: "gid://shopify/ProductVariant/…", qty }] */
+  /* lines: [{ variantId: "gid://shopify/ProductVariant/…", qty, sellingPlanId? }] */
   function checkout(lines, fallbackUrl) {
     var timer = new Promise(function (_, reject) {
       setTimeout(function () { reject(new Error("timeout")); }, 6000);
@@ -110,5 +117,5 @@
     if (email) write(EMAIL_KEY, email);
   });
 
-  window.RicciShopifyCart = { checkout: checkout };
+  window.RicciShopifyCart = { checkout: checkout, query: gql };
 })();

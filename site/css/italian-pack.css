@@ -26,3 +26,12 @@
   .pdp-final-cta .btn-primary { padding: 20px 22px; }
   .pdp-buybar .btn-primary { padding: 17px 22px; }
 }
+
+/* Purchase options before the footer: retain the original block and tan background. */
+.pdp-buybar + .buy-options {
+  box-sizing: border-box;
+  width: min(560px, calc(100% - 48px));
+  margin: 40px auto;
+  padding: 20px;
+  text-align: left;
+}

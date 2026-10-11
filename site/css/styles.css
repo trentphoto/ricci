@@ -6681,3 +6681,98 @@ body.cater-open { overflow: hidden; }
   .gx-table .gx-table-story img { aspect-ratio: 1.25; }
 }
 @media (prefers-reduced-motion: reduce) { .gx .gx-button { transition: none; } }
+
+/* ── Buy box: one-time / subscribe & save / sauce add-on (js/buy-options.js) ── */
+.buy-options { display: grid; gap: 10px; margin: 14px 0 16px; }
+.bo-opt {
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 4px 12px;
+  padding: 14px 16px; border: 1px solid var(--cream-edge); border-radius: 6px;
+  background: transparent; cursor: pointer;
+}
+.bo-opt.is-on { border: 2px solid var(--red); padding: 13px 15px; background: #fff; }
+.bo-opt input { accent-color: var(--red); width: 18px; height: 18px; margin: 0; }
+.bo-opt-title { font-weight: 700; color: var(--ink); }
+.bo-opt-price { font-weight: 700; color: var(--ink); text-align: right; white-space: nowrap; }
+.bo-opt-price s { color: var(--ink-faint); font-weight: 400; margin-left: 4px; }
+.bo-save {
+  display: inline-block; background: var(--red); color: #fff; font-size: 12px;
+  padding: 2px 6px; border-radius: 3px; margin-right: 6px; vertical-align: 1px;
+}
+.bo-opt-body { grid-column: 2 / -1; display: grid; gap: 8px; }
+.bo-opt:not(.is-on) .bo-opt-body select { display: none; }
+.bo-opt-sub { font-size: 14px; color: var(--ink-soft); }
+.bo-freq {
+  font: inherit; padding: 8px 10px; border: 1px solid var(--cream-edge);
+  border-radius: 4px; background: #fff; color: var(--ink); max-width: 100%;
+}
+.bo-addon {
+  display: flex; gap: 10px; align-items: flex-start; padding: 12px 16px;
+  border: 1px dashed var(--cream-edge); border-radius: 6px; cursor: pointer; color: var(--ink);
+}
+.bo-addon.is-on { border: 2px solid var(--red); padding: 11px 15px; background: #fff; }
+.bo-addon.is-on .bo-addon-sub { color: var(--red); font-weight: 600; }
+.bo-addon input { accent-color: var(--red); width: 18px; height: 18px; margin: 0; flex: none; }
+.bo-addon { align-items: center; }
+.bo-addon-img { width: 56px; height: 56px; object-fit: cover; border-radius: 4px; flex: none; }
+.bo-check { vertical-align: -2px; margin-right: 4px; }
+.bo-addon-sub { display: block; font-size: 13px; color: var(--ink-faint); margin-top: 2px; }
+@media (max-width: 480px) {
+  .bo-opt { grid-template-columns: auto 1fr; }
+  .bo-opt-price { grid-column: 2; text-align: left; }
+}
+/* Purchase controls on charcoal and red sections. */
+:is(.pdp-buy, .pdp-final, .px-table .px-close) .bo-opt,
+:is(.pdp-buy, .pdp-final, .px-table .px-close) .bo-addon { background: transparent; border-color: rgba(217,184,138,0.24); }
+:is(.pdp-buy, .pdp-final, .px-table .px-close) .bo-opt.is-on { background: rgba(217,184,138,0.10); border-color: var(--gold); }
+:is(.pdp-buy, .pdp-final, .px-table .px-close) .bo-opt-title,
+:is(.pdp-buy, .pdp-final, .px-table .px-close) .bo-opt-price,
+:is(.pdp-buy, .pdp-final, .px-table .px-close) .bo-addon { color: var(--white); }
+:is(.pdp-buy, .pdp-final, .px-table .px-close) .bo-addon strong { color: var(--gold); }
+:is(.pdp-buy, .pdp-final, .px-table .px-close) .bo-opt-sub,
+:is(.pdp-buy, .pdp-final, .px-table .px-close) .bo-addon-sub,
+:is(.pdp-buy, .pdp-final, .px-table .px-close) .bo-opt-price s { color: rgba(255,255,255,0.62); }
+:is(.pdp-buy, .pdp-final, .px-table .px-close) .bo-opt input,
+:is(.pdp-buy, .pdp-final, .px-table .px-close) .bo-addon input { accent-color: var(--gold); }
+:is(.pdp-buy, .pdp-final, .px-table .px-close) .bo-save { background: var(--gold); color: var(--charcoal); }
+:is(.pdp-buy, .pdp-final, .px-table .px-close) .bo-freq { background: var(--charcoal); color: var(--white); border-color: rgba(217,184,138,0.32); }
+:is(.pdp-buy, .pdp-final, .px-table .px-close) .bo-addon.is-on { border-color: var(--gold); background: rgba(217,184,138,0.10); }
+:is(.pdp-buy, .pdp-final, .px-table .px-close) .bo-addon.is-on .bo-addon-sub { color: var(--gold); }
+/* Centered closing CTA — keep the box at buy-column width, left-aligned inside. */
+.pdp-final .buy-options { max-width: 520px; margin: 20px auto 24px; text-align: left; }
+
+/* Sauce add-on: hover/tap quick view (js/buy-options.js) */
+.bo-addon { position: relative; }
+.bo-peek { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: zoom-in; }
+.bo-peek-img { flex: none; border-radius: 4px; line-height: 0; }
+.bo-addon-img { transition: transform .18s ease, box-shadow .18s ease; }
+.bo-peek-img:hover .bo-addon-img,
+.bo-addon.is-peek .bo-addon-img { transform: scale(1.06); box-shadow: 0 4px 14px rgba(42,34,27,.25); }
+.bo-peek-name {
+  font-weight: 700; text-decoration: underline dotted; text-underline-offset: 3px;
+  text-decoration-color: currentColor; transition: color .15s ease;
+}
+.bo-peek-name:hover,
+.bo-addon.is-peek .bo-peek-name { color: var(--red); text-decoration-style: solid; }
+.bo-peek:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+.bo-pop {
+  position: absolute; z-index: 20; left: 0; bottom: calc(100% + 10px);
+  width: min(300px, 100%); display: grid; gap: 6px; padding: 12px;
+  background: #fff; color: var(--ink); border: 1px solid var(--cream-edge); border-radius: 8px;
+  box-shadow: 0 12px 32px rgba(42,34,27,.22); font-size: 14px; line-height: 1.4;
+  opacity: 0; visibility: hidden; transform: translateY(4px);
+  transition: opacity .15s ease, transform .15s ease, visibility .15s;
+}
+.bo-addon.is-peek .bo-pop { opacity: 1; visibility: visible; transform: none; }
+.bo-pop img { width: 100%; height: 160px; object-fit: cover; border-radius: 4px; }
+.bo-pop-title { font-weight: 700; }
+.bo-pop-text { color: var(--ink-soft); }
+.bo-pop-label { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--red); font-weight: 700; margin-top: 2px; }
+.bo-pop-list { color: var(--ink-soft); }
+:is(.pdp-buy, .pdp-final, .px-table .px-close) .bo-peek-name { color: var(--gold); }
+:is(.pdp-buy, .pdp-final, .px-table .px-close) .bo-peek-name:hover,
+:is(.pdp-buy, .pdp-final, .px-table .px-close) .bo-addon.is-peek .bo-peek-name { color: var(--white); }
+:is(.pdp-buy, .pdp-final, .px-table .px-close) .bo-peek:focus-visible { outline-color: var(--gold); }
+@media (prefers-reduced-motion: reduce) { .bo-addon-img, .bo-pop { transition: none; } }
+.px-close .buy-options { max-width: 520px; margin: 18px auto 20px; text-align: left; }
+/* Final buy section follows the (also charcoal) email signup — divide them. */
+.pdp-final--last { border-top: 1px solid rgba(217,184,138,0.24); }

@@ -143,5 +143,41 @@ window.RicciShopifyVariants = {
         "label": "Zone E — West"
       }
     }
+  },
+  "lils-tomato-sauce-quart": {
+    "productId": "gid://shopify/Product/15910945816736",
+    "title": "Lil's Homemade Tomato Sauce (1 qt)",
+    "zones": {
+      "A": {
+        "variantId": "gid://shopify/ProductVariant/67673263931552",
+        "sku": "RIC-SAUCE-QT-A",
+        "price": "19.99",
+        "label": "Zone A — Nearby"
+      },
+      "B": {
+        "variantId": "gid://shopify/ProductVariant/67673263964320",
+        "sku": "RIC-SAUCE-QT-B",
+        "price": "19.99",
+        "label": "Zone B — Mid"
+      },
+      "C": {
+        "variantId": "gid://shopify/ProductVariant/67673263997088",
+        "sku": "RIC-SAUCE-QT-C",
+        "price": "19.99",
+        "label": "Zone C — Southeast"
+      },
+      "D": {
+        "variantId": "gid://shopify/ProductVariant/67673264029856",
+        "sku": "RIC-SAUCE-QT-D",
+        "price": "19.99",
+        "label": "Zone D — Central"
+      },
+      "E": {
+        "variantId": "gid://shopify/ProductVariant/67673264062624",
+        "sku": "RIC-SAUCE-QT-E",
+        "price": "19.99",
+        "label": "Zone E — West"
+      }
+    }
   }
 };

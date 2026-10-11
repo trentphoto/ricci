@@ -126,10 +126,17 @@
       var url = checkoutUrl(id);
       if (url) {
         if (window.RicciPixel) window.RicciPixel.initiateCheckout([{ id: id, qty: 1 }]);
+        /* buy-options.js (Italian Pack) may add a selling plan and the sauce line. */
+        var lines = (window.RicciBuyOptions && window.RicciBuyOptions.lines(id, variantGid(id), currentZone())) ||
+          [{ variantId: variantGid(id), qty: 1 }];
+        /* The permalink fallback carries the add-on but can't carry a subscription. */
+        var fallback = SHOP_URL + "/cart/" + lines.map(function (l) {
+          return variantNumericId(l.variantId) + ":" + l.qty;
+        }).join(",");
         if (window.RicciShopifyCart) {
-          window.RicciShopifyCart.checkout([{ variantId: variantGid(id), qty: 1 }], url);
+          window.RicciShopifyCart.checkout(lines, fallback);
         } else {
-          window.location.href = url;
+          window.location.href = fallback;
         }
         return;
       }

@@ -63,8 +63,8 @@
 .px-butcher { background:#faf7f0; }
 .px-butcher .px-hero { grid-template-columns:1.1fr 1fr; }
 .px-butcher .px-heading { grid-column:2; grid-row:1; }
-.px-butcher .px-hero-photo { grid-column:1; grid-row:1 / span 2; align-self:stretch; }
-.px-butcher .px-hero-photo img { height:calc(100% - 28px); min-height:550px; }
+.px-butcher .px-hero-photo { grid-column:1; grid-row:1 / span 2; align-self:start; }
+.px-butcher .px-hero-photo img { aspect-ratio:4/3; }
 .px-butcher .px-order { grid-column:2; grid-row:2; padding:24px; box-shadow:0 8px 32px #31271a0a; }
 .px-butcher h1 { font-size:clamp(40px,4.8vw,64px); }
 .px-butcher .px-products article { background:white; }
@@ -132,3 +132,13 @@
  .px-table .px-gallery-thumb { padding:2px; font-size:10px; }
 }
 .px-table .px-gallery:focus-visible { outline:3px solid #ae6335; outline-offset:6px; }
+
+/* Supporting text and controls in the existing red closing section. */
+.px-table .px-close .gx-kicker { color: var(--gold); }
+.px-table .px-close .gx-small { color: #fff8ed; }
+.px-table .px-close .px-manifest li { border-color: rgba(255,248,237,.25); }
+.px-table .px-close .bo-freq { background: var(--oxblood); }
+.px-table .px-close :is(input, select):focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}

@@ -104,6 +104,21 @@ const BUNDLES = [
       "Shipped frozen with shipping included in price.</p>",
     tags: ["Sausage Rolls", "Free Shipping", "Frozen"],
   },
+  {
+    // Add-on only (Italian Pack buy box, js/buy-options.js) — rides in the pack's box.
+    // tier "none" has no SHIP entry, so every zone variant is the flat base price.
+    handle: "lils-tomato-sauce-quart",
+    title: "Lil's Homemade Tomato Sauce (1 qt)",
+    base: 19.99,
+    tier: "none",
+    skuPrefix: "RIC-SAUCE-QT",
+    weightLb: 2.5,
+    productType: "Add-on",
+    status: "ACTIVE",
+    description:
+      "<p>A quart of Lil's homemade tomato sauce, made at the shop. Add it to a box and it ships frozen in the same box.</p>",
+    tags: ["Sauce", "Add-on", "Frozen"],
+  },
 ];
 
 function loadEnvFile(path) {
@@ -257,16 +272,18 @@ function upsertProduct(bundle, existingId) {
   return normalizeProduct(payload?.product);
 }
 
-function fetchOnlineStorePublicationId() {
+/* Online Store (cart permalinks) + the Headless storefront (site Cart API,
+   js/shopify-cart.js) — a product missing from either breaks that checkout path. */
+function fetchPublicationIds() {
   const data = runGraphQL(join(GRAPHQL, "publications.query.graphql"), {});
   const nodes = data?.publications?.nodes || [];
-  return nodes.find((p) => p.name === "Online Store")?.id || null;
+  return nodes.filter((p) => p.name === "Online Store" || /Headless/.test(p.name)).map((p) => p.id);
 }
 
-function publishProduct(productId, publicationId) {
+function publishProduct(productId, publicationIds) {
   const data = runGraphQL(join(GRAPHQL, "publishable-publish.mutation.graphql"), {
     id: productId,
-    input: [{ publicationId }],
+    input: publicationIds.map((publicationId) => ({ publicationId })),
   }, { mutation: true });
   const errs = data?.publishablePublish?.userErrors || [];
   if (errs.length) throw new Error(errs.map((e) => e.message).join("; "));
@@ -328,7 +345,7 @@ function printBundleResult(result) {
     console.log(`    · ${c.label} ${c.sku} → $${c.price}`);
   }
   if (result.variantCount != null) console.log(`  Verified: ${result.variantCount} variants`);
-  if (result.published) console.log("  Published to Online Store");
+  if (result.published) console.log("  Published to Online Store + Headless");
   for (const err of result.errors) console.log(`  ✗ ${err}`);
 }
 
@@ -362,13 +379,12 @@ async function main() {
     process.exit(0);
   }
 
-  /* Online Store publication — products must be published there or cart
-     permalinks return 410 and checkout handoff fails. */
-  let publicationId = null;
+  /* Online Store + Headless publications — see fetchPublicationIds. */
+  let publicationIds = [];
   if (!DRY_RUN) {
     try {
-      publicationId = fetchOnlineStorePublicationId();
-      if (!publicationId) console.warn("⚠ Online Store publication not found — skipping publish step\n");
+      publicationIds = fetchPublicationIds();
+      if (!publicationIds.length) console.warn("⚠ Online Store/Headless publications not found — skipping publish step\n");
     } catch (err) {
       console.warn("⚠ Could not read publications (re-auth with read_publications,write_publications scopes to auto-publish)");
       console.warn(`  ${err.message}\n`);
@@ -406,8 +422,8 @@ async function main() {
           sku: v.sku,
           price: v.price,
         }));
-        if (publicationId && verified?.id && (bundle.status || "ACTIVE") === "ACTIVE") {
-          publishProduct(verified.id, publicationId);
+        if (publicationIds.length && verified?.id && (bundle.status || "ACTIVE") === "ACTIVE") {
+          publishProduct(verified.id, publicationIds);
           result.published = true;
         }
       }

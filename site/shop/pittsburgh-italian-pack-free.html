@@ -489,6 +489,7 @@
            CLOSING CTA — second .product-price block on the page;
            js/shipping.js updates every one of them together.
       ══════════════════════════════════════════ -->
+
       <section class="pdp-final">
         <div class="container">
           <span class="eyebrow">The whole table</span>
@@ -528,53 +529,6 @@
         </div>
       </section>
 
-      <!-- RELATED -->
-      <section class="menu-section">
-        <div class="container">
-          <div class="menu-section-header">
-            <span class="eyebrow">Goes well with</span>
-            <h2>You Might Also Like.</h2>
-          </div>
-          <div class="products-grid products-grid--cream">
-            <div class="product-card">
-              <div class="product-card-img"><img src="../assets/img/sweet-links-pan.webp" alt="Classic Sweet Italian Sausage" /></div>
-              <div class="product-card-body">
-                <span class="product-card-tag">Best Seller</span>
-                <h3>Classic Sweet Italian Sausage</h3>
-                <p>The original recipe since 1945.</p>
-                <div class="product-card-footer">
-                  <div class="product-price"><span class="ship-note">At the counter · In our bundles</span></div>
-                  <a href="sweet-italian-sausage.html" class="btn btn-outline-dark">View</a>
-                </div>
-              </div>
-            </div>
-            <div class="product-card">
-              <div class="product-card-img"><img src="../assets/img/hot-links-pan.webp" alt="Hot Italian Sausage" /></div>
-              <div class="product-card-body">
-                <span class="product-card-tag">Fan Favorite</span>
-                <h3>Hot Italian Sausage</h3>
-                <p>Same family recipe, with crushed red pepper, real paprika, and whole fennel seed.</p>
-                <div class="product-card-footer">
-                  <div class="product-price"><span class="ship-note">At the counter · In our bundles</span></div>
-                  <a href="hot-italian-sausage.html" class="btn btn-outline-dark">View</a>
-                </div>
-              </div>
-            </div>
-            <div class="product-card">
-              <div class="product-card-img"><img src="../assets/img/meatball-sandwich.webp" alt="Homemade Italian Meatballs" /></div>
-              <div class="product-card-body">
-                <span class="product-card-tag">Hand-Rolled</span>
-                <h3>Homemade Italian Meatballs</h3>
-                <p>Lil's recipe.</p>
-                <div class="product-card-footer">
-                  <div class="product-price"><span class="ship-note">At the counter · In our bundles</span></div>
-                  <a href="italian-meatballs.html" class="btn btn-outline-dark">View</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <!-- EMAIL -->
       <section class="section-email">
@@ -592,7 +546,23 @@
       </section>
 
     </article>
-  </main>
+
+      <!-- FINAL BUY — last section before the footer; third .product-price on
+           the page, so js/shipping.js and js/buy-options.js pick it up too. -->
+      <section class="pdp-final pdp-final--last">
+        <div class="container">
+          <span class="eyebrow">The Pittsburgh Italian Pack</span>
+          <h2>Bring the Sunday Table Home.</h2>
+          <span class="product-price pdp-final-price" data-base="189.00" data-tier="med">
+            <span class="price-amount">$189.00</span>
+            <span class="ship-note">Free Shipping &middot; Ships Frozen</span>
+          </span>
+          <p class="pdp-final-cta">
+            <a href="https://shop.riccisausage.com/products/pittsburgh-italian-pack" class="btn btn-primary btn-lg" data-buy-now data-id="pittsburgh-italian-pack">Order Now &middot; Free Shipping</a>
+          </p>
+        </div>
+      </section>
+    </main>
 
   <!-- Sticky buy bar. CSS-only, ≤900px, where the hero CTA has scrolled
        away. Third .product-price on the page — shipping.js keeps all
@@ -688,6 +658,7 @@
   <script src="../js/cart.js" defer></script>
   <script src="../js/pixel-events.js" defer></script>
   <script src="../js/buy-now.js" defer></script>
+  <script src="../js/buy-options.js" defer></script>
   <!-- Pittsburgh Italian Pack split test — see docs/italian-pack-test.md -->
   <script src="../js/italian-pack-events.js" defer></script>
 <script src="../js/pack-videos.js" defer></script>
