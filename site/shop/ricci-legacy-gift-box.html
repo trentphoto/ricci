@@ -28,6 +28,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/italian-pack.css" />
+  <link rel="stylesheet" href="../css/pack-videos.css" />
   <link rel="icon" href="../assets/favicon/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon-32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon/favicon-16.png" />
@@ -48,7 +50,7 @@
   <meta name="twitter:description" content="Sweet sausage, hot sausage, meatballs, and stuffed peppers in a hand-packed gift box. Free shipping nationwide." />
   <meta name="twitter:image" content="https://riccisausage.com/assets/img/og-image.webp" />
 </head>
-<body>
+<body class="has-buybar">
 
   <header class="site-header">
     <nav class="nav" aria-label="Primary">
@@ -69,7 +71,6 @@
       </div>
       <div class="nav-cta">
         <span class="nav-cart">Cart (0)</span>
-        <a href="tel:4123319531" class="btn btn-primary">Call · 412-331-9531</a>
       </div>
       <button type="button" class="nav-toggle" id="site-nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
         <span class="nav-toggle-inner" aria-hidden="true">
@@ -92,16 +93,48 @@
   <main>
     <article class="product-detail">
 
-      <!-- HERO -->
-      <section class="product-hero">
-        <div class="container product-hero-grid">
-          <div class="product-hero-img">
-            <img src="../assets/img/sausage-peppers.webp" alt="The Ricci Legacy Gift Box" />
+      <!-- HERO — same pdp-hero buy box as the Italian Pack. js/shipping.js
+           rewrites every .product-price[data-base]; js/buy-options.js injects
+           one-time / subscribe & save after each one inside <main>. -->
+      <section class="page-hero pdp-hero">
+        <div class="pdp-hero-grid">
+          <div class="pdp-gallery">
+            <figure class="pdp-gallery-main">
+              <img src="../assets/img/sausage-peppers.webp"
+                   alt="Ricci's hot Italian sausage with peppers and onions in a pan"
+                   width="1500" height="1135" fetchpriority="high" decoding="async" />
+            </figure>
+            <div class="pdp-gallery-strip">
+              <figure>
+                <img src="../assets/img/banana-peppers-bag.webp" alt="Stuffed banana peppers, frozen, in a clear bag" loading="lazy" />
+                <figcaption>Stuffed peppers</figcaption>
+              </figure>
+              <figure>
+                <img src="../assets/img/sausage-rolls-tray.webp" alt="Lil's sausage rolls fresh from the oven" loading="lazy" />
+                <figcaption>Lil's sausage rolls</figcaption>
+              </figure>
+              <figure>
+                <img src="../assets/img/tomato-sauce.webp" alt="Ricci's homemade tomato sauce" loading="lazy" />
+                <figcaption>Homemade sauce</figcaption>
+              </figure>
+            </div>
           </div>
-          <div class="product-hero-body">
-            <span class="eyebrow">Gift Box · Free Shipping</span>
+
+          <div class="pdp-buy">
+            <span class="eyebrow">Gift Box &middot; Ships Frozen &middot; Free Shipping</span>
             <h1>The Ricci Legacy Gift Box</h1>
-            <p class="product-hero-lead">Our full range, beautifully packaged. The gift for the Italian food lover in your life — or the one you want to introduce to real Italian sausage.</p>
+            <p class="pdp-buy-lead">Our full range in one box. Everything in the Pittsburgh Italian Pack, plus Lil's stuffed banana peppers, a second sausage roll, and our homemade sauce.</p>
+
+            <ul class="pdp-manifest">
+              <li><span class="pdp-manifest-qty">5 lb</span><span>Sweet Italian sausage — a 5 lb box of rope</span></li>
+              <li><span class="pdp-manifest-qty">5 lb</span><span>Hot Italian sausage — a 5 lb box of rope</span></li>
+              <li><span class="pdp-manifest-qty">2 lb</span><span>Hand-rolled meatballs — ~16 at 2 oz, raw, in a clear bag</span></li>
+              <li><span class="pdp-manifest-qty">6 pc</span><span>Stuffed banana peppers — frozen, in a clear bag</span></li>
+              <li><span class="pdp-manifest-qty">2</span><span>Lil's sausage rolls — baked at the shop, then frozen</span></li>
+              <li><span class="pdp-manifest-qty">1 qt</span><span>Homemade San Marzano sauce — in a deli container</span></li>
+            </ul>
+            <p class="pdp-manifest-total">Labeled and packed in an insulated box with cold packs</p>
+
             <div class="ship-selector" id="ship-selector">
               <div class="ship-selector-inner">
                 <span class="ship-selector-label">
@@ -114,72 +147,53 @@
                 </label>
               </div>
             </div>
-            <div class="product-hero-meta product-price" data-base="289.00" data-tier="large">
-              <span class="price-amount product-price-lg">$289.00</span>
-              <span class="ship-note">Free Shipping · Premium Packaging</span>
+
+            <div class="product-price pdp-price" data-base="289.00" data-tier="large">
+              <span class="price-amount">$289.00</span>
+              <span class="ship-note">Free Shipping &middot; Ships Frozen</span>
             </div>
-            <div class="product-hero-cta">
-              <a href="#" class="btn btn-primary" data-add-to-cart data-id="ricci-legacy-gift-box">Add to Cart</a>
-              <a href="tel:4123319531" class="btn btn-outline-dark">Call · 412-331-9531</a>
+            <div class="pdp-cta">
+              <a href="https://shop.riccisausage.com/products/ricci-legacy-gift-box" class="btn btn-primary" data-buy-now data-id="ricci-legacy-gift-box">Order Now &middot; Free Shipping</a>
             </div>
-            <p class="product-guarantee"><strong>Cook one link.</strong> If it isn't the best Italian sausage you've had, tell us within 30 days and we'll replace the box or refund it — your call. Either way, keep what's left. We're not asking you to ship frozen meat back to Pennsylvania.</p>
+            <p class="pdp-note"><strong>Cook one link.</strong> If it isn't the best Italian sausage you've had, tell us within 30 days and we'll replace the box or refund it — your call. Either way, keep what's left. We're not asking you to ship frozen meat back to Pennsylvania.</p>
           </div>
         </div>
       </section>
 
-      <!-- DESCRIPTION -->
-      <section class="menu-section">
-        <div class="container product-prose">
-          <span class="eyebrow">About this product</span>
-          <h2>The Ricci Legacy Gift Box.</h2>
-          <p>Everything in the Pittsburgh Italian Pack — sweet sausage, hot sausage, hand-rolled meatballs — plus Lil's stuffed banana peppers, two sausage rolls, and a full quart of our homemade sauce. The gift that arrives and people remember.</p>
-          <h3>Ingredients</h3>
-          <p>See individual product pages. Includes the stuffed banana pepper recipe (banana peppers stuffed with hot sausage and homemade San Marzano sauce).</p>
-        </div>
-      </section>
-
-      <!-- WHY THIS ONE -->
-      <section class="section-plan">
-        <div class="container">
-          <div class="section-header">
-            <span class="eyebrow">Eighty-one years in</span>
-            <h2>Eighty-One Years on Pine Hollow Road.</h2>
-            <p>Most sausage is mass-produced, packed with fillers, and seasoned with pre-ground dust that lost its flavor a year ago — a label full of things you can't pronounce.</p>
+      <!-- TRUST STRIP -->
+      <div class="pdp-trustbar">
+        <div class="pdp-trustbar-inner">
+          <div class="pdp-trust">
+            <b>The box</b>
+            <span>Sweet, hot, meatballs, peppers, rolls, sauce</span>
           </div>
-          <div class="plan-grid">
-            <div class="plan-step">
-              <span class="plan-step-num">01</span>
-              <h3>Ground in Our Own Shop</h3>
-              <p>Hand-mixed in small batches in McKees Rocks, every day — sweet and hot are each their own recipe.</p>
-            </div>
-            <div class="plan-step">
-              <span class="plan-step-num">02</span>
-              <h3>All Natural</h3>
-              <p>No fillers, no MSG, no additives, no preservatives. Natural casing. That's the whole list.</p>
-            </div>
-            <div class="plan-step">
-              <span class="plan-step-num">03</span>
-              <h3>USDA-Inspected Since 1973</h3>
-              <p>Inspected every day we run — the same federal stamp you look for at the meat case.</p>
-            </div>
+          <div class="pdp-trust">
+            <b>How it ships</b>
+            <span>Frozen, in an insulated box with cold packs</span>
           </div>
-          <div class="section-photo">
-            <img src="../assets/img/family-original.webp" alt="Four members of the Ricci family in their McKees Rocks shop, with fresh coils of sausage on the table in front of them" loading="lazy" />
+          <div class="pdp-trust">
+            <b>Shipping</b>
+            <span>Built into the price you see above</span>
+          </div>
+          <div class="pdp-trust">
+            <b>The shop</b>
+            <span>USDA-inspected daily since 1973</span>
           </div>
         </div>
-      </section>
+      </div>
 
       <!-- WHAT'S IN THE BOX -->
-      <section class="menu-section menu-section-alt">
+      <section class="menu-section">
         <div class="container">
           <div class="menu-section-header">
             <span class="eyebrow">What you get</span>
             <h2>Everything in the Box.</h2>
+            <p>The whole Ricci's counter in one box. All USDA-inspected, hand-mixed, all natural: no fillers, no MSG, no additives, no preservatives. Full ingredient lists live on the individual product pages.</p>
           </div>
           <div class="includes-grid">
             <div class="includes-card">
               <div class="includes-card-img">
-                <img src="../assets/img/sweet-links-pan.webp" alt="Sweet Italian sausage links" loading="lazy" />
+                <img src="../assets/img/sweet-sausage-coil-raw.webp" alt="Raw Ricci's sweet rope sausage" loading="lazy" />
               </div>
               <div class="includes-card-body">
                 <span class="includes-card-qty">5 lb</span>
@@ -189,7 +203,7 @@
             </div>
             <div class="includes-card">
               <div class="includes-card-img">
-                <img src="../assets/img/hot-links-pan.webp" alt="Hot Italian sausage links" loading="lazy" />
+                <img src="../assets/img/hot-sausage-coil-raw.webp" alt="Raw Ricci's hot rope sausage" loading="lazy" />
               </div>
               <div class="includes-card-body">
                 <span class="includes-card-qty">5 lb</span>
@@ -229,9 +243,10 @@
             </div>
             <div class="includes-card">
               <div class="includes-card-img">
-                <img src="../assets/img/tomato-sauce.webp" alt="Quart of Ricci's homemade tomato sauce" loading="lazy" />
+                <img src="../assets/img/tomato-sauce.webp" alt="Ricci's homemade tomato sauce" loading="lazy" />
               </div>
               <div class="includes-card-body">
+                <span class="includes-card-qty">1 qt</span>
                 <h3>Homemade San Marzano Sauce</h3>
                 <p>The same Sunday gravy from the counter, in a deli container — ready to simmer.</p>
               </div>
@@ -241,89 +256,157 @@
         </div>
       </section>
 
-      <!-- PRICE ANCHOR -->
-      <section class="menu-section">
-        <div class="container product-prose">
-          <span class="eyebrow">The math</span>
-          <h2>Sized for Two, Built to Impress.</h2>
-          <p>Sweet, hot, meatballs, peppers, two sausage rolls, a quart of sauce — the whole Ricci's counter in one box. It's sized for two people to eat through in 5–7 days, or to feed a small gathering in one sitting. Either way, it's the full Sunday table, not a sampler.</p>
-          <p>Hand-mixed in ~200 lb batches. 22–25% fat. Natural casing, all natural — no fillers, MSG, additives, or preservatives.</p>
-          <div class="includes-grid includes-grid--wide">
-            <div class="includes-card">
-              <div class="includes-card-body">
-                <span class="includes-card-qty">6 items</span>
-                <h3>Sweet, hot, meatballs, peppers, rolls, sauce</h3>
-              </div>
+<section class="menu-section pack-videos pack-videos--meatballs" id="how-its-made" aria-labelledby="made-meatballs-title">
+<div class="container gx-wrap">
+<h2 id="made-meatballs-title">Meatballs</h2>
+<div class="pack-process-subhead"><p class="eyebrow gx-kicker">How it’s made</p><p class="pack-process-lead">Made by hand. See for yourself.</p></div>
+<div class="pack-video-row">
+<div class="pack-video-media" data-youtube-id="uvGXhziw7zI" data-video-title="How Ricci’s meatballs are made">
+<img src="../assets/img/video-poster-meatballs.webp" width="1280" height="720" loading="lazy" alt="Meatballs being rolled by hand at Ricci’s">
+<a class="pack-video-fallback" href="https://www.youtube.com/watch?v=uvGXhziw7zI" target="_blank" rel="noopener">Watch the meatball video ↗</a>
+</div>
+<div class="pack-video-copy"><p class="eyebrow gx-kicker">2 lb in your Legacy Box</p><h3>The hands behind the meatballs.</h3><p>Lil’s recipe. Rolled by hand at the shop. Watch the work that goes into the meatballs in your box.</p><p>About 16 meatballs at 2 oz each. Shipped uncooked and frozen, in a clear bag.</p><figure class="pack-video-product"><img src="../assets/img/homemade-meatballs-bag.webp" width="1200" height="900" loading="lazy" alt="Ricci’s uncooked meatballs in a clear bag"><figcaption>In your box: 2 lb of meatballs · About 16 at 2 oz each</figcaption></figure></div>
+</div>
+</div>
+</section>
+<section class="menu-section pack-videos pack-videos--rolls" aria-labelledby="made-rolls-title">
+<div class="container gx-wrap">
+<h2 id="made-rolls-title">Sausage Rolls</h2>
+<div class="pack-process-subhead"><p class="eyebrow gx-kicker">How it’s made</p><p class="pack-process-lead">Let Lil show you how it’s done.</p></div>
+<div class="pack-video-row pack-video-row--flip">
+<div class="pack-video-media" data-youtube-id="rTCpX1q99A8" data-video-title="How Lil’s sausage rolls are made">
+<img src="../assets/img/video-poster-sausage-rolls.webp" width="1280" height="720" loading="lazy" alt="Sausage rolls being made by hand at Ricci’s">
+<a class="pack-video-fallback" href="https://www.youtube.com/watch?v=rTCpX1q99A8" target="_blank" rel="noopener">Watch the sausage roll video ↗</a>
+</div>
+<div class="pack-video-copy"><p class="eyebrow gx-kicker">Two rolls in your Legacy Box</p><h3>Two rolls. A family tradition.</h3><p>Watch Lil’s sausage rolls take shape in the shop kitchen. Two come in every Legacy Box, baked at the shop, then frozen.</p><figure class="pack-video-product"><img src="../assets/img/sausage-roll.webp" width="2500" height="1667" loading="lazy" alt="Lil’s baked sausage roll, sliced to show the filling"><figcaption>In your box: two of Lil’s sausage rolls · Baked, then frozen</figcaption></figure></div>
+</div>
+<div class="pack-roll-memory">
+<figure><img src="../assets/img/shop-sausage-rolls-history.webp" width="686" height="960" loading="lazy" alt="A woman in a white shop coat holding a tray of freshly baked sausage rolls"></figure>
+<div><p class="gx-kicker">From our shop to your table</p><h3>A little piece of the family tradition.</h3><p>Two of Lil’s sausage rolls come in every Legacy Box — baked at the shop, then frozen. See how it’s made in the video above.</p></div>
+</div>
+</div>
+</section>
+
+      <!-- GUARANTEE — wording is duplicated verbatim in the hero note.
+           Change one, change both. -->
+      <section class="pdp-guarantee">
+        <div class="pdp-guarantee-inner">
+          <span class="eyebrow">Our guarantee</span>
+          <h2>Cook One Link. If It Isn't the Best, We'll Make It Right.</h2>
+          <p>
+            <strong>Cook one link.</strong> If it isn't the best Italian sausage you've had, tell us within 30 days and we'll replace the box or refund it — your call. Either way, keep what's left. We're not asking you to ship frozen meat back to Pennsylvania.
+          </p>
+        </div>
+      </section>
+
+      <!-- WHY THIS ONE -->
+      <section class="section-plan">
+        <div class="container">
+          <div class="section-header">
+            <span class="eyebrow">Eighty-one years in</span>
+            <h2>Eighty-One Years on Pine Hollow Road.</h2>
+            <p>Most sausage is mass-produced, packed with fillers, and seasoned with pre-ground dust that lost its flavor a year ago — a label full of things you can't pronounce.</p>
+          </div>
+          <div class="plan-grid">
+            <div class="plan-step">
+              <span class="plan-step-num">01</span>
+              <h3>Ground in Our Own Shop</h3>
+              <p>Hand-mixed in small batches in McKees Rocks, every day — sweet and hot are each their own recipe.</p>
             </div>
-            <div class="includes-card">
-              <div class="includes-card-body">
-                <span class="includes-card-qty">5–7 days</span>
-                <h3>Two people, eating well</h3>
-              </div>
+            <div class="plan-step">
+              <span class="plan-step-num">02</span>
+              <h3>All Natural</h3>
+              <p>No fillers, no MSG, no additives, no preservatives. Natural casing. That's the whole list.</p>
             </div>
-            <div class="includes-card">
-              <div class="includes-card-body">
-                <span class="includes-card-qty">$289</span>
-                <h3>Shipping included</h3>
-              </div>
+            <div class="plan-step">
+              <span class="plan-step-num">03</span>
+              <h3>USDA-Inspected Since 1973</h3>
+              <p>Inspected every day we run — the same federal stamp you look for at the meat case.</p>
             </div>
           </div>
           <div class="section-photo">
-            <img src="../assets/img/hot-sausage-on-grill.webp" alt="Ricci's hot sausage coiled on the grill" loading="lazy" />
+            <img src="../assets/img/family-original.webp" alt="Four members of the Ricci family in their McKees Rocks shop, with fresh coils of sausage on the table in front of them" loading="lazy" />
           </div>
         </div>
       </section>
 
-      <!-- COLD CHAIN -->
+      <!-- PRICE ANCHOR -->
       <section class="menu-section menu-section-alt">
+        <div class="container product-prose">
+          <span class="eyebrow">The math</span>
+          <h2>Sized for Two, Built to Impress.</h2>
+          <p>Sweet, hot, meatballs, peppers, two sausage rolls, sauce — the whole Ricci's counter in one box. It's sized for two people to eat through in 5–7 days, or to feed a small gathering in one sitting. Either way, it's the full Sunday table, not a sampler.</p>
+          <p>Hand-mixed in ~200 lb batches. 22–25% fat. Natural casing, all natural — no fillers, MSG, additives, or preservatives.</p>
+          <div class="pdp-stats">
+            <div class="pdp-stat">
+              <span class="pdp-stat-figure">6 items</span>
+              <span class="pdp-stat-label">Sweet, hot, meatballs, peppers, rolls, sauce</span>
+            </div>
+            <div class="pdp-stat">
+              <span class="pdp-stat-figure">5–7 days</span>
+              <span class="pdp-stat-label">Two people, eating well</span>
+            </div>
+            <div class="pdp-stat">
+              <span class="pdp-stat-figure">$289</span>
+              <span class="pdp-stat-label">Shipping included</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- COLD CHAIN — no ship-day cadence or shelf life stated; both are
+           still open in docs/WIKI.md. Shipping page is linked instead. -->
+      <section class="menu-section">
         <div class="container">
           <div class="menu-section-header">
             <span class="eyebrow">How it ships</span>
             <h2>Frozen at the Shop. Packed Cold.</h2>
+            <p>Frozen at the shop and packed for transit in an insulated box with cold packs.</p>
           </div>
-          <div class="menu-grid">
-            <div class="menu-item">
-              <div class="menu-item-header"><h3>Frozen, not chilled</h3></div>
-              <p>Everything goes into the box hard-frozen from our USDA-inspected facility.</p>
+          <div class="coldchain">
+            <div class="coldchain-step">
+              <span class="coldchain-mark" aria-hidden="true"></span>
+              <span class="coldchain-stage">At the shop</span>
+              <h3>Frozen, not chilled</h3>
+              <p>Everything goes into the box hard-frozen from our USDA-inspected facility — the same one that's been inspected every day we run since 1973.</p>
             </div>
-            <div class="menu-item">
-              <div class="menu-item-header"><h3>Insulated box, cold packs</h3></div>
-              <p>Each item labeled and packed in an insulated box with cold packs.</p>
+            <div class="coldchain-step">
+              <span class="coldchain-mark" aria-hidden="true"></span>
+              <span class="coldchain-stage">In transit</span>
+              <h3>Insulated box, cold packs</h3>
+              <p>Each item is labeled and packed in an insulated box with cold packs.</p>
             </div>
-            <div class="menu-item">
-              <div class="menu-item-plate" aria-hidden="true">
-                <span class="plate-figure">?</span>
-                <span class="plate-rule"></span>
-                <span class="plate-label">Ship-day cadence TBD</span>
-              </div>
-              <div class="menu-item-header"><h3>Nothing sits over a weekend</h3></div>
-              <p>We ship on set days to keep transit short — exact schedule to confirm.</p>
-            </div>
-            <div class="menu-item">
-              <div class="menu-item-plate" aria-hidden="true">
-                <span class="plate-figure">?</span>
-                <span class="plate-rule"></span>
-                <span class="plate-label">Shelf life TBD</span>
-              </div>
-              <div class="menu-item-header"><h3>Straight to the freezer</h3></div>
-              <p>Thaw in the refrigerator, never on the counter — exact frozen and fridge windows to confirm.</p>
+            <div class="coldchain-step">
+              <span class="coldchain-mark" aria-hidden="true"></span>
+              <span class="coldchain-stage">At your door</span>
+              <h3>Straight to the freezer</h3>
+              <p>Put it in the freezer when it lands. When you're ready to cook, thaw it in the refrigerator — never on the counter.</p>
             </div>
           </div>
+          <p class="coldchain-note">
+            Order cutoffs and transit times are on the
+            <a href="../shipping.html">Shipping page</a>. If any of it arrives
+            warm or thawed, we replace it or refund you — see
+            <a href="../returns.html">Returns</a>.
+          </p>
         </div>
       </section>
 
       <!-- HOW TO COOK -->
-      <section class="menu-section">
+      <section class="menu-section menu-section-alt">
         <div class="container">
           <div class="menu-section-header">
-            <span class="eyebrow">How to cook it</span>
-            <h2>Three Ways to Cook It.</h2>
+            <span class="eyebrow">Once it lands</span>
+            <h2>A Week of Italian Dinners.</h2>
           </div>
           <div class="plan-grid">
             <div class="plan-step">
+              <div class="plan-step-img">
+                <img src="../assets/img/slow-cooked-sweet.webp" alt="Ricci's sausage simmering in Sunday gravy" loading="lazy" />
+              </div>
               <div class="plan-step-body">
-                <h3>If it's a gift</h3>
-                <p>Ships straight to their door, frozen and freezer-ready. Add the gift address at checkout and we handle the rest.</p>
+                <h3>Sunday gravy</h3>
+                <p>Brown the sausage and meatballs, then drop them into the sauce from the box and let it go low and slow. Serve over rigatoni with bread.</p>
               </div>
             </div>
             <div class="plan-step">
@@ -331,63 +414,30 @@
                 <img src="../assets/img/meatball-sandwich.webp" alt="Ricci's meatball sandwich" loading="lazy" />
               </div>
               <div class="plan-step-body">
-                <h3>If it's for you</h3>
+                <h3>All week long</h3>
                 <p>Sausage and peppers Monday. Meatball subs Wednesday. Stuffed peppers Friday. Sausage pizza Saturday. One box, a week of Italian dinners.</p>
               </div>
             </div>
             <div class="plan-step">
+              <div class="plan-step-img">
+                <img src="../assets/img/hot-sausage-on-grill.webp" alt="Ricci's hot sausage coiled on the grill" loading="lazy" />
+              </div>
               <div class="plan-step-body">
-                <h3>For the freezer</h3>
-                <p>Everything is shipped frozen. Pull what you need.</p>
+                <h3>On the grill</h3>
+                <p>Whole rope, coiled, over medium heat, turned once. Peppers and onions alongside, a good roll, and that's dinner.</p>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      <!-- SERVING IDEAS -->
-      <section class="menu-section menu-section-alt">
-        <div class="container product-prose">
-          <span class="eyebrow">On the table</span>
-          <h2>Ideas From the Counter.</h2>
-          <p>Open the box, pour a glass of red, start a sauce. The legacy box is built for a real Italian feast — sausage two ways, meatballs in gravy, stuffed peppers as a side. Pittsburgh on a plate.</p>
-        </div>
-      </section>
-
-      <!-- USDA -->
-      <div class="section-usda">
-        <div class="usda-inner">
-          <div class="usda-badge">USDA<br />Federal<br />Inspected<br />Est. 1973</div>
-          <div class="usda-copy">
-            <h3>USDA Inspected Every Day Since 1973.</h3>
-            <p>The same federal stamp you look for at the meat case. We've held that standard for fifty-plus years without missing a day — one of only two USDA-inspected sausage makers in Pittsburgh with a retail counter, and the only one that cooks.</p>
-          </div>
-          <a href="../story.html" class="btn btn-outline">Learn More</a>
-        </div>
-      </div>
-
-      <!-- FAQ -->
-      <section class="menu-section menu-section-alt">
-        <div class="container product-prose">
-          <span class="eyebrow">Questions</span>
-          <h2>FAQ</h2>
-          <h3>Can I add a personal note?</h3>
-          <p>Yes — there's a note field at checkout. We hand-write it on a Ricci's card.</p>
-          <h3>Can I ship to a different address?</h3>
-          <p>Yes — set a separate ship-to address at checkout. Great for housewarmings, holidays, condolences.</p>
-          <h3>What if they don't have a freezer?</h3>
-          <p>Most of it goes in the fridge for the week. The bundle is sized for two people to eat through in 5–7 days.</p>
-          <h3>Why is shipping free on this one?</h3>
-          <p>Frozen shipping with cold packs isn't cheap — but on a box this size, it's worth shipping right. We eat the cost rather than tack it on at checkout: it's already built into the $289. The price you see is the price you pay.</p>
-          <h3>What if it thaws in transit?</h3>
-          <p>If any of it arrives warm or thawed, email us a photo within 24 hours of delivery and we'll send a free replacement or refund you. No return shipping, no argument. Full policy on our <a href="../returns.html">Returns page</a>.</p>
-          <h3>What if I'm not home when it arrives?</h3>
-          <p>Frozen product holds for several hours in the sealed, insulated box. We recommend shipping to an address where someone's around, and you'll get tracking the morning it goes out.</p>
+          <p class="ship-freezer-note">
+            <strong>Freezer strategy:</strong> everything ships frozen. Portion
+            the sausage into 1 lb bags before it goes in the freezer, and pull
+            what you need for any given dinner.
+          </p>
         </div>
       </section>
 
       <!-- REVIEWS -->
-      <section class="menu-section menu-section-alt">
+      <section class="menu-section">
         <div class="container">
           <div class="menu-section-header">
             <span class="eyebrow">From the counter</span>
@@ -427,71 +477,81 @@
         </div>
       </section>
 
-      <!-- RELATED -->
-      <section class="menu-section">
+      <!-- USDA -->
+      <div class="section-usda">
+        <div class="usda-inner">
+          <div class="usda-badge">USDA<br />Federal<br />Inspected<br />Est. 1973</div>
+          <div class="usda-copy">
+            <h3>USDA Inspected Every Day Since 1973.</h3>
+            <p>The same federal stamp you look for at the meat case. We've held that standard for fifty-plus years without missing a day — one of only two USDA-inspected sausage makers in Pittsburgh with a retail counter, and the only one that cooks.</p>
+          </div>
+          <a href="../story.html" class="btn btn-outline">Learn More</a>
+        </div>
+      </div>
+
+      <!-- CLOSING CTA — second .product-price block; shipping.js and
+           buy-options.js update every one of them together. -->
+      <section class="pdp-final">
         <div class="container">
-          <div class="menu-section-header">
-            <span class="eyebrow">Goes well with</span>
-            <h2>You Might Also Like.</h2>
-          </div>
-          <div class="products-grid">
-            <div class="product-card">
-              <div class="product-card-img"><img src="../assets/img/sweet-links-pan.webp" alt="Classic Sweet Italian Sausage" /></div>
-              <div class="product-card-body">
-                <span class="product-card-tag">Best Seller</span>
-                <h3>Classic Sweet Italian Sausage</h3>
-                <p>The original recipe since 1945.</p>
-                <div class="product-card-footer">
-                  <div class="product-price"><span class="ship-note">At the counter · In our bundles</span></div>
-                  <a href="sweet-italian-sausage.html" class="btn btn-outline-dark">View</a>
-                </div>
-              </div>
-            </div>
-            <div class="product-card">
-              <div class="product-card-img"><img src="../assets/img/hot-links-pan.webp" alt="Hot Italian Sausage" /></div>
-              <div class="product-card-body">
-                <span class="product-card-tag">Fan Favorite</span>
-                <h3>Hot Italian Sausage</h3>
-                <p>Same family recipe, with crushed red pepper, real paprika, and whole fennel seed.</p>
-                <div class="product-card-footer">
-                  <div class="product-price"><span class="ship-note">At the counter · In our bundles</span></div>
-                  <a href="hot-italian-sausage.html" class="btn btn-outline-dark">View</a>
-                </div>
-              </div>
-            </div>
-            <div class="product-card">
-              <div class="product-card-img"><img src="../assets/img/meatball-sandwich.webp" alt="Homemade Italian Meatballs" /></div>
-              <div class="product-card-body">
-                <span class="product-card-tag">Hand-Rolled</span>
-                <h3>Homemade Italian Meatballs</h3>
-                <p>Lil's recipe.</p>
-                <div class="product-card-footer">
-                  <div class="product-price"><span class="ship-note">At the counter · In our bundles</span></div>
-                  <a href="italian-meatballs.html" class="btn btn-outline-dark">View</a>
-                </div>
-              </div>
-            </div>
-          </div>
+          <span class="eyebrow">The whole counter</span>
+          <h2>One Box. The Full Sunday Table.</h2>
+          <p class="pdp-final-lead">
+            Sweet, hot, meatballs, stuffed peppers, two of Lil's sausage rolls and
+            homemade sauce — out of the same shop on Pine Hollow Road, packed
+            frozen and shipped with the shipping already paid for.
+          </p>
+          <span class="product-price pdp-final-price" data-base="289.00" data-tier="large">
+            <span class="price-amount">$289.00</span>
+            <span class="ship-note">Free Shipping &middot; Ships Frozen</span>
+          </span>
+          <p class="pdp-final-cta">
+            <a href="https://shop.riccisausage.com/products/ricci-legacy-gift-box" class="btn btn-primary btn-lg" data-buy-now data-id="ricci-legacy-gift-box">Order Now &middot; Free Shipping</a>
+          </p>
         </div>
       </section>
 
-      <!-- EMAIL -->
-      <section class="section-email">
-        <div class="container">
-          <span class="eyebrow">Join the Family</span>
-          <h2>Get Early Access &amp;<br />Members-Only Recipes.</h2>
-          <p>Seasonal bundles, shop specials, and a Ricci family recipe in your first email.</p>
-          <form class="email-form" data-crm="subscribe" data-source="shop" data-success="Thanks — you're on the list!">
-            <input type="email" name="email" placeholder="Your email address" required />
-            <input type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px" />
-            <button type="submit">Join</button>
-            <span class="crm-status" role="status" style="display:block;margin-top:8px;font-size:0.9rem;"></span>
-          </form>
+      <!-- FAQ -->
+      <section class="menu-section menu-section-alt">
+        <div class="container product-prose">
+          <span class="eyebrow">Questions</span>
+          <h2>FAQ</h2>
+          <h3>Why is shipping free on this one?</h3>
+          <p>Shipping is included in the price shown for your selected state. Choose your state above to see your total before checkout — no separate shipping charge is added.</p>
+          <h3>How is it packaged?</h3>
+          <p>Each item is labeled and packed in an insulated box with cold packs.</p>
+          <h3>What if it thaws in transit?</h3>
+          <p>If any of it arrives warm or thawed, email us a photo within 24 hours of delivery and we'll send a free replacement or refund you. No return shipping, no argument. Full policy on our <a href="../returns.html">Returns page</a>.</p>
+          <h3>What if I'm not home when it arrives?</h3>
+          <p>We recommend shipping to an address where someone can receive the delivery. Bring the box inside and refrigerate or freeze its contents promptly. You’ll receive a shipment confirmation email with a tracking number when your order ships.</p>
         </div>
       </section>
 
     </article>
-  </main>
+
+      <!-- FINAL BUY — last section before the footer; third .product-price. -->
+      <section class="pdp-final pdp-final--last">
+        <div class="container">
+          <span class="eyebrow">The Ricci Legacy Gift Box</span>
+          <h2>Send the Whole Counter.</h2>
+          <span class="product-price pdp-final-price" data-base="289.00" data-tier="large">
+            <span class="price-amount">$289.00</span>
+            <span class="ship-note">Free Shipping &middot; Ships Frozen</span>
+          </span>
+          <p class="pdp-final-cta">
+            <a href="https://shop.riccisausage.com/products/ricci-legacy-gift-box" class="btn btn-primary btn-lg" data-buy-now data-id="ricci-legacy-gift-box">Order Now &middot; Free Shipping</a>
+          </p>
+        </div>
+      </section>
+    </main>
+
+  <!-- Sticky buy bar, ≤900px. shipping.js keeps it in step with the others. -->
+  <div class="pdp-buybar product-price" data-base="289.00" data-tier="large">
+    <span>
+      <span class="price-amount">$289.00</span>
+      <span class="ship-note">Free shipping &middot; Ships frozen</span>
+    </span>
+    <a href="https://shop.riccisausage.com/products/ricci-legacy-gift-box" class="btn btn-primary" data-buy-now data-id="ricci-legacy-gift-box">Order Now</a>
+  </div>
 
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"The Ricci Legacy Gift Box","description":"5 lb sweet sausage, 5 lb hot sausage, 2 lb meatballs, stuffed banana peppers, two sausage rolls, and a quart of homemade sauce in a hand-packed gift box. Free shipping nationwide.","brand":{"@type":"Brand","name":"Ricci's Italian Sausage"},"image":"https://riccisausage.com/assets/img/sausage-peppers.webp","offers":{"@type":"Offer","price":"289.00","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://riccisausage.com/shop/ricci-legacy-gift-box.html","hasMerchantReturnPolicy":{"@type":"MerchantReturnPolicy","applicableCountry":"US","returnPolicyCategory":"https://schema.org/MerchantReturnNotPermitted","returnPolicyUrl":"https://riccisausage.com/returns","refundType":"https://schema.org/FullRefund"},"shippingDetails":{"@type":"OfferShippingDetails","shippingRate":{"@type":"MonetaryAmount","value":"0","currency":"USD"},"shippingDestination":{"@type":"DefinedRegion","addressCountry":"US","addressRegion":["PA","OH","WV","NY","NJ","MD","DE","VA","DC","MA","CT","RI","VT","NH","ME","NC","KY","TN","IN","MI","IL","WI","SC","GA","FL","AL","MS","MO","AR","LA","MN","IA","TX","OK","KS","NE","ND","SD","CO","WY","MT","NM","CA","OR","WA","ID","UT","NV","AZ"]},"deliveryTime":{"@type":"ShippingDeliveryTime","handlingTime":{"@type":"QuantitativeValue","minValue":0,"maxValue":2,"unitCode":"DAY"},"transitTime":{"@type":"QuantitativeValue","minValue":1,"maxValue":3,"unitCode":"DAY"}}}}}</script>
 
@@ -572,5 +632,8 @@
   <script src="../js/shipping.js" defer></script>
   <script src="../js/cart.js" defer></script>
   <script src="../js/pixel-events.js" defer></script>
+  <script src="../js/buy-now.js" defer></script>
+  <script src="../js/buy-options.js" defer></script>
+  <script src="../js/pack-videos.js" defer></script>
 </body>
 </html>

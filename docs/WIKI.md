@@ -676,6 +676,18 @@ bags · no recipe card · no bonus sample · no cooking numbers.
     generic filename — only use it on hot-sausage (or Pittsburgh Pack) content.
   - `sausage-roll.webp` is **Lil's baked sausage roll** (the hot-foods product,
     literally a roll) — only use it on sausage-roll content, never as a stand-in
+- **Legacy Gift Box contents (2026-10-12).** Carried forward on
+  `shop/ricci-legacy-gift-box.html` but never verified here: **6 pc** stuffed
+  banana peppers, **2** sausage rolls, **1 qt** of sauce, "sized for two people for 5–7 days", and
+  "one of only two USDA-inspected sausage makers… the only one that cooks"
+  (same unverified line as on the Italian Pack). Confirm or cut.
+- **Legacy Gift Box subscribe & save.** The page loads `js/buy-options.js`, but
+  the subscribe option only appears once `ricci-legacy-gift-box` has a selling
+  plan in Shopify (Subscriptions app). Until then it shows one-time only.
+- **No handwritten card** with gift boxes — confirmed by the owner 2026-10-12.
+  Removed the "we hand-write your note on a Ricci's card" FAQ from the Legacy
+  Gift Box page. Don't promise a gift note or card in copy.
+
     for hot/sweet sausage links. Sausage rolls are an **in-store hot food only**
     — they don't ship, so the image doesn't belong on shop/products pages
     (story.html is fine).

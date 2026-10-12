@@ -2,8 +2,9 @@
  * Ricci's buy box — one-time vs. subscribe & save, plus the sauce add-on.
  *
  * Injected after each .product-price[data-base] (hero + closing CTA) on a page whose
- * [data-buy-now] buttons sell PRODUCT (all six Italian Pack A/B versions load
- * this). All boxes share one choice, and buy-now.js asks RicciBuyOptions.lines()
+ * [data-buy-now] buttons sell one bundle (the Italian Pack A/B versions and the
+ * Legacy Gift Box load this). The product, base price and tier come from the page's
+ * first [data-buy-now] button and .product-price[data-base]. All boxes share one choice, and buy-now.js asks RicciBuyOptions.lines()
  * for the cart lines, so every Buy button on the page follows it.
  *
  * Subscribe only appears once the product has a selling plan in Shopify (the
@@ -16,8 +17,8 @@
 (function () {
   "use strict";
 
-  var PRODUCT = "pittsburgh-italian-pack";
-  var BASE = 189;
+  var PRODUCT = null;
+  var BASE = 0;
   var TIER = "med";
   var DEFAULT_WEEKS = 6;
   var CHECK = '<svg class="bo-check" viewBox="0 0 16 16" width="14" height="14" aria-label="Added" role="img">' +
@@ -244,7 +245,12 @@
   }
 
   function init() {
-    if (!document.querySelector('[data-buy-now][data-id="' + PRODUCT + '"]')) return;
+    var btn = document.querySelector("main [data-buy-now][data-id]");
+    var priceEl0 = document.querySelector("main .product-price[data-base]");
+    if (!btn || !priceEl0) return;
+    PRODUCT = btn.getAttribute("data-id");
+    BASE = parseFloat(priceEl0.getAttribute("data-base"));
+    TIER = priceEl0.getAttribute("data-tier") || TIER;
     // Every zone-priced block in the page content (hero + closing CTAs). The sticky
     // buy bars (.pdp-buybar, .px-buybar) sit outside <main> and stay a plain button.
     document.querySelectorAll("main .product-price[data-base]").forEach(function (priceEl) {
