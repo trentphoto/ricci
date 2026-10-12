@@ -61,5 +61,9 @@
 /shop/pittsburgh-italian-pack-minimal.html  /shop/pittsburgh-italian-pack-minimal  301!
 /shop/pittsburgh-italian-pack-butcher.html  /shop/pittsburgh-italian-pack-butcher  301!
 /shop/pittsburgh-italian-pack-table.html  /shop/pittsburgh-italian-pack-table  301!
+/products-black-friday.html  /products-black-friday  301!
 /shop/sausage-roll-box.html  /shop/sausage-roll-box  301!
 /shop/meatball-dinner-kit.html  /shop/meatball-dinner-kit  301!
+
+# box insert QR (recipe card back) — UTM-tagged so reorders from the insert are trackable
+/reorder  /shop?utm_source=box-insert&utm_medium=print&utm_campaign=recipe-card  302
