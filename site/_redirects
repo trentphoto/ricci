@@ -68,3 +68,5 @@
 
 # box insert QR (recipe card back) — UTM-tagged so reorders from the insert are trackable
 /reorder  /shop?utm_source=box-insert&utm_medium=print&utm_campaign=recipe-card  302
+/holiday.html  /holiday  301!
+/thanksgiving-confirmed.html  /thanksgiving-confirmed  301!
