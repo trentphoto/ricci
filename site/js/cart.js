@@ -3,7 +3,7 @@
  *
  * Mark any button or link with [data-add-to-cart] and data-id (product slug).
  * Price is read from the nearest .price-amount / .product-price-lg on click so
- * state-based shipping prices on products.html stay in sync.
+ * state-based shipping prices on shop.html stay in sync.
  *
  * window.RicciCart.add(id, opts) / .remove(id) / .open() / .get()
  */
@@ -268,7 +268,7 @@
   function productUrl(id) {
     var base = basePrefix();
     if (CATALOG[id]) return base + CATALOG[id].path;
-    return base + "products.html";
+    return base + "shop.html";
   }
 
   function addItem(id, opts) {
@@ -311,7 +311,7 @@
       panel.innerHTML =
         '<p class="cart-pop-empty">Your cart is empty.</p>' +
         '<p class="cart-pop-sub">Browse our boxes and bundles — shipped frozen nationwide.</p>' +
-        '<a href="' + base + 'products.html" class="btn btn-primary cart-pop-btn">Shop Bundles</a>';
+        '<a href="' + base + 'shop.html" class="btn btn-primary cart-pop-btn">Shop Bundles</a>';
       return;
     }
 
@@ -343,7 +343,7 @@
       html += '<button type="button" class="btn btn-primary cart-pop-btn" data-checkout>Checkout</button>';
     }
 
-    html += '<a href="' + base + 'products.html" class="cart-pop-continue">Continue shopping</a>';
+    html += '<a href="' + base + 'shop.html" class="cart-pop-continue">Continue shopping</a>';
     panel.innerHTML = html;
 
     panel.querySelectorAll("[data-remove-id]").forEach(function (btn) {

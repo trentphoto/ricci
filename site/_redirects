@@ -24,7 +24,9 @@
 /office-lunch  /lunch  301!
 /press.html  /press  301!
 /privacy.html  /privacy  301!
-/products.html  /products  301!
+# retired 2026-10-18: products.html mixed counter + online; /shop is the storefront
+/products.html  /shop  301!
+/products  /shop  301!
 /recipe-card.html  /recipe-card  301!
 /returns.html  /returns  301!
 /shipping.html  /shipping  301!
@@ -45,8 +47,8 @@
 /shop/sweet-italian-sausage.html  /shop/sweet-italian-sausage  301!
 /shop/thanksgiving-sausage.html  /shop/thanksgiving-sausage  301!
 # smoked page parked 2026-07 (white-labeled product; relaunch later from _archive/)
-/smoked-sausage-pittsburgh.html  /products  301!
-/smoked-sausage-pittsburgh  /products  301!
+/smoked-sausage-pittsburgh.html  /shop  301!
+/smoked-sausage-pittsburgh  /shop  301!
 /story.html  /story  301!
 /sweet-italian-sausage-pittsburgh.html  /sweet-italian-sausage-pittsburgh  301!
 /terms.html  /terms  301!

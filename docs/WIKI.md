@@ -73,18 +73,12 @@ Currently parked:
 
 ### Internal linking & breadcrumbs
 
-Two pages look like catalogs but aren't the same thing:
-
-| Page | In main nav? | Lists |
-|---|---|---|
-| `products.html` "What We Make" | **No** | All 6 `shop/` pages + all 8 `hot-foods/` pages — the only complete index |
-| `shop.html` "Shop" | Yes | Only the 2 shippable bundles (Pittsburgh Pack, Legacy Gift Box) |
-
-`shop.html` is a conversion page for the two things you can actually buy online,
-not a directory. So the breadcrumb parent for `shop/*` is **`products.html`**,
-even though it isn't in the nav — it's the only page that lists all six.
-`hot-foods/*` breadcrumbs to `menu.html` (counter-only items; menu.html has the
-prices and is in the nav).
+`shop.html` ("Shop", in nav) is the single storefront: hero, then the full
+bundle grid (`#products`, with the ship-to state picker). `products.html`
+("What We Make") was **retired 2026-10-18** — it mixed counter and online
+items and confused customers. `/products` 301s to `/shop`. Breadcrumb parent
+for `shop/*` is **`shop.html`**. `hot-foods/*` breadcrumbs to `menu.html`
+(counter-only items; menu.html has the prices and is in the nav).
 
 Every `shop/*` and `hot-foods/*` page carries a `.breadcrumb` nav placed directly
 after `</header>`. Same markup as the `co-packing/` pages. Add one to any new
@@ -94,14 +88,12 @@ subpage:
 <nav class="breadcrumb" aria-label="Breadcrumb">
   <ol>
     <li><a href="../index.html">Home</a></li>
-    <li><a href="../products.html">What We Make</a></li>
+    <li><a href="../shop.html">Shop</a></li>
     <li aria-current="page">Page Title</li>
   </ol>
 </nav>
 ```
 
-Known gap: `hot-foods/sweet-sausage-sandwich.html` is linked only from
-`products.html` — menu, shop, and index all skip it.
 
 Pages have **no templating** — the nav header and footer are copy-pasted into
 every page. Subpages in `site/shop/` and `site/hot-foods/` reference assets with
@@ -121,7 +113,7 @@ All files are IIFEs, no dependencies, included with `defer`.
 | `office-lunch.js` | Office-lunch ordering UI (served on `lunch.html`; script filename and CRM `source` tag kept as `office-lunch` so historical CRM data stays queryable). Keeps a profile/order history in `localStorage`; best-effort POST to `/api/catering` with `source: "office-lunch"`. |
 | `order-modal.js` | "Order Now" chooser (`[data-open-order]`). Routes: catering → `RicciCatering.open()`, pickup → `menu.html`, ship → `shop.html`. |
 | `nav-drawer.js` | Mobile nav toggle / backdrop. |
-| `shipping.js` | State-based all-in pricing. Maps US state → shipping zone (A–E), updates `.product-price[data-base][data-tier]` elements, persists state in `localStorage` (`ricci_ship_state`), fires `ricci:ship-state` on change. Exposes `window.RicciShipping` (`getState`, `getGroup`, `canShip`, `priceFor`, `stateName`). Loaded on `products.html` and `shop.html`. |
+| `shipping.js` | State-based all-in pricing. Maps US state → shipping zone (A–E), updates `.product-price[data-base][data-tier]` elements, persists state in `localStorage` (`ricci_ship_state`), fires `ricci:ship-state` on change. Exposes `window.RicciShipping` (`getState`, `getGroup`, `canShip`, `priceFor`, `stateName`). Loaded on `shop.html`. |
 | `cart.js` | localStorage cart + nav dropdown. `[data-add-to-cart]` buttons add bundle items; prices sync with `RicciShipping`. Checkout builds a Shopify cart URL from `js/shopify-variants.js` using the customer's zone variant. Exposes `window.RicciCart`. |
 | `buy-now.js` | Single-item, straight-to-Shopify checkout. `[data-buy-now]` + `data-id` resolves the shipping state to a zone (via `RicciShipping`, else `localStorage` + its own mirror), loads `shopify-variants.js`, and redirects to `/cart/{variantId}:1`. No localStorage cart, no cart popup. AK/HI (zone X) get told to call instead. Loaded on `shop/pittsburgh-italian-pack.html`, alongside `cart.js` — which still runs there for the nav cart. Don't put `[data-buy-now]` and `[data-add-to-cart]` on the same button. |
 | `shopify-variants.js` | **Auto-generated** by `tools/sync-shopify-bundles.mjs`. Maps bundle slugs → Shopify variant GIDs per zone. Do not edit by hand — re-run sync after price changes. |
@@ -269,7 +261,7 @@ SKUs: `RIC-PITT-A` … `RIC-PITT-E`, `RIC-LEGACY-A` … `RIC-LEGACY-E`.
 bundles on the marketing site, hit **Checkout**, and land on Shopify's checkout with
 the correct zone-priced variant pre-loaded.
 
-1. Customer adds bundles on `products.html` / `shop.html` (stored in
+1. Customer adds bundles on `shop.html` (stored in
    `localStorage` key `ricci_cart`).
 2. Shipping state is in `localStorage` key `ricci_ship_state` (set on shop
    pages via `shipping.js`).
@@ -300,7 +292,7 @@ script auto-publishes — see below), password is off, and permalinks 302 straig
 ### Minimal Shopify homepage
 
 Shoppers who visit `shop.riccisausage.com` directly (not via checkout link) should
-see a simple page pointing them to `riccisausage.com/products.html` — not a full
+see a simple page pointing them to `riccisausage.com/shop` — not a full
 Dawn catalog.
 
 **Via API** (after re-auth with theme scopes):
@@ -681,6 +673,10 @@ bags · no recipe card · no bonus sample · no cooking numbers.
   banana peppers, **2** sausage rolls, **1 qt** of sauce, "sized for two people for 5–7 days", and
   "one of only two USDA-inspected sausage makers… the only one that cooks"
   (same unverified line as on the Italian Pack). Confirm or cut.
+- **Bundle-grid claims on `shop.html` (2026-10-18).** The grid was copied
+  verbatim from the retired `products.html`: Pittsburgh Pack "**12 lbs**" + "one of Lil's
+  sausage rolls"; Sausage Roll Box "**Six**" rolls at $189; Legacy contents (see
+  above). None verified here. Confirm or cut.
 - **Legacy Gift Box subscribe & save.** The page loads `js/buy-options.js`, but
   the subscribe option only appears once `ricci-legacy-gift-box` has a selling
   plan in Shopify (Subscriptions app). Until then it shows one-time only.
@@ -770,9 +766,6 @@ Every page has exactly one commerce job — do not blur these when editing:
   Orders ship frozen via two-day service and have consistently arrived cold.
   Do not publish a specific unattended-box duration; tell customers to bring
   the delivery inside and refrigerate or freeze it promptly.
-- **`products.html`** ("What We Make") — informational catalog. Bundles appear
-  with prices linking to their PDPs; everything else (case items, hot foods) is
-  informational with availability tags, never a price.
 - **`shop/{sweet-italian-sausage,hot-italian-sausage,italian-meatballs}.html`** —
   story pages, NOT buyable. Hero uses `.avail-badges` (`--store` green /
   `--ships` oxblood) instead of a price, and CTAs are "Order Pickup" (tel:) +

@@ -1341,7 +1341,7 @@ body.nav-drawer-open .nav-backdrop {
 .product-price.is-noship .price-amount { opacity: 0.45; }
 .product-price.is-noship .ship-note { color: var(--oxblood); }
 
-/* SHIP-TO SELECTOR (products.html) */
+/* SHIP-TO SELECTOR (shop.html) */
 .ship-selector {
   background: var(--cream-dark);
   border: 1px solid var(--cream-edge);
