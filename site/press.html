@@ -47,6 +47,70 @@
   <meta name="twitter:title" content="Press — Ricci's Italian Sausage | As Seen On WQED, KDKA & More" />
   <meta name="twitter:description" content="See Ricci's Italian Sausage featured by CBS Pittsburgh, WQED's NEBBY series, YaJagoff, and more. Pittsburgh's family sausage tradition since 1945." />
   <meta name="twitter:image" content="https://riccisausage.com/assets/img/og-image.webp" />
+<style>
+.press-shell{--paper:#efe2c3;--ink:#143f2f;--burg:#8b1f22;--gold:#7e6b39;--muted:#d6c59e;}
+
+
+.press-shell{min-height:100vh;padding:18px;background:
+ radial-gradient(circle at 18% 20%,rgba(255,255,255,.38),transparent 24%),
+ radial-gradient(circle at 78% 70%,rgba(108,87,43,.08),transparent 28%),
+ repeating-linear-gradient(0deg,rgba(80,66,34,.025) 0 1px,transparent 1px 4px),
+ var(--paper);}
+.press{position:relative;max-width:1500px;margin:auto;border:3px solid var(--ink);padding:12px;box-shadow:inset 0 0 0 5px var(--paper),inset 0 0 0 7px rgba(20,63,47,.55);overflow:hidden}
+.press:before,.press:after{content:'✦';position:absolute;top:4px;color:var(--ink);font-size:20px;z-index:5} .press:before{left:8px} .press:after{right:8px}
+.inner{display:grid;grid-template-columns:minmax(220px,.9fr) minmax(500px,1.75fr) minmax(250px,.95fr);grid-template-rows:auto auto 1fr;gap:14px;padding:14px}
+.logo-wrap{grid-column:2;display:flex;justify-content:center;align-items:center;padding:0 14px 6px}
+.logo{width:min(520px,92%);filter:saturate(.9) contrast(.98);mix-blend-mode:multiply}
+.rule{height:8px;border-top:2px solid var(--ink);border-bottom:1px solid var(--burg);opacity:.9}
+.kicker{letter-spacing:.22em;text-transform:uppercase;color:var(--ink);font-size:clamp(12px,1vw,18px)}
+.title{grid-column:2;display:flex;flex-direction:column;align-items:center;justify-content:center;margin-top:-4px}
+.title h1{margin:0;color:var(--burg);font-size:clamp(68px,10vw,178px);line-height:.82;letter-spacing:-.045em;text-transform:uppercase;text-shadow:2px 2px 0 rgba(20,63,47,.18);font-weight:900}
+.title .sub{margin-top:8px;display:flex;align-items:center;gap:12px;width:100%;justify-content:center;color:var(--ink);font-weight:700;letter-spacing:.19em;font-size:clamp(15px,1.8vw,28px);text-transform:uppercase}
+.title .sub:before,.title .sub:after{content:'';height:2px;background:var(--gold);flex:1;max-width:130px}
+.card{border:2px solid rgba(20,63,47,.75);padding:9px;background:rgba(248,240,219,.42);box-shadow:inset 0 0 0 3px rgba(248,240,219,.7)}
+.image-card img{width:100%;height:100%;display:block;object-fit:cover;filter:saturate(.76) contrast(1.04);mix-blend-mode:multiply}
+.storefront{grid-column:1;grid-row:1 / span 2;min-height:470px}
+.story{grid-column:1;grid-row:3;padding:10px 16px 4px;border-top:2px solid var(--ink)}
+.story p{font-size:clamp(18px,1.6vw,29px);font-style:italic;line-height:1.28;margin:.3em 0}
+.story:after{content:'✦';display:block;text-align:center;color:var(--ink);margin-top:10px}
+.right-top{grid-column:3;grid-row:1 / span 2;display:grid;grid-template-rows:auto 1fr;gap:10px}
+.manifesto{text-align:center;padding:14px 10px}
+.manifesto strong{display:block;color:var(--ink);letter-spacing:.18em;font-size:clamp(13px,1.35vw,21px);line-height:1.7;text-transform:uppercase}
+.flag{display:flex;justify-content:center;margin:10px auto 0;width:140px;height:10px;border:1px solid rgba(0,0,0,.1)}
+.flag i{flex:1} .flag i:nth-child(1){background:#147443} .flag i:nth-child(2){background:#f6f0dd} .flag i:nth-child(3){background:#a3262d}
+.skyline{min-height:290px}
+.bottom{grid-column:2 / span 2;display:grid;grid-template-columns:1.35fr .8fr;gap:14px;align-items:stretch}
+.sausage{min-height:190px;position:relative}
+.sausage img{object-position:center 62%}
+.map{min-height:190px;position:relative}
+.map-label{position:absolute;right:16px;top:18px;background:rgba(239,226,195,.9);padding:7px 10px;border:1px solid var(--gold);color:var(--ink);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:13px}
+.archive-strip{grid-column:2;display:flex;align-items:center;justify-content:center;gap:14px;color:var(--gold);letter-spacing:.18em;text-transform:uppercase;font-size:11px;padding-top:2px}
+.archive-strip:before,.archive-strip:after{content:'';height:1px;background:var(--gold);width:80px}
+@media(max-width:1000px){
+ .inner{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+ .logo-wrap,.title,.archive-strip{grid-column:1 / -1}
+ .storefront{grid-column:1;grid-row:auto;min-height:360px}
+ .right-top{grid-column:2;grid-row:auto}
+ .story{grid-column:1;grid-row:auto}
+ .bottom{grid-column:1 / -1}
+}
+@media(max-width:700px){
+ .press-shell{padding:8px} .press{padding:4px} .inner{grid-template-columns:1fr;padding:9px;gap:10px}
+ .logo-wrap,.title,.archive-strip,.storefront,.right-top,.story,.bottom{grid-column:1}
+ .bottom{grid-template-columns:1fr}
+ .storefront{min-height:330px} .skyline{min-height:240px}
+ .title h1{font-size:clamp(64px,23vw,110px)}
+ .title .sub{font-size:14px;letter-spacing:.12em}
+}
+</style>
+<style>
+.manifesto strong.script-quote{position:relative;font-family:'Pinyon Script',cursive;text-transform:none;letter-spacing:0;font-size:clamp(28px,3vw,46px);line-height:1.15;padding:0 .55em}
+.script-quote .q{position:absolute;font-family:'Libre Caslon Text',Georgia,serif;color:var(--burg);font-size:1.6em;line-height:1}
+.script-quote .q-open{left:0;top:-.1em}
+.script-quote .q-close{right:0;bottom:-.45em}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap" rel="stylesheet" />
+<style>@media(min-width:1001px){.press-shell .bottom{grid-column:3;grid-row:3;display:block}.press-shell .bottom .map{height:100%}.press-shell .title{grid-row:2;justify-content:flex-start}.press-shell .storefront{grid-row:1 / span 3}.press-shell .story{grid-column:2;grid-row:3;text-align:center}}.press-shell .logo{width:min(280px,70%)}</style>
 </head>
 <body>
 
@@ -85,12 +149,40 @@
   <main>
 
     <!-- PAGE HERO -->
-    <div class="page-hero">
-      <span class="eyebrow">In the News</span>
-      <h1>Pittsburgh Loves<br /><em style="color:var(--gold)">Ricci's.</em></h1>
-      <p>Eighty years of making sausage the right way —<br />
-         Pittsburgh's press noticed a long time ago.</p>
+
+<section class="press-shell">
+  <div class="press" aria-label="Ricci's Italian Sausage press archive section">
+    <div class="inner">
+      <div class="storefront card image-card"><img src="/assets/img/press/storefront-vintage.webp" alt="Vintage engraving-style Ricci's storefront"></div>
+
+      <div class="logo-wrap"><img class="logo" src="/assets/img/press/logo.png" alt="Ricci's Italian Sausage logo"></div>
+
+      <div class="right-top">
+        <div class="manifesto card">
+          <strong class="script-quote"><span class="q q-open">“</span>It’s What<br>Pittsburgh<br>Eats!<span class="q q-close">”</span></strong>
+          <div class="flag"><i></i><i></i><i></i></div>
+        </div>
+        <div class="skyline card image-card"><img src="/assets/img/press/skyline.png" alt="Vintage Pittsburgh river landscape engraving"></div>
+      </div>
+
+      <div class="title">
+        <div class="rule" style="width:100%;margin-bottom:10px"></div>
+        <h1>Press</h1>
+        <div class="sub">Award Winning Since 1945</div>
+      </div>
+
+      <div class="story">
+        <p>Three generations of Italian sausage, made in McKees Rocks.</p>
+      </div>
+
+
+      <div class="bottom">
+        <div class="map card image-card"><img src="/assets/img/press/map.webp" alt="Vintage map of McKees Rocks and the Ohio River"><div class="map-label">McKees Rocks</div></div>
+      </div>
     </div>
+  </div>
+</section>
+
 
     <!-- INTRO -->
     <div class="press-intro">
