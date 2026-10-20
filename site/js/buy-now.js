@@ -87,8 +87,12 @@
     var zone = currentZone();
     if (!zone) return null;
     var entry = map[id];
-    if (!entry || !entry.zones || !entry.zones[zone]) return null;
-    var gid = entry.zones[zone].variantId;
+    if (!entry) return null;
+    /* pack-mix.js (Italian Pack) picks hot & sweet / all hot / all sweet. */
+    var mix = window.RicciPackMix && window.RicciPackMix.get(id);
+    var table = (mix && entry.mixes && entry.mixes[mix]) || entry.zones;
+    if (!table || !table[zone]) return null;
+    var gid = table[zone].variantId;
     return variantNumericId(gid) ? gid : null;
   }
 

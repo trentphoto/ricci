@@ -34,6 +34,104 @@ window.RicciShopifyVariants = {
         "price": "239.00",
         "label": "Zone E — West"
       }
+    },
+    "mixes": {
+      "mixed": {
+        "A": {
+          "variantId": "gid://shopify/ProductVariant/58140080046240",
+          "sku": "RIC-PITT-A",
+          "price": "189.00",
+          "label": "Zone A — Nearby"
+        },
+        "B": {
+          "variantId": "gid://shopify/ProductVariant/58140080079008",
+          "sku": "RIC-PITT-B",
+          "price": "199.00",
+          "label": "Zone B — Mid"
+        },
+        "C": {
+          "variantId": "gid://shopify/ProductVariant/58140080111776",
+          "sku": "RIC-PITT-C",
+          "price": "209.00",
+          "label": "Zone C — Southeast"
+        },
+        "D": {
+          "variantId": "gid://shopify/ProductVariant/58140080144544",
+          "sku": "RIC-PITT-D",
+          "price": "219.00",
+          "label": "Zone D — Central"
+        },
+        "E": {
+          "variantId": "gid://shopify/ProductVariant/58140080177312",
+          "sku": "RIC-PITT-E",
+          "price": "239.00",
+          "label": "Zone E — West"
+        }
+      },
+      "hot": {
+        "A": {
+          "variantId": "gid://shopify/ProductVariant/67740306866336",
+          "sku": "RIC-PITT-HOT-A",
+          "price": "189.00",
+          "label": "Zone A — Nearby"
+        },
+        "B": {
+          "variantId": "gid://shopify/ProductVariant/67740306899104",
+          "sku": "RIC-PITT-HOT-B",
+          "price": "199.00",
+          "label": "Zone B — Mid"
+        },
+        "C": {
+          "variantId": "gid://shopify/ProductVariant/67740306931872",
+          "sku": "RIC-PITT-HOT-C",
+          "price": "209.00",
+          "label": "Zone C — Southeast"
+        },
+        "D": {
+          "variantId": "gid://shopify/ProductVariant/67740306964640",
+          "sku": "RIC-PITT-HOT-D",
+          "price": "219.00",
+          "label": "Zone D — Central"
+        },
+        "E": {
+          "variantId": "gid://shopify/ProductVariant/67740306997408",
+          "sku": "RIC-PITT-HOT-E",
+          "price": "239.00",
+          "label": "Zone E — West"
+        }
+      },
+      "sweet": {
+        "A": {
+          "variantId": "gid://shopify/ProductVariant/67740307030176",
+          "sku": "RIC-PITT-SWEET-A",
+          "price": "189.00",
+          "label": "Zone A — Nearby"
+        },
+        "B": {
+          "variantId": "gid://shopify/ProductVariant/67740307062944",
+          "sku": "RIC-PITT-SWEET-B",
+          "price": "199.00",
+          "label": "Zone B — Mid"
+        },
+        "C": {
+          "variantId": "gid://shopify/ProductVariant/67740307095712",
+          "sku": "RIC-PITT-SWEET-C",
+          "price": "209.00",
+          "label": "Zone C — Southeast"
+        },
+        "D": {
+          "variantId": "gid://shopify/ProductVariant/67740307128480",
+          "sku": "RIC-PITT-SWEET-D",
+          "price": "219.00",
+          "label": "Zone D — Central"
+        },
+        "E": {
+          "variantId": "gid://shopify/ProductVariant/67740307161248",
+          "sku": "RIC-PITT-SWEET-E",
+          "price": "239.00",
+          "label": "Zone E — West"
+        }
+      }
     }
   },
   "ricci-legacy-gift-box": {

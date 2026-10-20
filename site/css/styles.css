@@ -6792,3 +6792,33 @@ body.cater-open { overflow: hidden; }
 .px-close .buy-options { max-width: 520px; margin: 18px auto 20px; text-align: left; }
 /* Final buy section follows the (also charcoal) email signup — divide them. */
 .pdp-final--last { border-top: 1px solid rgba(217,184,138,0.24); }
+
+/* Italian Pack mix picker (js/pack-mix.js) — sits in the buy column above the
+   manifest, so drop the campaign-section spacing .heat-pick carries. */
+.heat-pick.pack-mix { margin: 18px 0 14px; max-width: none; text-align: left; }
+.heat-pick.pack-mix .heat-pick-caption {
+  font-family: inherit;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  color: inherit;
+  margin-bottom: 8px;
+}
+.pack-mix .heat-switch-opt { padding: 9px 6px 8px; }
+.pack-mix .heat-switch-sub { margin-top: 3px; }
+/* Light designs (.px — butcher, minimal, table): match the cream ship selector. */
+.px .pack-mix .heat-switch {
+  background: #f7f5f1;
+  border-color: #ded9d1;
+  box-shadow: none;
+}
+.px .pack-mix .heat-switch-slab { background: var(--px-accent); border-color: transparent; box-shadow: none; }
+.px .pack-mix .heat-switch.slab-sweet .heat-switch-slab { background: var(--olive); }
+.px .pack-mix .heat-switch-name { color: #4d453d; }
+.px .pack-mix .heat-switch-sub { color: #6b6158; }
+.px .pack-mix .heat-switch-opt:hover .heat-switch-name { color: #28231e; }
+.px .pack-mix .heat-switch-opt:has(input:checked) .heat-switch-name { color: #fff; }
+.px .pack-mix .heat-switch-opt:has(input:checked) .heat-switch-sub { color: rgba(255,255,255,0.85); }
+.px .pack-mix .heat-pick-caption { color: #28231e; }
+/* The blend that isn't in the box — its manifest row, photo and card. */
+.pack-mix-off { display: none !important; }
