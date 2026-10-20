@@ -142,3 +142,35 @@
   outline: 2px solid var(--gold);
   outline-offset: 3px;
 }
+
+/* Butcher desktop hero: introduction above a balanced photo/order pair. */
+@media (min-width: 901px) {
+ .px-butcher .px-hero { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 32px 36px; padding-block: 24px 56px; align-items: stretch; }
+ .px-butcher .px-heading { grid-column: 1 / -1; grid-row: 1; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); column-gap: 36px; align-items: end; }
+ .px-butcher .px-heading > .gx-kicker { grid-column: 1 / -1; margin: 0 0 14px; }
+ .px-butcher .px-heading h1 { margin: 0; font-size: clamp(40px, 4.2vw, 58px); line-height: 1.1; letter-spacing: -.035em; }
+ .px-butcher .px-heading .gx-lead { margin: 0; max-width: 440px; font-size: 19px; line-height: 1.6; }
+ .px-butcher .px-hero-photo { grid-column: 1; grid-row: 2; align-self: stretch; display: grid; grid-template-rows: minmax(0, 1fr) auto; min-width: 0; margin: 0; overflow: hidden; }
+ .px-butcher .px-hero-photo img { display: block; width: 100%; height: 100%; min-height: 460px; aspect-ratio: auto; object-fit: cover; object-position: center; }
+ .px-butcher .px-hero-photo figcaption { margin: 0; padding: 10px 0 0; line-height: 1.5; }
+ .px-butcher .px-order { grid-column: 2; grid-row: 2; min-width: 0; padding: 24px; box-shadow: none; }
+ .px-butcher .px-order > .gx-kicker { margin-top: 0; }
+ .px-butcher .px-order .pack-mix { margin-block: 14px 10px; }
+ .px-butcher .px-order .px-manifest { margin-block: 12px; }
+ .px-butcher .px-order .px-manifest li { padding-block: 7px; }
+ .px-butcher .px-order .ship-selector { margin-block: 14px; }
+ .px-butcher .px-order .px-price { margin-block: 16px; }
+}
+
+/* Butcher hero mosaic: one serving photo and all four products in the box. */
+.px-butcher .px-hero-photo.px-mosaic { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.px-butcher .px-mosaic figure { margin: 0; min-width: 0; position: relative; overflow: hidden; background: var(--white); }
+.px-butcher .px-mosaic .px-mosaic-main { flex: 1; min-height: 0; }
+.px-butcher .px-mosaic .px-mosaic-main img { display: block; width: 100%; height: 100%; min-height: 0; aspect-ratio: 16 / 10; object-fit: cover; }
+.px-butcher .px-mosaic-products { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.px-butcher .px-mosaic-products img { display: block; width: 100%; height: auto; min-height: 0; aspect-ratio: 16 / 10; object-fit: cover; }
+.px-butcher .px-mosaic figcaption { position: absolute; inset: auto 0 0; margin: 0; padding: 8px 10px; background: rgba(42, 34, 27, .9); color: var(--white); font: 600 12px/1.4 var(--font-sans); }
+@media (max-width: 540px) {
+ .px-butcher .px-hero-photo.px-mosaic, .px-butcher .px-mosaic-products { gap: 8px; }
+ .px-butcher .px-mosaic figcaption { font-size: 11px; padding: 6px 8px; }
+}
