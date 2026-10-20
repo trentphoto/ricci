@@ -157,7 +157,7 @@
 .pack-videos.pack-videos--rolls { background:#fffcf5; }
 .pack-videos > .container > h2 { margin-bottom:36px; }
 
-.pack-videos pack-roll-memory {
+.pack-videos .pack-roll-memory {
  display:grid;
  grid-template-columns:minmax(0, 280px) minmax(0, 520px);
  justify-content:center;
@@ -167,18 +167,18 @@
  padding-top:48px;
  border-top:1px solid #e5ddce;
 }
-.pack-videos pack-roll-memory img { display:block; width:100%; height:auto; }
-.pack-videos pack-roll-memory h3 { margin:12px 0 20px; font-size:clamp(28px, 3vw, 38px); }
+.pack-videos .pack-roll-memory img { display:block; width:100%; height:auto; }
+.pack-videos .pack-roll-memory h3 { margin:12px 0 20px; font-size:clamp(28px, 3vw, 38px); }
 @media(max-width:640px) {
- .pack-videos pack-roll-memory { grid-template-columns:1fr; gap:24px; margin-top:40px; padding-top:32px; }
- .pack-videos pack-roll-memory figure { max-width:320px; }
+ .pack-videos .pack-roll-memory { grid-template-columns:1fr; gap:24px; margin-top:40px; padding-top:32px; }
+ .pack-videos .pack-roll-memory figure { max-width:320px; }
 }
 
 .pack-videos.pack-videos--meatballs > .container > h2,
 .pack-videos.pack-videos--rolls > .container > h2 { margin-bottom:12px; }
-.pack-videos pack-process-subhead { margin-bottom:36px; }
-.pack-videos pack-process-subhead .gx-kicker { margin-bottom:8px; }
-.pack-videos pack-process-subhead .pack-process-lead { margin-top:0; font-size:clamp(20px, 2.2vw, 26px); line-height:1.4; }
+.pack-videos .pack-process-subhead { margin-bottom:36px; }
+.pack-videos .pack-process-subhead .gx-kicker { margin-bottom:8px; }
+.pack-videos .pack-process-subhead .pack-process-lead { margin-top:0; font-size:clamp(20px, 2.2vw, 26px); line-height:1.4; }
 
 .pack-videos.pack-videos--meatballs { background:#eae0cb; }
 .pack-videos { color:var(--ink); }
@@ -200,3 +200,62 @@
 @media(max-width:900px) {
  .pack-videos .pack-video-copy h3 { font-size:28px; }
 }
+
+/* Italian Pack blend comparison. Keep quantity text intact for pack-mix.js. */
+.pack-blends { background: var(--cream); scroll-margin-top: 100px; }
+.pack-blends > .container { max-width: 1180px; }
+.pack-blends .eyebrow { margin-bottom: 14px; text-align: left; }
+.pack-blends h2 { max-width: 760px; margin: 0; font-size: clamp(2rem, 4.2vw, 3.5rem); line-height: 1.12; letter-spacing: -.035em; text-align: left; text-wrap: balance; }
+.pack-blends-lead { max-width: 720px; margin: 22px 0 36px; color: var(--ink-soft); font-size: 1.08rem; line-height: 1.7; }
+.pack-blends-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.pack-blend { min-width: 0; overflow: hidden; background: var(--white); border: 1px solid var(--cream-edge); border-radius: 6px; display: flex; flex-direction: column; }
+.pack-blend img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-bottom: 1px solid var(--cream-edge); }
+.pack-blend-body { position: relative; display: flex; flex-direction: column; flex: 1; align-items: flex-start; padding: 30px; border-top: 4px solid var(--olive); }
+.pack-blend--hot .pack-blend-body { border-top-color: var(--oxblood); }
+.pack-blend-qty { margin: 0 0 16px; color: var(--ink-soft); font: 600 .75rem/1.4 var(--font-mono); text-transform: uppercase; letter-spacing: .08em; }
+.pack-blend h3 { margin: 0 0 16px; color: var(--ink); font: 700 clamp(2rem, 3vw, 2.75rem)/1.1 var(--font-serif); letter-spacing: -.035em; }
+.pack-blend-tag { margin: 0 0 20px; padding: 7px 11px; border: 1px solid currentColor; border-radius: 3px; font: 600 .85rem/1.5 var(--font-sans); }
+.pack-blend--sweet .pack-blend-tag { color: var(--olive-deep); }
+.pack-blend--hot .pack-blend-tag { color: var(--oxblood); }
+.pack-blend-body > p:not([class]) { margin: 0 0 24px; color: var(--ink-soft); line-height: 1.7; }
+.pack-blend .pack-blend-ing { align-self: stretch; margin: auto 0 0; padding-top: 18px; border-top: 1px solid var(--cream-edge); color: var(--ink-soft); font-size: .875rem; line-height: 1.65; }
+.pack-blend-ing strong { color: var(--ink); }
+.pack-blends-qa { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin: 32px 0 0; }
+.pack-blends-qa details, .pack-blends-qa-item { min-width: 0; padding: 18px 0; border-top: 1px solid var(--cream-edge); border-bottom: 1px solid var(--cream-edge); }
+.pack-blends-qa summary { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; cursor: pointer; list-style: none; font-weight: 600; line-height: 1.5; color: var(--ink); }
+.pack-blends-qa summary::-webkit-details-marker { display: none; }
+.pack-blends-qa summary::after { content: '+'; flex: 0 0 auto; color: var(--oxblood); font-size: 1.25rem; }
+.pack-blends-qa details[open] summary::after { content: '−'; }
+.pack-blends-qa summary:focus-visible { outline: 2px solid var(--oxblood); outline-offset: 5px; }
+.pack-blends-qa details p, .pack-blends-qa-item p { margin: 14px 0 0; color: var(--ink-soft); line-height: 1.65; }
+/* A single selected blend uses the available width instead of leaving a gap. */
+.pack-blends-grid:has(.pack-mix-off) { grid-template-columns: minmax(0, 1fr); }
+.pack-blends-grid:has(.pack-mix-off) .pack-blend:not(.pack-mix-off) { display: grid; grid-template-columns: 1fr 1fr; }
+.pack-blends-grid:has(.pack-mix-off) .pack-blend img { height: 100%; aspect-ratio: auto; border-bottom: 0; }
+@media (max-width: 800px) {
+ .pack-blends-qa { grid-template-columns: 1fr; gap: 0; }
+ .pack-blends-qa details, .pack-blends-qa-item { border-bottom: 0; }
+ .pack-blends-qa details:last-child, .pack-blends-qa-item:last-child { border-bottom: 1px solid var(--cream-edge); }
+ .pack-blend-body { padding: 24px; }
+}
+@media (max-width: 600px) {
+ .pack-blends-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+ .pack-blends-grid:has(.pack-mix-off) .pack-blend:not(.pack-mix-off) { display: flex; }
+ .pack-blends-grid:has(.pack-mix-off) .pack-blend img { height: auto; aspect-ratio: 16 / 9; }
+ .pack-blends-lead { font-size: 1rem; margin-bottom: 28px; }
+}
+
+.pack-blends-qa-item h3 { margin: 0; font-family: inherit; font-size: 1rem; font-weight: 600; line-height: 1.5; color: var(--ink); }
+
+.gx .gx-faq .pack-faq-item { border-bottom: 1px solid var(--cream-edge); }
+.gx .gx-faq .pack-faq-item h3 { margin: 0; padding: 21px 0 14px; font-family: inherit; font-weight: 600; font-size: 17px; line-height: 1.5; }
+.gx .gx-faq .pack-faq-item p { margin: 0; font-size: 16px; padding: 0 0 24px; }
+
+.pack-videos .pack-roll-memory figure { margin: 0; }
+.pack-videos .pack-roll-memory > div { min-width: 0; }
+.pack-videos .pack-roll-memory > div > p:last-child { margin: 0; color: var(--ink-soft); line-height: 1.7; }
+/* Light designs (.px) use their own accent. */
+.px .pack-blend-qty, .px .pack-blend--hot .pack-blend-tag { color: var(--px-accent); }
+
+/* All four Italian Pack products in the hero gallery. */
+.pdp-gallery-strip.pdp-gallery-strip--full-pack { grid-template-columns: repeat(2, minmax(0, 1fr)); }
