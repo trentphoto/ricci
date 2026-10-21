@@ -12,7 +12,7 @@
  *    add-on for that tier, and show data-base + add-on.
  *  - Group A (nearby) add-on is 0 because the listed base price already bakes
  *    in nearby shipping. Farther groups pay the delta.
- *  - Items with no data-tier (Sausage Club subscription, Cookbook media mail)
+ *  - Items with no data-tier (Cookbook media mail)
  *    are left untouched.
  *
  * TUNING THE NUMBERS  <-- James: this is the only block you edit

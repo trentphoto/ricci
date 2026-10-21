@@ -480,9 +480,8 @@ serving." That's the register the rest of the site is in anyway.
 Fill in an answer and move it up into the verified list above. Until then, leave
 the slot blank or use the typographic plate stand-in. See `CLAUDE.md`.
 
-1. **Is the Sausage Club monthly box also a 5 lb box of rope?** TBD as of
-   2026-08-06. The page currently says it is — if that turns out wrong, fix
-   `shop/sausage-club.html`.
+1. ~~Is the Sausage Club monthly box also a 5 lb box of rope?~~ Moot: the
+   Sausage Club page was retired 2026-10-21.
 
 2. **Is the pepperoni roll $16.99?** TBD as of 2026-08-11. The figure is live in
    three places (`js/preorder-modal.js`, and two JSON-LD blocks in `menu.html`
@@ -770,8 +769,8 @@ Every page has exactly one commerce job — do not blur these when editing:
   story pages, NOT buyable. Hero uses `.avail-badges` (`--store` green /
   `--ships` oxblood) instead of a price, and CTAs are "Order Pickup" (tel:) +
   a link to the Pittsburgh Pack. Do not add prices or Add to Cart here.
-- **`shop/sausage-club.html`** — waitlist mode until subscriptions launch.
-  CTA anchors to `#club-waitlist` (email form, `data-source="sausage-club-waitlist"`).
+- **Sausage Club — retired 2026-10-21.** It duplicated Subscribe & save, which
+  is on every bundle's buy box. `/shop/sausage-club` 301s to `/shop`.
 - **Suggestion cards** ("You Might Also Like" / catalog cards): bundles show
   price + "Ships Nationwide"; individual products show
   `<span class="ship-note">At the counter · In our bundles</span>` and no price.

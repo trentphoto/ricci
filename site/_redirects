@@ -43,7 +43,9 @@
 /shop/pittsburgh-italian-pack-free.html  /shop/pittsburgh-italian-pack-free  301!
 /shop/pittsburgh-italian-pack-grill-pan.html  /shop/pittsburgh-italian-pack-grill-pan  301!
 /shop/ricci-legacy-gift-box.html  /shop/ricci-legacy-gift-box  301!
-/shop/sausage-club.html  /shop/sausage-club  301!
+# Sausage Club retired 2026-10-21 (duplicated Subscribe & save on every bundle)
+/shop/sausage-club.html  /shop  301!
+/shop/sausage-club  /shop  301!
 /shop/sweet-italian-sausage.html  /shop/sweet-italian-sausage  301!
 /shop/thanksgiving-sausage.html  /shop/thanksgiving-sausage  301!
 # smoked page parked 2026-07 (white-labeled product; relaunch later from _archive/)
