@@ -128,6 +128,62 @@
     return priceFor(base, tier, group);
   }
 
+  var ZONE_NAMES = { A: "Nearby", B: "Mid", C: "Southeast / Plains", D: "South Central / Mountain", E: "West Coast" };
+
+  /* "View shipping zones" link + modal, added under any #ship-state picker.
+     Totals come from the page's product price when the page sells one box;
+     multi-product pages just list which states fall in each zone. */
+  function zonesModal() {
+    var inner = document.querySelector(".ship-selector-inner");
+    if (!inner || document.getElementById("zones-dialog")) return;
+
+    var priced = {};
+    document.querySelectorAll(".product-price[data-tier]").forEach(function (el) {
+      priced[el.getAttribute("data-base") + "|" + el.getAttribute("data-tier")] = true;
+    });
+    var keys = Object.keys(priced);
+    var one = keys.length === 1 ? keys[0].split("|") : null;
+
+    var rows = Object.keys(ZONE_NAMES).map(function (g) {
+      var states = Object.keys(GROUP).filter(function (c) { return GROUP[c] === g; })
+        .sort(function (a, b) { return STATE_NAMES[a].localeCompare(STATE_NAMES[b]); })
+        .map(function (c) { return STATE_NAMES[c]; }).join(", ");
+      var price = one ? '<span class="zones-price">' + fmt(priceFor(parseFloat(one[0]), one[1], g)) + "</span>" : "";
+      return '<li data-zone="' + g + '"><div class="zones-head"><strong>Zone ' + g + " · " + ZONE_NAMES[g] +
+        "</strong>" + price + '</div><p>' + states + "</p></li>";
+    }).join("");
+
+    var dlg = document.createElement("dialog");
+    dlg.id = "zones-dialog";
+    dlg.className = "zones-dialog";
+    dlg.setAttribute("aria-labelledby", "zones-title");
+    dlg.innerHTML =
+      '<button type="button" class="zones-close" aria-label="Close">&times;</button>' +
+      '<h2 id="zones-title">Shipping zones</h2>' +
+      "<p class=\"zones-intro\">" + (one
+        ? "Every price includes shipping. Your price depends on the zone you ship to."
+        : "Every price includes shipping. Prices go up slightly the farther the box travels.") + "</p>" +
+      '<ul class="zones-list">' + rows + "</ul>" +
+      '<p class="zones-foot">We can’t cold-ship to Alaska or Hawaii yet.</p>';
+    document.body.appendChild(dlg);
+
+    var link = document.createElement("button");
+    link.type = "button";
+    link.className = "zones-link";
+    link.textContent = "View shipping zones";
+    inner.appendChild(link);
+
+    link.addEventListener("click", function () {
+      var mine = GROUP[getState()];
+      dlg.querySelectorAll("li").forEach(function (li) {
+        li.classList.toggle("is-current", li.getAttribute("data-zone") === mine);
+      });
+      if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", "");
+    });
+    dlg.querySelector(".zones-close").addEventListener("click", function () { dlg.close(); });
+    dlg.addEventListener("click", function (e) { if (e.target === dlg) dlg.close(); });
+  }
+
   window.RicciShipping = {
     getState: getState,
     getGroup: function (state) { return GROUP[state || getState()] || null; },
@@ -176,6 +232,7 @@
   function init() {
     var sel = document.getElementById("ship-state");
     if (sel && !sel.options.length) buildOptions(sel);
+    zonesModal();
     if (sel) {
       sel.addEventListener("change", function () {
         save(sel.value);

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="/js/analytics.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Review Your Order | Ricci's</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&amp;family=Source+Sans+3:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon" href="assets/favicon/favicon.ico" sizes="any" />
+  <link rel="canonical" href="https://riccisausage.com/review" />
+</head>
+<body class="lead-body">
+  <header class="lead-header" aria-label="Ricci's Italian Sausage">
+    <img src="assets/logo.png" alt="Ricci's Italian Sausage" width="220" height="83" />
+  </header>
+
+  <main class="lead-main">
+    <section class="review-card" aria-labelledby="review-title">
+      <form id="review-form" novalidate>
+        <span class="eyebrow">Your Ricci's order</span>
+        <h1 id="review-title">How was it?</h1>
+        <p class="lead-story">We're a small family shop. A few honest words help people outside Pittsburgh find us.</p>
+
+        <fieldset class="review-stars">
+          <legend>Your rating</legend>
+          <input type="radio" id="star5" name="rating" value="5"><label for="star5" title="5 stars">★</label>
+          <input type="radio" id="star4" name="rating" value="4"><label for="star4" title="4 stars">★</label>
+          <input type="radio" id="star3" name="rating" value="3"><label for="star3" title="3 stars">★</label>
+          <input type="radio" id="star2" name="rating" value="2"><label for="star2" title="2 stars">★</label>
+          <input type="radio" id="star1" name="rating" value="1"><label for="star1" title="1 star">★</label>
+        </fieldset>
+
+        <label for="review-body">Tell us about it <span class="review-opt">(optional)</span></label>
+        <textarea id="review-body" name="body" rows="5" maxlength="2000" placeholder="What did you make? How did it taste?"></textarea>
+
+        <div class="review-row">
+          <div>
+            <label for="review-name">First name</label>
+            <input id="review-name" name="name" autocomplete="given-name" maxlength="80" />
+          </div>
+          <div>
+            <label for="review-email">Email</label>
+            <input id="review-email" name="email" type="email" autocomplete="email" required />
+          </div>
+        </div>
+        <input class="hp-field" type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+        <button class="btn btn-primary" type="submit">Submit review</button>
+        <p class="form-status" id="review-status" role="status" aria-live="polite"></p>
+        <p class="review-fine">We show your first name and last initial with your review. Your email stays private.</p>
+      </form>
+
+      <section id="review-thanks" hidden aria-live="polite">
+        <span class="eyebrow">Grazie</span>
+        <h1>Thanks for the review.</h1>
+        <p class="lead-story">It means a lot to us. If something wasn't right with your order, email <a href="mailto:info@riccisausage.com">info@riccisausage.com</a> or call 412-331-9531 and we'll make it right.</p>
+        <a class="btn btn-primary" href="/shop">Back to the shop</a>
+      </section>
+    </section>
+  </main>
+
+  <footer class="lead-footer">
+    <p>Ricci's Italian Sausage · McKees Rocks, Pennsylvania · Since 1945</p>
+    <p class="lead-footer-links"><a href="/privacy">Privacy Policy</a><span aria-hidden="true">·</span><a href="/terms">Terms of Use</a></p>
+  </footer>
+
+  <script>if (location.hostname === "localhost") window.CRM_BASE = "http://localhost:8787";</script>
+  <script src="js/crm.js"></script>
+  <script src="js/review.js"></script>
+</body>
+</html>
