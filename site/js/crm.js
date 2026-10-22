@@ -103,4 +103,12 @@
 
   if (document.readyState !== "loading") init();
   else document.addEventListener("DOMContentLoaded", init);
+
+  // Klaviyo onsite tracking (product views + identify on form success).
+  if (!document.querySelector('script[src$="/js/klaviyo.js"]')) {
+    var kl = document.createElement("script");
+    kl.src = "/js/klaviyo.js";
+    kl.async = true;
+    document.head.appendChild(kl);
+  }
 })();
