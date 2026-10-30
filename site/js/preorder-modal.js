@@ -9,10 +9,9 @@
  * The pickup date is always the UPCOMING MONDAY, computed fresh on load — so it
  * rolls forward on its own each week with no edits.
  *
- * No total is shown here on purpose. The price lives in one place (the CRM's
- * PREORDER_UNIT_PRICE_CENTS) and Square's checkout page shows the real amount;
- * a second copy in this file could drift and quote a customer a total we then
- * don't charge.
+ * The running total uses PRICES below. These must match the CRM's
+ * PEPPERONI_ROLL_PRICE_CENTS / SAUSAGE_ROLL_PRICE_CENTS — the CRM is what
+ * actually charges, so change both together.
  *
  * Reuses the .cater-* modal styles from css/styles.css.
  */
@@ -55,6 +54,29 @@
     return out;
   }
 
+  // −/+ counter using the catering modal's .cater-qty styles.
+  function stepper(id, name, value, min) {
+    var btn = 'style="flex:0 0 44px;width:44px;padding:0;"';
+    return '<div class="cater-qty" data-min="' + min + '" style="display:inline-flex;width:auto;align-self:flex-start;">' +
+      '<button type="button" data-step="-1" aria-label="Fewer" ' + btn + '>&minus;</button>' +
+      '<input id="' + id + '" name="' + name + '" type="number" min="' + min + '" value="' + value + '" inputmode="numeric" style="flex:0 0 56px;width:56px;padding:0;">' +
+      '<button type="button" data-step="1" aria-label="More" ' + btn + '>+</button>' +
+      '</div>';
+  }
+
+  var PRICES = { qty: 1699, sausage_roll_qty: 1399 }; // cents
+
+  function updateTotal() {
+    var form = document.getElementById('preorder-form');
+    var el = document.getElementById('preorder-total');
+    if (!form || !el) return;
+    var cents = 0;
+    Object.keys(PRICES).forEach(function (k) {
+      cents += PRICES[k] * Math.max(0, parseInt(form.elements[k].value, 10) || 0);
+    });
+    el.textContent = 'Total $' + (cents / 100).toFixed(2) + ' · Paid at checkout';
+  }
+
   var pickup = nextMonday();
   var pickupLabel = headerDate(pickup);
 
@@ -76,14 +98,22 @@
       '        <div class="cater-field" style="grid-column:1/-1;"><label for="pre-name">Name</label><input id="pre-name" name="name" type="text" autocomplete="name" required></div>' +
       '        <div class="cater-field" style="grid-column:1/-1;"><label for="pre-email">Email</label><input id="pre-email" name="email" type="email" autocomplete="email" required></div>' +
       '        <div class="cater-field"><label for="pre-phone">Phone</label><input id="pre-phone" name="phone" type="tel" autocomplete="tel" required></div>' +
-      '        <div class="cater-field"><label for="pre-qty">How Many?</label><input id="pre-qty" name="qty" type="number" min="1" value="1" inputmode="numeric" required></div>' +
+      '        <div class="cater-field"><label for="pre-qty">How Many?</label>' + stepper('pre-qty', 'qty', 1, 1) + '</div>' +
       '        <div class="cater-field" style="grid-column:1/-1;"><label for="pre-time">Pickup Time &middot; ' + pickupLabel + '</label><select id="pre-time" name="time" required>' + timeOptions() + '</select></div>' +
       '      </div>' +
       '      <p style="margin:18px 0 0;font-size:0.85rem;color:#6b5544;">Pre-orders are paid in advance. The next step is Square\'s secure checkout &mdash; we never see your card details.</p>' +
+      '      <div style="margin-top:18px;display:flex;align-items:center;gap:14px;padding:12px;border:1px solid rgba(122,26,26,0.18);background:#fbf6ee;">' +
+      '        <img src="/assets/img/sausage-roll.webp" alt="Lil\'s Sausage Roll" width="76" height="76" style="width:76px;height:76px;object-fit:cover;flex:0 0 76px;">' +
+      '        <div style="flex:1;min-width:0;">' +
+      '          <label for="pre-addon" style="display:block;margin:0;font-family:var(--font-serif);font-size:1.15rem;font-weight:700;color:var(--ink);text-transform:none;letter-spacing:0;">Add a Lil\'s Sausage Roll?</label>' +
+      '          <span style="font-size:0.95rem;color:#6b5544;">$13.99 each &middot; made fresh daily</span>' +
+      '        </div>' +
+      '        ' + stepper('pre-addon', 'sausage_roll_qty', 0, 0) +
+      '      </div>' +
       '      <span class="crm-status" role="status" style="display:block;margin-top:10px;font-size:0.92rem;color:var(--red);"></span>' +
       '    </form>' +
       '    <div class="cater-footer">' +
-      '      <div class="cater-total" style="font-size:0.85rem;letter-spacing:0.02em;color:#6b5544;">$16.99 each · Paid at checkout</div>' +
+      '      <div class="cater-total" id="preorder-total" style="font-size:1rem;font-weight:600;letter-spacing:0.02em;color:var(--ink);">Total $16.99 · Paid at checkout</div>' +
       '      <div class="cater-actions"><button type="button" class="btn btn-primary" id="preorder-submit">Continue to Payment</button></div>' +
       '    </div>' +
       '  </div>' +
@@ -109,7 +139,7 @@
     document.body.classList.remove('cater-open');
   }
 
-  function renderSuccess(name, qty, time) {
+  function renderSuccess(name, qty, time, addon) {
     var body = document.getElementById('preorder-form');
     var footer = document.querySelector('#preorder-modal .cater-footer');
     if (body) {
@@ -123,7 +153,7 @@
           '</div>' +
           '<div class="cater-success-summary">' +
             '<span class="eyebrow">Your Reservation</span>' +
-            '<ul><li>' + qty + ' × Pepperoni Roll</li></ul>' +
+            '<ul><li>' + qty + ' × Pepperoni Roll</li>' + (addon ? '<li>' + addon + ' × Lil\'s Sausage Roll</li>' : '') + '</ul>' +
           '</div>' +
           '<p class="cater-success-contact">Questions? Call us at <a href="tel:4123319531" style="color:var(--red);font-weight:600;">412-331-9531</a>.</p>' +
         '</div>';
@@ -142,6 +172,7 @@
     var email = form.email.value.trim();
     var phone = form.phone.value.trim();
     var qty = Math.max(1, parseInt(form.qty.value, 10) || 1);
+    var addon = Math.max(0, parseInt(form.sausage_roll_qty.value, 10) || 0);
     var time = form.time.value;
 
     if (!name || !phone || !email) {
@@ -168,6 +199,7 @@
         email: email,
         phone: phone,
         qty: qty,
+        sausage_roll_qty: addon,
         source: 'pepperoni-preorder',
         pickup_date: isoDate(pickup),
         pickup_label: pickupLabel,
@@ -222,6 +254,18 @@
       if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
     });
     document.getElementById('preorder-submit').addEventListener('click', submit);
+
+    modal.querySelectorAll('.cater-qty button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var box = b.parentNode, input = box.querySelector('input');
+        var min = parseInt(box.getAttribute('data-min'), 10) || 0;
+        var n = (parseInt(input.value, 10) || 0) + parseInt(b.getAttribute('data-step'), 10);
+        input.value = Math.max(min, n);
+        updateTotal();
+      });
+    });
+    modal.querySelectorAll('.cater-qty input').forEach(function (i) { i.addEventListener('input', updateTotal); });
+    updateTotal();
   }
 
   if (document.readyState === 'loading') {
