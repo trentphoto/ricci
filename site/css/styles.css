@@ -6833,6 +6833,7 @@ body.cater-open { overflow: hidden; }
   width: min(520px, calc(100vw - 32px)); max-height: calc(100vh - 48px); overflow: auto;
   border: 1px solid var(--cream-edge); border-radius: 8px; padding: 28px 24px 20px;
   background: var(--cream); color: var(--ink);
+  margin: auto; /* global reset zeroes the UA centering */
 }
 .zones-dialog::backdrop { background: rgba(42, 34, 27, 0.55); }
 .zones-dialog h2 { margin: 0 0 6px; }
@@ -6849,6 +6850,8 @@ body.cater-open { overflow: hidden; }
 .zones-price { font-weight: 700; color: var(--red); }
 .zones-list p { margin: 4px 0 0; font-size: 0.88em; color: var(--ink-soft); }
 .ship-selector-inner .zones-link { flex-basis: 100%; margin-top: -12px; text-align: left; }
+.pdp-buy .zones-link { color: var(--gold); }
+.pdp-buy .zones-link:hover { color: var(--white); }
 
 /* Review page (review.html) */
 .review-card { max-width: 560px; margin: 0 auto; }
