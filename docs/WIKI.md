@@ -366,6 +366,12 @@ with GraphQL in `tools/shopify/graphql/`. Variant weights are **not** set via AP
 - **Pepperoni roll catering price:** $16.99 each, confirmed by the owner
   2026-09-24. Listed directly below sausage rolls.
 
+- **Lil's sausage roll, pre-order add-on:** $13.99 each, "made fresh daily"
+  (in-store pickup; shipped rolls are baked then frozen). Confirmed by the
+  owner 2026-10-30. Likely rising to $16.99 soon — when it does, update
+  `PRICES` and the "$13.99" label in `site/js/preorder-modal.js` and the CRM's
+  `SAUSAGE_ROLL_PRICE_CENTS` together.
+
 - **Catering buns:** one quantity is one dozen (12 buns), confirmed by the
   owner 2026-09-19. The modal shows a live bun count; do not equate buns with
   a guaranteed number of guests fed.
@@ -412,6 +418,7 @@ Confirmed by the owner 2026-08-06. Write these exactly; don't embellish.
 | Lil's sausage rolls | **Baked at the shop, then frozen.** |
 | San Marzano sauce | Plastic deli container (the cylinder tub). |
 | Bundle boxes | Items are labeled, packed in an insulated box with cold packs. |
+| Meatball Dinner Kit | 10 lb meatballs (five 2 lb bags) + **3 quarts** of sauce (three 1 qt tubs). Confirmed 2026-10-05. |
 
 **Phrasing rules — these are the exact mistakes already made:**
 
@@ -463,6 +470,11 @@ serving." That's the register the rest of the site is in anyway.
   Prices live in `ITEMS` / `MIN_PEOPLE` in `js/office-lunch.js`.
 
 ### Open questions — DO NOT write copy on these until answered
+
+- **Holiday pre-order draft (`holiday.html`, 2026-10-17, branch `holiday-preorder-draft`):**
+  prices confirmed 2026-10-18 ($39.99 per 5 lb box, $24.99 meatballs); unconfirmed — Thanksgiving pickup
+  Nov 23–25 / close Nov 18; Christmas close Dec 5; order cap; whether the shop is open
+  Sun Dec 20. Checkout not wired (fork `preorder-modal.js`). Not in sitemap; noindex.
 
 - **Catering page (2026-09-24):** the selected ivory table design now serves
   `catering.html`, with the original “You're Feeding a Crowd” headline.
@@ -636,10 +648,51 @@ the slot blank or use the typographic plate stand-in. See `CLAUDE.md`.
    - **Not in `sitemap.xml`.** `noindex, follow`, redirect added to
      `_redirects`. Add the `<loc>` if and when it launches.
 
+7. **Black Friday 2026 products page (`site/products-black-friday.html`).**
+   Added 2026-10-02 as a **review draft** (`noindex`, not in nav, live
+   `products.html` untouched). Built from a consultant's plan: four boxes
+   (Grill Box $149, Pittsburgh Pack $189, Freezer Stocker $219, Legacy $289)
+   plus à la carte with a $99 minimum. Every unconfirmed fact is wrapped in
+   `<mark class="tbd" title="…">` — the title is the question. Strip the
+   marks and `.tbd-banner` (`css/products-bf.css`) only as each is answered.
+   The minimum lives in `js/cart.js` (`ORDER_MIN`, applies to `alc-*` ids).
+
+   Open — **launch blockers:**
+   - **No Shopify products** for the Grill Box (`bf-grill-*`), Freezer
+     Stocker, or any `alc-*` item. Checkout falls back to "call us" if any of
+     them is in the cart.
+   - **Grill Box $149 vs. the live Sunday Grill Box at $189** (#6, peppers &
+     onions instead of sauce). Which one is the product? Flat or zone price?
+   - **Sizes that contradict the packaging table:** 2 lb rope (rope ships as
+     a 5 lb box), 2 lb bulk (bags are 1/5/10 lb), 6 lb rope in the Stocker.
+   - **Not in the wiki at all:** patties (count, weight, packing, blend),
+     truffle chips, banana peppers per bag, every à la carte price, $99
+     minimum, sausage-roll limits, deadline date, Legacy quantity cap.
+   - The plan's "$3.50/pc counter price" for peppers is the cooked-link price
+     (see `CLAUDE.md`) — not used.
+   - Sauce name (see #3). Photos added: `sausage-patties-tray.webp`,
+     `sausage-5lb-bulk-bag-label.webp` (owner photos, May 2026).
+
 The club is unlaunched, so treat the rest of that page as unverified too. Still
 live on it and never confirmed: the seasonal cut calendar (December = Feast of
 the Seven Fishes, May = fennel-and-orange, October = smoke-paprika), gift
 subscriptions in 3/6/12 months, and founding-member pricing.
+
+- **Legacy Gift Box contents (2026-10-12).** Carried forward on
+  `shop/ricci-legacy-gift-box.html` but never verified here: **6 pc** stuffed
+  banana peppers, **2** sausage rolls, **1 qt** of sauce, "sized for two people for 5–7 days", and
+  "one of only two USDA-inspected sausage makers… the only one that cooks"
+  (same unverified line as on the Italian Pack). Confirm or cut.
+- **Bundle-grid claims on `shop.html` (2026-10-18).** The grid was copied
+  verbatim from the retired `products.html`: Pittsburgh Pack "**12 lbs**" + "one of Lil's
+  sausage rolls"; Sausage Roll Box "**Six**" rolls at $189; Legacy contents (see
+  above). None verified here. Confirm or cut.
+- **Legacy Gift Box subscribe & save.** The page loads `js/buy-options.js`, but
+  the subscribe option only appears once `ricci-legacy-gift-box` has a selling
+  plan in Shopify (Subscriptions app). Until then it shows one-time only.
+- **No handwritten card** with gift boxes — confirmed by the owner 2026-10-12.
+  Removed the "we hand-write your note on a Ricci's card" FAQ from the Legacy
+  Gift Box page. Don't promise a gift note or card in copy.
 
 Answered and moved into the table above on 2026-08-06: 5 lb box is a plain box ·
 meatball bag · bundle labeling · insulated box + cold packs · rolls baked then
@@ -667,25 +720,8 @@ bags · no recipe card · no bonus sample · no cooking numbers.
     generic filename — only use it on hot-sausage (or Pittsburgh Pack) content.
   - `sausage-roll.webp` is **Lil's baked sausage roll** (the hot-foods product,
     literally a roll) — only use it on sausage-roll content, never as a stand-in
-- **Legacy Gift Box contents (2026-10-12).** Carried forward on
-  `shop/ricci-legacy-gift-box.html` but never verified here: **6 pc** stuffed
-  banana peppers, **2** sausage rolls, **1 qt** of sauce, "sized for two people for 5–7 days", and
-  "one of only two USDA-inspected sausage makers… the only one that cooks"
-  (same unverified line as on the Italian Pack). Confirm or cut.
-- **Bundle-grid claims on `shop.html` (2026-10-18).** The grid was copied
-  verbatim from the retired `products.html`: Pittsburgh Pack "**12 lbs**" + "one of Lil's
-  sausage rolls"; Sausage Roll Box "**Six**" rolls at $189; Legacy contents (see
-  above). None verified here. Confirm or cut.
-- **Legacy Gift Box subscribe & save.** The page loads `js/buy-options.js`, but
-  the subscribe option only appears once `ricci-legacy-gift-box` has a selling
-  plan in Shopify (Subscriptions app). Until then it shows one-time only.
-- **No handwritten card** with gift boxes — confirmed by the owner 2026-10-12.
-  Removed the "we hand-write your note on a Ricci's card" FAQ from the Legacy
-  Gift Box page. Don't promise a gift note or card in copy.
-
-    for hot/sweet sausage links. Sausage rolls are an **in-store hot food only**
-    — they don't ship, so the image doesn't belong on shop/products pages
-    (story.html is fine).
+    for hot/sweet sausage links. Sausage rolls **ship** (baked at the shop, then
+    frozen) — confirmed by the owner 2026-10-05. Fine on shop/product pages.
   - Sandwich photos (added Jul 2026): `hot-sausage-sandwich.webp`,
     `sweet-sausage-sandwich.webp`, `meatball-sandwich.webp`,
     `meatball-sandwich-alt.webp`, `banana-pepper-sandwich.webp`. The banana pepper
