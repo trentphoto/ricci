@@ -6871,3 +6871,132 @@ body.cater-open { overflow: hidden; }
 .review-fine { font-size: 0.85em; color: var(--ink-soft); margin-top: 10px; }
 .review-card .hp-field { position: absolute; left: -9999px; }
 @media (max-width: 520px) { .review-row { grid-template-columns: 1fr; } }
+
+/* =========================================================
+   Gift cards — section + chooser (modal reuses .order-*)
+   ========================================================= */
+.order-options--two { grid-template-columns: repeat(2, 1fr); max-width: 640px; margin: 0 auto; }
+a.order-option { text-decoration: none; }
+.order-option-note {
+  margin-top: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+@media (max-width: 768px) {
+  .order-options--two { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 520px) {
+  .order-options--two { grid-template-columns: 1fr; }
+}
+
+.section-giftcard {
+  background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%);
+  color: var(--white);
+  padding: var(--section-pad);
+  overflow: hidden;
+}
+.giftcard-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.giftcard-copy .eyebrow { color: var(--gold); }
+.giftcard-copy h2 { color: var(--white); margin: 12px 0 18px; }
+.giftcard-copy p {
+  color: rgba(255,255,255,0.85);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 44ch;
+  margin-bottom: 28px;
+}
+.giftcard-copy .btn-gift {
+  background: var(--gold);
+  color: var(--red-dark);
+  border: 1px solid var(--gold);
+}
+.giftcard-copy .btn-gift:hover { background: var(--cream); border-color: var(--cream); }
+.giftcard-uses {
+  display: flex;
+  gap: 24px;
+  margin-top: 22px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* The card itself — butcher-paper cream, double gold rule */
+.giftcard-visual { display: flex; justify-content: center; perspective: 1000px; }
+.giftcard-card {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 1.586;
+  background: var(--grain-bg, var(--cream));
+  background-color: var(--cream);
+  color: var(--charcoal);
+  box-shadow: 0 30px 70px rgba(0,0,0,0.45);
+  transform: rotate(-4deg);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 28px;
+}
+.giftcard-card:hover { transform: rotate(0deg) translateY(-6px); }
+.giftcard-card::before,
+.giftcard-card::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  border: 1px solid var(--red);
+}
+.giftcard-card::before { inset: 12px; }
+.giftcard-card::after { inset: 17px; opacity: 0.4; }
+.giftcard-card-est {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.3em;
+  color: var(--red);
+}
+.giftcard-card-name {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  color: var(--red);
+  line-height: 1;
+  margin: 10px 0 6px;
+}
+.giftcard-card-sub {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+.giftcard-card-label {
+  position: absolute;
+  bottom: 28px;
+  left: 0;
+  right: 0;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.32em;
+  color: var(--charcoal);
+}
+
+@media (max-width: 900px) {
+  .giftcard-inner { grid-template-columns: 1fr; gap: 48px; text-align: center; }
+  .giftcard-copy p { margin-left: auto; margin-right: auto; }
+  .giftcard-uses { justify-content: center; }
+  .giftcard-visual { order: -1; }
+  .giftcard-card { max-width: 340px; }
+}
