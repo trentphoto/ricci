@@ -5,7 +5,7 @@ mutation ProductSet($input: ProductSetInput!, $synchronous: Boolean!) {
       handle
       title
       status
-      variants(first: 10) {
+      variants(first: 50) {
         nodes {
           id
           sku

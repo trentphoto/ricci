@@ -10,7 +10,7 @@ query ProductByHandle($handle: String!) {
         mediaContentType
       }
     }
-    variants(first: 10) {
+    variants(first: 50) {
       nodes {
         id
         sku

@@ -58,8 +58,15 @@ const BUNDLES = [
     skuPrefix: "RIC-PITT",
     // TODO: confirm shipping weight incl. cold packs (12 lb of meat + 1 sausage roll)
     weightLb: 13,
+    // Second option, picked on the PDP (js/pack-mix.js). Hot & Sweet keeps the
+    // original RIC-PITT-<zone> SKUs and variant IDs; the others add an infix.
+    mixes: [
+      { key: "mixed", label: "Hot & Sweet", sku: "" },
+      { key: "hot", label: "All Hot", sku: "HOT-" },
+      { key: "sweet", label: "All Sweet", sku: "SWEET-" },
+    ],
     description:
-      "<p>5 lb sweet sausage, 5 lb hot sausage, 2 lb hand-rolled meatballs, and one of Lil's sausage rolls — " +
+      "<p>5 lb sweet and 5 lb hot sausage (or 10 lb of either), 2 lb hand-rolled meatballs, and one of Lil's sausage rolls — " +
       "the full Sunday table. Shipped frozen with shipping included in price.</p>",
     tags: ["Bundle", "Gift", "Free Shipping", "Frozen"],
   },
@@ -119,6 +126,66 @@ const BUNDLES = [
       "<p>A quart of Lil's homemade tomato sauce, made at the shop. Add it to a box and it ships frozen in the same box.</p>",
     tags: ["Sauce", "Add-on", "Frozen"],
   },
+  {
+    // Add-on only (Italian Pack buy box, js/buy-options.js) — flat price, rides in the pack's box.
+    handle: "italian-pack-addon-hot-10lb",
+    title: "Hot Italian Sausage Add-on (10 lb)",
+    base: 89.90,
+    tier: "none",
+    single: true, // one flat-price variant, no Shipping Zone option
+    skuPrefix: "RIC-ADD-HOT-10",
+    weightLb: 11,
+    productType: "Add-on",
+    status: "ACTIVE",
+    description:
+      "<p>10 lb of Ricci's uncooked hot Italian sausage rope, added to your Italian Pack. Ships frozen with your order.</p>",
+    tags: ["Sausage", "Add-on", "Frozen"],
+  },
+  {
+    // Add-on only (Italian Pack buy box, js/buy-options.js) — flat price, rides in the pack's box.
+    handle: "italian-pack-addon-hot-20lb",
+    title: "Hot Italian Sausage Add-on (20 lb)",
+    base: 159.80,
+    tier: "none",
+    single: true, // one flat-price variant, no Shipping Zone option
+    skuPrefix: "RIC-ADD-HOT-20",
+    weightLb: 21,
+    productType: "Add-on",
+    status: "ACTIVE",
+    description:
+      "<p>20 lb of Ricci's uncooked hot Italian sausage rope, added to your Italian Pack. Ships frozen with your order.</p>",
+    tags: ["Sausage", "Add-on", "Frozen"],
+  },
+  {
+    // Add-on only (Italian Pack buy box, js/buy-options.js) — flat price, rides in the pack's box.
+    handle: "italian-pack-addon-sweet-10lb",
+    title: "Sweet Italian Sausage Add-on (10 lb)",
+    base: 89.90,
+    tier: "none",
+    single: true, // one flat-price variant, no Shipping Zone option
+    skuPrefix: "RIC-ADD-SWEET-10",
+    weightLb: 11,
+    productType: "Add-on",
+    status: "ACTIVE",
+    description:
+      "<p>10 lb of Ricci's uncooked sweet Italian sausage rope, added to your Italian Pack. Ships frozen with your order.</p>",
+    tags: ["Sausage", "Add-on", "Frozen"],
+  },
+  {
+    // Add-on only (Italian Pack buy box, js/buy-options.js) — flat price, rides in the pack's box.
+    handle: "italian-pack-addon-sweet-20lb",
+    title: "Sweet Italian Sausage Add-on (20 lb)",
+    base: 159.80,
+    tier: "none",
+    single: true, // one flat-price variant, no Shipping Zone option
+    skuPrefix: "RIC-ADD-SWEET-20",
+    weightLb: 21,
+    productType: "Add-on",
+    status: "ACTIVE",
+    description:
+      "<p>20 lb of Ricci's uncooked sweet Italian sausage rope, added to your Italian Pack. Ships frozen with your order.</p>",
+    tags: ["Sausage", "Add-on", "Frozen"],
+  },
 ];
 
 function loadEnvFile(path) {
@@ -154,7 +221,26 @@ function priceFor(base, tier, zoneKey) {
   return (base + (SHIP[zoneKey]?.[tier] ?? 0)).toFixed(2);
 }
 
-function buildProductSetInput(bundle, existingId) {
+const DEFAULT_OPTION = { key: null, label: "Default Title" };
+
+/* One row per variant: every zone, times every mix if the bundle has them.
+   `single` bundles get one variant with SKU = skuPrefix. */
+function desiredVariants(bundle) {
+  if (bundle.single) {
+    return [{ mix: null, zone: DEFAULT_OPTION, sku: bundle.skuPrefix, price: bundle.base.toFixed(2) }];
+  }
+  const mixes = bundle.mixes || [null];
+  return mixes.flatMap((mix) => ZONES.map((zone) => ({
+    mix,
+    zone,
+    sku: `${bundle.skuPrefix}-${mix ? mix.sku : ""}${zone.key}`,
+    price: priceFor(bundle.base, bundle.tier, zone.key),
+  })));
+}
+
+function buildProductSetInput(bundle, existing) {
+  const existingId = existing?.id;
+  const idBySku = new Map((existing?.variants || []).map((v) => [v.sku, v.id]));
   const input = {
     title: bundle.title,
     handle: bundle.handle,
@@ -164,12 +250,20 @@ function buildProductSetInput(bundle, existingId) {
     tags: bundle.tags,
     status: bundle.status || "ACTIVE",
     productOptions: [
-      { name: "Shipping Zone", values: ZONES.map((z) => ({ name: z.label })) },
+      bundle.single
+        ? { name: "Title", values: [{ name: DEFAULT_OPTION.label }] }
+        : { name: "Shipping Zone", values: ZONES.map((z) => ({ name: z.label })) },
+      ...(bundle.mixes ? [{ name: "Mix", values: bundle.mixes.map((m) => ({ name: m.label })) }] : []),
     ],
-    variants: ZONES.map((zone) => ({
-      optionValues: [{ optionName: "Shipping Zone", name: zone.label }],
-      price: parseFloat(priceFor(bundle.base, bundle.tier, zone.key)),
-      sku: `${bundle.skuPrefix}-${zone.key}`,
+    /* Matching existing variants by SKU keeps their IDs (cart links, selling plans). */
+    variants: desiredVariants(bundle).map((d) => ({
+      ...(idBySku.has(d.sku) ? { id: idBySku.get(d.sku) } : {}),
+      optionValues: [
+        { optionName: bundle.single ? "Title" : "Shipping Zone", name: d.zone.label },
+        ...(d.mix ? [{ optionName: "Mix", name: d.mix.label }] : []),
+      ],
+      price: parseFloat(d.price),
+      sku: d.sku,
       inventoryPolicy: "CONTINUE",
     })),
   };
@@ -250,7 +344,8 @@ function normalizeProduct(node) {
       id: v.id,
       sku: v.sku,
       price: String(parseFloat(v.price).toFixed(2)),
-      option1: v.selectedOptions?.[0]?.value || "",
+      option1: v.selectedOptions?.find((o) => o.name === "Shipping Zone")?.value || v.selectedOptions?.[0]?.value || "",
+      mix: v.selectedOptions?.find((o) => o.name === "Mix")?.value || null,
     })),
   };
 }
@@ -260,10 +355,10 @@ function fetchProductByHandle(handle) {
   return normalizeProduct(data?.productByHandle);
 }
 
-function upsertProduct(bundle, existingId) {
+function upsertProduct(bundle, existing) {
   const data = runGraphQL(join(GRAPHQL, "product-set.mutation.graphql"), {
     synchronous: true,
-    input: buildProductSetInput(bundle, existingId),
+    input: buildProductSetInput(bundle, existing),
   }, { mutation: true });
   const payload = data?.productSet;
   if (payload?.userErrors?.length) {
@@ -291,10 +386,8 @@ function publishProduct(productId, publicationIds) {
 
 function verifyProduct(bundle, product) {
   const errors = [];
-  const desired = ZONES.map((z) => ({
-    sku: `${bundle.skuPrefix}-${z.key}`,
-    price: priceFor(bundle.base, bundle.tier, z.key),
-    option1: z.label,
+  const desired = desiredVariants(bundle).map((d) => ({
+    sku: d.sku, price: d.price, option1: d.zone.label, mix: d.mix ? d.mix.label : null,
   }));
   const bySku = new Map((product.variants || []).map((v) => [v.sku, v]));
 
@@ -309,7 +402,7 @@ function verifyProduct(bundle, product) {
       continue;
     }
     if (got.price !== want.price) errors.push(`${want.sku}: price ${got.price} ≠ ${want.price}`);
-    if (got.option1 !== want.option1) errors.push(`${want.sku}: option mismatch`);
+    if (got.option1 !== want.option1 || got.mix !== want.mix) errors.push(`${want.sku}: option mismatch`);
   }
 
   return { ok: errors.length === 0, errors };
@@ -318,11 +411,23 @@ function verifyProduct(bundle, product) {
 function extractVariantMap(synced) {
   const map = {};
   for (const { bundle, product } of synced) {
+    if (bundle.single) {
+      const v = product.variants?.[0];
+      map[bundle.handle] = { productId: product.id, title: bundle.title, variantId: v?.id, sku: v?.sku, price: v?.price };
+      continue;
+    }
     map[bundle.handle] = { productId: product.id, title: bundle.title, zones: {} };
+    /* `zones` stays the default mix so every existing reader keeps working;
+       `mixes.<key>` holds each mix's zone table. */
+    if (bundle.mixes) map[bundle.handle].mixes = {};
     for (const variant of product.variants || []) {
       const zoneKey = variant.sku?.split("-").pop();
       if (zoneKey && SHIP[zoneKey]) {
-        map[bundle.handle].zones[zoneKey] = {
+        const mix = bundle.mixes?.find((m) => m.label === variant.mix);
+        const tables = [];
+        if (!bundle.mixes || mix === bundle.mixes[0]) tables.push(map[bundle.handle].zones);
+        if (mix) tables.push(map[bundle.handle].mixes[mix.key] ||= {});
+        for (const t of tables) t[zoneKey] = {
           variantId: variant.id,
           sku: variant.sku,
           price: variant.price,
@@ -403,14 +508,11 @@ async function main() {
       if (DRY_RUN) {
         result.action = "dry-run";
         result.ok = true;
-        result.changes = ZONES.map((z) => ({
-          sku: `${bundle.skuPrefix}-${z.key}`,
-          price: priceFor(bundle.base, bundle.tier, z.key),
-        }));
+        result.changes = desiredVariants(bundle).map((d) => ({ sku: d.sku, price: d.price }));
       } else {
         const existing = fetchProductByHandle(bundle.handle);
         result.action = existing ? "updated" : "created";
-        const product = upsertProduct(bundle, existing?.id);
+        const product = upsertProduct(bundle, existing);
         const verified = fetchProductByHandle(bundle.handle);
         const check = verifyProduct(bundle, verified);
         result.product = verified;

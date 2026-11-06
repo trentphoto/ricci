@@ -57,6 +57,12 @@
 .px-minimal .px-hero { max-width:1000px; gap:28px 44px; }
 .px-minimal h1 { font-size:clamp(42px,5vw,64px); }
 .px-minimal .px-order { border:0; padding:0; }
+/* The order column runs long (plans, add-ons); the photo rides along with it
+   instead of leaving a tall blank under the heading. */
+@media(min-width:901px) {
+ .px-minimal .px-hero-photo { position:sticky; top:96px; align-self:start; }
+ .px-minimal .px-hero-photo img { aspect-ratio:4/5; }
+}
 .px-minimal .px-proof { background:white; }
 .px-minimal .gx-button { background:#28231e; }
 .px-minimal .gx-section { padding-block:64px; }

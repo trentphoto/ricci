@@ -37,6 +37,37 @@
       '<span class="bo-pop-list">Simmer the meatballs from your box right in it, low and slow, until they\'re cooked through. Spoon it over sausage, peppers and onions, or toss it with a pound of pasta.</span>' +
     '</span>';
 
+  /* Extra rope sausage, packed in the same box: 10 or 20 lb of each blend.
+     "Save" compares a size with the same weight in 10 lb packs (20 lb vs two
+     10s), so only the bigger size shows one. Handles must exist in
+     shopify-variants.js, or the line is left out of the cart. One flat price (no
+     zones). On a subscription they renew with the box when the add-on has a
+     plan at the same frequency (full price, like the sauce); else one-time. */
+  var SIZES = [
+    { lb: 10, price: 89.90 }, // $8.99/lb
+    { lb: 20, price: 159.80 } // $7.99/lb
+  ];
+  var SAUSAGE = [
+    { key: "hot", name: "Hot", img: "/assets/img/hot-sausage-coil-raw.webp" },
+    { key: "sweet", name: "Sweet", img: "/assets/img/sweet-sausage-coil-raw.webp" }
+  ];
+  function size(lb) { return SIZES.filter(function (z) { return z.lb === lb; })[0] || null; }
+  function addonId(key, lb) { return "italian-pack-addon-" + key + "-" + lb + "lb"; }
+  function perLb(z) { return "$" + (z.price / z.lb).toFixed(2) + "/lb"; }
+  function saving(z) { return SIZES[0].price * z.lb / SIZES[0].lb - z.price; }
+
+  function sausageTotal() {
+    return SAUSAGE.reduce(function (t, a) { var z = size(state[a.key]); return t + (z ? z.price : 0); }, 0);
+  }
+  var addonPlans = {}; // handle → its selling plans, loaded with the box's
+  function addonPlan(key) {
+    if (state.mode !== "sub" || !state[key]) return null;
+    var plan = selectedPlan();
+    var list = addonPlans[addonId(key, state[key])] || [];
+    return plan ? list.filter(function (p) { return p.weeks === plan.weeks; })[0] || null : null;
+  }
+  function sausageLb() { return (state.hot || 0) + (state.sweet || 0); }
+
   var PLANS_QUERY =
     "query($handle: String!) { product(handle: $handle) { sellingPlanGroups(first: 5) { nodes {" +
     " sellingPlans(first: 10) { nodes { id name recurringDeliveries" +
@@ -46,7 +77,7 @@
     " ... on SellingPlanFixedAmountPriceAdjustment { adjustmentAmount { amount } }" +
     " ... on SellingPlanFixedPriceAdjustment { price { amount } } } } } } } } } }";
 
-  var state = { mode: "once", planId: null, sauce: false };
+  var state = { mode: "once", planId: null, sauce: false, hot: 0, sweet: 0 };
   var plans = [];
   var saucePlans = []; // the sauce's own plans (no $20 off); matched to the box's frequency
   var boxes = [];
@@ -85,9 +116,10 @@
     var price = zonePrice();
     var plan = state.mode === "sub" ? selectedPlan() : null;
     var box = plan ? subPrice(plan, price) : price;
-    var total = box + (state.sauce ? ADDON.price : 0);
+    var total = box + (state.sauce ? ADDON.price : 0) + sausageTotal();
     var parts = [];
     if (plan) parts.push(plan.label + (price - box > 0 ? " · Save " + fmt(price - box) : ""));
+    if (sausageLb()) parts.push("+" + sausageLb() + " lb sausage");
     if (state.sauce) parts.push("Incl. sauce");
     document.querySelectorAll(".pdp-buybar.product-price, .px-buybar .product-price").forEach(function (bar) {
       var amount = bar.querySelector(".price-amount");
@@ -143,8 +175,36 @@
         '</button>' +
         '<span>Add a quart of <button type="button" class="bo-peek bo-peek-name" aria-expanded="false">Lil\'s homemade tomato sauce</button> &middot; +' + fmt(ADDON.price) +
         POP +
-        '<span class="bo-addon-sub">' + (state.sauce ? CHECK : "") + 'Ships frozen in the same box' + (state.mode === "sub" ? (sauceAutoRenews() ? " &middot; every delivery" : " &middot; this order only") : "") + '</span></span>' +
+        '<span class="bo-addon-sub">' + (state.sauce ? CHECK : "") + 'Ships frozen with your order' + (state.mode === "sub" ? (sauceAutoRenews() ? " &middot; every delivery" : " &middot; this order only") : "") + '</span></span>' +
       '</label>';
+
+    html += '<p class="bo-addon-head">Stock the freezer &middot; <strong>the more you add, the more you save</strong></p>';
+    SAUSAGE.forEach(function (a) {
+      var cur = state[a.key];
+      html +=
+        '<div class="bo-size' + (cur ? " is-on" : "") + '" role="radiogroup" aria-label="Add more ' + a.name + ' Italian sausage">' +
+          '<span class="bo-size-title"><img class="bo-addon-img" src="' + a.img + '" width="40" height="40" alt="" loading="lazy">' +
+            'Add more ' + a.name + ' Italian sausage</span>' +
+          '<span class="bo-size-opts">' +
+          [{ lb: 0 }].concat(SIZES).map(function (z) {
+            var on = cur === z.lb;
+            return '<label class="bo-pill' + (on ? " is-on" : "") + '">' +
+              '<input type="radio" class="bo-sausage" name="bo-' + a.key + '-' + n + '" value="' + z.lb + '" data-key="' + a.key + '"' + (on ? " checked" : "") + '>' +
+              (z.lb ? '<span class="bo-pill-main">' + z.lb + ' lb &middot; ' + perLb(z) + '</span>' +
+                '<span class="bo-pill-sub">' + (saving(z) > 0.005 ? 'Save ' + fmt(saving(z)) + ' &middot; Ships free!' : 'Ships free!') + '</span>' :
+                '<span class="bo-pill-main">No thanks</span>') +
+            '</label>';
+          }).join("") +
+          '</span>' +
+          (cur ? '<span class="bo-addon-sub">' + CHECK + '+' + fmt(size(cur).price) + ' &middot; Uncooked rope &middot; Ships frozen with your order' +
+            (state.mode === "sub" ? (addonPlan(a.key) ? " &middot; Every delivery &middot; Call or email to change" : " &middot; This order only") : "") + '</span>' : '') +
+        '</div>';
+    });
+    if (sausageLb()) {
+      var boxPrice = state.mode === "sub" && plan ? sub : price;
+      html += '<p class="bo-size-total">+' + sausageLb() + ' lb sausage: <strong>' + fmt(sausageTotal()) + '</strong>' +
+        ' &middot; Order total: <strong>' + fmt(boxPrice + sausageTotal() + (state.sauce ? ADDON.price : 0)) + '</strong></p>';
+    }
 
     box.innerHTML = html;
   }
@@ -155,8 +215,9 @@
     if (/^bo-mode/.test(t.name)) state.mode = t.value;
     else if (t.classList.contains("bo-freq")) { state.planId = t.value; state.mode = "sub"; }
     else if (t.classList.contains("bo-sauce")) state.sauce = t.checked;
+    else if (t.classList.contains("bo-sausage")) state[t.getAttribute("data-key")] = parseInt(t.value, 10);
     render();
-    var focus = box.querySelector(t.classList.contains("bo-freq") ? ".bo-freq" : t.name ? 'input[value="' + t.value + '"]' : ".bo-sauce");
+    var focus = box.querySelector(t.classList.contains("bo-freq") ? ".bo-freq" : /^bo-mode/.test(t.name) ? 'input[value="' + t.value + '"]' : t.classList.contains("bo-sausage") ? '.bo-sausage[name="' + t.name + '"][value="' + t.value + '"]' : ".bo-sauce");
     if (focus) focus.focus();
   }
 
@@ -195,7 +256,12 @@
     Promise.all([
       q(PLANS_QUERY, { handle: PRODUCT }).then(parsePlans),
       q(PLANS_QUERY, { handle: ADDON.id }).then(parsePlans).catch(function () { return []; })
-    ]).then(function (res) {
+    ].concat(SAUSAGE.reduce(function (all, a) {
+      return all.concat(SIZES.map(function (z) {
+        var h = addonId(a.key, z.lb);
+        return q(PLANS_QUERY, { handle: h }).then(parsePlans).then(function (p) { addonPlans[h] = p; }).catch(function () {});
+      }));
+    }, []))).then(function (res) {
       plans = res[0];
       saucePlans = res[1];
       var preferred = plans.filter(function (p) { return p.weeks === DEFAULT_WEEKS; })[0];
@@ -241,6 +307,14 @@
         out.push(sp ? { variantId: v.variantId, qty: 1, sellingPlanId: sp.id } : { variantId: v.variantId, qty: 1 });
       }
     }
+    SAUSAGE.filter(function (a) { return state[a.key]; }).forEach(function (a) {
+      var aid = addonId(a.key, state[a.key]);
+      var e = window.RicciShopifyVariants && window.RicciShopifyVariants[aid];
+      var v = e && (e.variantId ? e : e.zones && (e.zones[zone] || e.zones.A));
+      var sp = addonPlan(a.key);
+      if (v) out.push(sp ? { variantId: v.variantId, qty: 1, sellingPlanId: sp.id } : { variantId: v.variantId, qty: 1 });
+      else if (window.console) console.warn("[buy-options] no Shopify variant for " + aid + " — left out of cart");
+    });
     return out;
   }
 
@@ -272,7 +346,7 @@
 
   window.RicciBuyOptions = {
     lines: lines,
-    get: function () { return { mode: state.mode, planId: state.mode === "sub" ? (selectedPlan() || {}).id : null, sauce: state.sauce }; }
+    get: function () { return { mode: state.mode, planId: state.mode === "sub" ? (selectedPlan() || {}).id : null, sauce: state.sauce, hot: state.hot, sweet: state.sweet }; }
   };
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);

@@ -277,5 +277,33 @@ window.RicciShopifyVariants = {
         "label": "Zone E — West"
       }
     }
+  },
+  "italian-pack-addon-hot-10lb": {
+    "productId": "gid://shopify/Product/15959219699872",
+    "title": "Hot Italian Sausage Add-on (10 lb)",
+    "variantId": "gid://shopify/ProductVariant/68294810796192",
+    "sku": "RIC-ADD-HOT-10",
+    "price": "89.90"
+  },
+  "italian-pack-addon-hot-20lb": {
+    "productId": "gid://shopify/Product/15959219765408",
+    "title": "Hot Italian Sausage Add-on (20 lb)",
+    "variantId": "gid://shopify/ProductVariant/68294810828960",
+    "sku": "RIC-ADD-HOT-20",
+    "price": "159.80"
+  },
+  "italian-pack-addon-sweet-10lb": {
+    "productId": "gid://shopify/Product/15959219798176",
+    "title": "Sweet Italian Sausage Add-on (10 lb)",
+    "variantId": "gid://shopify/ProductVariant/68294811025568",
+    "sku": "RIC-ADD-SWEET-10",
+    "price": "89.90"
+  },
+  "italian-pack-addon-sweet-20lb": {
+    "productId": "gid://shopify/Product/15959219830944",
+    "title": "Sweet Italian Sausage Add-on (20 lb)",
+    "variantId": "gid://shopify/ProductVariant/68294811386016",
+    "sku": "RIC-ADD-SWEET-20",
+    "price": "159.80"
   }
 };

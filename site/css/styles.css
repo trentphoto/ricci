@@ -5757,7 +5757,7 @@ body.cater-open { overflow: hidden; }
   display: grid;
   grid-template-columns: 1.02fr 0.98fr;
   gap: 56px;
-  align-items: center;
+  align-items: start;
   max-width: var(--max-width);
   margin: 0 auto;
 }
@@ -5765,6 +5765,12 @@ body.cater-open { overflow: hidden; }
 /* One plate shot over three contents thumbs — the manifest in pictures,
    captions carrying the weights so the box is legible before any copy. */
 .pdp-gallery { display: grid; gap: 12px; }
+/* The offer column runs long (plans, add-ons), so the photos ride along
+   with it instead of floating mid-height in a column of empty space. */
+@media (min-width: 981px) {
+  .pdp-gallery { position: sticky; top: 96px; }
+  .pdp-gallery-main img { aspect-ratio: 4 / 3; }
+}
 .pdp-gallery figure {
   margin: 0;
   position: relative;
@@ -6732,6 +6738,23 @@ body.cater-open { overflow: hidden; }
 .bo-addon-img { width: 56px; height: 56px; object-fit: cover; border-radius: 4px; flex: none; }
 .bo-check { vertical-align: -2px; margin-right: 4px; }
 .bo-addon-sub { display: block; font-size: 13px; color: var(--ink-faint); margin-top: 2px; }
+.bo-addon-head { margin: 14px 0 2px; font-size: 14px; color: var(--ink-faint); }
+.bo-addon-head strong { color: var(--red); }
+.bo-size { display: grid; gap: 8px; padding: 12px 0; border-top: 1px solid rgba(0,0,0,0.08); }
+.bo-size-title { display: flex; align-items: center; gap: 10px; font-weight: 600; }
+.bo-size-title .bo-addon-img { width: 40px; height: 40px; }
+.bo-size-opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.bo-pill { position: relative; display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-height: 56px; min-width: 120px; padding: 10px 20px; border: 1px solid #888; border-radius: 999px; background: #fff; color: #111; font-size: 14px; cursor: pointer; line-height: 1.2; }
+.bo-pill input { position: absolute; opacity: 0; pointer-events: none; }
+.bo-pill-main { font-size: 15px; font-weight: 600; white-space: nowrap; }
+.bo-pill-sub { font-size: 12px; font-weight: 700; letter-spacing: 0.02em; color: var(--red); }
+.bo-pill.is-on .bo-pill-sub { color: #fff; }
+.bo-pill.is-on { background: #111; color: #fff; border-color: #111; box-shadow: 0 0 0 2px #fff, 0 0 0 4px #888; }
+.bo-pill:focus-within { outline: 2px solid var(--red); outline-offset: 3px; }
+.bo-size-total { margin: 4px 0 0; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.08); font-size: 15px; }
+.bo-size-total strong { color: var(--red); }
+:is(.pdp-buy, .pdp-final, .px-table .px-close) .bo-size-total strong { color: var(--gold); }
+:is(.pdp-buy, .pdp-final, .px-table .px-close) :is(.bo-addon-head, .bo-addon-head strong) { color: var(--gold); }
 @media (max-width: 480px) {
   .bo-opt { grid-template-columns: auto 1fr; }
   .bo-opt-price { grid-column: 2; text-align: left; }
