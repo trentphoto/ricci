@@ -1,0 +1,47 @@
+/* /pepperoni-roll — Facebook-ad landing page. Builds on styles.css tokens. */
+.lp { background: var(--cream); padding-bottom: 84px; }
+.lp-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: var(--white); border-bottom: 1px solid rgba(122,26,26,0.12); position: sticky; top: 0; z-index: 50; }
+.lp-logo img { height: 44px; width: auto; display: block; }
+.lp-header-cta { padding: 10px 18px; }
+
+.lp-hero { display: grid; grid-template-columns: 1.1fr 1fr; max-width: 1100px; margin: 0 auto; gap: 40px; padding: 40px 16px; align-items: center; }
+.lp-hero-media img { width: 100%; height: auto; display: block; border-top: 4px solid var(--gold); box-shadow: 0 20px 50px rgba(0,0,0,0.18); }
+.lp-hero-copy .eyebrow { color: var(--red); letter-spacing: 0.24em; font-size: 0.8rem; }
+.lp-hero-copy h1 { font-family: var(--font-serif); font-size: clamp(2.4rem, 6vw, 3.8rem); line-height: 1; margin: 8px 0 14px; color: var(--ink); }
+.lp-lede { font-size: 1.15rem; line-height: 1.5; margin: 0 0 14px; }
+.lp-price { font-size: 1.05rem; margin: 0 0 20px; }
+.lp-price strong { font-size: 1.5rem; color: var(--red); }
+.lp-cta { font-size: 1.1rem; padding: 16px 32px; }
+.lp-fine { font-size: 0.85rem; color: #6b5544; margin-top: 12px; }
+
+.lp-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 1100px; margin: 0 auto; padding: 8px 16px 40px; }
+.lp-step { background: var(--white); padding: 20px; border-top: 3px solid var(--red); }
+.lp-step span { font-family: var(--font-serif); font-size: 1.6rem; color: var(--gold); font-weight: 700; }
+.lp-step h3 { font-family: var(--font-serif); margin: 4px 0 6px; }
+.lp-step p { margin: 0; color: #6b5544; }
+
+.lp-form-section { max-width: 660px; margin: 0 auto; padding: 0 16px 48px; scroll-margin-top: 80px; }
+.preorder-inline { scroll-margin-top: 80px; }
+.preorder-inline .cater-dialog { margin: 0; max-width: none !important; animation: none; box-shadow: 0 20px 50px rgba(0,0,0,0.12); }
+.preorder-inline .cater-header { padding: 22px 20px 20px; }
+.preorder-inline .cater-body { background: var(--white); padding: 28px 24px; }
+.preorder-inline .cater-footer { position: static; background: var(--cream); }
+
+.lp-story, .lp-visit { max-width: 720px; margin: 0 auto; padding: 24px 16px; text-align: center; }
+.lp-story h2, .lp-visit h2 { font-family: var(--font-serif); color: var(--ink); }
+.lp-visit a { color: var(--red); font-weight: 600; }
+
+.lp-footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; max-width: 1100px; margin: 0 auto; padding: 24px 16px; font-size: 0.85rem; color: #6b5544; }
+.lp-footer a { color: inherit; }
+
+.lp-sticky { position: fixed; left: 0; right: 0; bottom: 0; padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); background: rgba(255,255,255,0.96); box-shadow: 0 -6px 20px rgba(0,0,0,0.1); z-index: 60; transition: transform 0.25s ease; }
+.lp-sticky .btn { width: 100%; padding: 14px; font-size: 1.05rem; }
+.lp-sticky.is-hidden { transform: translateY(110%); }
+
+@media (min-width: 861px) { .lp-sticky { display: none; } .lp { padding-bottom: 0; } }
+@media (max-width: 860px) {
+  .lp-hero { grid-template-columns: 1fr; gap: 20px; padding-top: 0; }
+  .lp-hero-media { margin: 0 -16px; }
+  .lp-steps { grid-template-columns: 1fr; }
+  .lp-header-cta { display: none; }
+}

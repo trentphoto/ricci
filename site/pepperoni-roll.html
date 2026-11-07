@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '27399609273050282');
+  fbq('track', 'PageView');
+  fbq('track', 'ViewContent', { content_name: 'Pepperoni Roll Pre-Order', value: 16.99, currency: 'USD' });
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=27399609273050282&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+  <script async src="/js/analytics.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reserve a Pepperoni Roll — Mondays Only | Ricci's Italian Sausage</title>
+  <meta name="description" content="Ricci's hand-rolled Pepperoni Roll, baked fresh every Monday in McKees Rocks. $16.99. Reserve online, pick up at the counter." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/landing-pepperoni.css" />
+  <link rel="icon" href="/assets/favicon/favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="/assets/favicon/apple-touch-icon.png" />
+  <link rel="canonical" href="https://riccisausage.com/pepperoni-roll" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Ricci's Italian Sausage" />
+  <meta property="og:title" content="The Pepperoni Roll — Mondays Only at Ricci's" />
+  <meta property="og:description" content="Hand-rolled, baked fresh, and gone by lunch. Reserve yours for Monday pickup in McKees Rocks." />
+  <meta property="og:url" content="https://riccisausage.com/pepperoni-roll" />
+  <meta property="og:image" content="https://riccisausage.com/assets/img/pepperoni-roll-hero.webp" />
+  <meta name="twitter:card" content="summary_large_image" />
+</head>
+<body class="lp">
+  <header class="lp-header">
+    <a href="/" class="lp-logo"><img src="/assets/logo.png" alt="Ricci's Italian Sausage"></a>
+    <button type="button" class="btn btn-primary lp-header-cta" data-open-preorder>Reserve</button>
+  </header>
+
+  <main>
+    <section class="lp-hero">
+      <div class="lp-hero-media">
+        <img src="/assets/img/pepperoni-roll-hero.webp" alt="Ricci's Pepperoni Roll, sliced" width="1200" height="900">
+      </div>
+      <div class="lp-hero-copy">
+        <span class="eyebrow">Mondays Only · McKees Rocks</span>
+        <h1>The Pepperoni Roll</h1>
+        <p class="lp-lede">Hand-rolled, baked fresh, and gone by lunch. Reserve yours now and it's waiting for you at the counter.</p>
+        <p class="lp-price"><strong>$16.99</strong> each · Pickup <span data-pickup-label>this Monday</span></p>
+        <button type="button" class="btn btn-primary lp-cta" data-open-preorder>Reserve Mine</button>
+        <p class="lp-fine">Prepaid through Square · Pickup 11:00 AM – 5:30 PM</p>
+      </div>
+    </section>
+
+    <section class="lp-steps" aria-label="How it works">
+      <div class="lp-step"><span>1</span><h3>Reserve</h3><p>Pick how many and a pickup time.</p></div>
+      <div class="lp-step"><span>2</span><h3>Pay online</h3><p>Secure Square checkout. Your roll is held for you.</p></div>
+      <div class="lp-step"><span>3</span><h3>Pick up Monday</h3><p>590 Pine Hollow Rd. Skip the line, grab it hot.</p></div>
+    </section>
+
+    <section class="lp-form-section" id="reserve">
+      <div id="preorder-inline"></div>
+    </section>
+
+    <section class="lp-story">
+      <h2>Family-made in McKees Rocks since 1945</h2>
+      <p>Same counter, same recipes, same Pine Hollow Road. The Pepperoni Roll is our Monday special, and we bake a limited batch. Reserved rolls are set aside first.</p>
+    </section>
+
+    <section class="lp-visit">
+      <h2>Pickup</h2>
+      <p><a href="https://maps.app.goo.gl/9rDvQrZiuCKRCmFE9" target="_blank" rel="noopener noreferrer">590 Pine Hollow Rd, McKees Rocks, PA 15136</a></p>
+      <p>Questions? <a href="tel:4123319531">412-331-9531</a></p>
+    </section>
+  </main>
+
+  <footer class="lp-footer">
+    <span>&copy; 2026 Ricci's Italian Sausage</span>
+    <span><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></span>
+  </footer>
+
+  <div class="lp-sticky">
+    <button type="button" class="btn btn-primary" data-open-preorder>Reserve a Pepperoni Roll · $16.99</button>
+  </div>
+
+  <script src="/js/preorder-modal.js" defer></script>
+  <script>
+    // Fill the hero pickup date to match the form's upcoming-Monday label.
+    document.addEventListener('DOMContentLoaded', function () {
+      var lbl = document.querySelector('label[for="pre-time"]');
+      var el = document.querySelector('[data-pickup-label]');
+      if (lbl && el) el.textContent = lbl.textContent.split('·').pop().trim();
+      // Hide the sticky bar once the form is on screen.
+      var form = document.getElementById('preorder-inline'), bar = document.querySelector('.lp-sticky');
+      if ('IntersectionObserver' in window && form && bar) {
+        new IntersectionObserver(function (e) { bar.classList.toggle('is-hidden', e[0].isIntersecting); }).observe(form);
+      }
+    });
+  </script>
+</body>
+</html>

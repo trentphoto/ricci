@@ -14,6 +14,10 @@
  * actually charges, so change both together.
  *
  * Reuses the .cater-* modal styles from css/styles.css.
+ *
+ * Inline mode: if the page has a #preorder-inline element (the /pepperoni-roll
+ * landing page), the form renders there instead of in a modal, and
+ * [data-open-preorder] buttons scroll to it.
  */
 (function () {
   var MONTHS = ['January','February','March','April','May','June','July',
@@ -80,17 +84,22 @@
   var pickup = nextMonday();
   var pickupLabel = headerDate(pickup);
 
+  var inlineHost = null;
+
   function buildModal() {
     if (document.getElementById('preorder-modal')) return;
+    inlineHost = document.getElementById('preorder-inline');
     var html =
-      '<div class="cater-modal" id="preorder-modal" role="dialog" aria-modal="true" aria-labelledby="preorder-title">' +
+      (inlineHost
+        ? '<div class="preorder-inline" id="preorder-modal" aria-labelledby="preorder-title">'
+        : '<div class="cater-modal" id="preorder-modal" role="dialog" aria-modal="true" aria-labelledby="preorder-title">') +
       '  <div class="cater-dialog" style="max-width:620px;">' +
       '    <div class="cater-header">' +
       '      <span class="eyebrow">Pepperoni Roll · Pre-Order</span>' +
       '      <h2 id="preorder-title">Reserve Your Pepperoni Rolls</h2>' +
       '      <p>$16.99 each. Pickup <strong>' + pickupLabel + '</strong> at 590 Pine Hollow Rd. Mondays only &mdash; reserve while they last.</p>' +
       '      <p style="font-weight:600;">Earliest pickup is 11:00 AM.</p>' +
-      '      <button type="button" class="cater-close" id="preorder-close" aria-label="Close">&times;</button>' +
+      (inlineHost ? '' : '      <button type="button" class="cater-close" id="preorder-close" aria-label="Close">&times;</button>') +
       '    </div>' +
       '    <form class="cater-body" id="preorder-form" novalidate>' +
       '      <input type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">' +
@@ -120,12 +129,18 @@
       '</div>';
     var wrap = document.createElement('div');
     wrap.innerHTML = html;
-    document.body.appendChild(wrap.firstChild);
+    (inlineHost || document.body).appendChild(wrap.firstChild);
   }
 
   function openModal() {
     var modal = document.getElementById('preorder-modal');
     if (!modal) return;
+    if (inlineHost) {
+      modal.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      var f = document.getElementById('pre-name');
+      if (f) setTimeout(function () { f.focus({ preventScroll: true }); }, 400);
+      return;
+    }
     modal.classList.add('is-open');
     document.body.classList.add('cater-open');
     var first = document.getElementById('pre-name');
@@ -188,6 +203,13 @@
     var prev = btn.textContent;
     btn.disabled = true;
     btn.textContent = 'Opening checkout…';
+    if (window.fbq) {
+      window.fbq('track', 'InitiateCheckout', {
+        value: (qty * PRICES.qty + addon * PRICES.sausage_roll_qty) / 100,
+        currency: 'USD',
+        content_name: 'Pepperoni Roll Pre-Order'
+      });
+    }
     status.textContent = '';
 
     var base = window.CRM_BASE || 'https://riccis-crm.fly.dev';
@@ -200,7 +222,7 @@
         phone: phone,
         qty: qty,
         sausage_roll_qty: addon,
-        source: 'pepperoni-preorder',
+        source: inlineHost ? 'pepperoni-landing' : 'pepperoni-preorder',
         pickup_date: isoDate(pickup),
         pickup_label: pickupLabel,
         pickup_time: time
@@ -248,11 +270,13 @@
     });
 
     var modal = document.getElementById('preorder-modal');
-    document.getElementById('preorder-close').addEventListener('click', closeModal);
-    modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
-    });
+    if (!inlineHost) {
+      document.getElementById('preorder-close').addEventListener('click', closeModal);
+      modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+      });
+    }
     document.getElementById('preorder-submit').addEventListener('click', submit);
 
     modal.querySelectorAll('.cater-qty button').forEach(function (b) {
