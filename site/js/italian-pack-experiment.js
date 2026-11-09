@@ -21,6 +21,12 @@
   window.RicciItalianPackExperiment = context;
   if (preview || bot || variants.indexOf(current) === -1) return;
 
+  // Ads that promise free meatballs link with ?offer=free: pin to that page, outside the test.
+  if (query.get("offer") === "free") {
+    if (current !== "free") location.replace(paths.free + location.search + location.hash);
+    return;
+  }
+
   var key = "ricci_italian_pack_v2";
   var saved;
   try {
