@@ -1,34 +1,25 @@
 /*
- * Ricci's — state-based all-in pricing.
+ * Ricci's — state-based shipping, shown as its own line.
  *
- * Customer picks their state (auto-detected on first visit); every perishable
- * product shows ONE price with shipping already baked in — "Free shipping to XX".
- * No "calculated at checkout." The price shown is the price charged.
+ * Every box is one price everywhere (data-base). Shipping is a separate,
+ * flat add-on by the customer's state, shown right under the price before
+ * checkout: "Free shipping to Ohio" / "+ $30 shipping to Texas".
  *
- * HOW IT WORKS
- *  - Each product-price div carries: data-base (the nearby / Group-A all-in
- *    price) and data-tier (small | med | large = box shipping weight bucket).
- *  - We look up the customer's state -> shipping group (A-E) -> a shipping
- *    add-on for that tier, and show data-base + add-on.
- *  - Group A (nearby) add-on is 0 because the listed base price already bakes
- *    in nearby shipping. Farther groups pay the delta.
- *  - Items with no data-tier (Cookbook media mail)
- *    are left untouched.
+ *  - .product-price[data-base][data-tier] blocks: price stays data-base;
+ *    the .ship-note line is rewritten for the chosen state.
+ *  - tier = box shipping-weight bucket (small | med | large).
+ *  - AK ships UPS 2nd Day Air to metro ZIPs only (inline ZIP check).
+ *    HI / PR stay closed.
  *
- * TUNING THE NUMBERS  <-- James: this is the only block you edit
- *  Run a ~box on PirateShip (FedEx 2-Day from 15136) for the 3 size buckets to
- *  each test zip, then replace the SHIP add-ons below. Test zips:
- *    A 44114 Cleveland · B 28202 Charlotte · C 29201 Columbia
- *    D 73102 Oklahoma City · E 90001 Los Angeles
- *  add-on = (actual FedEx rate to that group)  -  (actual rate to Group A)
- *  i.e. how much MORE than a nearby box that zone costs. Keep A at 0.
+ * Numbers mirror the PRD (ricci repo: business/operations/sales/ecom/
+ * shipping-pricing-prd.md §4a). Shopify shipping rates must match these.
  */
 (function () {
   "use strict";
 
-  /* State -> shipping group. Source: operations/sales/ecom/shipping-zones.md */
+  /* State -> shipping zone. */
   var GROUP = {
-    // A — Nearby
+    // A — Nearby (free)
     PA:"A", OH:"A", WV:"A", NY:"A", NJ:"A", MD:"A", DE:"A", VA:"A", DC:"A",
     // B — Mid
     MA:"B", CT:"B", RI:"B", VT:"B", NH:"B", ME:"B", NC:"B", KY:"B",
@@ -39,19 +30,40 @@
     TX:"D", OK:"D", KS:"D", NE:"D", ND:"D", SD:"D", CO:"D", WY:"D", MT:"D", NM:"D",
     // E — West Coast
     CA:"E", OR:"E", WA:"E", ID:"E", UT:"E", NV:"E", AZ:"E",
+    // Alaska metro — UPS 2nd Day Air
+    AK:"AK",
     // No ship — cold chain not viable
-    AK:"X", HI:"X"
+    HI:"X", PR:"X"
   };
 
-  /* PLACEHOLDER shipping add-ons ($) by group and box tier. Replace with real
-     PirateShip deltas. Group A = 0 (baked into base price). */
+  /* Shipping add-on ($) per box, by zone and tier. null = can't ship that tier
+     there (sauce-only orders don't go to AK). AK is PROPOSED pending a real
+     Pirate Ship quote to 99501 / 99701. */
   var SHIP = {
-    A: { small: 0,  med: 0,  large: 0  },
-    B: { small: 6,  med: 10, large: 10 },
-    C: { small: 12, med: 20, large: 30 },
-    D: { small: 18, med: 30, large: 40 },
-    E: { small: 24, med: 50, large: 50 }
+    A:  { small: 0,    med: 0,   large: 0   },
+    B:  { small: 0,    med: 20,  large: 30  },
+    C:  { small: 0,    med: 50,  large: 60  },
+    D:  { small: 0,    med: 60,  large: 70  },
+    E:  { small: 0,    med: 80,  large: 90  },
+    AK: { small: null, med: 139, large: 179 }
   };
+
+  /* AK ZIPs UPS 2nd Day Air treats as metro (zone 224): Anchorage / Eagle
+     River / JBER (995xx), Mat-Su + Kenai road system, Fairbanks, Juneau.
+     Bush / rural AK is closed. VERIFY against the UPS zone chart before
+     opening AK. */
+  var AK_METRO_ZIPS = ["99611", "99615", "99623", "99645", "99652", "99654",
+    "99664", "99669", "99672", "99674", "99687", "99688"];
+
+  function akZipOk(zip) {
+    zip = String(zip || "").trim().slice(0, 5);
+    if (!/^\d{5}$/.test(zip)) return false;
+    var n = +zip;
+    if (n >= 99501 && n <= 99599) return true;   // Anchorage area
+    if (n >= 99701 && n <= 99716) return true;   // Fairbanks / North Pole
+    if (n >= 99801 && n <= 99812) return true;   // Juneau
+    return AK_METRO_ZIPS.indexOf(zip) !== -1;    // Mat-Su, Kenai, Kodiak
+  }
 
   var STATE_NAMES = {
     AL:"Alabama",AK:"Alaska",AZ:"Arizona",AR:"Arkansas",CA:"California",
@@ -62,11 +74,12 @@
     MT:"Montana",NE:"Nebraska",NV:"Nevada",NH:"New Hampshire",NJ:"New Jersey",
     NM:"New Mexico",NY:"New York",NC:"North Carolina",ND:"North Dakota",OH:"Ohio",
     OK:"Oklahoma",OR:"Oregon",PA:"Pennsylvania",RI:"Rhode Island",SC:"South Carolina",
-    SD:"South Dakota",TN:"Tennessee",TX:"Texas",UT:"Utah",VT:"Vermont",VA:"Virginia",
+    SD:"South Dakota",PR:"Puerto Rico",TN:"Tennessee",TX:"Texas",UT:"Utah",VT:"Vermont",VA:"Virginia",
     WA:"Washington",WV:"West Virginia",WI:"Wisconsin",WY:"Wyoming"
   };
 
   var STORE_KEY = "ricci_ship_state";
+  var ZIP_KEY = "ricci_ship_zip";
   var DEFAULT_STATE = "PA";
 
   function fmt(n) {
@@ -74,14 +87,43 @@
     return "$" + (Math.round(n * 100) / 100).toFixed(2).replace(/\.00$/, "");
   }
 
-  function priceFor(base, tier, group) {
-    var add = (SHIP[group] && SHIP[group][tier]) || 0;
-    return base + add;
+  /* Add-on for one box: a number, or null when that box can't ship there. */
+  function addOn(tier, group) {
+    if (!group || group === "X" || !SHIP[group]) return null;
+    var v = SHIP[group][tier || "med"];
+    return v === undefined ? 0 : v;
+  }
+
+  function getZip() {
+    try { return localStorage.getItem(ZIP_KEY) || ""; } catch (e) { return ""; }
+  }
+
+  /* AK needs a metro ZIP before anything can be bought. */
+  function canShip(state) {
+    var g = GROUP[state];
+    if (!g || g === "X") return false;
+    if (g === "AK") return akZipOk(getZip());
+    return true;
+  }
+
+  function noteFor(state, tier) {
+    var group = GROUP[state];
+    var name = STATE_NAMES[state] || state;
+    if (group === "X") return "We can't ship frozen to " + name + " yet";
+    var add = addOn(tier, group);
+    if (add === null) return "Ships to Alaska only with a box";
+    if (group === "AK") {
+      var zip = getZip();
+      if (!zip) return "+ " + fmt(add) + " UPS 2nd Day Air to Alaska · Enter your ZIP";
+      if (!akZipOk(zip)) return "We can't reach ZIP " + zip + " yet (Alaska metro only)";
+      return "+ " + fmt(add) + " UPS 2nd Day Air to Alaska";
+    }
+    if (add === 0) return "Free shipping to " + name;
+    return "+ " + fmt(add) + " shipping to " + name;
   }
 
   function render(state) {
     var group = GROUP[state];
-    var noShip = group === "X";
     var name = STATE_NAMES[state] || state;
 
     document.querySelectorAll(".product-price[data-tier]").forEach(function (el) {
@@ -90,27 +132,99 @@
       var amountEl = el.querySelector(".price-amount");
       var noteEl = el.querySelector(".ship-note");
       if (isNaN(base) || !amountEl) return;
-
-      if (noShip) {
-        amountEl.textContent = fmt(base);
-        if (noteEl) noteEl.textContent = "We can't cold-ship to " + name + " yet";
-        el.classList.add("is-noship");
-        return;
-      }
-      el.classList.remove("is-noship");
-      amountEl.textContent = fmt(priceFor(base, tier, group));
-      if (noteEl) noteEl.textContent = "Free shipping to " + state + " · Ships frozen";
+      amountEl.textContent = fmt(base);
+      el.classList.toggle("is-noship", !canShip(state) || addOn(tier, group) === null);
+      if (noteEl) noteEl.textContent = noteFor(state, tier);
     });
 
-    // reflect selection in the picker + label
+    renderBreakdowns(state);
+
     var sel = document.getElementById("ship-state");
     if (sel && sel.value !== state) sel.value = state;
     var lbl = document.getElementById("ship-state-name");
     if (lbl) lbl.textContent = name;
+    renderZip(state);
 
     document.dispatchEvent(new CustomEvent("ricci:ship-state", {
-      detail: { state: state, group: group, canShip: !noShip, name: name }
+      detail: { state: state, group: group, canShip: canShip(state), name: name }
     }));
+  }
+
+  /* Line-by-line total under each main product price (not cards / sticky bars):
+     box, any add-ons (buy-options.js), shipping, total. */
+  function renderBreakdowns(state) {
+    state = state || getState();
+    var group = GROUP[state];
+    var name = STATE_NAMES[state] || state;
+    document.querySelectorAll("main .product-price[data-tier]").forEach(function (el) {
+      if (el.closest(".product-card, .pdp-buybar, .px-buybar")) return;
+      var base = parseFloat(el.getAttribute("data-base"));
+      if (isNaN(base)) return;
+      var bd = el.__breakdown;
+      if (!bd) {
+        bd = document.createElement("dl");
+        bd.className = "price-breakdown";
+        bd.setAttribute("aria-live", "polite");
+        el.__breakdown = bd;
+      }
+      var after = el.nextElementSibling && el.nextElementSibling.classList.contains("buy-options") ? el.nextElementSibling : el;
+      if (after.nextElementSibling !== bd) after.parentNode.insertBefore(bd, after.nextSibling);
+
+      var bo = window.RicciBuyOptions && window.RicciBuyOptions.summary && window.RicciBuyOptions.summary();
+      var lines = bo ? bo.lines : [{ label: "Box", amount: base }];
+      var sub = lines.reduce(function (t, l) { return t + l.amount; }, 0);
+      var add = canShip(state) ? addOn(el.getAttribute("data-tier"), group) : null;
+      var shipLabel = group === "AK" ? "UPS 2nd Day Air to Alaska" : "Shipping to " + name;
+      var html = lines.map(function (l) {
+        return "<div><dt>" + l.label + "</dt><dd>" + fmt(l.amount) + "</dd></div>";
+      }).join("");
+      if (add === null) {
+        html += '<div class="pb-ship"><dt>' + shipLabel + '</dt><dd>' +
+          (group === "AK" ? (getZip() ? "Not available" : "Enter ZIP") : "Not available") + "</dd></div>";
+      } else {
+        html += '<div class="pb-ship"><dt>' + shipLabel + "</dt><dd>" + (add === 0 ? "Free" : fmt(add)) + "</dd></div>" +
+          '<div class="pb-total"><dt>Total</dt><dd>' + fmt(sub + add) + "</dd></div>";
+      }
+      bd.innerHTML = html;
+    });
+  }
+
+  /* Inline ZIP field under the state picker, only when AK is chosen. */
+  function renderZip(state) {
+    var inner = document.querySelector(".ship-selector-inner");
+    if (!inner) return;
+    var box = document.getElementById("ship-zip-box");
+    if (GROUP[state] !== "AK") { if (box) box.hidden = true; return; }
+    if (!box) {
+      box = document.createElement("div");
+      box.id = "ship-zip-box";
+      box.className = "ship-zip";
+      box.innerHTML =
+        '<label for="ship-zip">Alaska ZIP</label>' +
+        '<input id="ship-zip" inputmode="numeric" maxlength="5" autocomplete="postal-code" placeholder="99501">' +
+        '<p class="ship-zip-msg" aria-live="polite"></p>';
+      inner.appendChild(box);
+      var input = box.querySelector("input");
+      input.addEventListener("input", function () {
+        var v = input.value.replace(/\D/g, "").slice(0, 5);
+        input.value = v;
+        if (v.length === 5 || v.length === 0) {
+          try { localStorage.setItem(ZIP_KEY, v); } catch (e) {}
+          render(getState());
+        }
+      });
+    }
+    box.hidden = false;
+    var zip = getZip();
+    var input2 = box.querySelector("input");
+    if (document.activeElement !== input2) input2.value = zip;
+    var msg = box.querySelector(".ship-zip-msg");
+    msg.textContent = !zip
+      ? "We ship UPS 2nd Day Air to Anchorage, Fairbanks, Juneau, Mat-Su and Kenai ZIPs."
+      : akZipOk(zip)
+        ? "We can ship there. Alaska boxes go out Mondays by UPS 2nd Day Air."
+        : "Sorry, we can't reach that ZIP yet. Call 412-331-9531 and we'll talk options.";
+    box.classList.toggle("is-bad", !!zip && !akZipOk(zip));
   }
 
   function getState() {
@@ -118,39 +232,51 @@
     return start && GROUP[start] ? start : DEFAULT_STATE;
   }
 
-  function canShip(state) {
-    return GROUP[state] !== "X";
+  /* Shipping for a list of {tier, qty}: number, or null if any box can't go. */
+  function shippingFor(items, state) {
+    state = state || getState();
+    if (!canShip(state)) return null;
+    var group = GROUP[state], total = 0;
+    for (var i = 0; i < items.length; i++) {
+      var add = addOn(items[i].tier, group);
+      if (add === null) return null;
+      total += add * (items[i].qty || 1);
+    }
+    return total;
   }
 
-  function priceForState(base, tier, state) {
-    var group = GROUP[state];
-    if (!group || group === "X") return base;
-    return priceFor(base, tier, group);
-  }
+  var ZONE_NAMES = { A: "Nearby", B: "Mid", C: "Southeast / Plains", D: "South Central / Mountain", E: "West Coast", AK: "Alaska metro · UPS 2nd Day Air" };
 
-  var ZONE_NAMES = { A: "Nearby", B: "Mid", C: "Southeast / Plains", D: "South Central / Mountain", E: "West Coast" };
-
-  /* "View shipping zones" link + modal, added under any #ship-state picker.
-     Totals come from the page's product price when the page sells one box;
-     multi-product pages just list which states fall in each zone. */
+  /* "What shipping costs" link + modal under any #ship-state picker. */
   function zonesModal() {
     var inner = document.querySelector(".ship-selector-inner");
     if (!inner || document.getElementById("zones-dialog")) return;
 
-    var priced = {};
+    var tiers = {};
     document.querySelectorAll(".product-price[data-tier]").forEach(function (el) {
-      priced[el.getAttribute("data-base") + "|" + el.getAttribute("data-tier")] = true;
+      tiers[el.getAttribute("data-tier")] = true;
     });
-    var keys = Object.keys(priced);
-    var one = keys.length === 1 ? keys[0].split("|") : null;
+    var oneTier = Object.keys(tiers).length === 1 ? Object.keys(tiers)[0] : null;
+
+    function cost(g) {
+      if (oneTier) {
+        var a = addOn(oneTier, g);
+        return a === 0 ? "Free" : "+ " + fmt(a);
+      }
+      var m = addOn("med", g), l = addOn("large", g);
+      if (!m && !l) return "Free";
+      return "+ " + fmt(m) + (l !== m ? " (Legacy + " + fmt(l) + ")" : "");
+    }
 
     var rows = Object.keys(ZONE_NAMES).map(function (g) {
-      var states = Object.keys(GROUP).filter(function (c) { return GROUP[c] === g; })
-        .sort(function (a, b) { return STATE_NAMES[a].localeCompare(STATE_NAMES[b]); })
-        .map(function (c) { return STATE_NAMES[c]; }).join(", ");
-      var price = one ? '<span class="zones-price">' + fmt(priceFor(parseFloat(one[0]), one[1], g)) + "</span>" : "";
-      return '<li data-zone="' + g + '"><div class="zones-head"><strong>Zone ' + g + " · " + ZONE_NAMES[g] +
-        "</strong>" + price + '</div><p>' + states + "</p></li>";
+      var states = g === "AK"
+        ? "Anchorage, Fairbanks, Juneau, Mat-Su and Kenai ZIPs. Ships Mondays."
+        : Object.keys(GROUP).filter(function (c) { return GROUP[c] === g; })
+          .sort(function (a, b) { return STATE_NAMES[a].localeCompare(STATE_NAMES[b]); })
+          .map(function (c) { return STATE_NAMES[c]; }).join(", ");
+      return '<li data-zone="' + g + '"><div class="zones-head"><strong>' +
+        (g === "AK" ? "" : "Zone " + g + " · ") + ZONE_NAMES[g] +
+        '</strong><span class="zones-price">' + cost(g) + "</span></div><p>" + states + "</p></li>";
     }).join("");
 
     var dlg = document.createElement("dialog");
@@ -159,18 +285,16 @@
     dlg.setAttribute("aria-labelledby", "zones-title");
     dlg.innerHTML =
       '<button type="button" class="zones-close" aria-label="Close">&times;</button>' +
-      '<h2 id="zones-title">Shipping zones</h2>' +
-      "<p class=\"zones-intro\">" + (one
-        ? "Every price includes shipping. Your price depends on the zone you ship to."
-        : "Every price includes shipping. Prices go up slightly the farther the box travels.") + "</p>" +
+      '<h2 id="zones-title">What shipping costs</h2>' +
+      '<p class="zones-intro">One price for the box everywhere. Shipping is a flat amount per box by state, shown before checkout.</p>' +
       '<ul class="zones-list">' + rows + "</ul>" +
-      '<p class="zones-foot">We can’t cold-ship to Alaska or Hawaii yet.</p>';
+      '<p class="zones-foot">We can’t ship frozen to Hawaii, Puerto Rico or rural Alaska yet.</p>';
     document.body.appendChild(dlg);
 
     var link = document.createElement("button");
     link.type = "button";
     link.className = "zones-link";
-    link.textContent = "View shipping zones";
+    link.textContent = "What shipping costs";
     inner.appendChild(link);
 
     link.addEventListener("click", function () {
@@ -188,7 +312,14 @@
     getState: getState,
     getGroup: function (state) { return GROUP[state || getState()] || null; },
     canShip: canShip,
-    priceFor: priceForState,
+    /* Box price no longer varies by state; kept for older callers. */
+    priceFor: function (base) { return base; },
+    addOn: function (tier, state) { return addOn(tier, GROUP[state || getState()]); },
+    shippingFor: shippingFor,
+    refresh: function () { renderBreakdowns(getState()); },
+    note: noteFor,
+    zip: getZip,
+    akZipOk: akZipOk,
     stateName: function (code) { return STATE_NAMES[code] || code; }
   };
 

@@ -87,8 +87,7 @@
   }
 
   function zonePrice() {
-    if (!window.RicciShipping) return BASE;
-    return window.RicciShipping.priceFor(BASE, TIER, window.RicciShipping.getState());
+    return BASE; // box price is the same in every state; shipping is its own line
   }
 
   function subPrice(plan, price) {
@@ -108,6 +107,20 @@
   function render() {
     boxes.forEach(renderBox);
     renderBars();
+    if (window.RicciShipping && window.RicciShipping.refresh) window.RicciShipping.refresh();
+  }
+
+  /* Line items for shipping.js's price breakdown. */
+  function summary() {
+    if (!boxes.length) return null;
+    var price = zonePrice();
+    var plan = state.mode === "sub" ? selectedPlan() : null;
+    var out = [{ label: plan ? "Box · " + plan.label : "Box", amount: plan ? subPrice(plan, price) : price }];
+    if (state.sauce) out.push({ label: "Lil's sauce (1 qt)", amount: ADDON.price });
+    SAUSAGE.forEach(function (a) {
+      if (state[a.key]) out.push({ label: "+" + state[a.key] + " lb " + a.name + " sausage", amount: size(state[a.key]).price });
+    });
+    return { lines: out };
   }
 
   /* Sticky buy bars follow the choice: total for what's selected, plus a short
@@ -118,6 +131,12 @@
     var box = plan ? subPrice(plan, price) : price;
     var total = box + (state.sauce ? ADDON.price : 0) + sausageTotal();
     var parts = [];
+    var rs = window.RicciShipping;
+    var ship = rs && rs.canShip(rs.getState()) ? rs.addOn(TIER) : null;
+    if (ship !== null && (state.mode === "sub" || state.sauce || sausageLb())) {
+      total += ship;
+      parts.push(ship ? "Total incl. " + fmt(ship) + " shipping" : "Total · Free shipping");
+    }
     if (plan) parts.push(plan.label + (price - box > 0 ? " · Save " + fmt(price - box) : ""));
     if (sausageLb()) parts.push("+" + sausageLb() + " lb sausage");
     if (state.sauce) parts.push("Incl. sauce");
@@ -200,12 +219,6 @@
             (state.mode === "sub" ? (addonPlan(a.key) ? " &middot; Every delivery &middot; Call or email to change" : " &middot; This order only") : "") + '</span>' : '') +
         '</div>';
     });
-    if (sausageLb()) {
-      var boxPrice = state.mode === "sub" && plan ? sub : price;
-      html += '<p class="bo-size-total">+' + sausageLb() + ' lb sausage: <strong>' + fmt(sausageTotal()) + '</strong>' +
-        ' &middot; Order total: <strong>' + fmt(boxPrice + sausageTotal() + (state.sauce ? ADDON.price : 0)) + '</strong></p>';
-    }
-
     box.innerHTML = html;
   }
 
@@ -346,6 +359,7 @@
 
   window.RicciBuyOptions = {
     lines: lines,
+    summary: summary,
     get: function () { return { mode: state.mode, planId: state.mode === "sub" ? (selectedPlan() || {}).id : null, sauce: state.sauce, hot: state.hot, sweet: state.sweet }; }
   };
 

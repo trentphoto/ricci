@@ -2,8 +2,8 @@
  * Ricci's cart — localStorage cart + nav dropdown.
  *
  * Mark any button or link with [data-add-to-cart] and data-id (product slug).
- * Price is read from the nearest .price-amount / .product-price-lg on click so
- * state-based shipping prices on shop.html stay in sync.
+ * Price is the box price (same in every state). Shipping is its own line in
+ * the dropdown, from shipping.js add-ons by state and each item's tier.
  *
  * window.RicciCart.add(id, opts) / .remove(id) / .open() / .get()
  */
@@ -21,7 +21,7 @@
     SC:"C", GA:"C", FL:"C", AL:"C", MS:"C", MO:"C", AR:"C", LA:"C", MN:"C", IA:"C",
     TX:"D", OK:"D", KS:"D", NE:"D", SD:"D", ND:"D", CO:"D", WY:"D", MT:"D", NM:"D",
     CA:"E", OR:"E", WA:"E", ID:"E", UT:"E", NV:"E", AZ:"E",
-    AK:"X", HI:"X"
+    AK:"AK", HI:"X", PR:"X"
   };
 
   var variantsLoading = false;
@@ -92,9 +92,6 @@
   function pricedForState(id, state) {
     var product = CATALOG[id];
     if (!product) return null;
-    if (window.RicciShipping) {
-      return window.RicciShipping.priceFor(product.base, product.tier, state);
-    }
     return product.base;
   }
 
@@ -118,18 +115,30 @@
     };
   }
 
+  /* Until Shopify has the flat (zone-less) variants, the zone-A variant is the
+     base-price one. Shipping itself comes from Shopify shipping rates. */
   function checkoutZone() {
     var state;
     if (window.RicciShipping) {
       state = window.RicciShipping.getState();
-      if (!window.RicciShipping.canShip(state)) return null;
-      return window.RicciShipping.getGroup(state);
+      return window.RicciShipping.canShip(state) && shippingTotal() !== null ? "A" : null;
     }
     try { state = localStorage.getItem(SHIP_STATE_KEY); } catch (e) {}
-    state = state || "PA";
-    var zone = STATE_ZONE[state];
-    if (zone === "X") return null;
-    return zone || "A";
+    var zone = STATE_ZONE[state || "PA"];
+    return zone && zone !== "X" && zone !== "AK" ? "A" : null;
+  }
+
+  /* Tier of each cart line: saved on add, else the catalog, else "none" (no add-on). */
+  function itemTier(item) {
+    return item.tier || (CATALOG[item.id] && CATALOG[item.id].tier) || "none";
+  }
+
+  function shippingTotal(items) {
+    items = items || getCart();
+    if (!window.RicciShipping) return null;
+    return window.RicciShipping.shippingFor(items.map(function (it) {
+      return { tier: itemTier(it), qty: it.qty || 1 };
+    }));
   }
 
   function variantNumericId(gid) {
@@ -168,6 +177,15 @@
     if (window.RicciShopifyCart || document.querySelector('script[src$="js/shopify-cart.js"]')) return;
     var s = document.createElement("script");
     s.src = basePrefix() + "js/shopify-cart.js";
+    document.head.appendChild(s);
+  }
+
+  /* Shipping math lives in shipping.js; pull it onto pages without a picker. */
+  function loadShipping() {
+    if (window.RicciShipping || document.querySelector('script[src$="js/shipping.js"]')) return;
+    var s = document.createElement("script");
+    s.src = basePrefix() + "js/shipping.js";
+    s.onload = function () { renderPanel(); };
     document.head.appendChild(s);
   }
 
@@ -254,6 +272,13 @@
     return parsePrice(btn.getAttribute("data-price"));
   }
 
+  function tierFromContext(btn) {
+    if (btn.getAttribute("data-tier")) return btn.getAttribute("data-tier");
+    var scope = btn.closest(".product-card, .product-hero-body, .product-card-footer");
+    var el = scope && scope.querySelector(".product-price[data-tier]");
+    return el ? el.getAttribute("data-tier") : null;
+  }
+
   function productName(id, btn) {
     if (btn && btn.getAttribute("data-name")) return btn.getAttribute("data-name");
     if (CATALOG[id]) return CATALOG[id].name;
@@ -280,13 +305,15 @@
     if (existing) {
       existing.qty = (existing.qty || 1) + (opts.qty || 1);
       existing.price = price;
+      if (opts.tier) existing.tier = opts.tier;
     } else {
       items.push({
         id: id,
         name: opts.name || (CATALOG[id] && CATALOG[id].name) || id,
         price: price,
         url: opts.url || productUrl(id),
-        qty: opts.qty || 1
+        qty: opts.qty || 1,
+        tier: opts.tier || (CATALOG[id] && CATALOG[id].tier) || "none"
       });
     }
     saveCart(items);
@@ -330,17 +357,30 @@
         '</li>';
     });
     html += '</ul>';
-    html += '<p class="cart-pop-total">Subtotal · ' + fmt(cartTotal(items)) + '</p>';
-
     var ship = shipContext();
-    if (ship.state && ship.canShip) {
-      html += '<p class="cart-pop-sub">Prices include free shipping to ' + escapeHtml(ship.name) + '.</p>';
+    var sub = cartTotal(items);
+    var shipping = ship.canShip ? shippingTotal(items) : null;
+    var isAK = window.RicciShipping && window.RicciShipping.getGroup(ship.state) === "AK";
+    html += '<dl class="cart-pop-totals">' +
+      '<div><dt>Subtotal</dt><dd>' + fmt(sub) + '</dd></div>';
+    if (shipping !== null) {
+      html += '<div><dt>' + (isAK ? 'UPS 2nd Day Air to Alaska' : 'Shipping to ' + escapeHtml(ship.name)) + '</dt><dd>' +
+        (shipping === 0 ? 'Free' : fmt(shipping)) + '</dd></div>' +
+        '<div class="cart-pop-grand"><dt>Total before tax</dt><dd>' + fmt(sub + shipping) + '</dd></div>';
+    }
+    html += '</dl>';
+
+    if (shipping !== null) {
+      if (isAK) html += '<p class="cart-pop-sub">Alaska boxes ship Mondays.</p>';
       html += '<button type="button" class="btn btn-primary cart-pop-btn" data-checkout>Checkout</button>';
-    } else if (ship.state && !ship.canShip) {
-      html += '<p class="cart-pop-sub cart-pop-sub--warn">We can\'t cold-ship to ' + escapeHtml(ship.name) + ' yet. Change your state on the shop page or call 412-331-9531.</p>';
+    } else if (isAK) {
+      html += '<p class="cart-pop-sub cart-pop-sub--warn">' + (window.RicciShipping.zip()
+        ? 'We can\'t reach that Alaska ZIP yet (Anchorage, Fairbanks, Juneau, Mat-Su and Kenai only). Call 412-331-9531 to talk options.'
+        : 'Enter your Alaska ZIP on the shop page to see shipping.') + '</p>';
+    } else if (ship.canShip) {
+      html += '<p class="cart-pop-sub cart-pop-sub--warn">Something in your cart can\'t ship to ' + escapeHtml(ship.name) + ' on its own. Add a box or call 412-331-9531.</p>';
     } else {
-      html += '<p class="cart-pop-sub">Shipping is included in bundle prices.</p>';
-      html += '<button type="button" class="btn btn-primary cart-pop-btn" data-checkout>Checkout</button>';
+      html += '<p class="cart-pop-sub cart-pop-sub--warn">We can\'t ship frozen to ' + escapeHtml(ship.name) + ' yet. Change your state on the shop page or call 412-331-9531.</p>';
     }
 
     html += '<a href="' + base + 'shop.html" class="cart-pop-continue">Continue shopping</a>';
@@ -412,6 +452,7 @@
         addItem(id, {
           name: productName(id, btn),
           price: priceFromContext(btn),
+          tier: tierFromContext(btn),
           url: productUrl(id)
         });
         openCart();
@@ -450,6 +491,7 @@
     renderPanel();
     updateNavCount();
     loadShopifyCart();
+    loadShipping();
     whenVariantsReady(function () { /* variants ready for checkout */ });
 
     cartTrigger.addEventListener("click", function (e) {

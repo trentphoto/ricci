@@ -1275,7 +1275,8 @@ body.nav-drawer-open .nav-backdrop {
 }
 .product-card-tag {
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: 0.72rem;
+  line-height: 1.6;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--oxblood);
@@ -1333,10 +1334,12 @@ body.nav-drawer-open .nav-backdrop {
 .product-price .ship-note {
   display: block;
   font-family: var(--font-sans);
-  font-size: 0.85rem;
-  color: #999;
-  font-weight: 400;
-  margin-top: 4px;
+  font-size: 1rem;
+  line-height: 1.35;
+  color: var(--charcoal);
+  font-weight: 600;
+  margin-top: 6px;
+  text-wrap: balance;
 }
 .product-price.is-noship .price-amount { opacity: 0.45; }
 .product-price.is-noship .ship-note { color: var(--oxblood); }
@@ -6876,6 +6879,28 @@ body.cater-open { overflow: hidden; }
 .pdp-buy .zones-link { color: var(--gold); }
 .pdp-buy .zones-link:hover { color: var(--white); }
 
+/* Alaska ZIP check under the state picker (js/shipping.js) */
+.ship-zip { flex-basis: 100%; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; }
+.ship-zip[hidden] { display: none; }
+.ship-zip label { font-weight: 700; font-size: 0.9em; }
+.ship-zip input {
+  width: 7.5em; padding: 8px 10px; font: inherit; border: 1px solid var(--cream-edge);
+  border-radius: 6px; background: var(--white); color: var(--ink);
+}
+.ship-zip.is-bad input { border-color: var(--red); }
+.ship-zip-msg { flex-basis: 100%; margin: 0; font-size: 0.88em; opacity: 0.85; }
+.ship-zip.is-bad .ship-zip-msg { color: var(--red); opacity: 1; }
+.pdp-buy .ship-zip.is-bad .ship-zip-msg { color: var(--gold); }
+
+/* Cart dropdown: subtotal / shipping / total */
+.cart-pop-totals { margin: 0 0 8px; }
+.cart-pop-totals div { display: flex; justify-content: space-between; gap: 12px; font-size: 0.92rem; padding: 2px 0; }
+.cart-pop-totals dt, .cart-pop-totals dd { margin: 0; }
+.cart-pop-totals .cart-pop-grand {
+  font-family: var(--font-serif); font-weight: 700; font-size: 1.05rem; color: var(--charcoal);
+  border-top: 1px solid var(--cream-edge); margin-top: 4px; padding-top: 6px;
+}
+
 /* Review page (review.html) */
 .review-card { max-width: 560px; margin: 0 auto; }
 .review-card form > label, .review-row label { display: block; font-weight: 600; margin: 18px 0 6px; }
@@ -7023,3 +7048,24 @@ a.order-option { text-decoration: none; }
   .giftcard-visual { order: -1; }
   .giftcard-card { max-width: 340px; }
 }
+
+/* shipping.html rate table */
+.ship-rates { width: 100%; border-collapse: collapse; margin: 8px 0 12px; font-size: 0.95em; }
+.ship-rates th, .ship-rates td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--cream-edge); vertical-align: top; }
+.ship-rates td + td, .ship-rates th + th { white-space: nowrap; }
+
+/* Line-by-line total under the main product price (js/shipping.js) */
+.price-breakdown {
+  margin: 14px 0 16px; padding: 12px 14px; max-width: 420px;
+  border: 1px solid color-mix(in srgb, currentColor 22%, transparent); border-radius: 8px;
+  background: color-mix(in srgb, currentColor 5%, transparent);
+  color: inherit; font-family: var(--font-sans); font-size: 1.02rem;
+}
+.price-breakdown div { display: flex; justify-content: space-between; gap: 16px; padding: 3px 0; }
+.price-breakdown dt, .price-breakdown dd { margin: 0; }
+.price-breakdown dd { font-weight: 600; white-space: nowrap; }
+.price-breakdown .pb-total {
+  border-top: 1px solid color-mix(in srgb, currentColor 22%, transparent); margin-top: 6px; padding-top: 8px;
+  font-family: var(--font-serif); font-weight: 700; font-size: 1.2rem;
+}
+.price-breakdown .pb-total dd { font-weight: 700; }

@@ -82,7 +82,16 @@
       attributes: attributes()
     };
     var email = read(EMAIL_KEY);
-    if (email) input.buyerIdentity = { email: email };
+    input.buyerIdentity = email ? { email: email } : {};
+    /* Preselect the state so checkout opens with that state's shipping rate. */
+    var ship = window.RicciShipping;
+    if (ship) {
+      var addr = { country: "US", provinceCode: ship.getState() };
+      if (ship.getGroup() === "AK" && ship.zip()) addr.zip = ship.zip();
+      input.buyerIdentity.countryCode = "US";
+      input.buyerIdentity.deliveryAddressPreferences = [{ deliveryAddress: addr }];
+      input.attributes.push({ key: "ship_state", value: ship.getState() });
+    }
 
     return gql(CART_CREATE, { input: input })
       .then(function (json) {

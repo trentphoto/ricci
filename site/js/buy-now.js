@@ -10,8 +10,9 @@
  * Coexists with cart.js: this handler owns [data-buy-now], cart.js owns
  * [data-add-to-cart] and the nav cart. Don't put both on one button.
  *
- * AK and HI are zone X — no cold-ship, no variant. Those get told to call
- * rather than sent to a checkout priced for somewhere else.
+ * Box price is the same everywhere; Shopify adds shipping by state. Until the
+ * flat variants exist, the zone-A variant is the base-price one. HI/PR and
+ * non-metro Alaska ZIPs are told to call.
  */
 (function () {
   "use strict";
@@ -28,7 +29,7 @@
     SC:"C", GA:"C", FL:"C", AL:"C", MS:"C", MO:"C", AR:"C", LA:"C", MN:"C", IA:"C",
     TX:"D", OK:"D", KS:"D", NE:"D", SD:"D", ND:"D", CO:"D", WY:"D", MT:"D", NM:"D",
     CA:"E", OR:"E", WA:"E", ID:"E", UT:"E", NV:"E", AZ:"E",
-    AK:"X", HI:"X"
+    AK:"AK", HI:"X", PR:"X"
   };
 
   var variantsLoading = false;
@@ -65,14 +66,11 @@
     var state;
     if (window.RicciShipping) {
       state = window.RicciShipping.getState();
-      if (!window.RicciShipping.canShip(state)) return null;
-      return window.RicciShipping.getGroup(state);
+      return window.RicciShipping.canShip(state) ? "A" : null;
     }
     try { state = localStorage.getItem(SHIP_STATE_KEY); } catch (e) {}
-    state = state || "PA";
-    var zone = STATE_ZONE[state];
-    if (zone === "X") return null;
-    return zone || "A";
+    var zone = STATE_ZONE[state || "PA"];
+    return zone && zone !== "X" && zone !== "AK" ? "A" : null;
   }
 
   function variantNumericId(gid) {
@@ -115,10 +113,10 @@
 
     /* Zone X is a hard stop — say so before the wait for variants. */
     if (currentZone() === null) {
-      window.alert(
-        "We can't cold-ship to that state yet. Call the shop at " + PHONE +
-        " and we'll sort it out."
-      );
+      var ak = window.RicciShipping && window.RicciShipping.getGroup() === "AK";
+      window.alert(ak && !window.RicciShipping.zip()
+        ? "Enter your Alaska ZIP under the state picker so we can check UPS 2nd Day Air reaches you."
+        : "We can't ship frozen there yet. Call the shop at " + PHONE + " and we'll sort it out.");
       return;
     }
 
