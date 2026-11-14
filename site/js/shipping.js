@@ -36,16 +36,18 @@
     HI:"X", PR:"X"
   };
 
-  /* Shipping add-on ($) per box, by zone and tier. null = can't ship that tier
-     there (sauce-only orders don't go to AK). AK is PROPOSED pending a real
-     Pirate Ship quote to 99501 / 99701. */
+  /* Shipping ($) per ORDER, by zone. One charge no matter how many boxes or
+     which box (Pack, Legacy, 20 lb...). Sauce-only ("small") ships free, but
+     not to AK. tools/sync-shopify-shipping.mjs reads this to build the Shopify
+     shipping profile, so the site and checkout can't drift. AK is PROPOSED
+     pending a real Pirate Ship quote to 99501 / 99701. */
   var SHIP = {
     A:  { small: 0,    med: 0,   large: 0   },
-    B:  { small: 0,    med: 20,  large: 30  },
-    C:  { small: 0,    med: 50,  large: 60  },
-    D:  { small: 0,    med: 60,  large: 70  },
-    E:  { small: 0,    med: 80,  large: 90  },
-    AK: { small: null, med: 139, large: 179 }
+    B:  { small: 0,    med: 20,  large: 20  },
+    C:  { small: 0,    med: 50,  large: 50  },
+    D:  { small: 0,    med: 60,  large: 60  },
+    E:  { small: 0,    med: 80,  large: 80  },
+    AK: { small: null, med: 139, large: 139 }
   };
 
   /* AK ZIPs UPS 2nd Day Air treats as metro (zone 224): Anchorage / Eagle
@@ -232,17 +234,22 @@
     return start && GROUP[start] ? start : DEFAULT_STATE;
   }
 
-  /* Shipping for a list of {tier, qty}: number, or null if any box can't go. */
+  /* Shipping for a cart [{tier, qty}]: ONE charge per order — the highest
+     add-on of any item (a box sets the rate; sauce rides free with it). null
+     if the order can't ship there. Matches Shopify's per-order flat rate. */
   function shippingFor(items, state) {
     state = state || getState();
     if (!canShip(state)) return null;
-    var group = GROUP[state], total = 0;
+    var group = GROUP[state], rate = 0, anyBox = false;
     for (var i = 0; i < items.length; i++) {
       var add = addOn(items[i].tier, group);
-      if (add === null) return null;
-      total += add * (items[i].qty || 1);
+      if (add === null) continue;
+      if (items[i].tier === "med" || items[i].tier === "large") anyBox = true;
+      if (add > rate) rate = add;
     }
-    return total;
+    var blocked = items.some(function (it) { return addOn(it.tier, group) === null; });
+    if (blocked && !anyBox) return null;
+    return rate;
   }
 
   var ZONE_NAMES = { A: "Nearby", B: "Mid", C: "Southeast / Plains", D: "South Central / Mountain", E: "West Coast", AK: "Alaska metro · UPS 2nd Day Air" };
@@ -263,9 +270,8 @@
         var a = addOn(oneTier, g);
         return a === 0 ? "Free" : "+ " + fmt(a);
       }
-      var m = addOn("med", g), l = addOn("large", g);
-      if (!m && !l) return "Free";
-      return "+ " + fmt(m) + (l !== m ? " (Legacy + " + fmt(l) + ")" : "");
+      var m = addOn("med", g);
+      return m ? "+ " + fmt(m) : "Free";
     }
 
     var rows = Object.keys(ZONE_NAMES).map(function (g) {
@@ -286,7 +292,7 @@
     dlg.innerHTML =
       '<button type="button" class="zones-close" aria-label="Close">&times;</button>' +
       '<h2 id="zones-title">What shipping costs</h2>' +
-      '<p class="zones-intro">One price for the box everywhere. Shipping is a flat amount per box by state, shown before checkout.</p>' +
+      '<p class="zones-intro">One price for the box everywhere. Shipping is one flat amount per order by state, shown before checkout.</p>' +
       '<ul class="zones-list">' + rows + "</ul>" +
       '<p class="zones-foot">We can’t ship frozen to Hawaii, Puerto Rico or rural Alaska yet.</p>';
     document.body.appendChild(dlg);

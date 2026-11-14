@@ -33,21 +33,14 @@ const ONLY = (process.argv.find((a) => a.startsWith("--only=")) || "").slice(7).
 
 loadEnvFile(join(TOOLS, ".env.local"));
 
-const SHIP = {
-  A: { med: 0, large: 0 },
-  B: { med: 10, large: 10 },
-  C: { med: 20, large: 30 },
-  D: { med: 30, large: 40 },
-  E: { med: 50, large: 50 },
-};
+/* Shipping is no longer baked into variants. Every box is one price
+   everywhere; Shopify charges shipping per order from the "Frozen boxes
+   (shipping by state)" profile (tools/sync-shopify-shipping.mjs).
 
-const ZONES = [
-  { key: "A", label: "Zone A — Nearby" },
-  { key: "B", label: "Zone B — Mid" },
-  { key: "C", label: "Zone C — Southeast" },
-  { key: "D", label: "Zone D — Central" },
-  { key: "E", label: "Zone E — West" },
-];
+   Each product keeps only its old Zone A variant (already the base price),
+   so variant IDs, SKUs (…-A), subscriptions and cart links carry over. The
+   B–E zone variants are dropped by productSet on the next sync. */
+const KEEP_SUFFIX = "A";
 
 const BUNDLES = [
   {
@@ -67,8 +60,8 @@ const BUNDLES = [
     ],
     description:
       "<p>5 lb sweet and 5 lb hot sausage (or 10 lb of either), 2 lb hand-rolled meatballs, and one of Lil's sausage rolls — " +
-      "the full Sunday table. Shipped frozen with shipping included in price.</p>",
-    tags: ["Bundle", "Gift", "Free Shipping", "Frozen"],
+      "the full Sunday table. Shipped frozen. Free shipping to PA and nearby states; farther states pay one flat shipping charge per order, shown before checkout.</p>",
+    tags: ["Bundle", "Gift", "Frozen"],
   },
   {
     handle: "ricci-legacy-gift-box",
@@ -80,8 +73,8 @@ const BUNDLES = [
     weightLb: 17,
     description:
       "<p>5 lb sweet sausage, 5 lb hot sausage, 2 lb meatballs, stuffed banana peppers, two sausage rolls, " +
-      "and a quart of homemade sauce — beautifully packaged. Shipped frozen with shipping included in price.</p>",
-    tags: ["Bundle", "Gift Box", "Free Shipping", "Frozen"],
+      "and a quart of homemade sauce — beautifully packaged. Shipped frozen. Free shipping to PA and nearby states; farther states pay one flat shipping charge per order, shown before checkout.</p>",
+    tags: ["Bundle", "Gift Box", "Frozen"],
   },
   {
     handle: "meatball-dinner-kit",
@@ -94,8 +87,8 @@ const BUNDLES = [
     status: "ACTIVE",
     description:
       "<p>10 lb of Lil's hand-rolled meatballs and 3 quarts of homemade sauce. Three Sunday dinners. " +
-      "Shipped frozen with shipping included in price.</p>",
-    tags: ["Meatballs", "Free Shipping", "Frozen"],
+      "Shipped frozen. Free shipping to PA and nearby states; farther states pay one flat shipping charge per order, shown before checkout.</p>",
+    tags: ["Meatballs", "Frozen"],
   },
   {
     handle: "sausage-roll-box",
@@ -108,12 +101,11 @@ const BUNDLES = [
     status: "ACTIVE",
     description:
       "<p>Six of Lil's sausage rolls, baked at the shop, then frozen. " +
-      "Shipped frozen with shipping included in price.</p>",
-    tags: ["Sausage Rolls", "Free Shipping", "Frozen"],
+      "Shipped frozen. Free shipping to PA and nearby states; farther states pay one flat shipping charge per order, shown before checkout.</p>",
+    tags: ["Sausage Rolls", "Frozen"],
   },
   {
     // Add-on only (Italian Pack buy box, js/buy-options.js) — rides in the pack's box.
-    // tier "none" has no SHIP entry, so every zone variant is the flat base price.
     handle: "lils-tomato-sauce-quart",
     title: "Lil's Homemade Tomato Sauce (1 qt)",
     base: 19.99,
@@ -217,25 +209,17 @@ function storeDomain() {
   return raw.includes(".myshopify.com") ? raw : `${raw}.myshopify.com`;
 }
 
-function priceFor(base, tier, zoneKey) {
-  return (base + (SHIP[zoneKey]?.[tier] ?? 0)).toFixed(2);
-}
-
 const DEFAULT_OPTION = { key: null, label: "Default Title" };
 
-/* One row per variant: every zone, times every mix if the bundle has them.
-   `single` bundles get one variant with SKU = skuPrefix. */
+/* One variant per mix (or one per product), all at the base price.
+   `single` bundles keep SKU = skuPrefix; the rest keep their old Zone A SKU. */
 function desiredVariants(bundle) {
-  if (bundle.single) {
-    return [{ mix: null, zone: DEFAULT_OPTION, sku: bundle.skuPrefix, price: bundle.base.toFixed(2) }];
+  const price = bundle.base.toFixed(2);
+  if (bundle.single) return [{ mix: null, sku: bundle.skuPrefix, price }];
+  if (bundle.mixes) {
+    return bundle.mixes.map((mix) => ({ mix, sku: `${bundle.skuPrefix}-${mix.sku}${KEEP_SUFFIX}`, price }));
   }
-  const mixes = bundle.mixes || [null];
-  return mixes.flatMap((mix) => ZONES.map((zone) => ({
-    mix,
-    zone,
-    sku: `${bundle.skuPrefix}-${mix ? mix.sku : ""}${zone.key}`,
-    price: priceFor(bundle.base, bundle.tier, zone.key),
-  })));
+  return [{ mix: null, sku: `${bundle.skuPrefix}-${KEEP_SUFFIX}`, price }];
 }
 
 function buildProductSetInput(bundle, existing) {
@@ -249,19 +233,15 @@ function buildProductSetInput(bundle, existing) {
     productType: bundle.productType || "Bundle",
     tags: bundle.tags,
     status: bundle.status || "ACTIVE",
-    productOptions: [
-      bundle.single
-        ? { name: "Title", values: [{ name: DEFAULT_OPTION.label }] }
-        : { name: "Shipping Zone", values: ZONES.map((z) => ({ name: z.label })) },
-      ...(bundle.mixes ? [{ name: "Mix", values: bundle.mixes.map((m) => ({ name: m.label })) }] : []),
-    ],
+    productOptions: bundle.mixes
+      ? [{ name: "Mix", values: bundle.mixes.map((m) => ({ name: m.label })) }]
+      : [{ name: "Title", values: [{ name: DEFAULT_OPTION.label }] }],
     /* Matching existing variants by SKU keeps their IDs (cart links, selling plans). */
     variants: desiredVariants(bundle).map((d) => ({
       ...(idBySku.has(d.sku) ? { id: idBySku.get(d.sku) } : {}),
-      optionValues: [
-        { optionName: bundle.single ? "Title" : "Shipping Zone", name: d.zone.label },
-        ...(d.mix ? [{ optionName: "Mix", name: d.mix.label }] : []),
-      ],
+      optionValues: d.mix
+        ? [{ optionName: "Mix", name: d.mix.label }]
+        : [{ optionName: "Title", name: DEFAULT_OPTION.label }],
       price: parseFloat(d.price),
       sku: d.sku,
       inventoryPolicy: "CONTINUE",
@@ -386,9 +366,7 @@ function publishProduct(productId, publicationIds) {
 
 function verifyProduct(bundle, product) {
   const errors = [];
-  const desired = desiredVariants(bundle).map((d) => ({
-    sku: d.sku, price: d.price, option1: d.zone.label, mix: d.mix ? d.mix.label : null,
-  }));
+  const desired = desiredVariants(bundle).map((d) => ({ sku: d.sku, price: d.price, mix: d.mix ? d.mix.label : null }));
   const bySku = new Map((product.variants || []).map((v) => [v.sku, v]));
 
   if (product.handle !== bundle.handle) errors.push(`handle mismatch: ${product.handle}`);
@@ -402,8 +380,10 @@ function verifyProduct(bundle, product) {
       continue;
     }
     if (got.price !== want.price) errors.push(`${want.sku}: price ${got.price} ≠ ${want.price}`);
-    if (got.option1 !== want.option1 || got.mix !== want.mix) errors.push(`${want.sku}: option mismatch`);
+    if (got.mix !== want.mix) errors.push(`${want.sku}: option mismatch`);
   }
+  const extra = (product.variants || []).filter((v) => !desired.some((d) => d.sku === v.sku));
+  if (extra.length) errors.push(`leftover variants: ${extra.map((v) => v.sku).join(", ")}`);
 
   return { ok: errors.length === 0, errors };
 }
@@ -416,24 +396,15 @@ function extractVariantMap(synced) {
       map[bundle.handle] = { productId: product.id, title: bundle.title, variantId: v?.id, sku: v?.sku, price: v?.price };
       continue;
     }
+    /* Readers (cart.js, buy-now.js, buy-options.js) look up zones.A /
+       mixes.<key>.A; "A" is now just "the" variant, at the base price. */
     map[bundle.handle] = { productId: product.id, title: bundle.title, zones: {} };
-    /* `zones` stays the default mix so every existing reader keeps working;
-       `mixes.<key>` holds each mix's zone table. */
     if (bundle.mixes) map[bundle.handle].mixes = {};
     for (const variant of product.variants || []) {
-      const zoneKey = variant.sku?.split("-").pop();
-      if (zoneKey && SHIP[zoneKey]) {
-        const mix = bundle.mixes?.find((m) => m.label === variant.mix);
-        const tables = [];
-        if (!bundle.mixes || mix === bundle.mixes[0]) tables.push(map[bundle.handle].zones);
-        if (mix) tables.push(map[bundle.handle].mixes[mix.key] ||= {});
-        for (const t of tables) t[zoneKey] = {
-          variantId: variant.id,
-          sku: variant.sku,
-          price: variant.price,
-          label: variant.option1,
-        };
-      }
+      const mix = bundle.mixes?.find((m) => m.label === variant.mix);
+      const entry = { variantId: variant.id, sku: variant.sku, price: variant.price, label: variant.mix || bundle.title };
+      if (!bundle.mixes || mix === bundle.mixes[0]) map[bundle.handle].zones[KEEP_SUFFIX] = entry;
+      if (mix) (map[bundle.handle].mixes[mix.key] ||= {})[KEEP_SUFFIX] = entry;
     }
   }
   return map;
@@ -442,7 +413,9 @@ function extractVariantMap(synced) {
 function printBundleResult(result) {
   console.log(`${result.ok ? "✓" : "✗"} ${result.title} (${result.handle})`);
   if (result.action === "dry-run") {
-    for (const v of result.changes) console.log(`    · ${v.sku} → $${v.price}`);
+    for (const v of result.changes) console.log(`    keep   ${v.sku} → $${v.price}${v.id ? "" : "  (NEW variant)"}`);
+    for (const v of result.drops || []) console.log(`    drop   ${v.sku} ($${v.price})`);
+    if (result.note) console.log(`    ${result.note}`);
     return;
   }
   if (result.action) console.log(`  Action: ${result.action}`);
@@ -508,7 +481,12 @@ async function main() {
       if (DRY_RUN) {
         result.action = "dry-run";
         result.ok = true;
-        result.changes = desiredVariants(bundle).map((d) => ({ sku: d.sku, price: d.price }));
+        const live = fetchProductByHandle(bundle.handle);
+        const idBySku = new Map((live?.variants || []).map((v) => [v.sku, v.id]));
+        const want = desiredVariants(bundle);
+        result.changes = want.map((d) => ({ sku: d.sku, price: d.price, id: idBySku.get(d.sku) }));
+        result.drops = (live?.variants || []).filter((v) => !want.some((d) => d.sku === v.sku));
+        if (!live) result.note = "(product doesn't exist yet; would be created)";
       } else {
         const existing = fetchProductByHandle(bundle.handle);
         result.action = existing ? "updated" : "created";

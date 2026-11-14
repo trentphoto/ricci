@@ -68,10 +68,10 @@ test("Pack pages with a buy button offer the upsells (buy-options.js)", () => {
 
 test("shipping.html rate table matches shipping.js", () => {
   const html = read("shipping.html");
-  for (const [zone, med, large] of [["Mid", 20, 30], ["Southeast / Plains", 50, 60], ["South Central / Mountain", 60, 70], ["West Coast", 80, 90], ["Alaska metro", 139, 179]]) {
+  for (const [zone, rate] of [["Nearby", "Free"], ["Mid", "$20"], ["Southeast / Plains", "$50"], ["South Central / Mountain", "$60"], ["West Coast", "$80"], ["Alaska metro", "$139"]]) {
     const row = html.split("<tr>").find((r) => r.includes(`<strong>${zone}</strong>`));
     assert.ok(row, zone);
-    assert.match(row, new RegExp(`<td>\\$${med}</td><td>\\$${large}</td>`), zone);
+    assert.ok(row.includes(`<td>${rate}</td>`), zone);
   }
 });
 

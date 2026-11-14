@@ -6,13 +6,13 @@ import { makeWindow, load, priceBlock } from "./helpers/fake-dom.mjs";
 
 const ship = (opts) => load(makeWindow(opts), "js/shipping.js").RicciShipping;
 
-test("zone add-ons per box (Pack med / Legacy large)", () => {
+test("zone rate per order (Pack and Legacy the same)", () => {
   const cases = [
     ["PA", 0, 0], ["OH", 0, 0], ["DC", 0, 0],
-    ["VT", 20, 30], ["IN", 20, 30],
-    ["FL", 50, 60], ["GA", 50, 60],
-    ["TX", 60, 70], ["CO", 60, 70],
-    ["CA", 80, 90], ["WA", 80, 90],
+    ["VT", 20, 20], ["IN", 20, 20],
+    ["FL", 50, 50], ["GA", 50, 50],
+    ["TX", 60, 60], ["CO", 60, 60],
+    ["CA", 80, 80], ["WA", 80, 80],
   ];
   for (const [st, med, large] of cases) {
     const s = ship({ state: st });
@@ -47,14 +47,21 @@ test("Alaska needs a valid ZIP before it can ship", () => {
   const s = ship({ state: "AK", zip: "99501" });
   assert.equal(s.canShip("AK"), true);
   assert.equal(s.shippingFor([{ tier: "med", qty: 1 }], "AK"), 139);
-  assert.equal(s.shippingFor([{ tier: "large", qty: 1 }], "AK"), 179);
+  assert.equal(s.shippingFor([{ tier: "large", qty: 1 }], "AK"), 139);
   assert.equal(s.shippingFor([{ tier: "small", qty: 1 }], "AK"), null, "sauce alone can't go to AK");
 });
 
-test("shippingFor stacks per box", () => {
+test("one shipping charge per order, however many boxes", () => {
   const s = ship({ state: "TX" });
-  assert.equal(s.shippingFor([{ tier: "med", qty: 2 }, { tier: "large", qty: 1 }], "TX"), 60 * 2 + 70);
+  assert.equal(s.shippingFor([{ tier: "med", qty: 2 }, { tier: "large", qty: 1 }], "TX"), 60);
+  assert.equal(s.shippingFor([{ tier: "small", qty: 1 }], "TX"), 0, "sauce alone ships free");
   assert.equal(s.shippingFor([{ tier: "none", qty: 3 }], "TX"), 0, "untiered items add nothing");
+});
+
+test("Alaska: sauce rides with a box but can't go alone", () => {
+  const s = ship({ state: "AK", zip: "99501" });
+  assert.equal(s.shippingFor([{ tier: "med", qty: 1 }, { tier: "small", qty: 1 }], "AK"), 139);
+  assert.equal(s.shippingFor([{ tier: "small", qty: 2 }], "AK"), null);
 });
 
 test("ship-note copy", () => {

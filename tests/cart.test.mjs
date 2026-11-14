@@ -33,10 +33,10 @@ test("free shipping nearby", () => {
   assert.match(html, /Total before tax<\/dt><dd>\$478/);
 });
 
-test("shipping stacks per box and by tier", () => {
+test("one shipping charge per order", () => {
   const html = cartPanel("CA", [pack(2), legacy]);
-  assert.match(html, /Shipping to California<\/dt><dd>\$250/); // 80*2 + 90
-  assert.match(html, /Total before tax<\/dt><dd>\$917/);
+  assert.match(html, /Shipping to California<\/dt><dd>\$80/);
+  assert.match(html, /Total before tax<\/dt><dd>\$747/); // 189*2 + 289 + 80
 });
 
 test("Hawaii: no total, no checkout", () => {
