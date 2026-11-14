@@ -8,7 +8,8 @@
  * Usage:
  *   ./tools/shopify/sync-bundles.sh --ping
  *   ./tools/shopify/sync-bundles.sh --dry-run
- *   ./tools/shopify/sync-bundles.sh
+ *   ./tools/shopify/sync-bundles.sh --descriptions [--dry-run]   (copy + tags only; variants untouched)
+ *   ./tools/shopify/sync-bundles.sh --drop-zone-variants          (full sync; deletes Zone B–E variants)
  *   ./tools/shopify/sync-bundles.sh --only=lils-meatballs-10-lb   (comma-separated handles)
  *
  * A bundle with status: "DRAFT" is created unpublished; the Online Store publish step is skipped.
@@ -37,10 +38,16 @@ loadEnvFile(join(TOOLS, ".env.local"));
    everywhere; Shopify charges shipping per order from the "Frozen boxes
    (shipping by state)" profile (tools/sync-shopify-shipping.mjs).
 
-   Each product keeps only its old Zone A variant (already the base price),
-   so variant IDs, SKUs (…-A), subscriptions and cart links carry over. The
-   B–E zone variants are dropped by productSet on the next sync. */
+   The site only sells each product's old Zone A variant (already the base
+   price), so IDs, SKUs (…-A) and cart links carry over.
+
+   Zone B–E variants are KEPT for now: live subscriptions renew on them. A
+   full sync would drop them (productSet removes unlisted variants), so it
+   needs --drop-zone-variants. Until those subscribers are moved, use
+   --descriptions (copy + tags only). */
 const KEEP_SUFFIX = "A";
+const DESCRIPTIONS_ONLY = ARGS.has("--descriptions");
+const DROP_ZONES = ARGS.has("--drop-zone-variants");
 
 const BUNDLES = [
   {
@@ -450,6 +457,29 @@ async function main() {
       console.error("  ./tools/shopify/sync-bundles.sh");
       process.exit(1);
     }
+  }
+
+  /* Copy + tags only: never touches variants (keeps subscribers' zone variants). */
+  if (DESCRIPTIONS_ONLY) {
+    const targets = ONLY.length ? BUNDLES.filter((b) => ONLY.includes(b.handle)) : BUNDLES;
+    let ok = true;
+    for (const bundle of targets) {
+      const live = fetchProductByHandle(bundle.handle);
+      if (!live) { console.log(`⚠ ${bundle.handle}: not in Shopify, skipped`); continue; }
+      if (DRY_RUN) { console.log(`· ${bundle.title}: would set description + tags [${bundle.tags.join(", ")}]`); continue; }
+      const res = runGraphQL(join(GRAPHQL, "product-update.mutation.graphql"), {
+        product: { id: live.id, descriptionHtml: bundle.description, tags: bundle.tags },
+      }, { mutation: true }).productUpdate;
+      if (res.userErrors.length) { ok = false; console.log(`✗ ${bundle.title}: ${res.userErrors.map((e) => e.message).join("; ")}`); }
+      else console.log(`✓ ${bundle.title}: description + tags updated`);
+    }
+    process.exit(ok ? 0 : 1);
+  }
+
+  if (!DRY_RUN && !DROP_ZONES) {
+    console.error("✗ A full sync deletes the Zone B–E variants that live subscriptions renew on.");
+    console.error("  Use --descriptions for copy only, or --drop-zone-variants once subscribers are moved to Zone A.");
+    process.exit(1);
   }
 
   if (PING_ONLY) {

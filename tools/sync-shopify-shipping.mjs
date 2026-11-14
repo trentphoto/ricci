@@ -15,8 +15,9 @@
  *   node tools/sync-shopify-shipping.mjs --assign --apply   CUTOVER: move them (checkout
  *                                                   starts charging shipping by state)
  *
- * Cutover order: sync-bundles (collapse to one variant per mix) → --assign --apply
- * → deploy the site. Grill Box / Gameday stay on the General (free) profile.
+ * Cutover: deploy the site → --assign --apply → sync-bundles --descriptions.
+ * Zone B–E variants are kept (live subscriptions renew on them) and stay on
+ * the General (free) profile with Grill Box / Gameday.
  *
  * Auth once with shipping scopes:
  *   shopify store auth --store tiyndf-za.myshopify.com \
@@ -113,16 +114,18 @@ function assign() {
   const target = deliveryProfiles.nodes.find((p) => p.name === PROFILE_NAME);
   if (!target) throw new Error(`"${PROFILE_NAME}" doesn't exist. Run --create first.`);
 
+  /* Only the base-price variants move. Old Zone B–E variants stay on the
+     General (free-shipping) profile so existing subscriptions on them renew
+     unchanged; the site never sends new orders to them. */
   const ids = [];
-  let zoneLeft = false;
   for (const handle of LINE_ITEM_PRODUCTS) {
     const p = gql(VARIANTS_BY_HANDLE, { handle }).productByHandle;
     if (!p) { console.log(`  ⚠ ${handle}: not found, skipped`); continue; }
-    const zoned = p.variants.nodes.filter((v) => /-[B-E]$/.test(v.sku || ""));
-    if (zoned.length) zoneLeft = true;
-    console.log(`  ${p.title}: ${p.variants.nodes.map((v) => `${v.sku} $${v.price}`).join(", ")}` +
-      (zoned.length ? `  ⚠ still has zone variants (${zoned.length}); run sync-bundles first` : ""));
-    ids.push(...p.variants.nodes.map((v) => v.id));
+    const move = p.variants.nodes.filter((v) => !/-[B-E]$/.test(v.sku || ""));
+    const stay = p.variants.nodes.length - move.length;
+    console.log(`  ${p.title}: ${move.map((v) => `${v.sku} $${v.price}`).join(", ")}` +
+      (stay ? `  (${stay} zone variants stay on General)` : ""));
+    ids.push(...move.map((v) => v.id));
   }
   console.log(`\n${ids.length} variants → "${PROFILE_NAME}" (now has ${target.productVariantsCount.count}).`);
 
@@ -130,7 +133,6 @@ function assign() {
     console.log("Dry run. Add --apply to move them (checkout starts charging shipping by state).");
     return;
   }
-  if (zoneLeft) throw new Error("Zone variants still exist. Run ./tools/shopify/sync-bundles.sh first.");
   const res = gql(UPDATE_PROFILE, { id: target.id, profile: { variantsToAssociate: ids } }, { mutation: true }).deliveryProfileUpdate;
   if (res.userErrors.length) throw new Error(res.userErrors.map((e) => `${e.field}: ${e.message}`).join("; "));
   console.log(`✓ Moved. "${PROFILE_NAME}" now has ${res.profile.productVariantsCount.count} variants.`);
