@@ -7069,3 +7069,32 @@ a.order-option { text-decoration: none; }
   font-family: var(--font-serif); font-weight: 700; font-size: 1.2rem;
 }
 .price-breakdown .pb-total dd { font-weight: 700; }
+
+/* Catering modal — optional tip */
+.cater-grat-card { cursor: pointer; }
+.cater-grat-input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.cater-grat-box {
+  flex-shrink: 0; width: 26px; height: 26px; border-radius: 4px;
+  border: 1.5px solid rgba(122,26,26,0.35); background: var(--white);
+  display: grid; place-items: center; transition: background .15s, border-color .15s;
+}
+.cater-grat-input:checked + .cater-grat-box { background: var(--red); border-color: var(--red); }
+.cater-grat-input:checked + .cater-grat-box::after {
+  content: ""; width: 7px; height: 13px; margin-top: -3px;
+  border: solid var(--white); border-width: 0 2.5px 2.5px 0; transform: rotate(45deg);
+}
+.cater-grat-input:focus-visible + .cater-grat-box { outline: 2px solid var(--gold); outline-offset: 2px; }
+.cater-grat-opts { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 16px 24px 4px; }
+.cater-grat-opts[hidden] { display: none; }
+.cater-grat-toggle label { display: inline-flex; align-items: center; gap: 6px; }
+.cater-grat-toggle input { position: absolute; opacity: 0; pointer-events: none; }
+.cater-grat-toggle label:has(input:checked) { background: var(--red); color: var(--white); }
+.cater-grat-toggle label:has(input:focus-visible) { outline: 2px solid var(--gold); outline-offset: -2px; }
+.cater-grat-toggle #c-grat-pct-amt { font-weight: 500; letter-spacing: 0; text-transform: none; opacity: .85; }
+.cater-grat-custom-wrap {
+  display: inline-flex; align-items: center; gap: 6px; background: var(--white);
+  border-bottom: 1.5px solid rgba(122,26,26,0.22); padding: 6px 12px;
+  font-family: var(--font-sans); font-size: 1.05rem; color: var(--red);
+}
+.cater-grat-custom-wrap:focus-within { border-bottom-color: var(--gold); box-shadow: 0 1px 0 0 var(--gold); }
+.cater-grat-custom-wrap input { border: 0; outline: 0; width: 5rem; font: inherit; background: transparent; }

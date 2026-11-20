@@ -109,6 +109,19 @@
       '        <div class="cater-section-head"><span class="eyebrow">Step 03</span><h3>Trays &amp; Items</h3></div>' +
       '        <div class="cater-items">' + ITEMS.map(itemRow).join('') + '</div>' +
       '      </div>' +
+      '      <div class="cater-section cater-gratuity">' +
+      '        <label class="cater-switch cater-grat-card" for="c-grat">' +
+      '          <div class="cater-switch-label">Thank the ladies in the shop<small>Add a tip that goes fully to the ladies who make your order.</small></div>' +
+      '          <input type="checkbox" id="c-grat" class="cater-grat-input"><span class="cater-grat-box" aria-hidden="true"></span>' +
+      '        </label>' +
+      '        <div class="cater-grat-opts" id="c-grat-opts" hidden>' +
+      '          <div class="cater-toggle cater-grat-toggle" role="radiogroup" aria-label="Tip amount">' +
+      '            <label class="cater-toggle-opt"><input type="radio" name="grat_mode" value="pct" checked>20% <span id="c-grat-pct-amt"></span></label>' +
+      '            <label class="cater-toggle-opt"><input type="radio" name="grat_mode" value="custom">Custom</label>' +
+      '          </div>' +
+      '          <div class="cater-grat-custom-wrap"><span>$</span><input type="number" id="c-grat-custom" min="0" step="1" inputmode="decimal" placeholder="0" aria-label="Custom tip amount"></div>' +
+      '        </div>' +
+      '      </div>' +
       '      <div class="cater-section">' +
       '        <div class="cater-section-head"><span class="eyebrow">Step 04</span><h3>Notes</h3></div>' +
       '        <div class="cater-field"><label for="c-notes">Anything else we should know?</label><textarea id="c-notes" name="notes" placeholder="Headcount, allergies, special requests..."></textarea></div>' +
@@ -145,6 +158,22 @@
     return el ? Math.max(0, parseInt(el.value, 10) || 0) : 0;
   }
 
+  function subtotalNow() {
+    return ITEMS.reduce(function (t, it) { return t + getQty(it.id) * it.price; }, 0);
+  }
+
+  // Gratuity is on the pre-tax subtotal and is not taxed.
+  function gratuityFor(subtotal) {
+    var box = document.getElementById('c-grat');
+    if (!box || !box.checked) return 0;
+    var mode = document.querySelector('input[name="grat_mode"]:checked');
+    if (mode && mode.value === 'custom') {
+      var v = parseFloat(document.getElementById('c-grat-custom').value);
+      return v > 0 ? Math.round(v * 100) / 100 : 0;
+    }
+    return Math.round(subtotal * 20) / 100;
+  }
+
   function recalcTotal() {
     var total = 0;
     ITEMS.forEach(function (it) {
@@ -154,7 +183,9 @@
       if (row) row.classList.toggle('has-qty', q > 0);
     });
     var el = document.getElementById('cater-total');
-    if (el) el.textContent = money(withTax(total));
+    if (el) el.textContent = money(withTax(total) + gratuityFor(total));
+    var pctAmt = document.getElementById('c-grat-pct-amt');
+    if (pctAmt) pctAmt.textContent = total > 0 ? '(' + money(Math.round(total * 20) / 100) + ')' : '';
     var buns = document.getElementById('cater-bun-count');
     if (buns) buns.textContent = (getQty('buns') * 12) + ' buns · 12 per dozen';
   }
@@ -196,10 +227,12 @@
       row.append(label, price);
       container.appendChild(row);
     });
+    var grat = gratuityFor(subtotal);
     document.getElementById('cater-review-totals').innerHTML =
       '<dt>Subtotal</dt><dd>' + money(subtotal) + '</dd>' +
       '<dt>Estimated tax (7%)</dt><dd>' + money(subtotal * TAX_RATE) + '</dd>' +
-      '<dt class="cater-review-grand-total">Estimated total</dt><dd class="cater-review-grand-total">' + money(withTax(subtotal)) + '</dd>';
+      (grat ? '<dt>Tip for the ladies in the shop</dt><dd>' + money(grat) + '</dd>' : '') +
+      '<dt class="cater-review-grand-total">Estimated total</dt><dd class="cater-review-grand-total">' + money(withTax(subtotal) + grat) + '</dd>';
     var fields = document.getElementById('cater-form').elements;
     var pickup = new Date(fields.date.value + 'T' + fields.time.value);
     document.getElementById('cater-review-pickup').textContent = pickup.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' }) + ' at ' + pickup.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }) + '\nIn-store pickup · ' +
@@ -327,6 +360,7 @@
         prep: prep,
         notes: notes,
         source: 'catering-modal',
+        gratuity: gratuityFor(subtotalNow()),
         lines: lines
       })
     }).then(function (res) {
@@ -413,7 +447,16 @@
       recalcTotal();
     });
 
+    modal.addEventListener('change', function (e) {
+      if (e.target.id === 'c-grat') document.getElementById('c-grat-opts').hidden = !e.target.checked;
+      if (e.target.id === 'c-grat' || e.target.name === 'grat_mode') recalcTotal();
+    });
+    modal.addEventListener('focusin', function (e) {
+      if (e.target.id === 'c-grat-custom') document.querySelector('input[name="grat_mode"][value="custom"]').checked = true;
+    });
+
     modal.addEventListener('input', function (e) {
+      if (e.target.id === 'c-grat-custom') recalcTotal();
       if (e.target.matches('input[data-qty]')) {
         e.target.value = Math.max(0, parseInt(e.target.value, 10) || 0);
         recalcTotal();
