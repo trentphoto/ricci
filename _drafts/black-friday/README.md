@@ -32,3 +32,11 @@ The build-your-own (à la carte, ids `alc-*`) items only ship in orders of $99+
         ' or more. Add ' + fmt(ORDER_MIN - sub) + ' to check out.</p>';
     } else if (shipping !== null) { … }
 ```
+
+## Product images (not in repo)
+
+The draft references four images kept outside the repo until it ships:
+`hot-sausage-closeup.webp`, `sweet-sausage-closeup.webp`,
+`sausage-5lb-bulk-bag-label.webp`, `sausage-patties-tray.webp`.
+They live in `~/Documents/ricci/business/source-docs/website-images/black-friday/`.
+Copy them into `site/assets/img/` before publishing.
