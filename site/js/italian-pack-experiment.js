@@ -1,11 +1,14 @@
-/* Pittsburgh Italian Pack v4: five live versions. Preview with ?preview=1.
- * Deploy CRM italian-pack-v4 tracking before publishing.
- * v2 (six versions, 2026-09-25 → 2026-11-23) is archived; its retired pages
- * (original, grill pan, table) now only route new visitors into this test. v3 (four versions) ran only minutes before H was added. */
+/* Pittsburgh Italian Pack v5: 4 designs × 2 offers = 8 pages, uniform draw
+ * (equivalent to drawing design and offer independently). "-sauce" pages swap
+ * the sausage roll for a quart of Lil's sauce and sell their own Shopify
+ * product. Preview with ?preview=1. Deploy CRM italian-pack-v5 first.
+ * v2 (six versions) is archived; its retired pages (original, grill pan,
+ * table) only route new visitors into this test. */
 (function () {
   "use strict";
-  var experiment = "italian-pack-v4";
-  var variants = ["butcher", "free", "minimal", "butcher-free", "sauce"];
+  var experiment = "italian-pack-v5";
+  var variants = ["butcher", "free", "minimal", "butcher-free",
+    "butcher-sauce", "free-sauce", "minimal-sauce", "butcher-free-sauce"];
   // Retired v2 pages still receive ad traffic: assign and redirect, never count.
   var routers = ["control", "grill-pan", "table"];
   var paths = {
@@ -13,7 +16,10 @@
     free: "/shop/pittsburgh-italian-pack-free",
     minimal: "/shop/pittsburgh-italian-pack-minimal",
     "butcher-free": "/shop/pittsburgh-italian-pack-butcher-free",
-    sauce: "/shop/pittsburgh-italian-pack-sauce"
+    "butcher-sauce": "/shop/pittsburgh-italian-pack-butcher-sauce",
+    "free-sauce": "/shop/pittsburgh-italian-pack-free-sauce",
+    "minimal-sauce": "/shop/pittsburgh-italian-pack-minimal-sauce",
+    "butcher-free-sauce": "/shop/pittsburgh-italian-pack-butcher-free-sauce"
   };
   var current = document.currentScript.getAttribute("data-variant");
   var query = new URLSearchParams(location.search);
@@ -30,7 +36,7 @@
     return;
   }
 
-  var key = "ricci_italian_pack_v4";
+  var key = "ricci_italian_pack_v5";
   var saved;
   try {
     var cookie = document.cookie.split("; ").find(function (s) { return s.indexOf(key + "=") === 0; });

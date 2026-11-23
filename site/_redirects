@@ -68,7 +68,13 @@
 /shop/pittsburgh-italian-pack-butcher.html  /shop/pittsburgh-italian-pack-butcher  301!
 /shop/pittsburgh-italian-pack-table.html  /shop/pittsburgh-italian-pack-table  301!
 /shop/pittsburgh-italian-pack-butcher-free.html  /shop/pittsburgh-italian-pack-butcher-free  301!
-/shop/pittsburgh-italian-pack-sauce.html  /shop/pittsburgh-italian-pack-sauce  301!
+/shop/pittsburgh-italian-pack-butcher-sauce.html  /shop/pittsburgh-italian-pack-butcher-sauce  301!
+/shop/pittsburgh-italian-pack-free-sauce.html  /shop/pittsburgh-italian-pack-free-sauce  301!
+/shop/pittsburgh-italian-pack-minimal-sauce.html  /shop/pittsburgh-italian-pack-minimal-sauce  301!
+/shop/pittsburgh-italian-pack-butcher-free-sauce.html  /shop/pittsburgh-italian-pack-butcher-free-sauce  301!
+# v4 test H (original design + sauce) retired 2026-11-23; v5 tests sauce on every design.
+/shop/pittsburgh-italian-pack-sauce.html  /shop/pittsburgh-italian-pack  301!
+/shop/pittsburgh-italian-pack-sauce  /shop/pittsburgh-italian-pack  301!
 /shop/sausage-roll-box.html  /shop/sausage-roll-box  301!
 /shop/meatball-dinner-kit.html  /shop/meatball-dinner-kit  301!
 
