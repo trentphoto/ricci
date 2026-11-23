@@ -1,16 +1,18 @@
-/* Pittsburgh Italian Pack: six live versions. Preview with ?preview=1.
- * Deploy CRM italian-pack-v2 tracking before publishing. */
+/* Pittsburgh Italian Pack v3: four live versions. Preview with ?preview=1.
+ * Deploy CRM italian-pack-v3 tracking before publishing.
+ * v2 (six versions, 2026-09-25 → 2026-11-23) is archived; its retired pages
+ * (original, grill pan, table) now only route new visitors into this test. */
 (function () {
   "use strict";
-  var experiment = "italian-pack-v2";
-  var variants = ["control", "free", "grill-pan", "minimal", "butcher", "table"];
+  var experiment = "italian-pack-v3";
+  var variants = ["butcher", "free", "minimal", "butcher-free"];
+  // Retired v2 pages still receive ad traffic: assign and redirect, never count.
+  var routers = ["control", "grill-pan", "table"];
   var paths = {
-    control: "/shop/pittsburgh-italian-pack",
-    free: "/shop/pittsburgh-italian-pack-free",
-    "grill-pan": "/shop/pittsburgh-italian-pack-grill-pan",
-    minimal: "/shop/pittsburgh-italian-pack-minimal",
     butcher: "/shop/pittsburgh-italian-pack-butcher",
-    table: "/shop/pittsburgh-italian-pack-table"
+    free: "/shop/pittsburgh-italian-pack-free",
+    minimal: "/shop/pittsburgh-italian-pack-minimal",
+    "butcher-free": "/shop/pittsburgh-italian-pack-butcher-free"
   };
   var current = document.currentScript.getAttribute("data-variant");
   var query = new URLSearchParams(location.search);
@@ -19,7 +21,7 @@
   var bot = /bot|crawler|spider|facebookexternalhit|HeadlessChrome/i.test(navigator.userAgent);
   var context = { experiment: experiment, variant: current, preview: preview, visitor: null, active: false };
   window.RicciItalianPackExperiment = context;
-  if (preview || bot || variants.indexOf(current) === -1) return;
+  if (preview || bot || (variants.indexOf(current) === -1 && routers.indexOf(current) === -1)) return;
 
   // Ads that promise free meatballs link with ?offer=free: pin to that page, outside the test.
   if (query.get("offer") === "free") {
@@ -27,7 +29,7 @@
     return;
   }
 
-  var key = "ricci_italian_pack_v2";
+  var key = "ricci_italian_pack_v3";
   var saved;
   try {
     var cookie = document.cookie.split("; ").find(function (s) { return s.indexOf(key + "=") === 0; });

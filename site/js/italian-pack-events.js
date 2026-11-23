@@ -9,7 +9,7 @@
   "use strict";
   var context = window.RicciItalianPackExperiment;
   if (!context || !context.active) return;
-  var endpoint = window.CRM_BASE + "/api/experiments/italian-pack-v2/events";
+  var endpoint = window.CRM_BASE + "/api/experiments/" + context.experiment + "/events";
   var viewed = false;
   var clicked = false;
 
