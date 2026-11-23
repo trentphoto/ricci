@@ -53,6 +53,7 @@
     if (exp && exp.active) {
       attrs.experiment = exp.experiment;
       attrs.experiment_variant = exp.variant;
+      attrs.experiment_visitor = exp.visitor;
     }
     return Object.keys(attrs).map(function (k) { return { key: k, value: String(attrs[k]) }; });
   }
