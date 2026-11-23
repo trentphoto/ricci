@@ -270,7 +270,8 @@ the correct zone-priced variant pre-loaded.
    Shopify lines for that zone.
 4. `js/shopify-cart.js` (Storefront **Cart API**, public token) runs `cartCreate`
    with those lines plus cart attributes — last-touch UTMs/fbclid, landing page,
-   referrer, Italian Pack experiment variant — and prefills the email if the
+   referrer, Italian Pack experiment, variant and visitor ID (the CRM credits paid
+   orders to test versions with these) — and prefills the email if the
    visitor submitted a CRM form. Attributes land on the order as
    `note_attributes` (visible in the `orders/paid` webhook). The browser goes to
    the returned `checkoutUrl`. If the API call fails or takes >6s, it falls back
@@ -815,3 +816,10 @@ Every page has exactly one commerce job — do not blur these when editing:
 
 When Square online pickup ordering launches, swap the "Order Pickup" tel: links
 for the Square ordering URL.
+
+## Italian Pack reviews wall
+
+All eight v5 pages share a 12-review Google wall (`css/pack-reviews.css`),
+written between `<!-- PACK-REVIEWS -->` markers by `python3 tools/pack-reviews.py`.
+Edit quotes in that script and re-run it; don't hand-edit the pages. Quotes are
+verbatim from `ricci/business/marketing/reviews.txt`.
