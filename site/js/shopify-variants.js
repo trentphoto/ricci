@@ -305,5 +305,43 @@ window.RicciShopifyVariants = {
     "variantId": "gid://shopify/ProductVariant/68294811386016",
     "sku": "RIC-ADD-SWEET-20",
     "price": "159.80"
+  },
+  "pittsburgh-italian-pack-sauce": {
+    "productId": "gid://shopify/Product/15994302529696",
+    "title": "The Pittsburgh Italian Pack — with Lil's Sauce",
+    "zones": {
+      "A": {
+        "variantId": "gid://shopify/ProductVariant/68662135586976",
+        "sku": "RIC-PITTSAUCE-A",
+        "price": "189.00",
+        "label": "Hot & Sweet"
+      }
+    },
+    "mixes": {
+      "mixed": {
+        "A": {
+          "variantId": "gid://shopify/ProductVariant/68662135586976",
+          "sku": "RIC-PITTSAUCE-A",
+          "price": "189.00",
+          "label": "Hot & Sweet"
+        }
+      },
+      "hot": {
+        "A": {
+          "variantId": "gid://shopify/ProductVariant/68662135619744",
+          "sku": "RIC-PITTSAUCE-HOT-A",
+          "price": "189.00",
+          "label": "All Hot"
+        }
+      },
+      "sweet": {
+        "A": {
+          "variantId": "gid://shopify/ProductVariant/68662135652512",
+          "sku": "RIC-PITTSAUCE-SWEET-A",
+          "price": "189.00",
+          "label": "All Sweet"
+        }
+      }
+    }
   }
 };

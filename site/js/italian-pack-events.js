@@ -43,7 +43,7 @@
   function buy(e) {
     if (clicked || (e.type === "auxclick" && e.button !== 1)) return;
     var a = e.target.closest && e.target.closest("[data-buy-now]");
-    if (!a || a.getAttribute("data-id") !== "pittsburgh-italian-pack") return;
+    if (!a || !/^pittsburgh-italian-pack(-sauce)?$/.test(a.getAttribute("data-id"))) return;
     if (a.getAttribute("aria-disabled") === "true") return;
     view();
     clicked = true;

@@ -71,6 +71,26 @@ const BUNDLES = [
     tags: ["Bundle", "Gift", "Frozen"],
   },
   {
+    // Landing-page test H (italian-pack v4): Lil's sauce replaces the sausage roll.
+    handle: "pittsburgh-italian-pack-sauce",
+    title: "The Pittsburgh Italian Pack — with Lil's Sauce",
+    base: 189,
+    tier: "med",
+    skuPrefix: "RIC-PITTSAUCE",
+    // TODO: confirm shipping weight incl. cold packs (12 lb of meat + 1 qt sauce)
+    weightLb: 15,
+    status: "ACTIVE",
+    mixes: [
+      { key: "mixed", label: "Hot & Sweet", sku: "" },
+      { key: "hot", label: "All Hot", sku: "HOT-" },
+      { key: "sweet", label: "All Sweet", sku: "SWEET-" },
+    ],
+    description:
+      "<p>5 lb sweet and 5 lb hot sausage (or 10 lb of either), 2 lb hand-rolled meatballs, and a quart of Lil's homemade San Marzano sauce — " +
+      "the full Sunday table. Shipped frozen. Free shipping to PA and nearby states; farther states pay one flat shipping charge per order, shown before checkout.</p>",
+    tags: ["Bundle", "Frozen"],
+  },
+  {
     handle: "ricci-legacy-gift-box",
     title: "The Ricci Legacy Gift Box",
     base: 289,
@@ -476,7 +496,10 @@ async function main() {
     process.exit(ok ? 0 : 1);
   }
 
-  if (!DRY_RUN && !DROP_ZONES) {
+  // A product that isn't in the variant map yet has no zone variants or subscribers to lose.
+  const existing = JSON.parse(readFileSync(join(TOOLS, "shopify-variant-map.json"), "utf8"));
+  const onlyNew = ONLY.length > 0 && ONLY.every((h) => !existing[h]);
+  if (!DRY_RUN && !DROP_ZONES && !onlyNew) {
     console.error("✗ A full sync deletes the Zone B–E variants that live subscriptions renew on.");
     console.error("  Use --descriptions for copy only, or --drop-zone-variants once subscribers are moved to Zone A.");
     process.exit(1);

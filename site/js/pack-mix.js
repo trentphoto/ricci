@@ -13,7 +13,8 @@
 (function () {
   "use strict";
 
-  var PRODUCT = "pittsburgh-italian-pack";
+  // Same mixes on the sauce version (test H) — its own Shopify product.
+  var PRODUCTS = ["pittsburgh-italian-pack", "pittsburgh-italian-pack-sauce"];
   var MIXES = [
     { key: "mixed", name: "Hot &amp; Sweet", sub: "5 lb &middot; 5 lb", slab: "" },
     { key: "hot", name: "All Hot", sub: "10 lb", slab: "is-mid" },
@@ -138,7 +139,7 @@
   }
 
   window.RicciPackMix = {
-    get: function (id) { return id === PRODUCT ? mix : null; }
+    get: function (id) { return PRODUCTS.indexOf(id) !== -1 ? mix : null; }
   };
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);

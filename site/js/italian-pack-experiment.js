@@ -1,18 +1,19 @@
-/* Pittsburgh Italian Pack v3: four live versions. Preview with ?preview=1.
- * Deploy CRM italian-pack-v3 tracking before publishing.
+/* Pittsburgh Italian Pack v4: five live versions. Preview with ?preview=1.
+ * Deploy CRM italian-pack-v4 tracking before publishing.
  * v2 (six versions, 2026-09-25 → 2026-11-23) is archived; its retired pages
- * (original, grill pan, table) now only route new visitors into this test. */
+ * (original, grill pan, table) now only route new visitors into this test. v3 (four versions) ran only minutes before H was added. */
 (function () {
   "use strict";
-  var experiment = "italian-pack-v3";
-  var variants = ["butcher", "free", "minimal", "butcher-free"];
+  var experiment = "italian-pack-v4";
+  var variants = ["butcher", "free", "minimal", "butcher-free", "sauce"];
   // Retired v2 pages still receive ad traffic: assign and redirect, never count.
   var routers = ["control", "grill-pan", "table"];
   var paths = {
     butcher: "/shop/pittsburgh-italian-pack-butcher",
     free: "/shop/pittsburgh-italian-pack-free",
     minimal: "/shop/pittsburgh-italian-pack-minimal",
-    "butcher-free": "/shop/pittsburgh-italian-pack-butcher-free"
+    "butcher-free": "/shop/pittsburgh-italian-pack-butcher-free",
+    sauce: "/shop/pittsburgh-italian-pack-sauce"
   };
   var current = document.currentScript.getAttribute("data-variant");
   var query = new URLSearchParams(location.search);
@@ -29,7 +30,7 @@
     return;
   }
 
-  var key = "ricci_italian_pack_v3";
+  var key = "ricci_italian_pack_v4";
   var saved;
   try {
     var cookie = document.cookie.split("; ").find(function (s) { return s.indexOf(key + "=") === 0; });
