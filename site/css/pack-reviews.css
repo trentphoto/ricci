@@ -1,0 +1,31 @@
+/* Google reviews wall for the Italian Pack test pages. Markup is written into
+ * every variant by tools/pack-reviews.py. */
+.pr { padding: 72px 0; background: #fbf7ef; border-block: 1px solid #e7dcc1; }
+.pr-wrap { max-width: 1160px; margin: 0 auto; padding: 0 16px; }
+.pr-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px 32px; margin-bottom: 32px; }
+.pr-kicker { margin: 0 0 8px; font: 600 13px/1 var(--font-sans); letter-spacing: .12em; text-transform: uppercase; color: var(--red); }
+.pr-head h2 { margin: 0; font: 700 clamp(28px, 4vw, 42px)/1.15 var(--font-serif); color: var(--ink); }
+.pr-badge { display: flex; align-items: center; gap: 12px; padding: 12px 18px; background: #fff; border: 1px solid #e7dcc1; border-radius: 999px; }
+.pr-badge .pr-g { width: 28px; height: 28px; }
+.pr-badge strong { display: block; font: 700 15px/1.2 var(--font-sans); color: var(--ink); }
+.pr-badge span { font: 400 13px/1.2 var(--font-sans); color: var(--ink-soft); }
+.pr-stars { color: #e8a317; letter-spacing: 2px; font-size: 18px; line-height: 1; }
+.pr-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: start; }
+.pr-card { margin: 0; padding: 22px 22px 18px; background: #fff; border: 1px solid #e7dcc1; border-radius: 14px; box-shadow: 0 1px 2px rgba(42,34,27,.05); }
+.pr-card blockquote { margin: 12px 0 16px; font: 400 16px/1.55 var(--font-sans); color: var(--ink); }
+.pr-card.pr-big blockquote { font: 400 19px/1.5 var(--font-serif); }
+.pr-card figcaption { display: flex; align-items: center; gap: 10px; padding-top: 14px; border-top: 1px solid #f0e6d0; }
+.pr-av { flex: none; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--red); color: #fff; font: 700 14px/1 var(--font-sans); }
+.pr-card figcaption strong { display: block; font: 600 14px/1.2 var(--font-sans); color: var(--ink); }
+.pr-card figcaption span { font: 400 12.5px/1.2 var(--font-sans); color: var(--ink-faint); }
+.pr-card .pr-g { width: 18px; height: 18px; margin-left: auto; }
+.pr-foot { margin: 24px 0 0; text-align: center; font: 400 14px/1.4 var(--font-sans); color: var(--ink-soft); }
+@media (max-width: 900px) { .pr-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) {
+  .pr { padding: 52px 0; }
+  .pr-grid { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 84%; overflow-x: auto;
+    scroll-snap-type: x mandatory; margin: 0 -16px; padding: 0 16px 8px; scrollbar-width: none; }
+  .pr-grid::-webkit-scrollbar { display: none; }
+  .pr-card { scroll-snap-align: center; }
+  .pr-foot::before { content: "Swipe for more · "; }
+}
