@@ -14,15 +14,15 @@
 (function () {
   var ITEMS = [
     { id: 'rolls',     name: "Lil's Sausage Rolls",       unit: 'each',             price: 16.99 },
-    { id: 'pepperoni_roll', name: 'Pepperoni Roll',       unit: 'each',             price: 19.99 },
+    { id: 'pepperoni_roll', name: 'Pepperoni Roll',       unit: 'each',             price: 16.99 },
     { id: 'pep_sm',    name: 'Stuffed Banana Peppers',    unit: 'Small Tray (6 pc)',  price: 23.99 },
     { id: 'pep_lg',    name: 'Stuffed Banana Peppers',    unit: 'Large Tray (12 pc)', price: 44.99 },
     { id: 'hot_sm',    name: 'Hot Italian Sausage',       unit: 'Small Tray (12 pc)', price: 47.99 },
     { id: 'hot_lg',    name: 'Hot Italian Sausage',       unit: 'Large Tray (24 pc)', price: 89.99 },
     { id: 'sweet_sm',  name: 'Sweet Italian Sausage',     unit: 'Small Tray (12 pc)', price: 47.99, askSauce: true },
     { id: 'sweet_lg',  name: 'Sweet Italian Sausage',     unit: 'Large Tray (24 pc)', price: 89.99, askSauce: true },
-    { id: 'mb_sm',     name: 'Meatballs (2 oz)',          unit: 'Small Tray (12 pc)', price: 32.99 },
-    { id: 'mb_lg',     name: 'Meatballs (2 oz)',          unit: 'Large Tray (24 pc)', price: 59.99 },
+    { id: 'mb_sm',     name: 'Meatballs (2 oz)',          unit: 'Small Tray (12 pc)', price: 29.99 },
+    { id: 'mb_lg',     name: 'Meatballs (2 oz)',          unit: 'Large Tray (24 pc)', price: 53.99 },
     { id: 'mac',       name: "Mac N' Cheese w/ Hot Sausage", unit: 'Small Tray',      price: 39.99 },
     { id: 'lasagna',   name: 'Sausage Lasagna',           unit: 'Small Tray (12 servings)', price: 71.99, chooseLasagna: true },
     { id: 'buns',      name: "Mancini's Sausage Buns",    unit: 'per dozen',          price: 6.00 }
