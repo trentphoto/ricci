@@ -7098,3 +7098,69 @@ a.order-option { text-decoration: none; }
 }
 .cater-grat-custom-wrap:focus-within { border-bottom-color: var(--gold); box-shadow: 0 1px 0 0 var(--gold); }
 .cater-grat-custom-wrap input { border: 0; outline: 0; width: 5rem; font: inherit; background: transparent; }
+
+/* =========================================================
+   Order Now modal v2 — illustrated options, pickup featured
+   ========================================================= */
+.order-options { grid-template-columns: 1.35fr 1fr; grid-template-rows: 1fr 1fr; gap: 18px; padding: 40px 48px 48px; }
+.order-option { aspect-ratio: auto; border-radius: 14px; gap: 6px; padding: 22px 20px; }
+.order-option::before { border-radius: 9px; }
+.order-option--pickup { grid-row: span 2; padding: 32px 28px; background: #FFFDF8; border: 2px solid var(--red); }
+.order-option--pickup::after { height: 5px; }
+.order-option-badge { position: absolute; top: 18px; left: 18px; padding: 5px 11px; border-radius: 999px; background: var(--red); color: var(--white); font: 700 0.7rem var(--font-sans); letter-spacing: 0.1em; text-transform: uppercase; }
+.order-option-go { margin-top: 10px; padding: 13px 22px; border-radius: 999px; background: var(--red); color: var(--white); font: 600 0.9rem var(--font-sans); letter-spacing: 0.04em; transition: background .2s, transform .2s; }
+.order-option-go span { display: inline-block; transition: transform .25s; }
+.order-option--pickup:hover .order-option-go { background: var(--red-dark); }
+.order-option--pickup:hover .order-option-go span { transform: translateX(5px); }
+.order-option--pickup .order-option-title { font-size: 1.7rem; max-width: none; }
+.order-option--pickup .order-option-desc { font-size: 0.95rem; max-width: 30ch; }
+.order-option--catering, .order-option--ship { flex-direction: row; text-align: left; justify-content: flex-start; gap: 16px; display: grid; grid-template-columns: 96px 1fr; grid-template-rows: auto auto; align-content: center; column-gap: 16px; }
+.order-option--catering .oi, .order-option--ship .oi { grid-row: span 2; width: 96px; height: auto; }
+.order-option--catering .order-option-title, .order-option--ship .order-option-title { align-self: end; max-width: none; }
+.order-option--catering .order-option-desc, .order-option--ship .order-option-desc { align-self: start; max-width: none; }
+
+/* Illustrations */
+.oi { display: block; width: 170px; max-width: 100%; height: auto; overflow: visible; color: var(--ink-faint); }
+.oi-steam path { opacity: 0; transform: translateY(6px); transition: opacity .3s, transform .6s; }
+.order-option:hover .oi-steam path, .order-option:focus-visible .oi-steam path { opacity: .7; animation: oiSteam 1.4s ease-in-out infinite; }
+.oi-steam path:nth-child(2) { animation-delay: .2s !important; }
+.oi-steam path:nth-child(3) { animation-delay: .4s !important; }
+@keyframes oiSteam { 0% { transform: translateY(6px); opacity: 0; } 40% { opacity: .75; } 100% { transform: translateY(-8px); opacity: 0; } }
+
+.oi-awning { transform-origin: 80px 40px; transition: transform .35s cubic-bezier(.34,1.56,.64,1); }
+.order-option:hover .oi-awning { transform: scaleY(1.12); }
+.oi-sign { transform-origin: 113px 90px; }
+.order-option:hover .oi-sign { animation: oiSwing 1s ease-in-out infinite; }
+@keyframes oiSwing { 0%,100% { transform: rotate(-6deg); } 50% { transform: rotate(6deg); } }
+.oi-sandwich { transition: transform .35s cubic-bezier(.34,1.56,.64,1); transform-origin: 62px 104px; }
+.order-option:hover .oi-sandwich { transform: translateY(-3px) scale(1.08); }
+
+.oi-lid { transition: transform .45s cubic-bezier(.34,1.56,.64,1); transform-origin: 130px 100px; }
+.order-option:hover .oi-lid { transform: translate(8px, -16px) rotate(14deg); }
+.oi-tray .oi-steam path { transform: translateY(14px); }
+
+.oi-crate { transition: transform .3s; transform-origin: 80px 124px; }
+.order-option:hover .oi-crate { animation: oiHop .7s cubic-bezier(.34,1.56,.64,1) infinite; }
+.order-option:hover .oi-shadow { animation: oiShadow .7s cubic-bezier(.34,1.56,.64,1) infinite; transform-origin: 80px 130px; }
+.oi-speed { opacity: 0; transform: translateX(10px); transition: opacity .25s, transform .3s; }
+.order-option:hover .oi-speed { opacity: .6; transform: none; }
+@keyframes oiHop { 0%,100% { transform: translateY(0) rotate(0); } 45% { transform: translateY(-12px) rotate(-4deg); } }
+@keyframes oiShadow { 0%,100% { transform: scaleX(1); opacity: .15; } 45% { transform: scaleX(.7); opacity: .08; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .order-option:hover .oi * { animation: none !important; }
+}
+
+@media (max-width: 768px) {
+  .order-options { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; padding: 28px 20px 32px; gap: 12px; }
+  .order-option--pickup { grid-column: 1 / -1; grid-row: auto; }
+  .order-option--catering, .order-option--ship { grid-template-columns: 1fr; text-align: center; justify-items: center; }
+  .order-option--catering .oi, .order-option--ship .oi { grid-row: auto; width: 80px; }
+}
+@media (max-width: 520px) {
+  .order-options { grid-template-columns: 1fr 1fr; }
+  .order-option { min-height: 0; padding: 18px 12px; }
+  .order-option--pickup { flex-direction: column; text-align: center; justify-content: center; padding: 44px 18px 22px; }
+  .oi-store { width: 130px; }
+  .order-option--pickup .order-option-title { font-size: 1.4rem; }
+}
