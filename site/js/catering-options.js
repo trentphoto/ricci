@@ -54,6 +54,7 @@
     var timeInput = document.getElementById('c-time');
     dateInput.min = shopTomorrow;
     if (!dateInput.value) dateInput.value = shopTomorrow;
+    dateInput.dispatchEvent(new Event('change'));
     if (!timeInput.value) timeInput.value = '13:00';
     var stage = 'menu';
     function showStage(next) {

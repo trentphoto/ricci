@@ -315,7 +315,7 @@
     var date = form.date.value;
     var time = form.time.value;
     var toggle = document.getElementById('c-prep-toggle');
-    var prep = toggle.getAttribute('data-active') === 'cool' ? 'cool' : 'hot';
+    var prep = toggle.getAttribute('data-active') === 'cool' || /-12-24$/.test(date) ? 'cool' : 'hot';
     var notes = form.notes.value.trim();
 
     if (!name || !email || !phone || !date || !time) {
@@ -397,6 +397,7 @@
     document.body.classList.add('cater-open');
     var dateInput = document.getElementById('c-date');
     if (dateInput && !dateInput.value) dateInput.value = tomorrowISO();
+    syncCoolOnly();
     var timeInput = document.getElementById('c-time');
     if (timeInput && !timeInput.value) timeInput.value = '13:00';
     var first = modal.querySelector('input, textarea, button');
@@ -467,6 +468,7 @@
     toggle.addEventListener('click', function (e) {
       var opt = e.target.closest('[data-prep]');
       if (!opt) return;
+      if (opt.disabled) return;
       toggle.setAttribute('data-active', opt.getAttribute('data-prep'));
       toggle.querySelectorAll('[data-prep]').forEach(function (button) {
         button.setAttribute('aria-pressed', String(button === opt));
@@ -479,6 +481,35 @@
 
     var dateInput = document.getElementById('c-date');
     dateInput.min = tomorrowISO();
+    dateInput.addEventListener('input', syncCoolOnly);
+    dateInput.addEventListener('change', syncCoolOnly);
+    syncCoolOnly();
+  }
+
+  // Christmas Eve (Dec 24): cool-down trays only, no hot pickups.
+  function syncCoolOnly() {
+    var dateInput = document.getElementById('c-date');
+    var toggle = document.getElementById('c-prep-toggle');
+    if (!dateInput || !toggle) return;
+    var coolOnly = /-12-24$/.test(dateInput.value);
+    var hot = toggle.querySelector('[data-prep="hot"]');
+    hot.disabled = coolOnly;
+    if (coolOnly) {
+      toggle.setAttribute('data-active', 'cool');
+      toggle.querySelectorAll('[data-prep]').forEach(function (b) {
+        b.setAttribute('aria-pressed', String(b.getAttribute('data-prep') === 'cool'));
+      });
+    }
+    var note = document.getElementById('c-prep-note');
+    if (!note) {
+      note = document.createElement('p');
+      note.id = 'c-prep-note';
+      note.className = 'cater-prep-note';
+      note.style.cssText = 'margin:8px 0 0;font-size:.9em;';
+      note.textContent = 'Christmas Eve pickups are cool-down trays only, chilled for reheating at home.';
+      toggle.closest('.cater-field').appendChild(note);
+    }
+    note.hidden = !coolOnly;
   }
 
   window.RicciCatering = { open: openModal };
