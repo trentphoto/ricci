@@ -61,6 +61,14 @@
     .pc-qty { flex: none; min-width: 32px; height: 28px; padding: 0 8px; display: grid; place-items: center; border-radius: 8px; background: rgba(122,38,31,.09); color: var(--red); font: 700 .9rem var(--font-sans); }
     .pc-t-foot { display: flex; gap: 10px; align-items: flex-start; margin-top: 10px; padding: 14px 22px; background: rgba(231,220,193,.75); border-top: 1px solid var(--cream-edge); color: var(--ink-soft); font-size: .88rem; line-height: 1.45; }
     .pc-t-foot svg { flex: none; width: 18px; height: 18px; margin-top: 1px; fill: none; stroke: var(--red); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .pc-share { margin: 0 0 36px; padding: 26px 24px; border-radius: 14px; background: var(--red); color: var(--cream); text-align: center; }
+    .pc-share h2 { margin: 0 0 6px; color: var(--white); font-size: clamp(1.4rem, 4vw, 1.8rem); }
+    .pc-share p { margin: 0 0 18px; color: var(--gold); }
+    .pc-share-main { display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; max-width: 380px; background: var(--cream); color: var(--red); border-color: var(--cream); font-size: 1rem; }
+    .pc-share-main:hover { background: var(--white); border-color: var(--white); color: var(--red-dark); }
+    .pc-share-alt { display: flex; justify-content: center; gap: 22px; margin-top: 14px; }
+    .pc-share-alt a, .pc-share-alt a:visited { color: var(--cream); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+    .pc-share-alt a:hover { color: var(--white); }
     .pc-ic { width: 18px; height: 18px; flex: none; }
   </style>
 </head>
@@ -128,6 +136,19 @@
         </div>
       </section>
 
+      <section class="pc-share" aria-labelledby="pc-share-h">
+        <h2 id="pc-share-h">Know someone who needs a Ricci's lunch?</h2>
+        <p>Send them the link. They can order ahead and skip the line too.</p>
+        <button type="button" class="btn pc-share-main" id="pc-copy">
+          <svg class="pc-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"/><path d="M12 3v12"/><path d="M7 8l5-5 5 5"/></svg>
+          <span id="pc-copy-t">Share Ricci's with a friend</span>
+        </button>
+        <div class="pc-share-alt">
+          <a href="sms:?&body=Ricci%27s%20takes%20online%20orders%20now.%20Pay%20ahead%20and%20skip%20the%20line%3A%20https%3A%2F%2Friccisausage.com%2Forder">Text it</a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Friccisausage.com%2Forder" target="_blank" rel="noopener">Post on Facebook</a>
+        </div>
+      </section>
+
       <h2>Picking Up</h2>
       <p>
         Come to the counter at
@@ -148,18 +169,6 @@
       <div class="pc-actions">
         <a class="btn btn-outline-dark" href="https://www.facebook.com/profile.php?id=100063674285557" target="_blank" rel="noopener">Follow Ricci's on Facebook</a>
       </div>
-
-      <h2>Tell a Friend</h2>
-      <p>Know someone who'd want lunch from Ricci's? Send them the link.</p>
-      <div class="pc-actions">
-        <a class="btn btn-outline-dark" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Friccisausage.com%2Forder" target="_blank" rel="noopener">Share on Facebook</a>
-        <a class="btn btn-outline-dark" href="sms:?&body=Order%20lunch%20from%20Ricci%27s%20online%3A%20https%3A%2F%2Friccisausage.com%2Forder">Text a friend</a>
-        <button type="button" class="btn btn-outline-dark" id="pc-copy">Copy link</button>
-      </div>
-
-      <p style="margin-top:32px;">
-        <a href="order.html" class="btn btn-primary">Back to Ordering</a>
-      </p>
 
     </article>
 
@@ -261,9 +270,10 @@
       document.getElementById('pc-summary').hidden = false;
     })();
     document.getElementById('pc-copy').addEventListener('click', function () {
-      var b = this, url = 'https://riccisausage.com/order';
-      if (navigator.share) { navigator.share({ title: "Ricci's Italian Sausage", text: "Order lunch from Ricci's online", url: url }).catch(function () {}); return; }
-      (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).then(function () { b.textContent = 'Link copied'; }, function () { prompt('Copy this link:', url); });
+      var t = document.getElementById('pc-copy-t'), url = 'https://riccisausage.com/order';
+      if (window.gtag) gtag('event', 'share', { method: navigator.share ? 'native' : 'copy', content_type: 'pickup_confirmed' });
+      if (navigator.share) { navigator.share({ title: "Ricci's Italian Sausage", text: "Ricci's takes online orders now. Pay ahead and skip the line:", url: url }).catch(function () {}); return; }
+      (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).then(function () { t.textContent = 'Link copied. Paste it anywhere.'; }, function () { prompt('Copy this link:', url); });
     });
   </script>
 </body>
