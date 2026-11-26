@@ -70,13 +70,38 @@
   function clock(m) { var h = Math.floor(m / 60), mm = m % 60; return ((h + 11) % 12 + 1) + ':' + String(mm).padStart(2, '0') + ' ' + (h >= 12 ? 'PM' : 'AM'); }
   function dayName(day) { return day.n === 0 ? 'Today' : day.n === 1 ? 'Tomorrow' : DAY[day.dow]; }
 
-  // Status line + slot list for the next open day (today if there's still time).
+  // ── holidays ────────────────────────────────────────────────────────
+  // Closed all day, or open for catering only. Federal holidays not listed here
+  // (MLK, Presidents, Juneteenth, Columbus, Veterans) are normal business days.
+  function nthDow(y, m, dow, n) { // n-th weekday of month (n = -1 → last)
+    if (n < 0) { var e = new Date(Date.UTC(y, m, 0)); return e.getUTCDate() - ((e.getUTCDay() - dow + 7) % 7); }
+    var f = new Date(Date.UTC(y, m - 1, 1)).getUTCDay(); return 1 + ((dow - f + 7) % 7) + (n - 1) * 7;
+  }
+  function holiday(y, m, d) {
+    var md = m + '-' + d;
+    if (md === '12-24') return { cateringOnly: true, name: 'Christmas Eve' };
+    if (md === '12-25') return { name: 'Christmas' };
+    if (md === '1-1') return { name: "New Year's Day" };
+    if (md === '7-4') return { name: 'the Fourth of July' };
+    if (m === 5 && d === nthDow(y, 5, 1, -1)) return { name: 'Memorial Day' };
+    if (m === 9 && d === nthDow(y, 9, 1, 1)) return { name: 'Labor Day' };
+    if (m === 11 && d === nthDow(y, 11, 4, 4)) return { name: 'Thanksgiving' };
+    return null;
+  }
+
+  // Slots for the next open day: today while open, otherwise order ahead.
+  // Holidays (closed or catering-only) are skipped like closed days.
   function buildSlots() {
-    var now = storeNow(), status;
+    var now = storeNow(), status = null, note = '';
+    var hol0 = holiday(now.y, now.m, now.d);
+    if (hol0) note = hol0.cateringOnly
+      ? '<strong>' + hol0.name + ': catering only.</strong> <a href="catering.html">Order catering trays &rarr;</a> Pickup orders: '
+      : '<strong>Closed for ' + hol0.name + '.</strong> ';
     slots = [];
-    for (var i = 0; i < 8 && !slots.length; i++) {
+    for (var i = 0; i < 10 && !slots.length; i++) {
       var day = dayAfter(now, i), h = HOURS[day.dow];
-      if (!h) continue;
+      var dt = new Date(Date.UTC(now.y, now.m - 1, now.d + i));
+      if (!h || holiday(dt.getUTCFullYear(), dt.getUTCMonth() + 1, dt.getUTCDate())) continue;
       var last = h[1] - LAST_CALL, start = h[0];
       if (i === 0) start = Math.max(start, now.min + LEAD_MIN);
       start = Math.ceil(start / STEP) * STEP;
@@ -85,9 +110,10 @@
       if (openNow) slots.push({ date: day.iso, dow: day.dow, time: 'ASAP', label: 'ASAP · ready in about ' + LEAD_MIN + ' min' });
       for (var m = start; m <= last; m += STEP) slots.push({ date: day.iso, dow: day.dow, time: clock(m), mins: m, label: dayName(day) + ' at ' + clock(m) });
 
+      var dn = dayName(day).replace(/^\w/, function (c) { return c.toUpperCase(); });
       if (openNow) status = { open: true, text: '<strong>Open now</strong> · Ready in about ' + LEAD_MIN + ' min · Closes ' + clock(h[1]) };
       else if (i === 0) status = { open: false, text: '<strong>Opens ' + clock(h[0]) + '</strong> · Order now for pickup today' };
-      else status = { open: false, text: '<strong>Closed now</strong> · Order ahead for ' + dayName(day).toLowerCase().replace(/^\w/, function (c) { return c.toUpperCase(); }) + ' from ' + clock(h[0]) };
+      else status = { open: false, text: (note || '<strong>Closed now</strong> · ') + 'Order ahead for ' + dn + ' from ' + clock(h[0]) };
     }
     if (!status) status = { open: false, text: '<strong>Online ordering is closed.</strong> Call 412-331-9531.' };
 
@@ -210,12 +236,14 @@
 
     var ups = UPSELL.filter(function (u) { return items[u.id] && !cart[u.id]; });
     $('po-upsell').innerHTML = count && ups.length ? ups.map(function (u) {
-      return '<button type="button" class="po-upsell-btn" data-add="' + u.id + '" data-upsell="1">+ ' + esc(u.label) + ' <span>' + money(items[u.id].priceCents) + '</span></button>';
+      return '<button type="button" class="po-upsell-btn" data-add="' + u.id + '" data-upsell="1">' +
+        (PHOTOS[u.id] ? '<i class="po-upsell-ic po-upsell-ic--' + PHOTOS[u.id] + '" style="background-image:url(' + IMG + PHOTOS[u.id] + '.webp)" aria-hidden="true"></i>' : '') +
+        '<b>+ ' + esc(u.label) + '</b><span>' + money(items[u.id].priceCents) + '</span></button>';
     }).join('') : '';
 
     $('po-subtotal').textContent = money(sub);
-    $('po-submit').disabled = !count;
-    $('po-submit').textContent = count ? 'Checkout · ' + money(sub) : 'Add something to order';
+    $('po-submit').disabled = !count || !slots.length;
+    $('po-submit').textContent = !slots.length ? 'Online ordering is closed' : count ? 'Checkout · ' + money(sub) : 'Add something to order';
     $('po-mobile-bar').hidden = !count;
     $('po-mobile-count').textContent = count + (count === 1 ? ' item' : ' items');
     $('po-mobile-total').textContent = money(sub);
