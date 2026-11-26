@@ -66,10 +66,26 @@
     .pc-share p { margin: 0 0 18px; color: var(--gold); }
     .pc-share-main { display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; max-width: 380px; background: var(--cream); color: var(--red); border-color: var(--cream); font-size: 1rem; }
     .pc-share-main:hover { background: var(--white); border-color: var(--white); color: var(--red-dark); }
-    .pc-share-alt { display: flex; justify-content: center; gap: 22px; margin-top: 14px; }
+    .pc-share-alt { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 32px; margin-top: 18px; font-size: 1.2rem; }
+    .pc-share-alt a { padding: 6px 2px; }
     .pc-share-alt a, .pc-share-alt a:visited { color: var(--cream); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
     .pc-share-alt a:hover { color: var(--white); }
     .pc-ic { width: 18px; height: 18px; flex: none; }
+    .pc-hero { background: url(assets/img/pittsburgh-map.webp) center 45% / cover no-repeat, #E9DDBF; padding: 110px 20px 64px; }
+    .pc-hero-card { position: relative; max-width: 580px; margin: 0 auto; padding: 34px 34px 26px; background: #FBF5E6; border: 2px solid #C9A961; border-radius: 10px; box-shadow: 0 0 0 5px #FBF5E6, 0 0 0 6px #C9A961, 0 22px 44px -20px rgba(42,34,27,.6); text-align: left; font-family: 'Libre Caslon Text', Georgia, serif; }
+    .pc-hero-card::before { content: ""; position: absolute; inset: 8px; border: 1px solid rgba(201,169,97,.55); border-radius: 6px; pointer-events: none; }
+    .pc-flourish { display: block; width: 74px; height: 22px; margin: -8px auto 16px; color: #B8913E; }
+    .pc-olive { position: absolute; top: -26px; right: -30px; width: 120px; height: 90px; transform: rotate(-8deg); pointer-events: none; }
+    .pc-hero .pc-hero-card .eyebrow { display: block; margin: 0 0 8px; font: 700 .78rem 'Libre Caslon Text', Georgia, serif; letter-spacing: .28em; text-transform: uppercase; color: #234A2E; }
+    .pc-hero h1 { margin: 0; font-family: 'Libre Caslon Text', Georgia, serif; font-weight: 700; font-size: clamp(2rem, 6vw, 2.9rem); line-height: 1.08; color: #7A1F1A; letter-spacing: .01em; }
+    .pc-hero h1 em { font-style: normal; color: #234A2E; }
+    .pc-hero-rule { height: 1px; margin: 18px 0 16px; background: linear-gradient(90deg, #C9A961, rgba(201,169,97,.2)); }
+    .pc-hero p { margin: 0; font-family: 'Libre Caslon Text', Georgia, serif; font-style: italic; font-size: 1.15rem; line-height: 1.5; color: #3A2E24; max-width: none; }
+    .pc-hero-foot { margin-top: 20px; padding-top: 14px; border-top: 1px solid rgba(201,169,97,.6); text-align: center; font: 600 .68rem 'Libre Caslon Text', Georgia, serif; letter-spacing: .3em; text-transform: uppercase; color: #3A2E24; }
+    .pc-tri { display: flex; width: 132px; height: 6px; margin: 20px 0 0; }
+    .pc-tri i { flex: 1; } .pc-tri i:nth-child(1) { background: #2F6B3A; } .pc-tri i:nth-child(2) { background: #F3ECDD; } .pc-tri i:nth-child(3) { background: #A8231C; }
+    @media (max-width: 560px) { .pc-hero-card { padding: 30px 22px 22px; } .pc-olive { width: 84px; right: -12px; top: -30px; } }
+
   </style>
 </head>
 <body>
@@ -108,10 +124,16 @@
 
   <main>
 
-    <div class="page-hero">
-      <span class="eyebrow">Pickup Order Confirmed</span>
-      <h1>Your Order <em style="color:var(--gold)">Is In.</em></h1>
-      <p>We've got it. Your receipt is on its way to your inbox.</p>
+    <div class="page-hero pc-hero">
+      <div class="pc-hero-card">
+        <svg class="pc-olive" viewBox="0 0 120 90" aria-hidden="true"><path d="M8 82 C40 62 70 40 112 8" fill="none" stroke="#5C5A2E" stroke-width="2" stroke-linecap="round"/><g fill="#6E7B3A" stroke="#4A5326" stroke-width=".8"><path d="M30 68c-4-10 0-20 10-22 2 10-2 18-10 22z"/><path d="M34 66c8 6 18 6 24-2-10-4-18-4-24 2z"/><path d="M52 52c-2-11 4-19 14-19 0 10-6 17-14 19z"/><path d="M58 48c9 4 18 2 22-6-10-2-18-1-22 6z"/><path d="M76 33c0-10 7-17 16-15-1 9-8 15-16 15z"/><path d="M82 28c8 3 16 0 19-8-9-1-16 1-19 8z"/></g><g fill="#4B1E22"><ellipse cx="46" cy="70" rx="6" ry="8" transform="rotate(-20 46 70)"/><ellipse cx="70" cy="56" rx="5.5" ry="7.5" transform="rotate(-25 70 56)"/></g><g fill="#fff" opacity=".35"><ellipse cx="44" cy="67" rx="1.6" ry="2.4"/><ellipse cx="68" cy="53" rx="1.4" ry="2.2"/></g></svg>
+        <svg class="pc-flourish" viewBox="0 0 74 22" aria-hidden="true" fill="currentColor"><path d="M37 2c2 4 2 8 0 12-2-4-2-8 0-12z"/><circle cx="37" cy="17" r="2"/><path d="M33 12c-6-6-14-6-20-1 5-1 10 0 14 4-6-2-11 0-14 4 6-3 13-3 20-7z"/><path d="M41 12c6-6 14-6 20-1-5-1-10 0-14 4 6-2 11 0 14 4-6-3-13-3-20-7z"/><path d="M2 19h18M54 19h18" stroke="currentColor" stroke-width="1"/></svg>
+        <span class="eyebrow">Pickup Order Confirmed</span>
+        <h1>Your Order <em>Is In.</em></h1>
+        <div class="pc-hero-rule" aria-hidden="true"></div>
+        <p>We've got it. Your receipt is on its way to your inbox.</p>
+        <span class="pc-tri" aria-hidden="true"><i></i><i></i><i></i></span>
+      </div>
     </div>
 
     <article class="story-body">
